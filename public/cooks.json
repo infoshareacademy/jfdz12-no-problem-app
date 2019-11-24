@@ -1,0 +1,19 @@
+[
+    {
+        "id": 1,
+        "name": "Zosia",
+        "surname": "Gessler",
+        "contact": {
+            "mail": "zg@gessler.pl",
+            "mobile": "48518456789"
+        },
+        "cakesId": [1,2,3],
+        "location": {
+            "city":"Gdańsk",
+            "district": "Oliwa",
+            "street": "Grunwaldzka"
+        },
+        "description": "aaaaaa",
+        "likes": 5
+    }
+]

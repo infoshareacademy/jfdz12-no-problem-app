@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "name": "makowiec",
+        "price": "100",
+        "typeId": 1,
+        "descrition": "bbbb",
+        "glutenFree": false,
+        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "nick": "Barbara",
+        "name": "Barbara",
+        "surname": "Zielińska",
+        "contact": {
+            "mail": "basia@gmail.pl",
+            "mobile": "485184454689"
+        }
+    }
+]
