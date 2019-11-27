@@ -15,5 +15,22 @@
         },
         "description": "aaaaaa",
         "likes": 5
+    },
+    {
+        "id": 2,
+        "name": "Zbigniew",
+        "surname": "Makłowicz",
+        "contact": {
+            "mail": "zyga.maklowicz@wp.pl",
+            "mobile": "48518456789"
+        },
+        "cakesId": [1,2,3],
+        "location": {
+            "city":"Gdańsk",
+            "district": "Oliwa",
+            "street": "Grunwaldzka"
+        },
+        "description": "aaaaaa",
+        "likes": 51
     }
 ]

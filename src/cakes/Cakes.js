@@ -4,33 +4,47 @@ import { Image, Card, Icon, Button, Label } from 'semantic-ui-react'
 class CakeCard extends React.Component{
     state = {
         cakes: this.props.cakes,
-        types: []
+        types: [],
+        cooks: []
     }
 
     fetchType = () => fetch ('./types.json').then(res => res.json());
-    
+    fetchCooks = () => fetch ('./cooks.json').then(res => res.json());
+
     componentDidMount() {
         this.fetchType()
             .then(res => this.setState({ types: res }));
+        
+        this.fetchCooks()
+            .then(res => this.setState({ cooks: res}));
       }
 
     render(){
 
         const type = this.state.types;
-        let typeName = {
+        const cook = this.state.cooks;
+
+        let typeData = {
             name:'',
             color: ''
         }
-        let tcolor = '';
+
+        let cooksData = {
+            name: '',
+        }
 
         type.forEach((el)=>{
             if (el.id === this.state.cakes.typeId){
-                typeName.name = el.name;
-                tcolor = el.color;
+                typeData.name = el.name;
+                typeData.color = el.color;
+            }
+        });
+
+        cook.forEach((el)=>{
+            if (el.id === this.state.cakes.cookId){
+                cooksData.name = `${el.name} ${el.surname}`;
             }
         })
-
-        const aaa = 'red'
 
         return <Card>
             <Card.Content>
@@ -50,8 +64,9 @@ class CakeCard extends React.Component{
                 
                 <Card.Meta textAlign='left'>cena: {this.state.cakes.price}</Card.Meta>
                 <Card.Meta textAlign='left'>
-                    kategoria: <Label color={tcolor ? tcolor : 'black'} horizontal>{typeName.name}</Label>
+                    kategoria: <Label color={typeData.color ? typeData.color : 'black'} horizontal>{typeData.name}</Label>
                 </Card.Meta>
+                <Card.Meta textAlign='left'>kucharz: {cooksData.name}</Card.Meta>
             </Card.Content>
             <Card.Content extra>
                 <Card.Description textAlign='left'>

@@ -51,7 +51,7 @@
     },
     {
         "id": 6,
-        "name": "cisto czekoladowe z czekoladą",
+        "name": "ciasto czekoladowe z czekoladą",
         "price": "600",
         "typeId": 5,
         "cookId": 1,
@@ -111,7 +111,7 @@
     },
     {
         "id": 12,
-        "name": "cisto czekoladowe z czekoladą",
+        "name": "ciasto czekoladowe z czekoladą",
         "price": "600",
         "typeId": 5,
         "cookId": 1,
