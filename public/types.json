@@ -1,7 +1,108 @@
 [
     {
         "id": 1,
-        "name": "makowiec",
-        "description": "bhejfgwegfj"
+        "name": "babki",
+        "description": "babki"
+    },
+    {
+        "id": 2,
+        "name": "bezy",
+        "description": "bezy"
+    },
+    {
+        "id": 3,
+        "name": "biszkopty",
+        "description": "biszkopty"
+    },
+    {
+        "id": 4,
+        "name": "czekoladowe",
+        "description": "ciasta czekoladowe"
+    },
+    {
+        "id": 5,
+        "name": "drożdżowe",
+        "description": "ciasta drożdżowe"
+    },
+    {
+        "id": 6,
+        "name": "kurche",
+        "description": "ciasta kurche"
+    },
+    {
+        "id": 7,
+        "name": "francuskie",
+        "description": "ciasta francuskie"
+    },
+    {
+        "id": 8,
+        "name": "pażone",
+        "description": "ciasta pażone"
+    },
+    {
+        "id": 9,
+        "name": "ucierane",
+        "description": "ciasta ucierane"
+    },
+    {
+        "id": 10,
+        "name": "z makiem",
+        "description": "ciasta z makiem"
+    },
+    {
+        "id": 11,
+        "name": "z owocami",
+        "description": "ciasta z owocami"
+    },
+    {
+        "id": 12,
+        "name": "z warzywami",
+        "description": "ciasta z warzywami"
+    },
+    {
+        "id": 13,
+        "name": "z galaretką",
+        "description": "ciasta z galaretką"
+    },
+    {
+        "id": 14,
+        "name": "z kremem",
+        "description": "ciasta z kremem"
+    },
+    {
+        "id": 15,
+        "name": "pierniki",
+        "description": "ciasta pierniki"
+    },
+    {
+        "id": 16,
+        "name": "seriniki",
+        "description": "ciasta seriniki"
+    },
+    {
+        "id": 17,
+        "name": "torty",
+        "description": "ciasta torty"
+    },
+    {
+        "id": 18,
+        "name": "pączki",
+        "description": "pączki, donaty itp."
+    },
+    {
+        "id": 18,
+        "name": "bez pieczenia",
+        "description": "ciasta bez pieczenia"
+    },
+    {
+        "id": 20,
+        "name": "inne",
+        "description": "wszystkie inne"
     }
 ]
+
+
+
+
+
+

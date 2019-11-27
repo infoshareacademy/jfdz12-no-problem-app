@@ -4,6 +4,57 @@
         "name": "makowiec",
         "price": "100",
         "typeId": 1,
+        "cookId": 1,
+        "descrition": "bbbb fsadsf sdf sd sdf sdfs df  werwe w",
+        "glutenFree": false,
+        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+    },
+    {
+        "id": 2,
+        "name": "pączek",
+        "price": "100",
+        "typeId": 1,
+        "cookId": 1,
+        "descrition": "bbbb",
+        "glutenFree": false,
+        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+    },
+    {
+        "id": 3,
+        "name": "ciasto drożdżowe",
+        "price": "100",
+        "typeId": 1,
+        "cookId": 1,
+        "descrition": "bbbb",
+        "glutenFree": false,
+        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+    },
+    {
+        "id": 4,
+        "name": "ciasto francuskie",
+        "price": "100",
+        "typeId": 1,
+        "cookId": 1,
+        "descrition": "bbbb fsadsf sdf sd sdf sdfs df  werwe w",
+        "glutenFree": false,
+        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+    },
+    {
+        "id": 5,
+        "name": "ciasto z galaretką",
+        "price": "100",
+        "typeId": 2,
+        "cookId": 1,
+        "descrition": "bbbb",
+        "glutenFree": false,
+        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+    },
+    {
+        "id": 6,
+        "name": "makowiec",
+        "price": "100",
+        "typeId": 13,
+        "cookId": 1,
         "descrition": "bbbb",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
