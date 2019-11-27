@@ -2,102 +2,122 @@
     {
         "id": 1,
         "name": "babki",
-        "description": "babki"
+        "description": "babki",
+        "color": "red"
     },
     {
         "id": 2,
         "name": "bezy",
-        "description": "bezy"
+        "description": "bezy",
+        "color": "orange"
     },
     {
         "id": 3,
         "name": "biszkopty",
-        "description": "biszkopty"
+        "description": "biszkopty",
+        "color": "yellow"
     },
     {
         "id": 4,
         "name": "czekoladowe",
-        "description": "ciasta czekoladowe"
+        "description": "ciasta czekoladowe",
+        "color": "olive"
     },
     {
         "id": 5,
         "name": "drożdżowe",
-        "description": "ciasta drożdżowe"
+        "description": "ciasta drożdżowe",
+        "color": "green"
     },
     {
         "id": 6,
         "name": "kurche",
-        "description": "ciasta kurche"
+        "description": "ciasta kurche",
+        "color": "teal"
     },
     {
         "id": 7,
         "name": "francuskie",
-        "description": "ciasta francuskie"
+        "description": "ciasta francuskie",
+        "color": "blue"
     },
     {
         "id": 8,
         "name": "pażone",
-        "description": "ciasta pażone"
+        "description": "ciasta pażone",
+        "color": "violet"
     },
     {
         "id": 9,
         "name": "ucierane",
-        "description": "ciasta ucierane"
+        "description": "ciasta ucierane",
+        "color": "purple"
     },
     {
         "id": 10,
         "name": "z makiem",
-        "description": "ciasta z makiem"
+        "description": "ciasta z makiem",
+        "color": "pink"
     },
     {
         "id": 11,
         "name": "z owocami",
-        "description": "ciasta z owocami"
+        "description": "ciasta z owocami",
+        "color": "brown"
     },
     {
         "id": 12,
         "name": "z warzywami",
-        "description": "ciasta z warzywami"
+        "description": "ciasta z warzywami",
+        "color": "grey"
     },
     {
         "id": 13,
         "name": "z galaretką",
-        "description": "ciasta z galaretką"
+        "description": "ciasta z galaretką",
+        "color": "red"
     },
     {
         "id": 14,
         "name": "z kremem",
-        "description": "ciasta z kremem"
+        "description": "ciasta z kremem",
+        "color": "orange"
     },
     {
         "id": 15,
         "name": "pierniki",
-        "description": "ciasta pierniki"
+        "description": "ciasta pierniki",
+        "color": "yellow"
     },
     {
         "id": 16,
         "name": "seriniki",
-        "description": "ciasta seriniki"
+        "description": "ciasta seriniki",
+        "color": "olive"
     },
     {
         "id": 17,
         "name": "torty",
-        "description": "ciasta torty"
+        "description": "ciasta torty",
+        "color": "green"
     },
     {
         "id": 18,
         "name": "pączki",
-        "description": "pączki, donaty itp."
+        "description": "pączki, donaty itp.",
+        "color": "teal"
     },
     {
         "id": 18,
         "name": "bez pieczenia",
-        "description": "ciasta bez pieczenia"
+        "description": "ciasta bez pieczenia",
+        "color": "violet"
     },
     {
         "id": 20,
         "name": "inne",
-        "description": "wszystkie inne"
+        "description": "wszystkie inne",
+        "color": "black"
     }
 ]
 

@@ -108,34 +108,39 @@ const typeCakes = [
 
 
 class CakesList extends React.Component{
-        state = {
-            cakes: [],
-            types: []
-            };
+    state = {
+        cakes: [],
+        types: []
+    };
     
+
     fetchCake = () => fetch ('./cakes.json').then(res => res.json());
     fetchType = () => fetch ('./types.json').then(res => res.json());
 
     componentDidMount() {
+        
         this.fetchCake()
             .then(res => this.setState({ cakes: res }));
 
         this.fetchType()
-            .then(res => this.setState({types: res}));
-
+            .then(res => this.setState({ types: res }));
       }
 
-      printConsol = (a) => console.log(a);
+    printConsol = (a) => console.log(a);
 
-      takeType = (type,id) =>{
+    takeType = (type,id) =>{
             return type.filter(el => el.id === id)[0]
       }
 
     render(){    
         const cakesData = this.state.cakes;
         const typeData = this.state.types;
-       
-       return <>
+
+        //Object.assign(typeData,this.state.types);
+        
+        //console.log('aaa',typeData[0]);
+
+        return <>
             <Container width = {1200}>
             <Card.Group doubling itemsPerRow={3} stackable>
             {cakesData.map((el)=>{ 
@@ -143,7 +148,6 @@ class CakesList extends React.Component{
                  return <Cakes 
                      key = {el.id}
                      cakes = {el}
-                     type = {this.takeType(typeCakes,el.typeId)}
                       />
                     })
             }
