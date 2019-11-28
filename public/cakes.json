@@ -14,7 +14,7 @@
         "name": "pączek z nadzieniem różnym",
         "price": "120",
         "typeId": 18,
-        "cookId": 1,
+        "cookId": 3,
         "descrition": "tradycyjny pączek polany lukrem z nadzieniem różanym",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -24,7 +24,7 @@
         "name": "babka drożdżowa z kruszonką",
         "price": "133",
         "typeId": 5,
-        "cookId": 1,
+        "cookId": 2,
         "descrition": "drożdzowa babka z kruszonką",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -44,7 +44,7 @@
         "name": "ciasto z galaretką i malinami",
         "price": "500",
         "typeId": 13,
-        "cookId": 1,
+        "cookId": 3,
         "descrition": "ciasto z galaretką i malinami z nadzieniem kremowym",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -64,7 +64,7 @@
         "name": "makowiec zawijany rolada",
         "price": "152",
         "typeId": 10,
-        "cookId": 1,
+        "cookId": 2,
         "descrition": "tradycyjny makowiec w formie rolady zawijany",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"

@@ -1,48 +1,35 @@
 import React from 'react';
-import { Image, Card, Icon, Button, Label } from 'semantic-ui-react'
+import { Image, Card, Icon, Button, Label } from 'semantic-ui-react';
+import TypeLabel from './TypeLabel';
+import CookLabel from './CookLabel';
 
 class CakeCard extends React.Component{
     state = {
         cakes: this.props.cakes,
-        types: [],
         cooks: []
     }
 
-    fetchType = () => fetch ('./types.json').then(res => res.json());
     fetchCooks = () => fetch ('./cooks.json').then(res => res.json());
 
     componentDidMount() {
-        this.fetchType()
-            .then(res => this.setState({ types: res }));
-        
+    
         this.fetchCooks()
             .then(res => this.setState({ cooks: res}));
       }
 
     render(){
 
-        const type = this.state.types;
         const cook = this.state.cooks;
-
-        let typeData = {
-            name:'',
-            color: ''
-        }
 
         let cooksData = {
             name: '',
+            city: ''
         }
-
-        type.forEach((el)=>{
-            if (el.id === this.state.cakes.typeId){
-                typeData.name = el.name;
-                typeData.color = el.color;
-            }
-        });
 
         cook.forEach((el)=>{
             if (el.id === this.state.cakes.cookId){
                 cooksData.name = `${el.name} ${el.surname}`;
+                cooksData.city = `${el.location.city}`;
             }
         })
 
@@ -53,7 +40,7 @@ class CakeCard extends React.Component{
                 <Card.Meta textAlign='right'>
                     <Button as='div' size='mini' labelPosition='left' >
                         <Label as='a' basic pointing='right' size='mini'>
-                            2,048
+                            48
                         </Label>
                         <Button icon size='mini'>
                             <Icon name='heart' />
@@ -62,16 +49,26 @@ class CakeCard extends React.Component{
                     </Button>
                 </Card.Meta>
                 
-                <Card.Meta textAlign='left'>cena: {this.state.cakes.price}</Card.Meta>
-                <Card.Meta textAlign='left'>
-                    kategoria: <Label color={typeData.color ? typeData.color : 'black'} horizontal>{typeData.name}</Label>
+                <Card.Meta textAlign='left' style = {{paddingTop:'0.4em'}}>
+                    <span className='colorMeta'>cena:
+                        <span style = {{fontWeight: 'bold', float:'right'}}> 
+                            {this.state.cakes.price} zł
+                        </span>
+                    </span>
                 </Card.Meta>
-                <Card.Meta textAlign='left'>kucharz: {cooksData.name}</Card.Meta>
-            </Card.Content>
-            <Card.Content extra>
+                <Card.Meta style = {{paddingTop:'0.4em'}} textAlign='left'> 
+                    <TypeLabel  typeId = {this.state.cakes.typeId} />
+                </Card.Meta>
+                <Card.Meta style = {{paddingTop:'0.4em'}} textAlign='left'>
+                    bezglutenowe: <span className='floatRight' >{this.state.cakes.glutenFree ? ' tak': ' nie'}</span> 
+                </Card.Meta>
+                
                 <Card.Description textAlign='left'>
                     {this.state.cakes.descrition}  
-                </Card.Description> 
+                </Card.Description>
+            </Card.Content>
+            <Card.Content>
+                <CookLabel cookId = {this.state.cakes.cookId} />
             </Card.Content>
         </Card>
     }

@@ -1,0 +1,49 @@
+import React from 'react';
+import { Image, Card } from 'semantic-ui-react'
+
+class CookLabel extends React.Component{
+    state = {
+        cookId: this.props.cookId,
+        cooks: []
+    }
+
+    fetchCooks = () => fetch ('./cooks.json').then(res => res.json());
+
+    componentDidMount() {
+    
+        this.fetchCooks()
+            .then(res => this.setState({ cooks: res}));
+      }
+
+    render(){
+
+        const cook = this.state.cooks;
+
+        let cooksData = {
+            name: '',
+            avatar: '',
+            city: ''
+        }
+
+        cook.forEach((el)=>{
+            if (el.id === this.state.cookId){
+                cooksData.name = `${el.name} ${el.surname}`;
+                cooksData.city = `${el.location.city}`;
+                cooksData.avatar = `${el.avatar}`;
+            }
+        })
+
+        return <>
+            <Image
+                    floated='right'
+                    size='mini'
+                    src={cooksData.avatar}
+                    circular
+            />
+            <Card.Header textAlign='left'>cukiernik: {cooksData.name}</Card.Header>
+            <Card.Meta textAlign='left'>z miasta {cooksData.city}</Card.Meta>  
+        </>
+    }
+}
+
+export default CookLabel;

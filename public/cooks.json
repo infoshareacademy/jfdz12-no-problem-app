@@ -14,6 +14,7 @@
             "street": "Grunwaldzka"
         },
         "description": "aaaaaa",
+        "avatar" :"./img/jenny.jpg",
         "likes": 5
     },
     {
@@ -31,6 +32,25 @@
             "street": "Grunwaldzka"
         },
         "description": "aaaaaa",
-        "likes": 51
+        "avatar" :"./img/elliot.jpg",
+        "likes": 53
+    },
+    {
+        "id": 3,
+        "name": "Anna",
+        "surname": "Starmach",
+        "contact": {
+            "mail": "annas100@wp.pl",
+            "mobile": "4853356789"
+        },
+        "cakesId": [1,2,3],
+        "location": {
+            "city":"Gdańsk",
+            "district": "Oliwa",
+            "street": "Grunwaldzka"
+        },
+        "description": "produkuję fajne ciasta na każdą okazję specjalizuje się w sernikach i puszystych bezach",
+        "avatar" :"./img/molly.png",
+        "likes": 11
     }
 ]
