@@ -5,7 +5,6 @@ import CookLabel from './CookLabel';
 
 class CakeCard extends React.Component{
     
-
     render(){
         const { name, imgURL, typeId, cookId, price, description, glutenFree } = this.props.cakes;
 
@@ -36,7 +35,7 @@ class CakeCard extends React.Component{
                     <TypeLabel  typeId = {typeId} />
                 </Card.Meta>
                 <Card.Meta style = {{paddingTop:'0.4em'}} textAlign='left'>
-                    bezglutenowe: <span className='floatRight' >{glutenFree ? ' tak': ' nie'}</span> 
+                    bezglutenowe: <span className='floatRight'>{glutenFree ? ' tak': ' nie'}</span> 
                 </Card.Meta>
                 
                 <Card.Description textAlign='left'>

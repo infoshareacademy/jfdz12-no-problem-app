@@ -5,46 +5,40 @@ class TypeLabel extends React.Component{
     state = {
         typeId: this.props.typeId,
         types: []
-    }
+    };
 
-    fetchType = () => fetch ('./types.json').then(res => res.json());
+    fetchType = () => {fetch ('./types.json')
+            .then(res => res.json())
+            .then(res => this.setState({ types: res }))
+        }
 
     componentDidMount() {
         this.fetchType()
-            .then(res => this.setState({ types: res }));
     }        
 
     render(){
 
-        //const {typeData} = this.state.types;
-
-        //let {name,color} = typeData.find(el => el.id === this.state.typeId );
-
-        const type = this.state.types;
-       
-        let typeData = {
-            name:'',
-            color: ''
-        }
-
-        type.forEach((el)=>{
-            if (el.id === this.state.typeId){
-                typeData.name = el.name;
-                typeData.color = el.color;
-            }
+        const {types, typeId} = this.state;
+        let typeData = {};
+        
+        types.find((el) => {
+                typeData = {
+                    name: el.name, 
+                    color: el.color
+                }
+            return el.id === typeId;
         });
 
-   
+        //const {name, color} = types.find((el) => el.id === typeId );
+
     return <>
-        
             kategoria: 
             <Label 
-                    color={typeData.color || 'black'} 
+                    color = {typeData.color || 'black'} 
                     style = {{float:'right'}}
                     horizontal > 
                 {typeData.name}
             </Label>
-
         </>
     }
 }

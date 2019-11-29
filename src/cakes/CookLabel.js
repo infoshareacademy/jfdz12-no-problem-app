@@ -7,29 +7,26 @@ class CookLabel extends React.Component{
         cooks: []
     }
 
-    fetchCooks = () => fetch ('./cooks.json').then(res => res.json());
+    fetchCooks = () => fetch ('./cooks.json')
+            .then(res => res.json())
+            .then(res => this.setState({ cooks: res}));
 
     componentDidMount() {
-    
         this.fetchCooks()
-            .then(res => this.setState({ cooks: res}));
       }
 
     render(){
 
-        const cook = this.state.cooks;
+        const {cooks, cookId} = this.state;
+        let cooksData = {};
 
-        let cooksData = {
-            name: '',
-            avatar: '',
-            city: ''
-        }
-
-        cook.forEach((el)=>{
-            if (el.id === this.state.cookId){
-                cooksData.name = `${el.name} ${el.surname}`;
-                cooksData.city = `${el.location.city}`;
-                cooksData.avatar = `${el.avatar}`;
+        cooks.forEach((el)=>{
+            if (el.id === cookId){
+                cooksData = {
+                    name: `${el.name} ${el.surname}`,
+                    city: `${el.location.city}`,
+                    avatar: `${el.avatar}`
+                }
             }
         })
 

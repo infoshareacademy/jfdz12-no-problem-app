@@ -7,11 +7,13 @@ class CakesList extends React.Component{
         cakes: []
     };
     
-    fetchCake = () => fetch ('./cakes.json').then(res => res.json());
+    fetchCake = () => {fetch ('./cakes.json')
+            .then(res => res.json())
+            .then(res => this.setState({ cakes: res }));
+    }
 
     componentDidMount() {   
         this.fetchCake()
-            .then(res => this.setState({ cakes: res }));
     }
 
     render(){    
