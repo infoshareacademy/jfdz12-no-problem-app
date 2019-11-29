@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Label } from 'semantic-ui-react'
+import { Label } from 'semantic-ui-react'
 
 class TypeLabel extends React.Component{
     state = {
@@ -16,8 +16,12 @@ class TypeLabel extends React.Component{
 
     render(){
 
+        //const {typeData} = this.state.types;
+
+        //let {name,color} = typeData.find(el => el.id === this.state.typeId );
+
         const type = this.state.types;
-        //console.log(this.state.ty)
+       
         let typeData = {
             name:'',
             color: ''
@@ -35,10 +39,10 @@ class TypeLabel extends React.Component{
         
             kategoria: 
             <Label 
-                color={typeData.color ? typeData.color : 'black'} 
-                style = {{float:'right'}}
-                horizontal > {typeData.name}
-                
+                    color={typeData.color || 'black'} 
+                    style = {{float:'right'}}
+                    horizontal > 
+                {typeData.name}
             </Label>
 
         </>

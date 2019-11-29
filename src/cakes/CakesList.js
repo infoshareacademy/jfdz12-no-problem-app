@@ -1,5 +1,5 @@
 import React from 'react'
-import Cakes from './Cakes';
+import CakeCard from './CakeCard';
 import { Container, Card} from 'semantic-ui-react'
 
 class CakesList extends React.Component{
@@ -15,15 +15,15 @@ class CakesList extends React.Component{
     }
 
     render(){    
-        const cakesData = this.state.cakes;
+        const {cakes} = this.state;
    
         return <>
             <Container width = {1200}>
                 <Card.Group doubling itemsPerRow={3} stackable>
-                    {cakesData.map((el)=>{ 
-                        return <Cakes 
-                            key = {el.id}
-                            cakes = {el}
+                    {cakes.map((cake)=>{ 
+                        return <CakeCard 
+                            key = {cake.id}
+                            cakes = {cake}
                             />
                         })
                     }

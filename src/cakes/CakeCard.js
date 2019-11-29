@@ -4,39 +4,15 @@ import TypeLabel from './TypeLabel';
 import CookLabel from './CookLabel';
 
 class CakeCard extends React.Component{
-    state = {
-        cakes: this.props.cakes,
-        cooks: []
-    }
-
-    fetchCooks = () => fetch ('./cooks.json').then(res => res.json());
-
-    componentDidMount() {
     
-        this.fetchCooks()
-            .then(res => this.setState({ cooks: res}));
-      }
 
     render(){
-
-        const cook = this.state.cooks;
-
-        let cooksData = {
-            name: '',
-            city: ''
-        }
-
-        cook.forEach((el)=>{
-            if (el.id === this.state.cakes.cookId){
-                cooksData.name = `${el.name} ${el.surname}`;
-                cooksData.city = `${el.location.city}`;
-            }
-        })
+        const { name, imgURL, typeId, cookId, price, description, glutenFree } = this.props.cakes;
 
         return <Card>
             <Card.Content>
-                <Card.Header as='h2' textAlign='center'>{this.state.cakes.name} </Card.Header>
-                <Image size='small' floated='left' src={this.state.cakes.imgURL} wrapped ui={true} />
+                <Card.Header as='h2' textAlign='center'>{name} </Card.Header>
+                <Image size='small' floated='left' src={imgURL} wrapped ui={true} />
                 <Card.Meta textAlign='right'>
                     <Button as='div' size='mini' labelPosition='left' >
                         <Label as='a' basic pointing='right' size='mini'>
@@ -52,23 +28,23 @@ class CakeCard extends React.Component{
                 <Card.Meta textAlign='left' style = {{paddingTop:'0.4em'}}>
                     <span className='colorMeta'>cena:
                         <span style = {{fontWeight: 'bold', float:'right'}}> 
-                            {this.state.cakes.price} zł
+                            {price} zł
                         </span>
                     </span>
                 </Card.Meta>
                 <Card.Meta style = {{paddingTop:'0.4em'}} textAlign='left'> 
-                    <TypeLabel  typeId = {this.state.cakes.typeId} />
+                    <TypeLabel  typeId = {typeId} />
                 </Card.Meta>
                 <Card.Meta style = {{paddingTop:'0.4em'}} textAlign='left'>
-                    bezglutenowe: <span className='floatRight' >{this.state.cakes.glutenFree ? ' tak': ' nie'}</span> 
+                    bezglutenowe: <span className='floatRight' >{glutenFree ? ' tak': ' nie'}</span> 
                 </Card.Meta>
                 
                 <Card.Description textAlign='left'>
-                    {this.state.cakes.descrition}  
+                    {description}  
                 </Card.Description>
             </Card.Content>
             <Card.Content>
-                <CookLabel cookId = {this.state.cakes.cookId} />
+                <CookLabel cookId = {cookId} />
             </Card.Content>
         </Card>
     }
