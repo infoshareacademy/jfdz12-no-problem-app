@@ -13,31 +13,21 @@ class TypeLabel extends React.Component{
         }
 
     componentDidMount() {
-        this.fetchType()
+        this.fetchType();
     }        
 
     render(){
-
         const {types, typeId} = this.state;
-        let typeData = {};
         
-        types.find((el) => {
-                typeData = {
-                    name: el.name, 
-                    color: el.color
-                }
-            return el.id === typeId;
-        });
-
-        //const {name, color} = types.find((el) => el.id === typeId );
-
+        const {color,name} = types.find((el) => el.id === typeId) || {};
+        
     return <>
             kategoria: 
             <Label 
-                    color = {typeData.color || 'black'} 
+                    color = {color || 'black'} 
                     style = {{float:'right'}}
                     horizontal > 
-                {typeData.name}
+                {name}
             </Label>
         </>
     }

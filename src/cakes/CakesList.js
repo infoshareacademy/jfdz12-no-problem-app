@@ -1,51 +1,79 @@
 import React from 'react'
 import CakeCard from './CakeCard';
-import CakeFilter from './filter/CakeFilter'
-import { Container, Card} from 'semantic-ui-react'
+import CakeFilters from './filter/CakeFilters'
+import { Container, Card } from 'semantic-ui-react'
+import { filterCondition } from './filter/filterCondition'
+import FilterButton from './filter/FilterButton'
 
 class CakesList extends React.Component{
     state = {
         cakes: [],
-        nameFilter: '' ,
-        onReset: false
+        filterName: '', 
+        checked: false,
+        selected: [],
+        filterProp: {
+            visible: 'hidden',
+            arrow: 'angle double right'
+        }
     };
 
-    filterNameChange = this.filterNameChange.bind(this);
-    reset = this.reset.bind(this);
-    
     fetchCake = () => {fetch ('./cakes.json')
             .then(res => res.json())
             .then(res => this.setState({ cakes: res }));
     }
 
-    componentDidMount() {   
-        this.fetchCake()
+    componentDidMount() {
+        this.fetchCake();
+    }   
+    
+    filterNameChange = (filterName) =>{
+        this.setState ({filterName});
     }
 
-    filterNameChange(nameFilter){
-        this.setState ({nameFilter})
+    reset = () => {
+        this.setState({filterName: ''});
     }
 
-    reset (){
-        this.setState({nameFilter: ''})
+    filterVisibility = () =>{
+        this.setState({filterProp :{
+            visible : this.state.filterProp.visible === 'hidden' ? 'visible' : 'hidden',
+            arrow: this.state.filterProp.visible === 'hidden' ? 'angle double left' : 'angle double right'
+        }});
     }
 
+    filterCheckboxChange = () => {
+        this.setState({checked: this.state.checked ? false : true});
+    }
+
+    handleChangeType = (e, {value}) => {
+        this.setState({ selected: value });
+    };
 
     render(){    
-        const {cakes} = this.state;
-        const {nameFilter} = this.state;
-       
+        const {cakes, filterName, checked, selected, filterProp} = this.state;
+        
         return <>
-            <CakeFilter 
-                filterNameValue = {nameFilter}
+            
+            <FilterButton
+                onButtonClick = {this.filterVisibility}
+                iconName = {filterProp.arrow}
+            />
+            
+            <CakeFilters 
+                filterNameValue = {filterName}
+                checkboxChecked ={checked} 
                 onNameChange = {this.filterNameChange}
                 onReset = {this.reset}
+                onChecked = {this.filterCheckboxChange}
+                onCheckedType = {this.handleChangeType}
+                filterPropVisible = {filterProp.visible}
             />
-            <p>---</p>
+            <br></br>
+            
             <Container width = {1200}>
                 <Card.Group doubling itemsPerRow={3} stackable>
                     {cakes.map((cake)=>{
-                        if(cake.name.toLowerCase().includes(nameFilter.toLowerCase())){ 
+                        if(filterCondition(cake, filterName, checked, selected)){ 
                             return <CakeCard 
                                 key = {cake.id}
                                 cakes = {cake}
