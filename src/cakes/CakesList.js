@@ -2,13 +2,15 @@ import React from 'react'
 import CakeCard from './CakeCard';
 import CakeFilters from './filter/CakeFilters'
 import { Container, Card } from 'semantic-ui-react'
-import { filterCondition } from './filter/filterCondition'
+import filterCondition from './filter/FilterCondition'
 import FilterButton from './filter/FilterButton'
+
 
 class CakesList extends React.Component{
     state = {
         cakes: [],
         filterName: '', 
+        filterCook: '',
         checked: false,
         selected: [],
         filterProp: {
@@ -30,6 +32,10 @@ class CakesList extends React.Component{
         this.setState ({filterName});
     }
 
+    filterCookChange = (filterCook) =>{
+        this.setState({filterCook});
+    }
+
     reset = () => {
         this.setState({filterName: ''});
     }
@@ -48,10 +54,10 @@ class CakesList extends React.Component{
     handleChangeType = (e, {value}) => {
         this.setState({ selected: value });
     };
-
+    
     render(){    
-        const {cakes, filterName, checked, selected, filterProp} = this.state;
-        
+        const {cakes, filterName, filterCook, checked, selected, filterProp} = this.state;
+        console.log(filterCook)
         return <>
             
             <FilterButton
@@ -61,8 +67,10 @@ class CakesList extends React.Component{
             
             <CakeFilters 
                 filterNameValue = {filterName}
+                filterCookName = {filterCook}
                 checkboxChecked ={checked} 
                 onNameChange = {this.filterNameChange}
+                onCookChange = {this.filterCookChange}
                 onReset = {this.reset}
                 onChecked = {this.filterCheckboxChange}
                 onCheckedType = {this.handleChangeType}

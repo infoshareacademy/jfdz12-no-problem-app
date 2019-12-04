@@ -1,9 +1,12 @@
 
-export function filterCondition(cake, filterName, checked, selected){
+
+
+const filterCondition = (cake, filterName, checked, selected) => {
     let condition = true;
     let cName = true;
     let cType = true;
     let cGluten = true;
+    console.log(this.cooks)
 
     if (filterName !== '' && cake.name.toLowerCase().includes(filterName.toLowerCase())){
         cName = true;
@@ -20,7 +23,7 @@ export function filterCondition(cake, filterName, checked, selected){
     if(checked && cake.glutenFree === false){
         cGluten = false;
     }
-   
+
     if (selected.length>0){
         if (selected.includes(cake.typeId)){
             cType = true;
@@ -37,4 +40,5 @@ export function filterCondition(cake, filterName, checked, selected){
     return condition;
 }
 
- 
+
+export default filterCondition ;

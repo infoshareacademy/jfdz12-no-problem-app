@@ -1,12 +1,17 @@
 import React from 'react';
 import { Input, Button, Checkbox, Segment} from 'semantic-ui-react';
 import FilterDropdown from './FilterDropdown'
+import FilterCook from './FilterCook';
 
 class CakeFilters extends React.Component{
 
     handleChange = (event) => {
         this.props.onNameChange(event.target.value);
       }
+    
+    handleCookChange = (event) =>{
+        this.props.onCookChange(event.target.value);
+    }
     
     reset = () => {
         this.props.onReset();
@@ -49,8 +54,15 @@ class CakeFilters extends React.Component{
                 
                 <FilterDropdown 
                     onCheckedType = {this.handleChangeType}
+                    
                 />
+                <p></p>
             
+                <FilterCook
+                    onCookChange = {this.handleCookChange}
+                    filterCookValue = {this.props.filterCookName}
+                />
+
             </Segment>
         </>
     }
