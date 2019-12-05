@@ -9,6 +9,7 @@ import FilterButton from './filter/FilterButton'
 class CakesList extends React.Component{
     state = {
         cakes: [],
+        cooks: [],
         filterName: '', 
         filterCook: '',
         checked: false,
@@ -24,8 +25,20 @@ class CakesList extends React.Component{
             .then(res => this.setState({ cakes: res }));
     }
 
+    fetchCooks = () => {fetch ('./cooks.json')
+        .then(res => res.json())
+        .then(res => this.setState({ 
+            cooks: res.map((cook) =>{
+                return {
+                    cookId: cook.id,
+                    cookName: `${cook.name} ${cook.surname}` 
+                }})
+        }));
+    }
+
     componentDidMount() {
         this.fetchCake();
+        this.fetchCooks();
     }   
     
     filterNameChange = (filterName) =>{
@@ -36,9 +49,9 @@ class CakesList extends React.Component{
         this.setState({filterCook});
     }
 
-    reset = () => {
-        this.setState({filterName: ''});
-    }
+    reset = () => this.setState({filterName: ''});
+
+    resetCook = () =>this.setState({filterCook: ''});
 
     filterVisibility = () =>{
         this.setState({filterProp :{
@@ -54,10 +67,16 @@ class CakesList extends React.Component{
     handleChangeType = (e, {value}) => {
         this.setState({ selected: value });
     };
+
+    filterCook = (id) =>{
+        this.state.cooks.find((cookId) => {
+            return cookId === id;
+        });
+    }
     
     render(){    
-        const {cakes, filterName, filterCook, checked, selected, filterProp} = this.state;
-        console.log(filterCook)
+        const {cakes, filterName, filterCook, checked, selected, filterProp, cooks} = this.state;
+       
         return <>
             
             <FilterButton
@@ -72,6 +91,7 @@ class CakesList extends React.Component{
                 onNameChange = {this.filterNameChange}
                 onCookChange = {this.filterCookChange}
                 onReset = {this.reset}
+                onResetCook = {this.resetCook}
                 onChecked = {this.filterCheckboxChange}
                 onCheckedType = {this.handleChangeType}
                 filterPropVisible = {filterProp.visible}
@@ -81,7 +101,9 @@ class CakesList extends React.Component{
             <Container width = {1200}>
                 <Card.Group doubling itemsPerRow={3} stackable>
                     {cakes.map((cake)=>{
-                        if(filterCondition(cake, filterName, checked, selected)){ 
+                        const {cookName} = (cooks.find((el) => el.cookId === cake.cookId)) || {}
+         
+                        if(filterCondition(cake, filterName, checked, selected, cookName, filterCook)){ 
                             return <CakeCard 
                                 key = {cake.id}
                                 cakes = {cake}
