@@ -1,13 +1,13 @@
 [
     {
         "id": 1,
-        "name": "makowiec zawijany rolada",
+        "name": "makowiec",
         "price": "152",
         "typeId": 10,
         "cookId": 1,
-        "description": "tradycyjny makowiec w formie rolady zawijany",
+        "description": "tradycyjny makowiec",
         "glutenFree": false,
-        "imgURL": "./img/makowiec1.jpg"
+        "imgURL": "./img/ciacha/makowiec1.jpg"
     },
     {
         "id": 2,
@@ -17,7 +17,7 @@
         "cookId": 1,
         "description": "tradycyjny pączek polany lukrem z nadzieniem różanym",
         "glutenFree": true,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/ciacha/paczek1.jpg"
     },
     {
         "id": 3,
@@ -27,7 +27,7 @@
         "cookId": 2,
         "description": "drożdzowa babka z kruszonką",
         "glutenFree": false,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/ciacha/babkadrozdzowa.jpg"
     },
     {
         "id": 4,
@@ -35,9 +35,9 @@
         "price": "104",
         "typeId": 7,
         "cookId": 2,
-        "description": "ciasto francuskie z nadzieniem mailnowym i posypką llukrem",
+        "description": "ciasto francuskie z nadzieniem malinowym",
         "glutenFree": true,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/ciacha/francuskiemaliny.jpeg"
     },
     {
         "id": 5,
@@ -47,17 +47,17 @@
         "cookId": 3,
         "description": "ciasto z galaretką i malinami z nadzieniem kremowym",
         "glutenFree": false,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/ciacha/galaretkamaliny.jpg"
     },
     {
         "id": 6,
         "name": "ciasto czekoladowe z czekoladą",
         "price": "600",
-        "typeId": 5,
+        "typeId": 4,
         "cookId": 3,
-        "description": "ciasto czekoladowe z polewączekoladową tzw. murzynek",
+        "description": "ciasto czekoladowe z polewą czekoladową tzw. murzynek",
         "glutenFree": false,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/ciacha/murzynek.jpg"
     },
     {
         "id": 7,
@@ -65,58 +65,180 @@
         "price": "152",
         "typeId": 10,
         "cookId": 4,
-        "description": "tradycyjny makowiec w formie rolady zawijany",
+        "description": "makowiec w formie rolady",
         "glutenFree": false,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/ciacha/makowiecrolada.jpg"
     },
     {
         "id": 8,
-        "name": "pączek z nadzieniem różnym",
+        "name": "Pavlova",
         "price": "120",
-        "typeId": 18,
+        "typeId": [2,17],
         "cookId": 4,
-        "description": "tradycyjny pączek polany lukrem z nadzieniem różanym",
+        "description": "tort Pavlova",
         "glutenFree": true,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/ciacha/bezaPavlova.jpg"
     },
     {
         "id": 9,
-        "name": "babka drożdżowa z kruszonką",
+        "name": "piernik",
         "price": "133",
-        "typeId": 5,
+        "typeId": 15,
         "cookId": 5,
-        "description": "drożdzowa babka z kruszonką",
+        "description": "piernik tradycyjny z powidłami",
         "glutenFree": false,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/ciacha/piernikpowidla.jpg"
     },
     {
         "id": 10,
-        "name": "ciasto francuskie",
+        "name": "babka kokosowa",
         "price": "104",
-        "typeId": 7,
+        "typeId": 1,
         "cookId": 5,
-        "description": "ciasto francuskie z nadzieniem mailnowym i posypką llukrem",
-        "glutenFree": false,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "description": "babka kokosowa posypana cukrem pudrem",
+        "glutenFree": true,
+        "imgURL": "./img/ciacha/babkakokosowa.jpg"
     },
     {
         "id": 11,
-        "name": "ciasto z galaretką i malinami",
+        "name": "sernik",
         "price": "500",
-        "typeId": 13,
+        "typeId": 16,
         "cookId": 6,
-        "description": "ciasto z galaretką i malinami z nadzieniem kremowym",
+        "description": "sernik wiedeński z polewą czekoladową",
         "glutenFree": false,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/ciacha/sernikwiedenski.jpg"
     },
     {
         "id": 12,
-        "name": "ciasto czekoladowe z czekoladą",
+        "name": "brownie",
         "price": "600",
-        "typeId": 5,
+        "typeId": 4,
         "cookId": 6,
-        "description": "ciasto czekoladowe z polewączekoladową tzw. murzynek",
+        "description": "wyjątkowe brownie bananowe",
         "glutenFree": false,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/ciacha/browniebananowe.jpg"
+    },
+    {
+        "id": 13,
+        "name": "biszkopt z jabłkami",
+        "price": "300",
+        "typeId": 3,
+        "cookId": 7,
+        "description": "pyszne ciasto z owocami",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/biszkoptjablka.jpeg"
+    },
+    {
+        "id": 14,
+        "name": "ciasto cukiniowe",
+        "price": "100",
+        "typeId": 12,
+        "cookId": 7,
+        "description": "ciasto cukiniowe z migdałami, orzechami włoskimi i laskowymi",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/cukiniowe.jpg"
+    },
+    {
+        "id": 15,
+        "name": "ciasto karmelowe",
+        "price": "500",
+        "typeId": 6,
+        "cookId": 8,
+        "description": "kruche ciasto z bakaliami i karmelem",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/karmelowe.jpg"
+    },
+    {
+        "id": 16,
+        "name": "ciasto kefirowe",
+        "price": "300",
+        "typeId": 11,
+        "cookId": 8,
+        "description": "miękkie i wigotne, pachnace owocami lata",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/kefirowe.jpg"
+    },
+    {
+        "id": 17,
+        "name": "Raffaello",
+        "price": "600",
+        "typeId": 19,
+        "cookId": 9,
+        "description": "idealne na lato",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/raffaello.jpg"
+    },
+    {
+        "id": 18,
+        "name": "ciasto 3bit",
+        "price": "500",
+        "typeId": 19,
+        "cookId": 9,
+        "description": "herbatniki, budyń, kajmak, bita śmietana i czekolada",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/3bit.jpg"
+    },
+    {
+        "id": 19,
+        "name": "karpatka",
+        "price": "400",
+        "typeId": 14,
+        "cookId": 10,
+        "description": "Doskonałe ciasto na imieniny.",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/karpatka.jpg"
+    },
+    {
+        "id": 20,
+        "name": "keks angielski",
+        "price": "200",
+        "typeId": 3,
+        "cookId": 10,
+        "description": "Mnóstwo bakalii (rodzynki, morele, daktyle, skórka pomarańczowa) nasączonych rumem i delikatne ciasto",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/keksangielski.jpeg"
+    },
+    {
+        "id": 21,
+        "name": "tort Czarny Las",
+        "price": "200",
+        "typeId": 17,
+        "cookId": 11,
+        "description": "znany też jako tort Szwarcwaldzki",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/czarnylas.jpg"
+    },
+    {
+        "id": 22,
+        "name": "tort bezowy z czarną porzeczką",
+        "price": "400",
+        "typeId": 17,
+        "cookId": 11,
+        "description": "Przepyszne połączenie chrupiącej bezy, kwaskowej frużeliny z czarnej porzeczki i delikatnej śmietany porzeczkowej.",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/bezaczarnaporzeczka.jpg"
+    },
+    {
+        "id": 23,
+        "name": "zebra",
+        "price": "200",
+        "typeId": 1,
+        "cookId": 12,
+        "description": "super ciasto w paski",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/zebra.jpg"
+    },
+    {
+        "id": 24,
+        "name": "Pani Walewska - Pychotka",
+        "price": "400",
+        "typeId": 6,
+        "cookId": 12,
+        "description": "kruche ciasto, dżem z czarnej porzeczki, beza z migdałami i krem budyniowy",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/pychotka.jpg"
     }
+
+
 ]
