@@ -7,14 +7,14 @@
         "cookId": 1,
         "description": "tradycyjny makowiec w formie rolady zawijany",
         "glutenFree": false,
-        "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
+        "imgURL": "./img/makowiec1.jpg"
     },
     {
         "id": 2,
         "name": "pączek z nadzieniem różnym",
         "price": "120",
         "typeId": 18,
-        "cookId": 3,
+        "cookId": 1,
         "description": "tradycyjny pączek polany lukrem z nadzieniem różanym",
         "glutenFree": true,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -34,7 +34,7 @@
         "name": "ciasto francuskie",
         "price": "104",
         "typeId": 7,
-        "cookId": 1,
+        "cookId": 2,
         "description": "ciasto francuskie z nadzieniem mailnowym i posypką llukrem",
         "glutenFree": true,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -54,7 +54,7 @@
         "name": "ciasto czekoladowe z czekoladą",
         "price": "600",
         "typeId": 5,
-        "cookId": 1,
+        "cookId": 3,
         "description": "ciasto czekoladowe z polewączekoladową tzw. murzynek",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -64,7 +64,7 @@
         "name": "makowiec zawijany rolada",
         "price": "152",
         "typeId": 10,
-        "cookId": 2,
+        "cookId": 4,
         "description": "tradycyjny makowiec w formie rolady zawijany",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -74,7 +74,7 @@
         "name": "pączek z nadzieniem różnym",
         "price": "120",
         "typeId": 18,
-        "cookId": 1,
+        "cookId": 4,
         "description": "tradycyjny pączek polany lukrem z nadzieniem różanym",
         "glutenFree": true,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -84,7 +84,7 @@
         "name": "babka drożdżowa z kruszonką",
         "price": "133",
         "typeId": 5,
-        "cookId": 1,
+        "cookId": 5,
         "description": "drożdzowa babka z kruszonką",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -94,7 +94,7 @@
         "name": "ciasto francuskie",
         "price": "104",
         "typeId": 7,
-        "cookId": 1,
+        "cookId": 5,
         "description": "ciasto francuskie z nadzieniem mailnowym i posypką llukrem",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -104,7 +104,7 @@
         "name": "ciasto z galaretką i malinami",
         "price": "500",
         "typeId": 13,
-        "cookId": 1,
+        "cookId": 6,
         "description": "ciasto z galaretką i malinami z nadzieniem kremowym",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"
@@ -114,7 +114,7 @@
         "name": "ciasto czekoladowe z czekoladą",
         "price": "600",
         "typeId": 5,
-        "cookId": 1,
+        "cookId": 6,
         "description": "ciasto czekoladowe z polewączekoladową tzw. murzynek",
         "glutenFree": false,
         "imgURL": "https://d3iamf8ydd24h9.cloudfront.net/pictures/articles/2017/12/20067-v-900x556.jpg"

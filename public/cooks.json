@@ -7,13 +7,13 @@
             "mail": "zg@gessler.pl",
             "mobile": "48518456789"
         },
-        "cakesId": [1,2,3],
+        "cakesId": [1,2],
         "location": {
             "city":"Gdańsk",
             "district": "Oliwa",
             "street": "Grunwaldzka"
         },
-        "description": "aaaaaa",
+        "description": "Piekę odkąd pamiętam. Zapraszam do zapoznania się z moją ofertą",
         "avatar" :"./img/jenny.jpg",
         "likes": 5
     },
@@ -25,13 +25,13 @@
             "mail": "zyga.maklowicz@wp.pl",
             "mobile": "48518456789"
         },
-        "cakesId": [1,2,3],
+        "cakesId": [3,4],
         "location": {
             "city":"Gdańsk",
             "district": "Oliwa",
             "street": "Grunwaldzka"
         },
-        "description": "aaaaaa",
+        "description": "Nie tylko kobiety mogą piec pyszne ciasta. Mnie uczyła Babcia. Jestem najlepszy! Spróbuj!",
         "avatar" :"./img/elliot.jpg",
         "likes": 53
     },
@@ -41,16 +41,322 @@
         "surname": "Starmach",
         "contact": {
             "mail": "annas100@wp.pl",
-            "mobile": "4853356789"
+            "mobile": "48222333666"
         },
-        "cakesId": [1,2,3],
+        "cakesId": [5,6],
         "location": {
             "city":"Gdańsk",
-            "district": "Oliwa",
-            "street": "Grunwaldzka"
+            "district": "Wrzeszcz",
+            "street": "Dmowskiego"
         },
-        "description": "produkuję fajne ciasta na każdą okazję specjalizuje się w sernikach i puszystych bezach",
+        "description": "Piekę fajne ciasta na każdą okazję. Specjalizuję się w sernikach i puszystych bezach. Mniam!",
         "avatar" :"./img/molly.png",
         "likes": 11
+    },
+    {
+        "id": 4,
+        "name": "Maria",
+        "surname": "Lewandowska",
+        "contact": {
+            "mail": "marysia@o2.com",
+            "mobile": "48589666322"
+        },
+        "cakesId": [7,8],
+        "location": {
+            "city":"Gdańsk",
+            "district": "Orunia",
+            "street": "Platynowa"
+        },
+        "description": "Potrzebujesz ciasta? Napisz do mnie! Na pewno wybierzemy z mojej oferty coś pysznego dla Ciebie!",
+        "avatar" :"./img/jenny.jpg",
+        "likes": 12
+    },
+    {
+        "id": 5,
+        "name": "Marek",
+        "surname": "Kucharz",
+        "contact": {
+            "mail": "kucharz@kucharz.com",
+            "mobile": "48888547123"
+        },
+        "cakesId": [9,10],
+        "location": {
+            "city":"Gdańsk",
+            "district": "Orunia",
+            "street": "Platynowa"
+        },
+        "description": "Nazwisko zobowiązuje! Na codzień pracuję w jednej z gdańskich restauracji, ale po pracy tez lubię coś upichcić. Moje ciasta to niebo w gębie. Przekonaj się sam.",
+        "avatar" :"./img/elliot.jpg",
+        "likes": 102
+    },
+    {
+        "id": 6,
+        "name": "Joanna",
+        "surname": "Malinowska",
+        "contact": {
+            "mail": "joannamalinowska@buziaczek.com",
+            "mobile": "48874111255"
+        },
+        "cakesId": [11,12],
+        "location": {
+            "city":"Gdańsk",
+            "district": "Osowa",
+            "street": "Hokejowa"
+        },
+        "description": "Piekę od niedawna, ale sądzę, że mam talent :) Na pewno nie zafunduję Ci zakalca. Moi znajomi uwielbiają moje brownie. Ale blondie też dam radę upiec ;) ",
+        "avatar" : "./img/jenny.jpg",
+        "likes": 15
+    },
+    {
+        "id": 7,
+        "name": "Mariola",
+        "surname": "Pawluczuk",
+        "contact": {
+            "mail": "mapaw@interia.com",
+            "mobile": "48555477899"
+        },
+        "cakesId": [13,14],
+        "location": {
+            "city":"Gdańsk",
+            "district": "Chełm",
+            "street": "Cieszyńskiego"
+        },
+        "description": "Wszyscy w mojej rodzinie pieką. Mama, Tata, Babcia Zosia... Ja zaczęłam, gdy miałam cztery lata - upiekłam sernik. Dla Ciebie też go mogę upiec",
+        "avatar" : "./img/molly.png",
+        "likes": 45
+    },
+    {
+        "id": 8,
+        "name": "Kamil",
+        "surname": "Richert",
+        "contact": {
+            "mail": "kamil@richert.com",
+            "mobile": "48516968478"
+        },
+        "cakesId": [15,16],
+        "location": {
+            "city":"Gdynia",
+            "district": "Wielki Kack",
+            "street": "Orna"
+        },
+        "description": "Na co dzień pracuję w IT, ale moja prawdziwa pasja to pieczenie. Dzień zaczynam od sernika, w południe makowiec, na wieczór beza. Dla Ciebie też mogę coś upiec!",
+        "avatar" : "./img/elliot.jpg",
+        "likes": 355
+    },
+    {
+        "id": 9,
+        "name": "Martyna",
+        "surname": "Wojdowska",
+        "contact": {
+            "mail": "wojdowska@wojdowska.com",
+            "mobile": "48774852136"
+        },
+        "cakesId": [17,18],
+        "location": {
+            "city":"Gdynia",
+            "district": "Orłowo",
+            "street": "Inżynierska"
+        },
+        "description": "Jeśli potrzebujesz ciasta a sam nie umiesz piec - skontaktuj się za mną!",
+        "avatar" : "./img/jenny.jpg",
+        "likes": 355
+    },
+    {
+        "id": 10,
+        "name": "Julia",
+        "surname": "Kowalik",
+        "contact": {
+            "mail": "julkakowalik88@gmail.pl",
+            "mobile": "48698745214"
+        },
+        "cakesId": [19,20],
+        "location": {
+            "city":"Gdynia",
+            "district": "Orłowo",
+            "street": "Powstania Śląskiego"
+        },
+        "description": "Moje motto brzmi: Musi być pysznie! Obiecuję, że będzie. Napisz do mnie! Krótkie terminy realizacji zleceń!",
+        "avatar" : "./img/molly.png",
+        "likes": 55
+    },
+    {
+        "id": 11,
+        "name": "Marian",
+        "surname": "Nowak",
+        "contact": {
+            "mail": "nowak@buziaczek.com",
+            "mobile": "48222478596"
+        },
+        "cakesId": [21,22],
+        "location": {
+            "city":"Gdynia",
+            "district": "Śródmieście",
+            "street": "Stoczniowców"
+        },
+        "description": "Mąka, masło i mój talent to niezbędne skłądniki każdego mojego wypieku. Nikt nie zaoferuje Ci nic lepszego. Jeśli nawet nie widzisz jakiegoś ciasta w mojej ofercie, to i tak pewnie damy radę się dogadać. Dla chcącego nic trudnego!",
+        "avatar" : "./img/elliot.jpg",
+        "likes": 5
+    },
+    {
+        "id": 12,
+        "name": "Zofia",
+        "surname": "Małek",
+        "contact": {
+            "mail": "zofiamałek@wp.com",
+            "mobile": "48742698456"
+        },
+        "cakesId": [23,24],
+        "location": {
+            "city":"Gdynia",
+            "district": "Śródmieście",
+            "street": "Komandorska"
+        },
+        "description": "Jeśli chcesz prawdziwych babcinych wypieków, to potrzebujesz mnie - prawdziwej babci 10 wnucząt. One kochają moje wypieki. Ty też je pokochasz.",
+        "avatar" : "./img/jenny.jpg",
+        "likes": 555
+    },
+    {
+        "id": 13,
+        "name": "Natalia",
+        "surname": "Tkaczyk",
+        "contact": {
+            "mail": "natalka89@interia.com",
+            "mobile": "48459752145"
+        },
+        "cakesId": [25,26],
+        "location": {
+            "city":"Gdynia",
+            "district": "Śródmieście",
+            "street": "Hozjusza"
+        },
+        "description": "Dobre ciasta w dobrej cenie. Cóż więcej potrzeba?",
+        "avatar" : "./img/jenny.jpg",
+        "likes": 5
+    },
+    {
+        "id": 14,
+        "name": "Manuela",
+        "surname": "Wawrzyniecka",
+        "contact": {
+            "mail": "manka@gmail.pl",
+            "mobile": "48587412369"
+        },
+        "cakesId": [27,28],
+        "location": {
+            "city":"Sopot",
+            "district": "Karlikowo",
+            "street": "Łokietka"
+        },
+        "description": "Moim sekretem jest... No nie, tak łatwo go nie wyjawię ;) Ale Twoje ciasto dostarczę na czas!",
+        "avatar" : "./img/molly.png",
+        "likes": 29
+    },
+    {
+        "id": 15,
+        "name": "Patrycja",
+        "surname": "Woroniecka",
+        "contact": {
+            "mail": "pati99@o2.pl",
+            "mobile": "48598741563"
+        },
+        "cakesId": [29,30],
+        "location": {
+            "city":"Sopot",
+            "district": "Karlikowo",
+            "street": "Architektów"
+        },
+        "description": "Wypieki z sercem.",
+        "avatar" : "./img/molly.png",
+        "likes": 31
+    },
+    {
+        "id": 16,
+        "name": "Karolina",
+        "surname": "Małomiejska",
+        "contact": {
+            "mail": "malakarola@wp.com",
+            "mobile": "48429746316"
+        },
+        "cakesId": [31,32],
+        "location": {
+            "city":"Reda",
+            "district": "Betlejem",
+            "street": "Kwiatowa"
+        },
+        "description": "Czekam na Twoje zamówienia. Poradze sobie z każdym zleceniem. Specjalizuję się w ciastach droźdżowych",
+        "avatar" : "./img/molly.png",
+        "likes": 3
+    },
+    {
+        "id": 17,
+        "name": "Damian",
+        "surname": "Perkowski",
+        "contact": {
+            "mail": "perkowski@wp.com",
+            "mobile": "48744855966"
+        },
+        "cakesId": [33,34],
+        "location": {
+            "city":"Reda",
+            "district": "Ciechocino",
+            "street": "Wiejska"
+        },
+        "description": "Jeśli potrzebujesz ciasta na urodziny, imieniny, święta, czy na dowolną inną okazję - napisz do mnie!",
+        "avatar" : "./img/elliot.jpg",
+        "likes": 43
+    },
+    {
+        "id": 18,
+        "name": "Anna",
+        "surname": "Mikołajewska",
+        "contact": {
+            "mail": "amikołajewska@onet.com",
+            "mobile": "48596314785"
+        },
+        "cakesId": [35,36],
+        "location": {
+            "city":"Rumia",
+            "district": "Biała Rzeka",
+            "street": "Hetmańska"
+        },
+        "description": "Domowe ciasta i ciasteczka. Oferta bezglutenowa.",
+        "avatar" : "./img/molly.png",
+        "likes": 12
+    },
+    {
+        "id": 19,
+        "name": "Weronika",
+        "surname": "Psiuk",
+        "contact": {
+            "mail": "werapsiuk87@o2.com",
+            "mobile": "488741256387"
+        },
+        "cakesId": [37,38],
+        "location": {
+            "city":"Rumia",
+            "district": "Zagórze",
+            "street": "Wyżynna"
+        },
+        "description": "Nigdy nie gotuję zgodnie z przepisem, bo wierzę, że zdolny cukiernik ich nie potrzebuje. Oferuję pięknie zdobione torty na każdą okazję.",
+        "avatar" : "./img/jenny.jpg",
+        "likes": 40
+    },
+    {
+        "id": 20,
+        "name": "Agnieszka",
+        "surname": "Tarnowska",
+        "contact": {
+            "mail": "aga7@buziaczek.com",
+            "mobile": "48847123654"
+        },
+        "cakesId": [39,40],
+        "location": {
+            "city":"Kartuzy",
+            "district": "Kartuzy",
+            "street": "Klasztorna"
+        },
+        "description": "Setki zadowolonych klientów to moja najlepsza rekomendacja! Nie wahaj się! To ja upiekę ciasto dla Ciebie!",
+        "avatar" : "./img/jenny.jpg",
+        "likes": 1
     }
 ]
