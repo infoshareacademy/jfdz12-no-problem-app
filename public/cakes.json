@@ -238,7 +238,165 @@
         "description": "kruche ciasto, dżem z czarnej porzeczki, beza z migdałami i krem budyniowy",
         "glutenFree": false,
         "imgURL": "./img/ciacha/pychotka.jpg"
-    }
-
-
+    },
+    {
+        "id": 25,
+        "name": "ciasto orzechowe",
+        "price": "200",
+        "typeId": 11,
+        "cookId": 13,
+        "description": "ciasto orzechowe z brzoskwniami",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/orzechowebrzoskwinie.jpeg"
+    },
+    {
+        "id": 26,
+        "name": "jabłecznik",
+        "price": "250",
+        "typeId": 11,
+        "cookId": 13,
+        "description": "jabłecznik z budyniem na kruchym cieście",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/jablecznik.webp"
+    },
+    {
+        "id": 27,
+        "name": "szarlotka amerykańska",
+        "price": "200",
+        "typeId": 1,
+        "cookId": 14,
+        "description": "apple pie :)",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/applepie.jpg"
+    },
+    {
+        "id": 28,
+        "name": "szarlotka z rabarbarem",
+        "price": "400",
+        "typeId": 6,
+        "cookId": 14,
+        "description": "smakuje jak tradycyjna szarlotka z jabłkami",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/szarlotkarabarbar.jpg"
+    },
+    {
+        "id": 29,
+        "name": "babka z agrestem",
+        "price": "100",
+        "typeId": 1,
+        "cookId": 15,
+        "description": "biszkoptowo - budyniowa o kwaskowym smaku",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/babkaagrest.jpg"
+    },
+    {
+        "id": 30,
+        "name": "babka łaciata",
+        "price": "400",
+        "typeId": 1,
+        "cookId": 15,
+        "description": "Znana i lubiana babka łaciata w dwóch kolorach.",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/babkalaciata.jpg"
+    },
+    {
+        "id": 31,
+        "name": "ciasto z cukinią",
+        "price": "80",
+        "typeId": 12,
+        "cookId": 16,
+        "description": "w smaku jak piernik",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/ciastocukinia.jpg"
+    },
+    {
+        "id": 32,
+        "name": "miodownik z orzechami",
+        "price": "300",
+        "typeId": 20,
+        "cookId": 16,
+        "description": "ciasto miodowe, krem z kaszy manny i orzechy",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/miodownik.jpg"
+    },
+    {
+        "id": 33,
+        "name": "ciasto z cukinią",
+        "price": "80",
+        "typeId": 12,
+        "cookId": 17,
+        "description": "w smaku jak piernik",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/ciastocukinia.jpg"
+    },
+    {
+        "id": 34,
+        "name": "miodownik z orzechami",
+        "price": "300",
+        "typeId": 20,
+        "cookId": 17,
+        "description": "ciasto miodowe, krem z kaszy manny i orzechy",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/miodownik.jpg"
+    },
+    {
+        "id": 35,
+        "name": "kawowa Pavlova",
+        "price": "80",
+        "typeId": 17,
+        "cookId": 18,
+        "description": "oryginalna wersja klasycznej Pavlovej",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/kawowapavlova.jpg"
+    },
+    {
+        "id": 36,
+        "name": "tort bezowy",
+        "price": "300",
+        "typeId": 17,
+        "cookId": 18,
+        "description": "Tort bezowy z gorzką czekoladą i kremem mascarpone",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/tortbezowymas.jpg"
+    },
+    {
+        "id": 37,
+        "name": "sernik na zimno",
+        "price": "280",
+        "typeId": 16,
+        "cookId": 19,
+        "description": "Sernik na zimno z musem jagodowym",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/sernikjagody.jpg"
+    },
+    {
+        "id": 38,
+        "name": "cytrusek",
+        "price": "180",
+        "typeId": 3,
+        "cookId": 19,
+        "description": "biszkopt z masą cytrynową, bitą śmietaną i herbatnikami oblanymi lukrem",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/cytrusek.jpg"
+    },
+    {
+        "id": 39,
+        "name": "Ciasto jogurtowe z truskawkami",
+        "price": "250",
+        "typeId": 11,
+        "cookId": 20,
+        "description": "na biszkopcie, bardzo truskawkowe",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/truskawkowe.jpg"
+    },
+    {
+        "id": 40,
+        "name": "ciasto kruche z truskawkami i serem",
+        "price": "100",
+        "typeId": 6,
+        "cookId": 20,
+        "description": "Mięciutkie i delikatne kruche ciasto ",
+        "glutenFree": false,
+        "imgURL": "./img/ciacha/kruchetruskawki.jpeg"
+    }    
 ]
