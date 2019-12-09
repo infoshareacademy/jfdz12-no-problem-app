@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Card } from 'semantic-ui-react'
+import {Card, CardHeader,  Typography, Avatar } from '@material-ui/core';
 
 class CookLabel extends React.Component{
     state = {
@@ -31,14 +31,19 @@ class CookLabel extends React.Component{
         })
 
         return <>
-            <Image
-                    floated='right'
-                    size='mini'
-                    src={cooksData.avatar}
-                    circular
-            />
-            <Card.Header textAlign='left'>cukiernik: {cooksData.name}</Card.Header>
-            <Card.Meta textAlign='left'>z miasta {cooksData.city}</Card.Meta>  
+            <Card className="cookLabelCard" >
+                
+                <CardHeader 
+                        className = "cookLabelHeader"
+                        avatar= {<Avatar
+                            src={cooksData.avatar}
+                            variant="circle"
+                            />}
+                        title = {`cukiernik: ${cooksData.name}`} 
+                        subheader = {`z miasta ${cooksData.city}`}
+                />
+
+            </Card>
         </>
     }
 }

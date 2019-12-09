@@ -1,7 +1,7 @@
 import React from 'react'
 import CakeCard from './CakeCard';
 import CakeFilters from './filter/CakeFilters'
-import { Container, Card } from 'semantic-ui-react'
+import { Container, Grid, Paper } from '@material-ui/core'
 import filterCondition from './filter/FilterCondition'
 import FilterButton from './filter/FilterButton'
 
@@ -95,24 +95,28 @@ class CakesList extends React.Component{
                 onChecked = {this.filterCheckboxChange}
                 onCheckedType = {this.handleChangeType}
                 filterPropVisible = {filterProp.visible}
-            />
+            /> 
             <br></br>
             
-            <Container width = {1200}>
-                <Card.Group doubling itemsPerRow={3} stackable>
+            <Container maxWidth = "lg"  >
+                <Grid container spacing={3} wrap = 'wrap' alignContent="space-around" alignItems="flex-start" >
                     {cakes.map((cake)=>{
                         const {cookName} = (cooks.find((el) => el.cookId === cake.cookId)) || {}
          
                         if(filterCondition(cake, filterName, checked, selected, cookName, filterCook)){ 
-                            return <CakeCard 
-                                key = {cake.id}
-                                cakes = {cake}
-                                />
+                            return <Grid  item xs={4} style ={{minWidth: '300px'}}>
+                                        <Paper >
+                                            <CakeCard 
+                                            key = {cake.id}
+                                            cakes = {cake}
+                                            />
+                                        </Paper>
+                                    </Grid>
                             }
                         return '';
                         })
                     }
-                </Card.Group>
+                </Grid>
             </Container>
         </>
     }

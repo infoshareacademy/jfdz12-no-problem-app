@@ -1,52 +1,92 @@
 import React from 'react';
-import { Image, Card, Icon, Button, Label } from 'semantic-ui-react';
+import { Card, CardContent,CardMedia, withStyles, Grid, Icon, Button, Typography, Paper } from '@material-ui/core';
 import TypeLabel from './TypeLabel';
 import CookLabel from './CookLabel';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
+const styles= {
+    root:{
+        padding: '5px 2px',
+        margin: '5px',
+        },
+    paper:{
+        margin: '5px',
+        padding: '5px',
+        minWidth: '100px',
+        minHeight: '100px',
+    },
+    media:{
+        minWidth: '100px',
+        width: '100%',
+        minHeight: '100px',
+        margin: '5px',
+        borderRadius: '5px',
+    },
+    dataLeft:{
+        textAlign: 'left',
+    },
+    dataRight:{
+        float:'right',
+    }
+    
+}
 
 class CakeCard extends React.Component{
     
     render(){
         const { name, imgURL, typeId, cookId, price, description, glutenFree } = this.props.cakes;
+        const {classes} = this.props
 
-        return <Card>
-            <Card.Content>
-                <Card.Header as='h2' textAlign='center'>{name} </Card.Header>
-                <Image size='small' floated='left' src={imgURL} wrapped ui={true} />
-                <Card.Meta textAlign='right'>
-                    <Button as='div' size='mini' labelPosition='left' >
-                        <Label as='a' basic pointing='right' size='mini'>
-                            48
-                        </Label>
-                        <Button icon size='mini'>
-                            <Icon name='heart' />
-                            Like
-                        </Button>
-                    </Button>
-                </Card.Meta>
-                
-                <Card.Meta textAlign='left' style = {{paddingTop:'0.4em'}}>
-                    <span className='colorMeta'>cena:
-                        <span style = {{fontWeight: 'bold', float:'right'}}> 
+        return( <>
+            <Grid container spacing={1} >
+                <Grid item xs={12}>
+                    <Paper className = {classes.root} >
+                        <Typography variant="h5"> {name}</Typography> 
+                    </Paper> 
+                </Grid>
+                <Grid item>
+                    <CardMedia image={imgURL} 
+                        className= {classes.media} 
+                    />
+                </Grid>
+                <Grid item xs={12} sm container >
+                    
+                    <Grid item xs={6}>
+                        <Typography variant="subtitle1" > 
+                            <span >Cena: </span>
+                        </Typography>
+                        <Typography variant="subtitle1" > 
+                            <span >Kategoria: </span>
+                        </Typography>
+                        
+                        <Typography variant="subtitle1" > 
+                            <span >bezglutenowe: </span>
+                        </Typography>
+                     </Grid>
+                     <Grid item xs={6} alignItems='flex-end'>
+                        <Typography variant="subtitle1" > 
                             {price} zł
-                        </span>
-                    </span>
-                </Card.Meta>
-                <Card.Meta style = {{paddingTop:'0.4em'}} textAlign='left'> 
-                    <TypeLabel  typeId = {typeId} />
-                </Card.Meta>
-                <Card.Meta style = {{paddingTop:'0.4em'}} textAlign='left'>
-                    bezglutenowe: <span className='floatRight'>{glutenFree ? ' tak': ' nie'}</span> 
-                </Card.Meta>
+                        </Typography>
+                        <Typography variant="subtitle1" component='p'>
+                            <p><TypeLabel typeId = {typeId} /> </p>
+                        </Typography>
+                        
+                        <Typography variant="subtitle1" > 
+                            {glutenFree ? ' tak': ' nie'}
+                        </Typography>
+                     </Grid>         
+                </Grid>
                 
-                <Card.Description textAlign='left'>
-                    {description}  
-                </Card.Description>
-            </Card.Content>
-            <Card.Content>
-                <CookLabel cookId = {cookId} />
-            </Card.Content>
-        </Card>
+                <Grid item xs={12}>
+                    <Typography>{description}</Typography>
+                </Grid>
+                <Grid item xs= {12}>
+                    <CardContent> <CookLabel cookId = {cookId} /></CardContent>    
+                </Grid>
+                
+            </Grid>
+        </>)
     }
 }
 
-export default CakeCard;
+export default withStyles(styles)(CakeCard);
