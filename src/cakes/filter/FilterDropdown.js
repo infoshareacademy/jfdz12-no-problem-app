@@ -1,5 +1,5 @@
 import React from 'react';
-import {Segment, Dropdown } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 
 
 class FilterDropdown extends React.Component{
@@ -32,16 +32,14 @@ class FilterDropdown extends React.Component{
         const {types} = this.state;
 
         return <> 
-            <Segment style = {{width: '300px' , margin: 'auto'}}>
-                <Dropdown placeholder='kategorie' 
-                            fluid
-                            multiple 
-                            selection  
-                            options = {types}
-                            onChange = {this.handleChangeType} />
-           
-            </Segment>
-           
+            <Dropdown   placeholder='kategorie' 
+                        fluid
+                        multiple 
+                        selection   
+                        options = {types}
+                        onChange = {this.handleChangeType} 
+                        style= {{margin: '10px 2px'}}
+            />
         </>
     }
 }
