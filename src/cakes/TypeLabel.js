@@ -8,11 +8,7 @@ const styles= {
         borderRadius: '4px',
         color: 'white',
         fontWeight: 'bold',
-        fontSize: ''
     },
-    span:{
-        fontSize:'14px',
-    }
 }
 
 class TypeLabel extends React.Component{

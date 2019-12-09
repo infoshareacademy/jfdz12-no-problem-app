@@ -1,8 +1,7 @@
 import React from 'react';
-import { Card, CardContent,CardMedia, withStyles, Grid, Icon, Button, Typography, Paper } from '@material-ui/core';
+import { CardContent,CardMedia, withStyles, Grid, Icon, Button, Typography, Paper } from '@material-ui/core';
 import TypeLabel from './TypeLabel';
 import CookLabel from './CookLabel';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const styles= {
     root:{
@@ -16,11 +15,12 @@ const styles= {
         minHeight: '100px',
     },
     media:{
-        minWidth: '100px',
+        //minWidth: '100px',
         width: '100%',
-        minHeight: '100px',
-        margin: '5px',
-        borderRadius: '5px',
+        //minHeight: '100px',
+        //margin: '5px',
+        //borderRadius: '5px',
+        height: '120px',
     },
     dataLeft:{
         textAlign: 'left',
@@ -38,44 +38,36 @@ class CakeCard extends React.Component{
         const {classes} = this.props
 
         return( <>
-            <Grid container spacing={1} >
+            <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Paper className = {classes.root} >
                         <Typography variant="h5"> {name}</Typography> 
                     </Paper> 
                 </Grid>
-                <Grid item>
-                    <CardMedia image={imgURL} 
-                        className= {classes.media} 
-                    />
+                <Grid item xs={12} container>
+                    <Grid item xs={5} style = {{padding: "5px"}}>
+                        <CardMedia image={imgURL} 
+                            className= {classes.media} 
+
+                        />
+                    </Grid>
+                    <Grid item xs={7} >
+                        <Grid item xs style = {{padding: "5px 10px 5px 5xp"}}>
+                            <Typography variant="subtitle1" > 
+                                <span style={{textAlign: "left"}}>Cena: </span> <span style={{float:"right"}}>{price} zł </span>
+                            </Typography> 
+                        </Grid>
+                        <Grid item xs style = {{padding: "6px"}}>
+                                <span >Kategoria: </span> <TypeLabel typeId = {typeId} />
+                        </Grid>
+                        <Grid item xs style = {{padding: "6px"}}>
+                            
+                                <span >bezglutenowe:</span> <span style={{float:"right"}}>{glutenFree ? ' tak': ' nie'}</span>
+                             
+                        </Grid>
+                    </Grid>         
                 </Grid>
-                <Grid item xs={12} sm container >
-                    
-                    <Grid item xs={6}>
-                        <Typography variant="subtitle1" > 
-                            <span >Cena: </span>
-                        </Typography>
-                        <Typography variant="subtitle1" > 
-                            <span >Kategoria: </span>
-                        </Typography>
-                        
-                        <Typography variant="subtitle1" > 
-                            <span >bezglutenowe: </span>
-                        </Typography>
-                     </Grid>
-                     <Grid item xs={6} alignItems='flex-end'>
-                        <Typography variant="subtitle1" > 
-                            {price} zł
-                        </Typography>
-                        <Typography variant="subtitle1" component='p'>
-                            <p><TypeLabel typeId = {typeId} /> </p>
-                        </Typography>
-                        
-                        <Typography variant="subtitle1" > 
-                            {glutenFree ? ' tak': ' nie'}
-                        </Typography>
-                     </Grid>         
-                </Grid>
+                
                 
                 <Grid item xs={12}>
                     <Typography>{description}</Typography>
