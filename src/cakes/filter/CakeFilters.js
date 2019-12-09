@@ -6,7 +6,7 @@ import FilterCook from './FilterCook';
 class CakeFilters extends React.Component{
 
     handleChange = (event) => {
-        this.props.onNameChange(event.target.value);
+        this.props.onCakeChange(event.target.value);
       }
     
     handleCookChange = (event) =>{

@@ -1,51 +1,42 @@
 import React from 'react';
-import {Card, CardHeader,  Typography, Avatar } from '@material-ui/core';
+import {Grid, Avatar, Typography,withStyles } from '@material-ui/core';
 
-class CookLabel extends React.Component{
-    state = {
-        cookId: this.props.cookId,
-        cooks: []
-    }
-
-    fetchCooks = () => fetch ('./cooks.json')
-            .then(res => res.json())
-            .then(res => this.setState({ cooks: res}));
-
-    componentDidMount() {
-        this.fetchCooks()
-      }
-
-    render(){
-
-        const {cooks, cookId} = this.state;
-        let cooksData = {};
-
-        cooks.forEach((el)=>{
-            if (el.id === cookId){
-                cooksData = {
-                    name: `${el.name} ${el.surname}`,
-                    city: `${el.location.city}`,
-                    avatar: `${el.avatar}`
-                }
-            }
-        })
-
-        return <>
-            <Card className="cookLabelCard" >
-                
-                <CardHeader 
-                        className = "cookLabelHeader"
-                        avatar= {<Avatar
-                            src={cooksData.avatar}
-                            variant="circle"
-                            />}
-                        title = {`cukiernik: ${cooksData.name}`} 
-                        subheader = {`z miasta ${cooksData.city}`}
-                />
-
-            </Card>
-        </>
-    }
+const styles= {
+    avatar:{
+        padding: '3px',
+    },
+    
+    data:{
+        paddingTop:'5px ',
+        paddingBottom: '5px',
+        paddingRight: '10px',
+        paddingLeft: '10px',
+        // border: '1px solid black',
+    },
 }
 
-export default CookLabel;
+function CookLabel(props){
+
+        const cook = props.cook;
+        const {classes} = props;
+
+        return <>
+            <Grid container xs >
+                
+                <Grid item xs = {2} container justify='center' className={classes.avatar}>
+                    <Avatar src={cook.avatar} variant="circle" />
+                </Grid> 
+                <Grid container xs direction='column' className={classes.data}>
+                    <Grid item container justify='flex-start' xs  >
+                        <Typography>cukiernik: {cook.name} {cook.surname}</Typography>
+                    </Grid>
+                    <Grid item container justify='flex-start' xs >
+                        <Typography>z miasta: {cook.location.city}</Typography>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </>
+
+}
+
+export default withStyles(styles)(CookLabel);

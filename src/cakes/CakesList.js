@@ -10,46 +10,38 @@ class CakesList extends React.Component{
     state = {
         cakes: [],
         cooks: [],
-        filterName: '', 
+        types:[],
+        filterCake: '', 
         filterCook: '',
-        checked: false,
-        selected: [],
+        filterChecked: false,
+        filterSelected: [],
         filterProp: {
             visible: 'hidden',
             arrow: 'angle double right'
-        }
+        },
     };
 
-    fetchCake = () => {fetch ('./cakes.json')
-            .then(res => res.json())
-            .then(res => this.setState({ cakes: res }));
-    }
-
-    fetchCooks = () => {fetch ('./cooks.json')
-        .then(res => res.json())
-        .then(res => this.setState({ 
-            cooks: res.map((cook) =>{
-                return {
-                    cookId: cook.id,
-                    cookName: `${cook.name} ${cook.surname}` 
-                }})
-        }));
-    }
-
     componentDidMount() {
-        this.fetchCake();
-        this.fetchCooks();
-    }   
-    
-    filterNameChange = (filterName) =>{
-        this.setState ({filterName});
+        Promise.all([
+            fetch('./cakes.json').then(res => res.json()),
+            fetch('./cooks.json').then(res => res.json()),
+            fetch('./types.json').then(res => res.json()),
+        ]).then(data => this.setState({
+            cakes: data[0],
+            cooks: data[1],
+            types: data[2],
+        }))
+    }
+        
+    filterCakeChange = (filterCake) =>{
+        this.setState ({filterCake});
     }
 
     filterCookChange = (filterCook) =>{
         this.setState({filterCook});
     }
 
-    reset = () => this.setState({filterName: ''});
+    reset = () => this.setState({filterCake: ''});
 
     resetCook = () =>this.setState({filterCook: ''});
 
@@ -61,22 +53,39 @@ class CakesList extends React.Component{
     }
 
     filterCheckboxChange = () => {
-        this.setState({checked: this.state.checked ? false : true});
+        this.setState({filterChecked: this.state.filterChecked ? false : true});
     }
 
     handleChangeType = (e, {value}) => {
-        this.setState({ selected: value });
+        this.setState({ filterSelected: value });
     };
 
-    filterCook = (id) =>{
-        this.state.cooks.find((cookId) => {
-            return cookId === id;
-        });
+    findCookName = (id) =>{
+        const cookFind = this.state.cooks.find((cook) => cook.id === id) || {};
+        return {
+            cookLongName: `${cookFind.name} ${cookFind.surname}`,
+            cookData: cookFind,
+        };
+    }
+
+    findTypeData = (typeId) =>{
+        const typeFind = this.state.types.find((type) => type.id === typeId) || {};
+        return {
+            typeName: typeFind.name,
+            typeColor: typeFind.color,
+        };
     }
     
     render(){    
-        const {cakes, filterName, filterCook, checked, selected, filterProp, cooks} = this.state;
-       
+        const {
+                cakes, 
+                filterCook, 
+                filterCake, 
+                filterChecked, 
+                filterSelected, 
+                filterProp,
+            } = this.state;
+
         return <>
             
             <FilterButton
@@ -85,10 +94,10 @@ class CakesList extends React.Component{
             />
             
             <CakeFilters 
-                filterNameValue = {filterName}
+                filterNameValue = {filterCake}
                 filterCookName = {filterCook}
-                checkboxChecked ={checked} 
-                onNameChange = {this.filterNameChange}
+                checkboxChecked ={filterChecked} 
+                onCakeChange = {this.filterCakeChange}
                 onCookChange = {this.filterCookChange}
                 onReset = {this.reset}
                 onResetCook = {this.resetCook}
@@ -96,19 +105,23 @@ class CakesList extends React.Component{
                 onCheckedType = {this.handleChangeType}
                 filterPropVisible = {filterProp.visible}
             /> 
-            <br></br>
             
             <Container maxWidth = "lg"  >
                 <Grid container spacing={3} wrap = 'wrap' alignContent="space-around" alignItems="flex-start" >
                     {cakes.map((cake)=>{
-                        const {cookName} = (cooks.find((el) => el.cookId === cake.cookId)) || {}
-         
-                        if(filterCondition(cake, filterName, checked, selected, cookName, filterCook)){ 
-                            return <Grid  item xs={4} style ={{minWidth: '300px'}}>
+                        if(filterCondition( cake, 
+                                            filterCake, 
+                                            filterChecked, 
+                                            filterSelected, 
+                                            this.findCookName(cake.cookId),
+                                            filterCook)
+                           ){ 
+                            return <Grid  key = {cake.id} item xs={4} style ={{minWidth: '300px'}}>
                                         <Paper >
                                             <CakeCard 
-                                            key = {cake.id}
-                                            cakes = {cake}
+                                                cakes = {cake}
+                                                type = {this.findTypeData(cake.typeId)}
+                                                cook = {this.findCookName(cake.cookId)}
                                             />
                                         </Paper>
                                     </Grid>

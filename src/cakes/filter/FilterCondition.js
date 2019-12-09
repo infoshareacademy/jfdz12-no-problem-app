@@ -1,15 +1,17 @@
-const filterCondition = (cake, filterName, checked, selected, cookName, filterCook) => {
+
+const filterCondition = (cake, filterCake, filterChecked, filterSelected, cook, filterCook) => {
     let condition = true;
     let cName = true;
     let cType = true;
     let cGluten = true;
     let cCookName = true;
+    const cookName = cook.cookLongName;
     
-    if (filterName !== '' && cake.name.toLowerCase().includes(filterName.toLowerCase())){
+    if (filterCake !== '' && cake.name.toLowerCase().includes(filterCake.toLowerCase())){
         cName = true;
     }
     
-    if (filterName !== '' && !cake.name.toLowerCase().includes(filterName.toLowerCase())){
+    if (filterCake !== '' && !cake.name.toLowerCase().includes(filterCake.toLowerCase())){
         cName = false;
     }
 
@@ -21,16 +23,16 @@ const filterCondition = (cake, filterName, checked, selected, cookName, filterCo
         cCookName = false;
     }
 
-    if (checked && cake.glutenFree === true){
+    if (filterChecked && cake.glutenFree === true){
         cGluten = true;
     }
 
-    if(checked && cake.glutenFree === false){
+    if(filterChecked && cake.glutenFree === false){
         cGluten = false;
     }
 
-    if (selected.length>0){
-        if (selected.includes(cake.typeId)){
+    if (filterSelected.length>0){
+        if (filterSelected.includes(cake.typeId)){
             cType = true;
         } else {
             cType = false;
