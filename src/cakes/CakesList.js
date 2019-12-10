@@ -4,7 +4,7 @@ import CakeFilters from './filter/CakeFilters'
 import { Container, Grid, Paper } from '@material-ui/core'
 import filterCondition from './filter/FilterCondition'
 import FilterButton from './filter/FilterButton'
-
+import CakeCardFull from './CakeCardFull';
 
 class CakesList extends React.Component{
     state = {
@@ -19,6 +19,8 @@ class CakesList extends React.Component{
             visible: 'hidden',
             arrow: 'angle double right'
         },
+        cakeCardOpen: false,
+        CakeCardOpenId: null,
     };
 
     componentDidMount() {
@@ -33,17 +35,18 @@ class CakesList extends React.Component{
         }))
     }
         
-    filterCakeChange = (filterCake) =>{
-        this.setState ({filterCake});
-    }
+    filterCakeChange = (filterCake) => this.setState ({filterCake});
 
-    filterCookChange = (filterCook) =>{
-        this.setState({filterCook});
-    }
+    filterCookChange = (filterCook) => this.setState({filterCook});    
 
     reset = () => this.setState({filterCake: ''});
 
-    resetCook = () =>this.setState({filterCook: ''});
+    resetCook = () => this.setState({filterCook: ''});
+
+    openCakeCard = (id,e) => {
+        this.setState({ cakeCardOpen: this.state.cakeCardOpen ? false : true,
+                        cakeCardOpenId: id,});
+    };
 
     filterVisibility = () =>{
         this.setState({filterProp :{
@@ -56,9 +59,7 @@ class CakesList extends React.Component{
         this.setState({filterChecked: this.state.filterChecked ? false : true});
     }
 
-    handleChangeType = (e, {value}) => {
-        this.setState({ filterSelected: value });
-    };
+    handleChangeType = (e, {value}) => this.setState({ filterSelected: value });
 
     findCookName = (id) =>{
         const cookFind = this.state.cooks.find((cook) => cook.id === id) || {};
@@ -75,24 +76,23 @@ class CakesList extends React.Component{
             typeColor: typeFind.color,
         };
     }
-    
-    render(){    
-        const {
-                cakes, 
-                filterCook, 
-                filterCake, 
-                filterChecked, 
-                filterSelected, 
-                filterProp,
-            } = this.state;
 
-        return <>
-            
+    findCakeById = cakeId => this.state.cakes.find((cake) => cake.id === cakeId) || {}; 
+
+    renderFilterButton = () => {
+        return (
             <FilterButton
                 onButtonClick = {this.filterVisibility}
-                iconName = {filterProp.arrow}
+                iconName = {this.state.filterProp.arrow}
             />
-            
+        )
+        
+    }
+
+    renderFilterForm = () =>{
+        const { filterCook, filterCake, filterChecked, filterProp } = this.state;
+        
+        return(
             <CakeFilters 
                 filterNameValue = {filterCake}
                 filterCookName = {filterCook}
@@ -104,8 +104,14 @@ class CakesList extends React.Component{
                 onChecked = {this.filterCheckboxChange}
                 onCheckedType = {this.handleChangeType}
                 filterPropVisible = {filterProp.visible}
-            /> 
-            
+            />
+        )
+    }
+
+    renderCakeList = () =>{
+        const { cakes, filterCook, filterCake, filterChecked, filterSelected } = this.state;
+
+        return(
             <Container maxWidth = "lg"  >
                 <Grid container spacing={3} wrap = 'wrap' alignContent="space-around" alignItems="flex-start" >
                     {cakes.map((cake)=>{
@@ -115,23 +121,53 @@ class CakesList extends React.Component{
                                             filterSelected, 
                                             this.findCookName(cake.cookId),
                                             filterCook)
-                           ){ 
-                            return <Grid  key = {cake.id} item xs={4} style ={{minWidth: '300px'}}>
-                                        <Paper >
-                                            <CakeCard 
-                                                cakes = {cake}
-                                                type = {this.findTypeData(cake.typeId)}
-                                                cook = {this.findCookName(cake.cookId)}
-                                            />
-                                        </Paper>
-                                    </Grid>
-                            }
+                            ){ 
+                            return (
+                                <Grid  key = {cake.id} item xs={4} style ={{minWidth: '350px' , maxWidth: '500px', width:'100%'}}>
+                                    <Paper >
+                                        <CakeCard 
+                                            cake = {cake}
+                                            type = {this.findTypeData(cake.typeId)}
+                                            cook = {this.findCookName(cake.cookId)}
+                                            onCakeCardOpen = {this.openCakeCard}
+                                        />
+                                    </Paper>
+                                </Grid>
+                            )}
                         return '';
                         })
                     }
                 </Grid>
             </Container>
-        </>
+        )}
+    
+    render(){    
+        const {cakeCardOpen, cakeCardOpenId} = this.state;
+
+        if (!cakeCardOpen) {
+            return <>
+                {this.renderFilterButton()}
+                
+                {this.renderFilterForm()}
+                
+                {this.renderCakeList()}
+            </>
+        }
+
+        if(cakeCardOpen){
+            const oneCake = this.findCakeById (cakeCardOpenId)
+            return (
+                <CakeCardFull 
+                    onCakeCardOpen = {this.openCakeCard}
+                    cakeCardOpenId = {cakeCardOpenId}
+                    cake = {oneCake}
+                    type = {this.findTypeData(oneCake.typeId)}
+                    cook = {this.findCookName(oneCake.cookId)}
+                />
+            )
+        }
+
+
     }
 }
 export default CakesList;

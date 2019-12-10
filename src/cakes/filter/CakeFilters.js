@@ -41,7 +41,7 @@ class CakeFilters extends React.Component{
                         onChange={this.handleChange}
                         style= {{margin: '10px 2px'}}
                 />
-                <span> </span>
+                
                 <Button onClick = {this.reset} > 
                     wyczyść 
                 </Button>
