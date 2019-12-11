@@ -1,10 +1,11 @@
 import React from 'react'
 import CakeCard from './CakeCard';
 import CakeFilters from './filter/CakeFilters'
-import { Container, Grid, Paper } from '@material-ui/core'
+import { Container, Grid, Paper, CircularProgress, withStyles } from '@material-ui/core'
 import filterCondition from './filter/FilterCondition'
 import FilterButton from './filter/FilterButton'
 import CakeCardFull from './CakeCardFull';
+import {styles} from './CakeStyles';
 
 class CakesList extends React.Component{
     state = {
@@ -21,6 +22,7 @@ class CakesList extends React.Component{
         },
         cakeCardOpen: false,
         CakeCardOpenId: null,
+        loading: true,
     };
 
     componentDidMount() {
@@ -32,6 +34,7 @@ class CakesList extends React.Component{
             cakes: data[0],
             cooks: data[1],
             types: data[2],
+            loading: false,
         }))
     }
         
@@ -61,23 +64,7 @@ class CakesList extends React.Component{
 
     handleChangeType = (e, {value}) => this.setState({ filterSelected: value });
 
-    findCookName = (id) =>{
-        const cookFind = this.state.cooks.find((cook) => cook.id === id) || {};
-        return {
-            cookLongName: `${cookFind.name} ${cookFind.surname}`,
-            cookData: cookFind,
-        };
-    }
-
-    findTypeData = (typeId) =>{
-        const typeFind = this.state.types.find((type) => type.id === typeId) || {};
-        return {
-            typeName: typeFind.name,
-            typeColor: typeFind.color,
-        };
-    }
-
-    findCakeById = cakeId => this.state.cakes.find((cake) => cake.id === cakeId) || {}; 
+    findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     renderFilterButton = () => {
         return (
@@ -86,7 +73,6 @@ class CakesList extends React.Component{
                 iconName = {this.state.filterProp.arrow}
             />
         )
-        
     }
 
     renderFilterForm = () =>{
@@ -109,26 +95,27 @@ class CakesList extends React.Component{
     }
 
     renderCakeList = () =>{
-        const { cakes, filterCook, filterCake, filterChecked, filterSelected } = this.state;
+        const { cakes, cooks, types, filterCook, filterCake, filterChecked, filterSelected } = this.state;
+        const { classes } = this.props;
 
         return(
             <Container maxWidth = "lg"  >
-                <Grid container spacing={3} wrap = 'wrap' alignContent="space-around" alignItems="flex-start" >
+                <Grid container spacing={2}  justify='center' >
                     {cakes.map((cake)=>{
                         if(filterCondition( cake, 
                                             filterCake, 
                                             filterChecked, 
                                             filterSelected, 
-                                            this.findCookName(cake.cookId),
-                                            filterCook)
+                                            this.findDataById(cooks, cake.cookId),
+                                            filterCook )
                             ){ 
                             return (
-                                <Grid  key = {cake.id} item xs={4} style ={{minWidth: '350px' , maxWidth: '500px', width:'100%'}}>
-                                    <Paper >
+                                <Grid container wrap='wrap' key = {cake.id} item xs={12} sm={6} md={4}  >
+                                    <Paper className={classes.paper}>
                                         <CakeCard 
                                             cake = {cake}
-                                            type = {this.findTypeData(cake.typeId)}
-                                            cook = {this.findCookName(cake.cookId)}
+                                            type = {this.findDataById(types, cake.typeId)}
+                                            cook = {this.findDataById(cooks, cake.cookId)}
                                             onCakeCardOpen = {this.openCakeCard}
                                         />
                                     </Paper>
@@ -142,9 +129,9 @@ class CakesList extends React.Component{
         )}
     
     render(){    
-        const {cakeCardOpen, cakeCardOpenId} = this.state;
+        const {cakeCardOpen, cakeCardOpenId, cakes, cooks, types, loading} = this.state;
 
-        if (!cakeCardOpen) {
+        if (!cakeCardOpen && !loading) {
             return <>
                 {this.renderFilterButton()}
                 
@@ -154,21 +141,27 @@ class CakesList extends React.Component{
             </>
         }
 
-        if(cakeCardOpen){
-            const oneCake = this.findCakeById (cakeCardOpenId)
+        if(cakeCardOpen && !loading){
+            const oneCake = this.findDataById (cakes, cakeCardOpenId);
             return (
                 <CakeCardFull 
                     onCakeCardOpen = {this.openCakeCard}
                     cakeCardOpenId = {cakeCardOpenId}
                     cake = {oneCake}
-                    type = {this.findTypeData(oneCake.typeId)}
-                    cook = {this.findCookName(oneCake.cookId)}
+                    type = {this.findDataById(types, oneCake.typeId)}
+                    cook = {this.findDataById(cooks, oneCake.cookId)}
                 />
+            )
+        }
+
+        if(loading){
+            return ( 
+               <CircularProgress/>
             )
         }
 
 
     }
 }
-export default CakesList;
+export default withStyles(styles)(CakesList);
       

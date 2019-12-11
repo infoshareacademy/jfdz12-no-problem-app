@@ -9,10 +9,10 @@ class CakeCard extends React.Component{
 
     render(){
         const { name, imgURL, price, glutenFree, id } = this.props.cake;
-        const { typeName, typeColor } = this.props.type;
+        const { type } = this.props;
         const { classes } = this.props;
 
-        return( <>
+        return(
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <Card className = {classes.paper} >
@@ -37,11 +37,11 @@ class CakeCard extends React.Component{
                                     <Grid item xs>
                                         <Grid item xs container justify='space-between' className = {classes.data}>
                                             <Typography variant="subtitle1" >Kategoria: </Typography> 
-                                            <Chip   label = {typeName}
+                                            <Chip   label = {type.name}
                                                     size = 'small'
                                                     clickable = {false}
                                                     className={classes.typeLabel} 
-                                                    style={{backgroundColor: typeColor}}
+                                                    style={{backgroundColor: type.color}}
                                                     wrap='wrap'
                                             />
                                         </Grid>
@@ -58,17 +58,13 @@ class CakeCard extends React.Component{
             
                 <Grid item xs= {12}>
                     <Paper className={classes.paper}> 
-                        <CookLabel cook = {this.props.cook.cookData} />
+                        <CookLabel cook = {this.props.cook} />
                     </Paper>    
                 </Grid>
                 
             </Grid>
-        </>)
+        )
     }
 }
 
 export default withStyles(styles)(CakeCard);
-
-// <Typography className={classes.typeLabel} style={{backgroundColor: typeColor}}>
-//                                                 {typeName}
-//                                             </Typography>

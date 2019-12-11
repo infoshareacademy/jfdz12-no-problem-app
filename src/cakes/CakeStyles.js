@@ -2,7 +2,8 @@ export const styles= {
     paper:{
         padding: '5px 2px',
         margin: '2px 5px',
-        border: "0.5px solid lightgrey",
+        borderColor: '#e0e0e0', //e0e0e0 bdbdbd
+        border: "0.5px solid",
     },
     media:{
         width: '100%',
@@ -20,9 +21,6 @@ export const styles= {
         paddingRight: '5px',
     },
     typeLabel:{
-        //float:'right',
-        //padding: '2px 8px',
-        //borderRadius: '4px',
         color: 'white',
         fontWeight: 'bold',
     },

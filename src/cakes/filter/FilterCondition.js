@@ -5,7 +5,7 @@ const filterCondition = (cake, filterCake, filterChecked, filterSelected, cook, 
     let cType = true;
     let cGluten = true;
     let cCookName = true;
-    const cookName = cook.cookLongName;
+    const cookName = `${cook.name} ${cook.surname}`;
     
     if (filterCake !== '' && cake.name.toLowerCase().includes(filterCake.toLowerCase())){
         cName = true;
