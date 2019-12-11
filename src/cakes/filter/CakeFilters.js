@@ -1,7 +1,9 @@
 import React from 'react';
-import { Input, Button, Checkbox, Segment} from 'semantic-ui-react';
+import { TextField, Input, Button, Checkbox, Card, Grid,Box } from '@material-ui/core';
 import FilterDropdown from './FilterDropdown'
 import FilterCook from './FilterCook';
+import FilterButton from './FilterButton';
+
 
 class CakeFilters extends React.Component{
 
@@ -24,47 +26,64 @@ class CakeFilters extends React.Component{
     handleChangeType = (event, data) =>{
         this.props.onCheckedType (event, data)
     }
-    
+
+    filterVisibility = () =>{
+        this.props.onButtonClick();
+    }
+
+
     render(){
-
         return <> 
-            <Segment style={{visibility: this.props.filterPropVisible,
-                            position: 'fixed', 
-                            zIndex:99, 
-                            left: 0, 
-                            top: 60,
-                            width: '340px' }}>
+            <Grid style={{display: 'flex', flexDirection:'row'}}>
+                <Box>
+                    <FilterButton
+                        onButtonClick = {this.filterVisibility}
+                    />
+                </Box>
+                
+                <Card style={{display: this.props.filterPropVisible,
+                                zIndex:'99',
+                                flexDirection: 'row', 
+                                marginLeft: 5, 
+                                top: 0,
+                                width: '1000px'}}>
+                    
 
-                <Input  icon='search' 
-                        placeholder='wpisz nazwę ciasta' 
-                        value={this.props.filterNameValue}
-                        onChange={this.handleChange}
-                        style= {{margin: '10px 2px'}}
-                />
-                
-                <Button onClick = {this.reset} > 
-                    wyczyść 
-                </Button>
-                
-                <FilterCook
-                        onCookChange = {this.handleCookChange}
-                        filterCookValue = {this.props.filterCookName}
-                        style= {{margin: '10px 2px'}}
-                />
-                <Button onClick = {this.resetCook} > 
-                    wyczyść 
-                </Button>
-                
-                <Checkbox label='bezglutenowe' 
-                        checked = {this.props.checkboxChecked} 
-                        onClick = {this.handleCheckboxChange}
-                        style= {{margin: '10px 2px'}}  
-                />
-                
-                <FilterDropdown 
-                    onCheckedType = {this.handleChangeType}
-                />
-            </Segment>
+                    <TextField 
+                            id="filled-basic" 
+                            label="wpisz nazwę ciasta" 
+                            type="search" 
+                            variant="filled"
+                            value={this.props.filterNameValue}
+                            onChange={this.handleChange}
+                            color="secondary"
+
+                        />
+                    
+                    <Button onClick = {this.reset} > 
+                        wyczyść 
+                    </Button>
+                    
+                    <FilterCook
+                            onCookChange = {this.handleCookChange}
+                            filterCookValue = {this.props.filterCookName}
+                            style= {{margin: '10px 2px'}}
+                    />
+                    <Button onClick = {this.resetCook} > 
+                        wyczyść 
+                    </Button>
+                    
+                    <Checkbox label='bezglutenowe' 
+                            checked = {this.props.checkboxChecked} 
+                            onClick = {this.handleCheckboxChange}
+                            style= {{margin: '10px 2px'}}  
+                    />
+                    
+                    <FilterDropdown 
+                        onCheckedType = {this.handleChangeType}
+                    />
+                </Card>
+            </Grid>    
         </>
     }
 }

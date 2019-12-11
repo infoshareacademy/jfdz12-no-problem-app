@@ -1,11 +1,9 @@
-import React from 'react'
-import CakeCard from './CakeCard';
-import CakeFilters from './filter/CakeFilters'
-import { Container, Grid, Paper, CircularProgress, withStyles } from '@material-ui/core'
-import filterCondition from './filter/FilterCondition'
-import FilterButton from './filter/FilterButton'
+import React from 'react';
+import CakeFilters from './filter/CakeFilters';
+import { CircularProgress, withStyles, Container } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
 import {styles} from './CakeStyles';
+import RenderCakesList from './RenderCakesList';
 
 class CakesList extends React.Component{
     state = {
@@ -16,10 +14,7 @@ class CakesList extends React.Component{
         filterCook: '',
         filterChecked: false,
         filterSelected: [],
-        filterProp: {
-            visible: 'hidden',
-            arrow: 'angle double right'
-        },
+        filterPropVisible: 'none',
         cakeCardOpen: false,
         CakeCardOpenId: null,
         loading: true,
@@ -52,10 +47,7 @@ class CakesList extends React.Component{
     };
 
     filterVisibility = () =>{
-        this.setState({filterProp :{
-            visible : this.state.filterProp.visible === 'hidden' ? 'visible' : 'hidden',
-            arrow: this.state.filterProp.visible === 'hidden' ? 'angle double left' : 'angle double right'
-        }});
+        this.setState({filterPropVisible : this.state.filterPropVisible === 'none' ? 'flex' : 'none'});
     }
 
     filterCheckboxChange = () => {
@@ -65,79 +57,32 @@ class CakesList extends React.Component{
     handleChangeType = (e, {value}) => this.setState({ filterSelected: value });
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
-
-    renderFilterButton = () => {
-        return (
-            <FilterButton
-                onButtonClick = {this.filterVisibility}
-                iconName = {this.state.filterProp.arrow}
-            />
-        )
-    }
-
-    renderFilterForm = () =>{
-        const { filterCook, filterCake, filterChecked, filterProp } = this.state;
-        
-        return(
-            <CakeFilters 
-                filterNameValue = {filterCake}
-                filterCookName = {filterCook}
-                checkboxChecked ={filterChecked} 
-                onCakeChange = {this.filterCakeChange}
-                onCookChange = {this.filterCookChange}
-                onReset = {this.reset}
-                onResetCook = {this.resetCook}
-                onChecked = {this.filterCheckboxChange}
-                onCheckedType = {this.handleChangeType}
-                filterPropVisible = {filterProp.visible}
-            />
-        )
-    }
-
-    renderCakeList = () =>{
-        const { cakes, cooks, types, filterCook, filterCake, filterChecked, filterSelected } = this.state;
-        const { classes } = this.props;
-
-        return(
-            <Container maxWidth = "lg"  >
-                <Grid container spacing={2}  justify='center' >
-                    {cakes.map((cake)=>{
-                        if(filterCondition( cake, 
-                                            filterCake, 
-                                            filterChecked, 
-                                            filterSelected, 
-                                            this.findDataById(cooks, cake.cookId),
-                                            filterCook )
-                            ){ 
-                            return (
-                                <Grid container wrap='wrap' key = {cake.id} item xs={12} sm={6} md={4}  >
-                                    <Paper className={classes.paper}>
-                                        <CakeCard 
-                                            cake = {cake}
-                                            type = {this.findDataById(types, cake.typeId)}
-                                            cook = {this.findDataById(cooks, cake.cookId)}
-                                            onCakeCardOpen = {this.openCakeCard}
-                                        />
-                                    </Paper>
-                                </Grid>
-                            )}
-                        return '';
-                        })
-                    }
-                </Grid>
-            </Container>
-        )}
-    
+      
     render(){    
-        const {cakeCardOpen, cakeCardOpenId, cakes, cooks, types, loading} = this.state;
+        const {cakeCardOpen, cakeCardOpenId, cakes, cooks, types, loading, filterCook, filterCake, filterChecked, filterPropVisible} = this.state;
 
         if (!cakeCardOpen && !loading) {
             return <>
-                {this.renderFilterButton()}
-                
-                {this.renderFilterForm()}
-                
-                {this.renderCakeList()}
+                <Container maxWidth = "lg"  >
+                    <CakeFilters 
+                        onButtonClick = {this.filterVisibility}
+                        filterPropVisible = {filterPropVisible}
+                        filterNameValue = {filterCake}
+                        filterCookName = {filterCook}
+                        checkboxChecked ={filterChecked} 
+                        onCakeChange = {this.filterCakeChange}
+                        onCookChange = {this.filterCookChange}
+                        onReset = {this.reset}
+                        onResetCook = {this.resetCook}
+                        onChecked = {this.filterCheckboxChange}
+                        onCheckedType = {this.handleChangeType}
+                    />
+                    
+                    <RenderCakesList
+                        state = {this.state}
+                        onCakeCardOpen = {this.openCakeCard}
+                    />
+                </Container>
             </>
         }
 

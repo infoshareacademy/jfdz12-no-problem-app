@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button, Icon} from 'semantic-ui-react'
+import React from 'react';
+import { Button, Icon} from '@material-ui/core';
 
 class FilterButton extends React.Component{
 
@@ -8,20 +8,18 @@ class FilterButton extends React.Component{
     }
 
     render(){    
-        const {iconName} = this.props;
-        
+       
         return <>
-              
-            <Button style={{position: 'fixed', zIndex:99, left: 0 , top:50}} 
-                    icon
-                    size = 'mini'
-                    compact
-                    labelPosition='right' 
-                    onClick = {this.filterVisibility}>
-                filtry
-                <Icon name = {iconName} />
+            <Button
+
+                style={{display: 'flex', zIndex:99, marginTop:10, marginLeft:5}} 
+                onClick = {this.filterVisibility}
+                variant="outlined" color="secondary" size="large"
+                endIcon = {<Icon>filter</Icon>}
+            > 
+                filtry 
             </Button>
-            
+           
         </>
     }
 }

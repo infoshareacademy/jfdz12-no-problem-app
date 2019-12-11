@@ -38,7 +38,7 @@ class FilterDropdown extends React.Component{
                         selection   
                         options = {types}
                         onChange = {this.handleChangeType} 
-                        style= {{margin: '10px 2px'}}
+                        style= {{margin: '10px 2px', width: '200px'}}
             />
         </>
     }
