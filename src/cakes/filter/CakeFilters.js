@@ -1,9 +1,9 @@
 import React from 'react';
-import { TextField, Input, Button, Checkbox, Card, Grid,Box } from '@material-ui/core';
+import { TextField, Button, Checkbox, Grid, Box, FormControlLabel } from '@material-ui/core';
 import FilterDropdown from './FilterDropdown'
 import FilterCook from './FilterCook';
 import FilterButton from './FilterButton';
-
+import SearchIcon from '@material-ui/icons/Search';
 
 class CakeFilters extends React.Component{
 
@@ -41,48 +41,54 @@ class CakeFilters extends React.Component{
                     />
                 </Box>
                 
-                <Card style={{display: this.props.filterPropVisible,
+                <Box style={{display: this.props.filterPropVisible,
                                 zIndex:'99',
                                 flexDirection: 'row', 
                                 marginLeft: 5, 
                                 top: 0,
                                 width: '1000px'}}>
-                    
-
+                 <form noValidate autoComplete="off">   
                     <TextField 
-                            id="filled-basic" 
-                            label="wpisz nazwę ciasta" 
-                            type="search" 
+                            label=" wpisz nazwę ciasta" 
+                             
                             variant="filled"
                             value={this.props.filterNameValue}
                             onChange={this.handleChange}
-                            color="secondary"
-
-                        />
-                    
-                    <Button onClick = {this.reset} > 
+                            
+                            style={{margin:'2px 10px'}}
+                     />
+          
+                    <Button onClick = {this.reset } variant="outlined" color="secondary" size="large"> 
                         wyczyść 
                     </Button>
-                    
+                   
                     <FilterCook
                             onCookChange = {this.handleCookChange}
                             filterCookValue = {this.props.filterCookName}
                             style= {{margin: '10px 2px'}}
                     />
-                    <Button onClick = {this.resetCook} > 
+                    <Button onClick = {this.resetCook} variant="outlined" color="secondary" size="large"> 
                         wyczyść 
                     </Button>
-                    
-                    <Checkbox label='bezglutenowe' 
+                    <FormControlLabel
+                        style= {{margin: '10px 2px'}}
+                        control={
+                            <Checkbox label='' 
                             checked = {this.props.checkboxChecked} 
                             onClick = {this.handleCheckboxChange}
-                            style= {{margin: '10px 2px'}}  
+                              
+                            color = 'secondary'
                     />
+                        }
+                        label="bezglutenowe"
+                    />
+                    
                     
                     <FilterDropdown 
                         onCheckedType = {this.handleChangeType}
                     />
-                </Card>
+                    </form>
+                </Box>
             </Grid>    
         </>
     }
