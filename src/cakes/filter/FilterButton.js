@@ -11,8 +11,7 @@ class FilterButton extends React.Component{
        
         return <>
             <Button
-
-                style={{display: 'flex', zIndex:99, marginTop:10, marginLeft:5}} 
+                style={{position: "absolute", display: 'flex', zIndex:99, marginTop:-50, marginLeft:0}} 
                 onClick = {this.filterVisibility}
                 variant="outlined" color="secondary" size="large"
                 endIcon = {<Icon>filter</Icon>}

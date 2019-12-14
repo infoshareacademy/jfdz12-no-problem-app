@@ -6,21 +6,21 @@ import { Grid, Paper } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 function RenderCakesList(props){
-    const { cakes, cooks, types, filterCook, filterCake, filterChecked, filterSelected } = props.state;
+    const { cakes, cooks, types, filterCook, filterCake, filterChecked, filterTypesId } = props.state;
     const { classes } = props;
 
-    const openCakeCard = () => props.onCakeCardOpen();
+    const openCakeCard = (id,e) => props.onCakeCardOpen(id,e);
     
     const findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     return(
-        
+
             <Grid container spacing={2}  justify='center' >
                 {cakes.map((cake)=>{
                     if(filterCondition( cake, 
                                         filterCake, 
                                         filterChecked, 
-                                        filterSelected, 
+                                        filterTypesId, 
                                         findDataById(cooks, cake.cookId),
                                         filterCook )
                         ){ 
@@ -31,6 +31,7 @@ function RenderCakesList(props){
                                         cake = {cake}
                                         type = {findDataById(types, cake.typeId)}
                                         cook = {findDataById(cooks, cake.cookId)}
+                                        inne = {"dasdas"}
                                         onCakeCardOpen = {openCakeCard}
                                     />
                                 </Paper>

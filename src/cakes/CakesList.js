@@ -1,9 +1,11 @@
 import React from 'react';
 import CakeFilters from './filter/CakeFilters';
-import { CircularProgress, withStyles, Container } from '@material-ui/core';
+import { CircularProgress, withStyles, Container, Box } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
 import {styles} from './CakeStyles';
 import RenderCakesList from './RenderCakesList';
+import FilterButton from './filter/FilterButton';
+
 
 class CakesList extends React.Component{
     state = {
@@ -13,11 +15,12 @@ class CakesList extends React.Component{
         filterCake: '', 
         filterCook: '',
         filterChecked: false,
-        filterSelected: [],
-        filterPropVisible: 'none',
+        filterPropVisible: false,
         cakeCardOpen: false,
         CakeCardOpenId: null,
         loading: true,
+        filterTypes: [],
+        filterTypesId:[],
     };
 
     componentDidMount() {
@@ -47,36 +50,49 @@ class CakesList extends React.Component{
     };
 
     filterVisibility = () =>{
-        this.setState({filterPropVisible : this.state.filterPropVisible === 'none' ? 'flex' : 'none'});
+        //this.setState({filterPropVisible : this.state.filterPropVisible === 'hidden' ? 'visible' : 'hidden'});
+        this.setState({filterPropVisible : this.state.filterPropVisible === false ? true : false});
     }
 
     filterCheckboxChange = () => {
         this.setState({filterChecked: this.state.filterChecked ? false : true});
     }
 
-    handleChangeType = (e, {value}) => this.setState({ filterSelected: value });
+    handleChangeType = (e) => {
+        this.setState({ filterTypes: e.target.value,
+                        filterTypesId: e.target.value.map( nType => this.state.types.find(typ => typ.name === nType).id)});
+       }
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
     render(){    
-        const {cakeCardOpen, cakeCardOpenId, cakes, cooks, types, loading, filterCook, filterCake, filterChecked, filterPropVisible} = this.state;
-
+        const {filterTypes, filterTypesId, cakeCardOpen, cakeCardOpenId, cakes, cooks, types, loading, filterCook, filterCake, filterChecked, filterPropVisible} = this.state;
+   
         if (!cakeCardOpen && !loading) {
             return <>
-                <Container maxWidth = "lg"  >
-                    <CakeFilters 
-                        onButtonClick = {this.filterVisibility}
-                        filterPropVisible = {filterPropVisible}
-                        filterNameValue = {filterCake}
-                        filterCookName = {filterCook}
-                        checkboxChecked ={filterChecked} 
-                        onCakeChange = {this.filterCakeChange}
-                        onCookChange = {this.filterCookChange}
-                        onReset = {this.reset}
-                        onResetCook = {this.resetCook}
-                        onChecked = {this.filterCheckboxChange}
-                        onCheckedType = {this.handleChangeType}
-                    />
+                <Container maxWidth = "lg" >
+                    <Box>
+                        <FilterButton
+                            onButtonClick = {this.filterVisibility}
+                        />
+                    </Box>
+                    {filterPropVisible && 
+                        <CakeFilters 
+                            onButtonClick = {this.filterVisibility}
+                            filterNameValue = {filterCake}
+                            filterCookName = {filterCook}
+                            checkboxChecked ={filterChecked} 
+                            onCakeChange = {this.filterCakeChange}
+                            onCookChange = {this.filterCookChange}
+                            onReset = {this.reset}
+                            onResetCook = {this.resetCook}
+                            onChecked = {this.filterCheckboxChange}
+                            onCheckedType = {this.handleChangeType}
+                            types = {types}
+                            filterTypes = {filterTypes}
+                            filterTypesId = {filterTypesId} 
+                        />
+                    }
                     
                     <RenderCakesList
                         state = {this.state}
@@ -88,6 +104,7 @@ class CakesList extends React.Component{
 
         if(cakeCardOpen && !loading){
             const oneCake = this.findDataById (cakes, cakeCardOpenId);
+           
             return (
                 <CakeCardFull 
                     onCakeCardOpen = {this.openCakeCard}

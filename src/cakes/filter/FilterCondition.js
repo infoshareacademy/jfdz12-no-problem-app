@@ -1,5 +1,5 @@
 
-const filterCondition = (cake, filterCake, filterChecked, filterSelected, cook, filterCook) => {
+const filterCondition = (cake, filterCake, filterChecked, filterTypes, cook, filterCook) => {
     let condition = true;
     let cName = true;
     let cType = true;
@@ -31,8 +31,8 @@ const filterCondition = (cake, filterCake, filterChecked, filterSelected, cook, 
         cGluten = false;
     }
 
-    if (filterSelected.length>0){
-        if (filterSelected.includes(cake.typeId)){
+    if (filterTypes.length>0){
+        if (filterTypes.includes(cake.typeId)){
             cType = true;
         } else {
             cType = false;
