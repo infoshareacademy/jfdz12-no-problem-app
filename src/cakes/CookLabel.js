@@ -23,10 +23,10 @@ function CookLabel(props){
                     <Avatar src={cook.avatar} variant="circle" />
                 </Grid> 
                 <Grid item container xs direction='column' className={classes.data}>
-                    <Grid item container justify='flex-start' xs  >
+                    <Grid item container xs  >
                         <Typography>cukiernik: {cook.name} {cook.surname}</Typography>
                     </Grid>
-                    <Grid item container justify='flex-start' xs >
+                    <Grid item container xs >
                         <Typography>z miasta: {cook.location.city}</Typography>
                     </Grid>
                 </Grid>

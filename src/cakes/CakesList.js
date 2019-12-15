@@ -3,25 +3,29 @@ import CakeFilters from './filter/CakeFilters';
 import { CircularProgress, withStyles, Container, Box } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
 import {styles} from './CakeStyles';
-import RenderCakesList from './RenderCakesList';
+import {RenderCakesList} from './RenderCakesList';
 import FilterButton from './filter/FilterButton';
-
+import './Cake.css'
 
 class CakesList extends React.Component{
-    state = {
-        cakes: [],
-        cooks: [],
-        types:[],
-        filterCake: '', 
-        filterCook: '',
-        filterChecked: false,
-        filterPropVisible: false,
-        cakeCardOpen: false,
-        CakeCardOpenId: null,
-        loading: true,
-        filterTypes: [],
-        filterTypesId:[],
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            cakes: [],
+            cooks: [],
+            types:[],
+            filterCake: '', 
+            filterCook: '',
+            filterChecked: false,
+            filterPropVisible: false,
+            cakeCardOpen: false,
+            CakeCardOpenId: null,
+            loading: true,
+            filterTypes: [],
+            filterTypesId:[],
+        };
+        this.filterChange = this.filterChange.bind(this);    
+    }
 
     componentDidMount() {
         Promise.all([
@@ -36,9 +40,11 @@ class CakesList extends React.Component{
         }))
     }
         
-    filterCakeChange = (filterCake) => this.setState ({filterCake});
-
-    filterCookChange = (filterCook) => this.setState({filterCook});    
+    filterChange (event){
+        this.setState ({
+            [event.target.name] : event.target.value,
+        });
+    } 
 
     reset = () => this.setState({filterCake: ''});
 
@@ -50,7 +56,6 @@ class CakesList extends React.Component{
     };
 
     filterVisibility = () =>{
-        //this.setState({filterPropVisible : this.state.filterPropVisible === 'hidden' ? 'visible' : 'hidden'});
         this.setState({filterPropVisible : this.state.filterPropVisible === false ? true : false});
     }
 
@@ -67,7 +72,7 @@ class CakesList extends React.Component{
       
     render(){    
         const {filterTypes, filterTypesId, cakeCardOpen, cakeCardOpenId, cakes, cooks, types, loading, filterCook, filterCake, filterChecked, filterPropVisible} = this.state;
-   
+       
         if (!cakeCardOpen && !loading) {
             return <>
                 <Container maxWidth = "lg" >
@@ -78,12 +83,10 @@ class CakesList extends React.Component{
                     </Box>
                     {filterPropVisible && 
                         <CakeFilters 
-                            onButtonClick = {this.filterVisibility}
                             filterNameValue = {filterCake}
                             filterCookName = {filterCook}
                             checkboxChecked ={filterChecked} 
-                            onCakeChange = {this.filterCakeChange}
-                            onCookChange = {this.filterCookChange}
+                            onFilterChange = {this.filterChange}
                             onReset = {this.reset}
                             onResetCook = {this.resetCook}
                             onChecked = {this.filterCheckboxChange}

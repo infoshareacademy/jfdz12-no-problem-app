@@ -1,5 +1,5 @@
 
-const filterCondition = (cake, filterCake, filterChecked, filterTypes, cook, filterCook) => {
+export const filterCondition = (cake, filterCake, filterChecked, filterTypes, cook, filterCook) => {
     let condition = true;
     let cName = true;
     let cType = true;
@@ -43,10 +43,6 @@ const filterCondition = (cake, filterCake, filterChecked, filterTypes, cook, fil
         condition = true
     } else {condition = false}
 
-    // console.log('selected', selected, 'typeid', cake.typeId, 'filtername', filterName, 'bezg', cake.glutenFree, 'cod', condition );
 
     return condition;
 }
-
-
-export default filterCondition ;

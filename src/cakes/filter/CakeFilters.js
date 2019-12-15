@@ -1,8 +1,7 @@
 import React from 'react';
-import { withStyles, TextField, Button, Checkbox, Grid, Box, FormControlLabel, Paper } from '@material-ui/core';
-import FilterDropdown from './FilterDropdown'
-import FilterCook from './FilterCook';
-import SearchIcon from '@material-ui/icons/Search';
+import { withStyles, Button, Checkbox, Grid, Box, FormControlLabel } from '@material-ui/core';
+import FilterDropdown from './FilterDropdown';
+import { FilterInput } from './FilterInput';
 
 const styles = {
     root: {
@@ -12,105 +11,94 @@ const styles = {
         },
         '& .MuiButton-root':{
             margin: '5px',
-            pading: '4px'
-        },	
-        
-    button: {
-        margin: '2', 
-        width: 100,
-        height: 20,
+            pading: '4px',
         },
-    }    
-  
+        '& .MuiBox-root':{
+            position: 'realtive',
+            display: 'flex',
+            zIndex:'99',
+            flexDirection: 'row',
+            flexWrap: 'wrap', 
+            alignItems:'center',
+            justifyContent: 'center',
+            maxWidth: '1200px'
+        }
+    }	
 }
 
 class CakeFilters extends React.Component{
+    constructor (props){
+        super(props);
+        this.handleFilterChange = this.handleFilterChange.bind(this);
+        this.reset = this.reset.bind(this);
+        this.resetCook = this.resetCook.bind(this);
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+        this.handleChangeType = this.handleChangeType.bind(this);
+        this.handleFilterChange = this.handleFilterChange.bind(this);
+    }
 
-    handleChange = (event) => {
-        this.props.onCakeChange(event.target.value);
+    handleFilterChange (event) {
+        this.props.onFilterChange(event);
     }
     
-    handleCookChange = (event) =>{
-        this.props.onCookChange(event.target.value);
-    }
-    
-    reset = () => this.props.onReset();
+    reset () { this.props.onReset() };
 
-    resetCook = () => this.props.onResetCook();
+    resetCook () { this.props.onResetCook() };
 
-    handleCheckboxChange = (event) =>{
+    handleCheckboxChange (event) {
         this.props.onChecked(event.target.checked)
     }
 
-    handleChangeType = (event) =>{
+    handleChangeType (event) {
         this.props.onCheckedType (event)
     }
 
-    filterVisibility = () =>{
+    filterVisibility () {
         this.props.onButtonClick();
     }
-
 
     render(){
         const { classes } = this.props;
 
         return <> 
-            <Grid >
+            <Grid className={classes.root}>
                 
-                <Box className={classes.root}  
-                    style={{visibility: this.props.filterPropVisible, 
-                            position: 'realtive',
-                            display: 'flex',
-                            zIndex:'99',
-                            flexDirection: 'row',
-                            flexWrap: 'wrap', 
-                            alignItems:'center',
-                            justifyContent: 'center',
-                            maxWidth: '1200px'}}
-                            >
-                
-                    <TextField 
-                            label=" wpisz nazwę ciasta" 
-                            type="search"
-                            variant="outlined"
-                            value={this.props.filterNameValue}
-                            onChange={this.handleChange}
-                            color = 'secondary'
-                            size='small'
+                <Box style={{visibility: this.props.filterPropVisible }}>
+                                
+                    <FilterInput 
+                        value={this.props.filterNameValue}
+                        onChange={this.handleFilterChange}
+                        label = "wpisz nazwę ciasta"
+                        inputName = "filterCake"
                      />
                    
-                    <Button onClick = {this.reset }  
-                        variant="outlined" 
-                        color="secondary" 
-                    > 
+                    <Button onClick = {this.reset} variant="outlined" color="secondary" > 
                         wyczyść 
                     </Button>
                    
-                    <TextField 
-                            label="wpisz nazwę cukiernika" 
-                            type="search"
-                            variant="outlined"
-                            value={this.props.filterCookName}
-                            onChange={this.handleCookChange}
-                            color = 'secondary'
-                            size='small'
+                    <FilterInput 
+                        value={this.props.filterCookName}
+                        onChange={this.handleFilterChange}
+                        label = "wpisz nazwę cukiernika"
+                        inputName = "filterCook"
                      />
                     
                     <Button onClick = {this.resetCook} variant="outlined" color="secondary" > 
                         wyczyść 
                     </Button>
+
                     <FormControlLabel
                         style= {{margin: '10px 2px'}}
                         control={
                             <Checkbox label='' 
-                            checked = {this.props.checkboxChecked} 
-                            onClick = {this.handleCheckboxChange}
-                              
-                            color = 'secondary'
+                                    checked = {this.props.checkboxChecked} 
+                                    onClick = {this.handleCheckboxChange}
+                                    color = 'secondary'
                             />
                         }
                         label="bezglutenowe"
                     />
+                    
                     <FilterDropdown 
                         filterTypes = {this.props.filterTypes}
                         types = {this.props.types}
@@ -123,9 +111,3 @@ class CakeFilters extends React.Component{
 }
 
 export default withStyles(styles)(CakeFilters);
-
-// <FilterCook
-//                             onCookChange = {this.handleCookChange}
-//                             filterCookValue = {this.props.filterCookName}
-//                             style= {{margin: '10px 2px'}}
-//                     />
