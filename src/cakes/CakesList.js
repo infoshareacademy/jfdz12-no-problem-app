@@ -1,13 +1,12 @@
 import React from 'react';
 import CakeFilters from './filter/CakeFilters';
-import { CircularProgress, withStyles, Container, Box } from '@material-ui/core';
+import { CircularProgress, Container, Box } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
-import {styles} from './CakeStyles';
 import {RenderCakesList} from './RenderCakesList';
 import FilterButton from './filter/FilterButton';
 import './Cake.css'
 
-class CakesList extends React.Component{
+export class CakesList extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -46,9 +45,12 @@ class CakesList extends React.Component{
         });
     } 
 
-    reset = () => this.setState({filterCake: ''});
-
-    resetCook = () => this.setState({filterCook: ''});
+    reset = (id) => {
+        id === 'btn1' 
+        ? this.setState({filterCake: ''})
+        : this.setState({filterCook: ''})
+        } 
+    ;
 
     openCakeCard = (id,e) => {
         this.setState({ cakeCardOpen: this.state.cakeCardOpen ? false : true,
@@ -88,7 +90,6 @@ class CakesList extends React.Component{
                             checkboxChecked ={filterChecked} 
                             onFilterChange = {this.filterChange}
                             onReset = {this.reset}
-                            onResetCook = {this.resetCook}
                             onChecked = {this.filterCheckboxChange}
                             onCheckedType = {this.handleChangeType}
                             types = {types}
@@ -128,5 +129,3 @@ class CakesList extends React.Component{
 
     }
 }
-export default withStyles(styles)(CakesList);
-      

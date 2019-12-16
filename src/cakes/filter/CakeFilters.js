@@ -31,7 +31,6 @@ class CakeFilters extends React.Component{
         super(props);
         this.handleFilterChange = this.handleFilterChange.bind(this);
         this.reset = this.reset.bind(this);
-        this.resetCook = this.resetCook.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.handleChangeType = this.handleChangeType.bind(this);
         this.handleFilterChange = this.handleFilterChange.bind(this);
@@ -41,9 +40,7 @@ class CakeFilters extends React.Component{
         this.props.onFilterChange(event);
     }
     
-    reset () { this.props.onReset() };
-
-    resetCook () { this.props.onResetCook() };
+    reset (id) { this.props.onReset(id) };
 
     handleCheckboxChange (event) {
         this.props.onChecked(event.target.checked)
@@ -58,12 +55,12 @@ class CakeFilters extends React.Component{
     }
 
     render(){
-        const { classes } = this.props;
+     //   const { classes } = this.props;
 
         return <> 
-            <Grid className={classes.root}>
+            <Grid>
                 
-                <Box style={{visibility: this.props.filterPropVisible }}>
+                <Box className='cakesFilters-box' style={{visibility: this.props.filterPropVisible }}>
                                 
                     <FilterInput 
                         value={this.props.filterNameValue}
@@ -72,7 +69,7 @@ class CakeFilters extends React.Component{
                         inputName = "filterCake"
                      />
                    
-                    <Button onClick = {this.reset} variant="outlined" color="secondary" > 
+                    <Button className= 'cakesFilters-button' onClick = {(id) => this.reset('btn1')} variant="outlined" color="secondary" > 
                         wyczyść 
                     </Button>
                    
@@ -83,12 +80,13 @@ class CakeFilters extends React.Component{
                         inputName = "filterCook"
                      />
                     
-                    <Button onClick = {this.resetCook} variant="outlined" color="secondary" > 
+                    <Button className= 'cakesFilters-button' onClick = {(id) => this.reset('btn2')} variant="outlined" color="secondary" > 
                         wyczyść 
                     </Button>
 
                     <FormControlLabel
-                        style= {{margin: '10px 2px'}}
+                        //style= {{margin: '10px 2px'}}
+                        className = 'cakesFilter-testField'
                         control={
                             <Checkbox label='' 
                                     checked = {this.props.checkboxChecked} 
@@ -110,4 +108,5 @@ class CakeFilters extends React.Component{
     }
 }
 
-export default withStyles(styles)(CakeFilters);
+//export default withStyles(styles)(CakeFilters);
+export default CakeFilters;

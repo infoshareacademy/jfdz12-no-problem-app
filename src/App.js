@@ -1,5 +1,5 @@
 import React from 'react';
-import CakesList from './cakes/CakesList'
+import {CakesList} from './cakes/CakesList'
 
 
 import 'semantic-ui-css/semantic.min.css'
