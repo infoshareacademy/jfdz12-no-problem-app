@@ -1,30 +1,9 @@
 import React from 'react';
-import { withStyles, Button, Checkbox, Grid, Box, FormControlLabel } from '@material-ui/core';
+import { Button, Checkbox, Grid, Box, FormControlLabel } from '@material-ui/core';
 import FilterDropdown from './FilterDropdown';
 import { FilterInput } from './FilterInput';
+import {styleFilter} from './FilterStyle';
 
-const styles = {
-    root: {
-        '& .MuiTextField-root': {
-          margin: '5px', 
-          width: 200,
-        },
-        '& .MuiButton-root':{
-            margin: '5px',
-            pading: '4px',
-        },
-        '& .MuiBox-root':{
-            position: 'realtive',
-            display: 'flex',
-            zIndex:'99',
-            flexDirection: 'row',
-            flexWrap: 'wrap', 
-            alignItems:'center',
-            justifyContent: 'center',
-            maxWidth: '1200px'
-        }
-    }	
-}
 
 class CakeFilters extends React.Component{
     constructor (props){
@@ -55,12 +34,11 @@ class CakeFilters extends React.Component{
     }
 
     render(){
-     //   const { classes } = this.props;
 
         return <> 
             <Grid>
                 
-                <Box className='cakesFilters-box' style={{visibility: this.props.filterPropVisible }}>
+                <Box style = {styleFilter.Box} >
                                 
                     <FilterInput 
                         value={this.props.filterNameValue}
@@ -69,7 +47,11 @@ class CakeFilters extends React.Component{
                         inputName = "filterCake"
                      />
                    
-                    <Button className= 'cakesFilters-button' onClick = {(id) => this.reset('btn1')} variant="outlined" color="secondary" > 
+                    <Button style = {styleFilter.Button} 
+                            onClick = {(id) => this.reset('btn1')} 
+                            variant="outlined" 
+                            color="secondary" 
+                    > 
                         wyczyść 
                     </Button>
                    
@@ -80,13 +62,12 @@ class CakeFilters extends React.Component{
                         inputName = "filterCook"
                      />
                     
-                    <Button className= 'cakesFilters-button' onClick = {(id) => this.reset('btn2')} variant="outlined" color="secondary" > 
+                    <Button style = {styleFilter.Button} onClick = {(id) => this.reset('btn2')} variant="outlined" color="secondary" > 
                         wyczyść 
                     </Button>
 
                     <FormControlLabel
-                        //style= {{margin: '10px 2px'}}
-                        className = 'cakesFilter-testField'
+                        style= {styleFilter.FormControlLabel}
                         control={
                             <Checkbox label='' 
                                     checked = {this.props.checkboxChecked} 

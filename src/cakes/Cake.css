@@ -7,17 +7,17 @@
     align-items: center;
     justify-content: center;
     max-width: 1200px;
-}
-
-.cakesFilters-button {
+  }
+  
+  .cakesFiltersButton {
     margin: 5px; 
     padding: 4px;
-}
-
-.cakesFilter-textField {
+  }
+  
+  .cakesFilter-textField {
     margin: 10px 2px;
-}
-
+  }
+  
 /* 
 root: {
     '& .MuiTextField-root': {
