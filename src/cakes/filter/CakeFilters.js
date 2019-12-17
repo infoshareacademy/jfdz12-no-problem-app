@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button, Checkbox, Grid, Box, FormControlLabel } from '@material-ui/core';
+import { Checkbox, Grid, Box, FormControlLabel } from '@material-ui/core';
 import FilterDropdown from './FilterDropdown';
-import { FilterInput } from './FilterInput';
+import FilterInput from './FilterInput';
 import {styleFilter} from './FilterStyle';
 
 
@@ -19,7 +19,9 @@ class CakeFilters extends React.Component{
         this.props.onFilterChange(event);
     }
     
-    reset (id) { this.props.onReset(id) };
+    reset (id) { 
+        this.props.onReset(id) 
+    };
 
     handleCheckboxChange (event) {
         this.props.onChecked(event.target.checked)
@@ -36,36 +38,30 @@ class CakeFilters extends React.Component{
     render(){
 
         return <> 
-            <Grid container spacing={2} justify='center' alignContent='center' maxWidth='lg'>
+            <Grid container 
+                    spacing={2} 
+                    justify='center' 
+                    alignContent='center' 
+                    style = {styleFilter.Grid}>
                 
                 <Box style = {styleFilter.Box}  >
                                 
                     <FilterInput 
                         value={this.props.filterNameValue}
                         onChange={this.handleFilterChange}
-                        label = "wpisz nazwę ciasta"
+                        onClick = {this.reset}
+                        label = "szukaj ciasto"
                         inputName = "filterCake"
                      />
-                   
-                    <Button style = {styleFilter.Button} 
-                            onClick = {(id) => this.reset('btn1')} 
-                            variant="outlined" 
-                            color="secondary" 
-                    > 
-                        wyczyść 
-                    </Button>
                    
                     <FilterInput 
                         value={this.props.filterCookName}
                         onChange={this.handleFilterChange}
-                        label = "wpisz nazwę cukiernika"
+                        label = "szukaj cukiernika"
                         inputName = "filterCook"
+                        onClick = {this.reset}
                      />
                     
-                    <Button style = {styleFilter.Button} onClick = {(id) => this.reset('btn2')} variant="outlined" color="secondary" > 
-                        wyczyść 
-                    </Button>
-
                     <FormControlLabel
                         style= {styleFilter.FormControlLabel}
                         control={

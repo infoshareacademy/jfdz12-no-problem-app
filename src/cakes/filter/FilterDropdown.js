@@ -16,13 +16,13 @@ const styles = {
       backgroundColor: 'white',
      // border: '1px solid green',
       borderRadius:'10px',
-      paddingTop: '7px',
-      paddingBottom: '7px',
+      // paddingTop: '7px',
+      // paddingBottom: '7px',
     },
-    '& FilterDropdown-root':{
-      borderRadius: '5px',
-      border: '1px solid yellow',
-    },
+    // '& FilterDropdown-root':{
+    //   borderRadius: '5px',
+    //   border: '1px solid yellow',
+    // },
 
     // '& MuiOutlinedInput-root':{
     //   borderRadius: '15px',
@@ -62,8 +62,8 @@ const styles = {
   },
 
   formControl: {
-     // margin: '10px 10px',
-    minWidth: 120,
+    margin: '10px 10px',
+    minWidth: 150,
   },
     
   chips: {
@@ -100,7 +100,7 @@ class FilterDropdown extends React.Component{
 
     return <> 
       <FormControl  color = 'secondary' 
-                    margin='dense' 
+                      margin='dense' 
                     variant='outlined' 
                     className={clsx(classes.formControl, classes.root)}
                   

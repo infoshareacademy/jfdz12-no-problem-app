@@ -26,7 +26,7 @@ class CakeCardFull extends React.Component{
                         <Grid item xs={6} style={{padding:'10px'}}>
                             <CardMedia image={cake.imgURL} style={{width: '100%', height:'100%', padding: '10px'}}/>
                         </Grid>
-                        <Grid item xs={6} direction='column'>
+                        <Grid container item xs={6} direction='column'>
                             <Paper style={{margin: '10px', padding:'40px 10px'}}>
                                 
                                 <Typography variant='h2'>

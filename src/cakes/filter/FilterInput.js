@@ -1,9 +1,22 @@
 import React from 'react';
-import { TextField, InputAdornment } from '@material-ui/core';
-import { styleFilter } from './FilterStyle';
+import { TextField, InputAdornment, IconButton, withStyles } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 
-export class FilterInput extends React.Component{
+const styles = {
+    root: {
+        '& .MuiOutlinedInput-root':{
+            borderRadius: '20px',
+            margin: '5px',
+            minWidth: '250px',
+        },
+        '& .MuiIconButton-root': {
+            padding: '6px',
+        },
+    },
+  };
+
+class FilterInput extends React.Component{
     constructor(props){
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -13,19 +26,44 @@ export class FilterInput extends React.Component{
         this.props.onChange(event);
     }
 
+    reset (id) {
+        this.props.onClick(id);
+    }
+
+    renderResetIcon(){
+        const startAdormentObj = {
+            startAdornment: (
+                <InputAdornment  position="start">
+                    <SearchIcon edge="start" />
+                </InputAdornment>
+            ),
+        };
+
+        const endAdormentObj = {
+            endAdornment: (
+                <IconButton onClick = {(id) => this.reset(this.props.inputName)} 
+                            color="secondary" aria-label="reset">
+                    <HighlightOffRoundedIcon />
+                </IconButton>
+            ),
+        };
+
+        return (this.props.value.length >0  
+                ?   {...startAdormentObj, ...endAdormentObj}    
+                :   {...startAdormentObj});
+
+    }
+
     render(){
+        const { classes } = this.props;
+        
         return (
-            <TextField pr={0}
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment  position="end">
-                            <SearchIcon edge="end" />
-                        </InputAdornment>
-                    ),
-                }}
-                style = {styleFilter.TextField}    
+            <TextField 
+                className={classes.root}
+                
+                InputProps = {this.renderResetIcon()}
                 name = {this.props.inputName} 
-                label = {this.props.label} 
+                placeholder = {this.props.label} 
                 type = "search"
                 variant = "outlined"
                 value = {this.props.value}
@@ -34,11 +72,8 @@ export class FilterInput extends React.Component{
                 size = 'small'
             />
         )
-
     }
-    
-
 }
 
-
+export default withStyles(styles)(FilterInput); 
 

@@ -46,7 +46,7 @@ export class CakesList extends React.Component{
     } 
 
     reset = (id) => {
-        id === 'btn1' 
+        id === 'filterCake' 
         ? this.setState({filterCake: ''})
         : this.setState({filterCook: ''})
         } 
@@ -83,7 +83,7 @@ export class CakesList extends React.Component{
                             onButtonClick = {this.filterVisibility}
                         />
                     </Box>
-                    {//filterPropVisible && 
+                    {filterPropVisible && 
                         <CakeFilters 
                             filterNameValue = {filterCake}
                             filterCookName = {filterCook}
