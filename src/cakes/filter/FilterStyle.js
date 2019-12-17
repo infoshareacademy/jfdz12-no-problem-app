@@ -9,15 +9,15 @@ export const styleFilter = {
     },
     
     Box: {
-        position: 'realtive',
+        // position: 'realtive',
         display: 'flex',
         zIndex:'99',
         flexDirection: 'row',
         flexWrap: 'wrap', 
         alignItems:'center',
         justifyContent: 'center',
-        maxWidth: '1200px',
-        border: '1px solid black',
+        maxWidth: 'lg',
+      //  border: '1px solid black',
     },
 
     FormControlLabel:{

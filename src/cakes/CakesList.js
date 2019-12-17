@@ -83,7 +83,7 @@ export class CakesList extends React.Component{
                             onButtonClick = {this.filterVisibility}
                         />
                     </Box>
-                    {filterPropVisible && 
+                    {//filterPropVisible && 
                         <CakeFilters 
                             filterNameValue = {filterCake}
                             filterCookName = {filterCook}

@@ -36,9 +36,9 @@ class CakeFilters extends React.Component{
     render(){
 
         return <> 
-            <Grid>
+            <Grid container spacing={2} justify='center' alignContent='center' maxWidth='lg'>
                 
-                <Box style = {styleFilter.Box} >
+                <Box style = {styleFilter.Box}  >
                                 
                     <FilterInput 
                         value={this.props.filterNameValue}

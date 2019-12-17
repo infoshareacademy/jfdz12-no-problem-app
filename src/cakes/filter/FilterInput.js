@@ -1,6 +1,7 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, InputAdornment } from '@material-ui/core';
 import { styleFilter } from './FilterStyle';
+import SearchIcon from '@material-ui/icons/Search';
 
 export class FilterInput extends React.Component{
     constructor(props){
@@ -14,7 +15,14 @@ export class FilterInput extends React.Component{
 
     render(){
         return (
-            <TextField
+            <TextField pr={0}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment  position="end">
+                            <SearchIcon edge="end" />
+                        </InputAdornment>
+                    ),
+                }}
                 style = {styleFilter.TextField}    
                 name = {this.props.inputName} 
                 label = {this.props.label} 
