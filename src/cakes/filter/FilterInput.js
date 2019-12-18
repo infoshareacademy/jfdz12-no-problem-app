@@ -8,7 +8,7 @@ const styles = {
         '& .MuiOutlinedInput-root':{
             borderRadius: '20px',
             margin: '5px',
-            minWidth: '250px',
+            width: '250px',
         },
         '& .MuiIconButton-root': {
             padding: '6px',
@@ -60,7 +60,6 @@ class FilterInput extends React.Component{
         return (
             <TextField 
                 className={classes.root}
-                
                 InputProps = {this.renderResetIcon()}
                 name = {this.props.inputName} 
                 placeholder = {this.props.label} 

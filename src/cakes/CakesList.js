@@ -5,6 +5,8 @@ import CakeCardFull from './CakeCardFull';
 import {RenderCakesList} from './RenderCakesList';
 import FilterButton from './filter/FilterButton';
 import './Cake.css'
+import { FilterAllToogle } from './filterNew/FilterAllToogle';
+import FilterAll from './filterNew/FilterAll'
 
 export class CakesList extends React.Component{
     constructor(props){
@@ -22,8 +24,10 @@ export class CakesList extends React.Component{
             loading: true,
             filterTypes: [],
             filterTypesId:[],
+            filterAllToogle: true,
         };
-        this.filterChange = this.filterChange.bind(this);    
+        this.filterChange = this.filterChange.bind(this);
+        this.handleToogleChange = this.handleToogleChange.bind(this);    
     }
 
     componentDidMount() {
@@ -40,8 +44,12 @@ export class CakesList extends React.Component{
     }
         
     filterChange (event){
+        const value =
+            event.target.type === 'checkbox'
+                ? event.target.checked
+                : event.target.value;
         this.setState ({
-            [event.target.name] : event.target.value,
+            [event.target.name] : value,
         });
     } 
 
@@ -61,20 +69,24 @@ export class CakesList extends React.Component{
         this.setState({filterPropVisible : this.state.filterPropVisible === false ? true : false});
     }
 
-    filterCheckboxChange = () => {
-        this.setState({filterChecked: this.state.filterChecked ? false : true});
-    }
-
     handleChangeType = (e) => {
         this.setState({ filterTypes: e.target.value,
                         filterTypesId: e.target.value.map( nType => this.state.types.find(typ => typ.name === nType).id)});
        }
 
+    handleToogleChange(e) { 
+
+        this.setState(prevState => ({
+            filterAllToogle:  !prevState.filterAllToogle,
+        })) 
+    }
+
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
     render(){    
-        const {filterTypes, filterTypesId, cakeCardOpen, cakeCardOpenId, cakes, cooks, types, loading, filterCook, filterCake, filterChecked, filterPropVisible} = this.state;
-       
+        const {filterTypes, filterTypesId, cakeCardOpen, cakeCardOpenId, cakes, cooks, types, loading, filterCook, filterCake, filterChecked, filterPropVisible, filterAllToogle} = this.state;
+        console.log(filterAllToogle)
+
         if (!cakeCardOpen && !loading) {
             return <>
                 <Container maxWidth = "lg" >
@@ -83,21 +95,28 @@ export class CakesList extends React.Component{
                             onButtonClick = {this.filterVisibility}
                         />
                     </Box>
-                    {filterPropVisible && 
+                    <Box>
+                        <FilterAllToogle
+                            filterAllToogle = {filterAllToogle}
+                            onHandleToogleChange = {this.handleToogleChange}
+                        />
+                    </Box>
+                    {filterPropVisible && filterAllToogle && 
                         <CakeFilters 
+                            types = {types}
+                            filterTypes = {filterTypes}
+                            filterTypesId = {filterTypesId} 
                             filterNameValue = {filterCake}
                             filterCookName = {filterCook}
                             checkboxChecked ={filterChecked} 
                             onFilterChange = {this.filterChange}
                             onReset = {this.reset}
-                            onChecked = {this.filterCheckboxChange}
                             onCheckedType = {this.handleChangeType}
-                            types = {types}
-                            filterTypes = {filterTypes}
-                            filterTypesId = {filterTypesId} 
                         />
                     }
-                    
+                    {filterPropVisible && !filterAllToogle &&
+                        <FilterAll />
+                    }
                     <RenderCakesList
                         state = {this.state}
                         onCakeCardOpen = {this.openCakeCard}

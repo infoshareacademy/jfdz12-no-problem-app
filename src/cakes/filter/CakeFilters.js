@@ -25,7 +25,7 @@ class CakeFilters extends React.Component{
 
     handleCheckboxChange (event) {
         this.props.onChecked(event.target.checked)
-    }
+     }
 
     handleChangeType (event) {
         this.props.onCheckedType (event)
@@ -67,8 +67,9 @@ class CakeFilters extends React.Component{
                         control={
                             <Checkbox label='' 
                                     checked = {this.props.checkboxChecked} 
-                                    onClick = {this.handleCheckboxChange}
+                                    onClick = {this.handleFilterChange}
                                     color = 'secondary'
+                                    name = 'filterChecked'
                             />
                         }
                         label="bezglutenowe"
