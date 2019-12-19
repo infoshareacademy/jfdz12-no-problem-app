@@ -15,6 +15,7 @@ export class CakesList extends React.Component{
             cakes: [],
             cooks: [],
             types:[],
+            cakesAndCooks:[],
             filterCake: '', 
             filterCook: '',
             filterChecked: false,
@@ -39,6 +40,13 @@ export class CakesList extends React.Component{
             cakes: data[0],
             cooks: data[1],
             types: data[2],
+            cakesAndCooks: data[0].map((cake) => {
+                const cookData =  this.findDataById(data[1], cake.cookId);
+                return {
+                    id: cake.id,
+                    name: `${cake.name} ${cookData.name} ${cookData.surname}`,
+                }
+            }),
             loading: false,
         }))
     }
@@ -84,9 +92,21 @@ export class CakesList extends React.Component{
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
     render(){    
-        const {filterTypes, filterTypesId, cakeCardOpen, cakeCardOpenId, cakes, cooks, types, loading, filterCook, filterCake, filterChecked, filterPropVisible, filterAllToogle} = this.state;
-        console.log(filterAllToogle)
-
+        const {filterTypes, 
+                filterTypesId, 
+                cakeCardOpen, 
+                cakeCardOpenId, 
+                cakes, 
+                cooks, 
+                types, 
+                loading, 
+                filterCook, 
+                filterCake, 
+                filterChecked, 
+                filterPropVisible, 
+                filterAllToogle,
+                cakesAndCooks} = this.state;
+       
         if (!cakeCardOpen && !loading) {
             return <>
                 <Container maxWidth = "lg" >
@@ -115,7 +135,9 @@ export class CakesList extends React.Component{
                         />
                     }
                     {filterPropVisible && !filterAllToogle &&
-                        <FilterAll />
+                        <FilterAll
+                            cakesAndCooks = {cakesAndCooks}
+                        />
                     }
                     <RenderCakesList
                         state = {this.state}
