@@ -25,17 +25,19 @@ export class RenderCakesList extends React.Component{
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     getFilteredCakes(){
-        const { cakes, cooks, filterCook, filterCake, filterChecked, filterTypesId } = this.props.state;
+        const { cakes, cooks, filterCook, filterCake, filterChecked, filterTypesId, filterLocation, filterAll, filterAllToogle } = this.props.state;
 
         return cakes
                 .filter (cake => {
                     return(
                     filterCondition( cake, 
-                        filterCake, 
+                        filterAllToogle ? filterCake : filterAll, 
                         filterChecked, 
                         filterTypesId, 
                         this.findDataById(cooks, cake.cookId),
-                        filterCook )
+                        filterAllToogle ? filterCook : filterAll,
+                        filterAllToogle ? filterLocation : filterAll,
+                        filterAllToogle )
                     )
                 });
     }

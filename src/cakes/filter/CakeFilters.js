@@ -18,7 +18,7 @@ class CakeFilters extends React.Component{
     handleFilterChange (event) {
         this.props.onFilterChange(event);
     }
-    
+
     reset (id) { 
         this.props.onReset(id) 
     };
@@ -47,7 +47,7 @@ class CakeFilters extends React.Component{
                 <Box style = {styleFilter.Box}  >
                                 
                     <FilterInput 
-                        value={this.props.filterNameValue}
+                        value={this.props.filterCakeName}
                         onChange={this.handleFilterChange}
                         onClick = {this.reset}
                         label = "szukaj ciasto"
@@ -62,6 +62,14 @@ class CakeFilters extends React.Component{
                         onClick = {this.reset}
                      />
                     
+                    <FilterInput 
+                        value={this.props.filterLocationCity}
+                        onChange={this.handleFilterChange}
+                        label = "szukaj miasta"
+                        inputName = "filterLocation"
+                        onClick = {this.reset}
+                     />
+
                     <FormControlLabel
                         style= {styleFilter.FormControlLabel}
                         control={

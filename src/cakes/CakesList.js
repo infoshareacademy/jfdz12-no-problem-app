@@ -18,6 +18,8 @@ export class CakesList extends React.Component{
             cakesAndCooks:[],
             filterCake: '', 
             filterCook: '',
+            filterLocation:'',
+            filterAll: '',
             filterChecked: false,
             filterPropVisible: false,
             cakeCardOpen: false,
@@ -28,7 +30,8 @@ export class CakesList extends React.Component{
             filterAllToogle: true,
         };
         this.filterChange = this.filterChange.bind(this);
-        this.handleToogleChange = this.handleToogleChange.bind(this);    
+        this.handleToogleChange = this.handleToogleChange.bind(this);
+        this.handleFilterAllChange = this.handleFilterAllChange.bind(this);    
     }
 
     componentDidMount() {
@@ -61,12 +64,14 @@ export class CakesList extends React.Component{
         });
     } 
 
-    reset = (id) => {
-        id === 'filterCake' 
-        ? this.setState({filterCake: ''})
-        : this.setState({filterCook: ''})
-        } 
-    ;
+        
+    handleFilterAllChange (event){
+        this.setState({
+            filterAll: event.target.value,
+        });
+    }
+
+    reset = (id) => this.setState({[id]: ''});
 
     openCakeCard = (id,e) => {
         this.setState({ cakeCardOpen: this.state.cakeCardOpen ? false : true,
@@ -100,13 +105,16 @@ export class CakesList extends React.Component{
                 cooks, 
                 types, 
                 loading, 
+                filterAll,
                 filterCook, 
-                filterCake, 
+                filterCake,
+                filterLocation, 
                 filterChecked, 
                 filterPropVisible, 
                 filterAllToogle,
                 cakesAndCooks} = this.state;
-       
+            console.log(filterAll)
+
         if (!cakeCardOpen && !loading) {
             return <>
                 <Container maxWidth = "lg" >
@@ -126,8 +134,9 @@ export class CakesList extends React.Component{
                             types = {types}
                             filterTypes = {filterTypes}
                             filterTypesId = {filterTypesId} 
-                            filterNameValue = {filterCake}
+                            filterCakeName = {filterCake}
                             filterCookName = {filterCook}
+                            filterLocationCity = {filterLocation}
                             checkboxChecked ={filterChecked} 
                             onFilterChange = {this.filterChange}
                             onReset = {this.reset}
@@ -136,7 +145,8 @@ export class CakesList extends React.Component{
                     }
                     {filterPropVisible && !filterAllToogle &&
                         <FilterAll
-                            cakesAndCooks = {cakesAndCooks}
+                            filterAll = {filterAll}
+                            onHandleFilterAllChange = {this.handleFilterAllChange}
                         />
                     }
                     <RenderCakesList

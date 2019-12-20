@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, ListItemText, Grid, withStyles, IconButton, InputBase,Paper, Divider } from '@material-ui/core';
+import { Grid, withStyles, IconButton, InputBase,Paper, Divider } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -29,37 +29,25 @@ const styles={
 class FilterAll extends React.Component{
     constructor(props){
         super(props);
-        this.state={
-            click: false,
-            value: '',
-
-        }
-        this.handleClick = this.handleClick.bind(this);
+    
+        // this.handleClick = this.handleClick.bind(this);
     }
-    handleClick = event => {
 
-        this.setState({
-            value: event.target.value,
-            click: event.target.value !=='' ? true : false,
-        })
+    handleFilterAllChange = (event) => {
+        this.props.onHandleFilterAllChange (event);
       };
 
-    filteredListOfCaC(){
-        const search = this.state.value.toLowerCase();
-        return this.props.cakesAndCooks
-            .filter((el) => el.name.toLowerCase().includes(search))
-            .filter((el, idx) => idx<10)
-            //.map((el) => {return {name: el.name.toLowerCase().replace(search, `<strong>${search}</strong>`), key: el.id}})
+    // filteredListOfCaC(){
+    //     const search = this.state.value.toLowerCase();
+    //     return this.props.cakesAndCooks
+    //         .filter((el) => el.name.toLowerCase().includes(search))
+    //         .filter((el, idx) => idx<10)
         
-    }
+    // }
 
     render(){
-        const {classes, cakesAndCooks} = this.props;
+        const { classes } = this.props;
        
-        const filteredCakesAndCooks = this.filteredListOfCaC();
-
-
-
         return (<>
             <Grid   container 
                     spacing={2} 
@@ -74,8 +62,8 @@ class FilterAll extends React.Component{
                                 <SearchIcon />
                             </IconButton>
                             <InputBase
-                                onChange={this.handleClick}
-                                value={this.state.value}
+                                onChange={this.handleFilterAllChange}
+                                value={this.props.filterAll}
                                 className={classes.input}
                                 placeholder="ciasto cukiernik lokalizacja ..."
                             />
@@ -85,23 +73,6 @@ class FilterAll extends React.Component{
                                 <MenuIcon />
                             </IconButton>
                         </Grid>
-
-                        {this.state.click &&(
-                        <div>
-                            <Divider variant='middle' />
-                        
-                            <List component="nav" aria-label="secondary mailbox folders">
-                                {filteredCakesAndCooks.map((el) =>{
-                                    return(
-                                        <ListItem button key={el.id}>
-                                            {el.name} 
-                                        </ListItem>
-                                    )    
-                                })
-                                }
-                            </List>
-                        </div>)
-                        }
                     </Grid>
                 </Paper>
                 
@@ -163,3 +134,22 @@ export default  withStyles(styles)(FilterAll);
 // </Menu>
 
 //<ListItemText disableTypography ={true} primary={el.name} />
+
+// //działająca list pod filtrem
+// {this.state.click &&(
+//     <div>
+//         <Divider variant='middle' />
+    
+//         <List component="nav" aria-label="secondary mailbox folders">
+//             {filteredCakesAndCooks.map((el) =>{
+//                 return(
+//                     <ListItem button key={el.id}>
+//                         {el.name} 
+//                     </ListItem>
+//                 )    
+//             })
+//             }
+//         </List>
+//     </div>)
+//     }
+
