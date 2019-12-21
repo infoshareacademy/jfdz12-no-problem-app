@@ -5,8 +5,8 @@ import CakeCardFull from './CakeCardFull';
 import {RenderCakesList} from './RenderCakesList';
 import FilterButton from './filter/FilterButton';
 import './Cake.css'
-import { FilterAllToogle } from './filterNew/FilterAllToogle';
-import FilterAll from './filterNew/FilterAll'
+import { FilterAllToogle } from './filterAll/FilterAllToogle';
+import FilterAll from './filterAll/FilterAll'
 
 export class CakesList extends React.Component{
     constructor(props){
@@ -21,13 +21,13 @@ export class CakesList extends React.Component{
             filterLocation:'',
             filterAll: '',
             filterChecked: false,
-            filterPropVisible: false,
+            filterPropVisible: true,
             cakeCardOpen: false,
             CakeCardOpenId: null,
             loading: true,
             filterTypes: [],
             filterTypesId:[],
-            filterAllToogle: true,
+            filterAllToogle: false,
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
@@ -43,13 +43,6 @@ export class CakesList extends React.Component{
             cakes: data[0],
             cooks: data[1],
             types: data[2],
-            cakesAndCooks: data[0].map((cake) => {
-                const cookData =  this.findDataById(data[1], cake.cookId);
-                return {
-                    id: cake.id,
-                    name: `${cake.name} ${cookData.name} ${cookData.surname}`,
-                }
-            }),
             loading: false,
         }))
     }
@@ -59,6 +52,7 @@ export class CakesList extends React.Component{
             event.target.type === 'checkbox'
                 ? event.target.checked
                 : event.target.value;
+
         this.setState ({
             [event.target.name] : value,
         });
@@ -70,6 +64,20 @@ export class CakesList extends React.Component{
             filterAll: event.target.value,
         });
     }
+
+    handleTypeToggle = value => {
+        const {filterTypesId} = this.state;
+        const currentIndex = filterTypesId.indexOf(value);
+        const newChecked = [...filterTypesId];
+        
+        if (currentIndex === -1) {
+          newChecked.push(value);
+        } else {
+          newChecked.splice(currentIndex, 1);
+        }
+        
+        this.setState({filterTypesId: newChecked});
+    };
 
     reset = (id) => this.setState({[id]: ''});
 
@@ -98,7 +106,6 @@ export class CakesList extends React.Component{
       
     render(){    
         const {filterTypes, 
-                filterTypesId, 
                 cakeCardOpen, 
                 cakeCardOpenId, 
                 cakes, 
@@ -112,8 +119,8 @@ export class CakesList extends React.Component{
                 filterChecked, 
                 filterPropVisible, 
                 filterAllToogle,
-                cakesAndCooks} = this.state;
-            console.log(filterAll)
+                filterTypesId,
+            } = this.state;
 
         if (!cakeCardOpen && !loading) {
             return <>
@@ -133,7 +140,7 @@ export class CakesList extends React.Component{
                         <CakeFilters 
                             types = {types}
                             filterTypes = {filterTypes}
-                            filterTypesId = {filterTypesId} 
+                           // filterTypesId = {filterTypesId} 
                             filterCakeName = {filterCake}
                             filterCookName = {filterCook}
                             filterLocationCity = {filterLocation}
@@ -145,8 +152,11 @@ export class CakesList extends React.Component{
                     }
                     {filterPropVisible && !filterAllToogle &&
                         <FilterAll
+                            onFilterChange = {this.filterChange}
+                            onHandleTypeToggle = {this.handleTypeToggle}
+                            filterTypesId ={filterTypesId} 
                             filterAll = {filterAll}
-                            onHandleFilterAllChange = {this.handleFilterAllChange}
+                            types = {types}
                         />
                     }
                     <RenderCakesList

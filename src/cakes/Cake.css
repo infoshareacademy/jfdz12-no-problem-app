@@ -9,16 +9,15 @@
     max-width: 1200px;
   }
   
-  .cakesFiltersButton {
-    margin: 5px; 
-    padding: 4px;
-  }
-  
-  .cakesFilter-textField {
-    margin: 10px 2px;
-  }
-  
+.cakesFiltersButton {
+  margin: 5px; 
+  padding: 4px;
+}
 
+.cakesFilter-textField {
+  margin: 10px 2px;
+}
+  
 
 /* 
 root: {
