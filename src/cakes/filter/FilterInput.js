@@ -8,7 +8,7 @@ const styles = {
         '& .MuiOutlinedInput-root':{
             borderRadius: '20px',
             margin: '5px',
-            width: '250px',
+            width: '180px',
         },
         '& .MuiIconButton-root': {
             padding: '6px',

@@ -25,9 +25,8 @@ export class CakesList extends React.Component{
             cakeCardOpen: false,
             CakeCardOpenId: null,
             loading: true,
-            filterTypes: [],
             filterTypesId:[],
-            filterAllToogle: false,
+            filterAllToogle: true,
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
@@ -57,7 +56,6 @@ export class CakesList extends React.Component{
             [event.target.name] : value,
         });
     } 
-
         
     handleFilterAllChange (event){
         this.setState({
@@ -91,12 +89,12 @@ export class CakesList extends React.Component{
     }
 
     handleChangeType = (e) => {
-        this.setState({ filterTypes: e.target.value,
-                        filterTypesId: e.target.value.map( nType => this.state.types.find(typ => typ.name === nType).id)});
-       }
+        this.setState({ 
+            filterTypesId: e.target.value, 
+        })
+    }
 
     handleToogleChange(e) { 
-
         this.setState(prevState => ({
             filterAllToogle:  !prevState.filterAllToogle,
         })) 
@@ -105,8 +103,7 @@ export class CakesList extends React.Component{
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
     render(){    
-        const {filterTypes, 
-                cakeCardOpen, 
+        const { cakeCardOpen, 
                 cakeCardOpenId, 
                 cakes, 
                 cooks, 
@@ -139,8 +136,7 @@ export class CakesList extends React.Component{
                     {filterPropVisible && filterAllToogle && 
                         <CakeFilters 
                             types = {types}
-                            filterTypes = {filterTypes}
-                           // filterTypesId = {filterTypesId} 
+                            filterTypesId = {filterTypesId}
                             filterCakeName = {filterCake}
                             filterCookName = {filterCook}
                             filterLocationCity = {filterLocation}

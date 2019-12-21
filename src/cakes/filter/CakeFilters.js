@@ -84,7 +84,7 @@ class CakeFilters extends React.Component{
                     />
                     
                     <FilterDropdown 
-                        filterTypes = {this.props.filterTypes}
+                        filterTypesId = {this.props.filterTypesId}
                         types = {this.props.types}
                         onCheckedType = {this.handleChangeType}
                     />

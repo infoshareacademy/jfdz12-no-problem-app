@@ -1,7 +1,6 @@
 export const styleFilter = {
     
     Box: {
-        // position: 'realtive',
         display: 'flex',
         zIndex:'99',
         flexDirection: 'row',
@@ -9,7 +8,6 @@ export const styleFilter = {
         alignItems:'center',
         justifyContent: 'center',
         maxWidth: 'lg',
-        // border: '1px solid black',
     },
 
     FormControlLabel:{
