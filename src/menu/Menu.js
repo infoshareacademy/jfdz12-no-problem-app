@@ -13,7 +13,7 @@ export function Menu(){
                     style={{margin: '10px', padding: '10px'}}
             >
                 <Paper style={{width: '600px'}}> 
-                    <Typography variant='h2'> Menu </Typography> 
+                    <Typography variant='h3'> Menu </Typography> 
                 </Paper>
             </Grid>
 

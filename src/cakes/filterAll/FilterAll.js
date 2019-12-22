@@ -3,6 +3,7 @@ import { Button, Grid, withStyles, IconButton, InputBase,Paper, Divider } from '
 import SearchIcon from '@material-ui/icons/Search';
 import RenderFilterAllMenu from './RenderFilterAllMenu'
 import {styles} from './FilterAllStyle';
+import {FilterButton} from '../FilterButton';
 
 class FilterAll extends React.Component{
     constructor(props){
@@ -14,6 +15,7 @@ class FilterAll extends React.Component{
         this.handleTypeClick = this.handleTypeClick.bind(this);
         this.handleTypeClose = this.handleTypeClose.bind(this);
         this.handleTypeToggle = this.handleTypeToggle.bind(this);
+        this.handleToogleChange = this.handleToogleChange.bind(this);
     }
 
     handleFilterChange (event) {
@@ -30,6 +32,10 @@ class FilterAll extends React.Component{
 
     handleTypeToggle (value){
         this.props.onHandleTypeToggle(value);
+    }
+
+    handleToogleChange (){
+        this.props.onHandleToogleChange();
     }
 
     render(){
@@ -75,11 +81,20 @@ class FilterAll extends React.Component{
                                 onHandleTypeClose = {this.handleTypeClose}
                                 onHandleFilterChange = {this.handleFilterChange}
                                 onHandleTypeToggle = {this.handleTypeToggle}
+                            />
+                            
+                            <Divider className={classes.divider} orientation="vertical" />
+
+                            <FilterButton
+                                filterAllToogle = {this.props.filterAllToogle}
+                                onHandleToogleChange = {this.handleToogleChange}
                             />   
                             
                         </Grid>
                     </Grid>
                 </Paper>
+                
+
             </Grid>
         </>)
     }

@@ -3,9 +3,8 @@ import CakeFilters from './filter/CakeFilters';
 import { CircularProgress, Container, Box } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
 import {RenderCakesList} from './RenderCakesList';
-import FilterButton from './filter/FilterButton';
 import './Cake.css'
-import { FilterAllToogle } from './filterAll/FilterAllToogle';
+import { FilterVisibleToogle} from './FilterVisibleToogle';
 import FilterAll from './filterAll/FilterAll'
 
 export class CakesList extends React.Component{
@@ -21,16 +20,17 @@ export class CakesList extends React.Component{
             filterLocation:'',
             filterAll: '',
             filterChecked: false,
-            filterPropVisible: true,
+            filterVisibility: false,
             cakeCardOpen: false,
             CakeCardOpenId: null,
             loading: true,
             filterTypesId:[],
-            filterAllToogle: true,
+            filterAllToogle: false,
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
         this.handleFilterAllChange = this.handleFilterAllChange.bind(this);    
+        this.filterVisibility = this.filterVisibility.bind(this);
     }
 
     componentDidMount() {
@@ -84,16 +84,19 @@ export class CakesList extends React.Component{
                         cakeCardOpenId: id,});
     };
 
-    filterVisibility = () =>{
-        this.setState({filterPropVisible : this.state.filterPropVisible === false ? true : false});
-    }
-
     handleChangeType = (e) => {
         this.setState({ 
             filterTypesId: e.target.value, 
         })
     }
-
+    
+    filterVisibility (){
+        this.setState( prevState => ({
+            filterVisibility: !prevState.filterVisibility
+            })
+        )
+    }
+    
     handleToogleChange(e) { 
         this.setState(prevState => ({
             filterAllToogle:  !prevState.filterAllToogle,
@@ -114,7 +117,7 @@ export class CakesList extends React.Component{
                 filterCake,
                 filterLocation, 
                 filterChecked, 
-                filterPropVisible, 
+                filterVisibility, 
                 filterAllToogle,
                 filterTypesId,
             } = this.state;
@@ -123,36 +126,35 @@ export class CakesList extends React.Component{
             return <>
                 <Container maxWidth = "lg" >
                     <Box>
-                        <FilterButton
-                            onButtonClick = {this.filterVisibility}
+                        <FilterVisibleToogle
+                            filterVisibility = {filterVisibility}
+                            onFilterVisibility = {this.filterVisibility}
                         />
                     </Box>
-                    <Box>
-                        <FilterAllToogle
-                            filterAllToogle = {filterAllToogle}
-                            onHandleToogleChange = {this.handleToogleChange}
-                        />
-                    </Box>
-                    {filterPropVisible && filterAllToogle && 
+                    {filterVisibility && filterAllToogle && 
                         <CakeFilters 
                             types = {types}
                             filterTypesId = {filterTypesId}
                             filterCakeName = {filterCake}
                             filterCookName = {filterCook}
                             filterLocationCity = {filterLocation}
+                            filterAllToogle = {filterAllToogle}
                             checkboxChecked ={filterChecked} 
                             onFilterChange = {this.filterChange}
                             onReset = {this.reset}
                             onCheckedType = {this.handleChangeType}
+                            onHandleToogleChange= {this.handleToogleChange}
                         />
                     }
-                    {filterPropVisible && !filterAllToogle &&
+                    {filterVisibility && !filterAllToogle &&
                         <FilterAll
-                            onFilterChange = {this.filterChange}
-                            onHandleTypeToggle = {this.handleTypeToggle}
                             filterTypesId ={filterTypesId} 
                             filterAll = {filterAll}
+                            filterAllToogle = {filterAllToogle}
                             types = {types}
+                            onHandleToogleChange= {this.handleToogleChange}
+                            onFilterChange = {this.filterChange}
+                            onHandleTypeToggle = {this.handleTypeToggle}
                         />
                     }
                     <RenderCakesList

@@ -25,6 +25,8 @@ export const styles={
         display: 'flex',
         alignItems: 'center',
         width: '600px',
+        borderColor: '#e0e0e0', //e0e0e0 bdbdbd
+        border: "0.5px solid",
     },
     grid:{
         margin: '10px',

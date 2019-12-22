@@ -3,6 +3,7 @@ import { Checkbox, Grid, Box, FormControlLabel } from '@material-ui/core';
 import FilterDropdown from './FilterDropdown';
 import FilterInput from './FilterInput';
 import {styleFilter} from './FilterStyle';
+import {FilterButton} from '../FilterButton';
 
 
 class CakeFilters extends React.Component{
@@ -12,7 +13,7 @@ class CakeFilters extends React.Component{
         this.reset = this.reset.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.handleChangeType = this.handleChangeType.bind(this);
-        this.handleFilterChange = this.handleFilterChange.bind(this);
+        this.handleToogleChange = this.handleToogleChange.bind(this);
     }
 
     handleFilterChange (event) {
@@ -33,6 +34,10 @@ class CakeFilters extends React.Component{
 
     filterVisibility () {
         this.props.onButtonClick();
+    }
+
+    handleToogleChange (){
+        this.props.onHandleToogleChange();
     }
 
     render(){
@@ -87,6 +92,10 @@ class CakeFilters extends React.Component{
                         filterTypesId = {this.props.filterTypesId}
                         types = {this.props.types}
                         onCheckedType = {this.handleChangeType}
+                    />
+                    <FilterButton
+                        filterAllToogle = {this.props.filterAllToogle}
+                        onHandleToogleChange = {this.handleToogleChange}
                     />
                 </Box>
             </Grid>    
