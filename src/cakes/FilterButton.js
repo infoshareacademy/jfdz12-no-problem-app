@@ -10,8 +10,8 @@ export class FilterButton extends React.Component{
     render(){    
        const myStyle = {
            borderRadius: this.props.filterAllToogle ? '20px': '5px',
-           marginLeft: '10px',
-           marginRight: '10px',
+           margin: '2px 0px',
+           maxWidth:'150px',
         };
         return <>
             <Button
@@ -19,7 +19,7 @@ export class FilterButton extends React.Component{
                 onClick = {this.handleToogleChange}
                 variant= {this.props.filterAllToogle ? "outlined" : "text"} 
                 color="default" 
-                size="small"
+                size="medium"
             > 
                 {this.props.filterAllToogle ? "mniej filtrów" : "więcej filtrów" } 
             </Button>

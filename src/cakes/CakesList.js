@@ -20,7 +20,7 @@ export class CakesList extends React.Component{
             filterLocation:'',
             filterAll: '',
             filterChecked: false,
-            filterVisibility: false,
+            filterVisibility: true,
             cakeCardOpen: false,
             CakeCardOpenId: null,
             loading: true,

@@ -32,14 +32,22 @@ export const styles={
         margin: '10px 0px',
     },
     input: {
-        marginLeft: '10px',
-        flex: 1,
+        width: '80%',
+        marginLeft: '5px',
+        padding: '2px 0px',
+        flex: '1',
+
     },
     iconButton: {
-        padding: 10,
+        padding: 8,
+        minWidth:'37.5px',
     },
     divider: {
         height: 28,
         margin: 4,
     },
+    gridSearch:{
+        flexGrow:'1', 
+        textAlign:'left',
+    }
 }

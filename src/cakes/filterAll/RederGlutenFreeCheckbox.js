@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuItem, Checkbox, ListItemIcon} from '@material-ui/core';
+import { MenuItem, Checkbox, ListItemIcon, FormControlLabel} from '@material-ui/core';
 
 export class RenderGlutenFreeCheckbox extends React.Component{
     constructor(props){
@@ -14,17 +14,20 @@ export class RenderGlutenFreeCheckbox extends React.Component{
     render(){
         
         return (
-            <MenuItem >  
-                <ListItemIcon onClick={this.handleFilterChange}>
-                    <Checkbox
-                        name ="filterChecked"
-                        edge="start"
-                        checked={this.props.filterChecked}
-                        tabIndex={-1}
-                        disableRipple
-                    />
-                </ListItemIcon>
-                bezgutenowe
+            <MenuItem >
+                <FormControlLabel  style = {{margin: '0px',}}
+                    control = {<ListItemIcon >
+                        <Checkbox
+                            onClick={this.handleFilterChange}
+                            name ="filterChecked"
+                            edge="start"
+                            checked={this.props.filterChecked}
+                            tabIndex={-1}
+                            disableRipple
+                        />
+                    </ListItemIcon>}
+                    label = "bezgutenowe"
+                />
             </MenuItem>
         )
     }
