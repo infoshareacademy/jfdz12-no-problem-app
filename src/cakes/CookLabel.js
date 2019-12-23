@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Avatar, Typography,withStyles } from '@material-ui/core';
+import {Grid, Avatar, withStyles } from '@material-ui/core';
 
 const styles= {
     avatar:{
@@ -8,6 +8,15 @@ const styles= {
     
     data:{
         padding: '5px 10px',
+    },
+    labelTitle:{
+        fontSize: '14px',
+        width: '70px',
+        textAlign: 'left',
+    },
+    labelSubTitle:{
+        fontSize: '14px',
+        fontWeight: 'bold',
     },
 }
 
@@ -19,15 +28,17 @@ function CookLabel(props){
         return <>
             <Grid container item xs >
                 
-                <Grid item xs = {2} container justify='center' className={classes.avatar}>
+                <Grid item xs = {2} md={2} container justify='center' className={classes.avatar}>
                     <Avatar src={cook.avatar} variant="circle" />
                 </Grid> 
                 <Grid item container xs direction='column' className={classes.data}>
-                    <Grid item container xs  >
-                        <Typography>cukiernik: {cook.name} {cook.surname}</Typography>
+                    <Grid item container xs >
+                        <div className = {classes.labelTitle}>cukiernik: </div> 
+                        <div className = {classes.labelSubTitle}>{cook.name} {cook.surname}</div>
                     </Grid>
                     <Grid item container xs >
-                        <Typography>z miasta: {cook.location.city}</Typography>
+                        <span className = {classes.labelTitle}>miasto: </span>
+                        <span className = {classes.labelSubTitle}>{cook.location.city}</span>
                     </Grid>
                 </Grid>
             </Grid>

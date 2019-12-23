@@ -95,7 +95,7 @@ class FilterDropdown extends React.Component {
                                     label = {type.name}
                                     size = 'small'
                                     variant = 'outlined'
-                                    style = {{color: type.color, border: `1px solid ${type.color}`}}
+                                    style = {{border: `1px solid ${type.color}`}}
                                     className = {classes.chip} 
                                 />
                                 )}

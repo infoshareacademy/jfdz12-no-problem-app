@@ -2,7 +2,7 @@ import React from 'react';
 import { Checkbox, Grid, Box, FormControlLabel } from '@material-ui/core';
 import FilterDropdown from './FilterDropdown';
 import FilterInput from './FilterInput';
-import {styleFilter} from './FilterStyle';
+import {filterStyle} from './FilterStyle';
 import {FilterButton} from '../FilterButton';
 
 
@@ -44,12 +44,11 @@ class CakeFilters extends React.Component{
 
         return <> 
             <Grid container 
-                    spacing={2} 
                     justify='center' 
                     alignContent='center' 
-                    style = {styleFilter.Grid}>
+                    style = {filterStyle.Grid}>
                 
-                <Box style = {styleFilter.Box}  >
+                <Box style = {filterStyle.Box}  >
                                 
                     <FilterInput 
                         value={this.props.filterCakeName}
@@ -76,7 +75,7 @@ class CakeFilters extends React.Component{
                      />
 
                     <FormControlLabel
-                        style= {styleFilter.FormControlLabel}
+                        style= {filterStyle.FormControlLabel}
                         control={
                             <Checkbox label='' 
                                     checked = {this.props.checkboxChecked} 

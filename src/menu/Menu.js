@@ -6,11 +6,9 @@ export function Menu(){
         <div>
             <Grid container 
                     item
-                    xs={12}
-                    spacing={2} 
                     justify='center' 
                     alignContent='center'
-                    style={{margin: '10px', padding: '10px'}}
+                    style={{margin: '10px 0px', padding: '10px'}}
             >
                 <Paper style={{width: '600px'}}> 
                     <Typography variant='h3'> Menu </Typography> 

@@ -29,7 +29,7 @@ export const styles={
         border: "0.5px solid",
     },
     grid:{
-        margin: '10px',
+        margin: '10px 0px',
     },
     input: {
         marginLeft: '10px',

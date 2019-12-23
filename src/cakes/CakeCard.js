@@ -31,12 +31,12 @@ class CakeCard extends React.Component{
                                 </Grid>
                                 <Grid item xs={7} className = {classes.gridPaddingRight}>
                                     <Grid item xs container justify='space-between' className = {classes.data}>
-                                            <Typography variant="subtitle1" > Cena: </Typography> 
-                                            <Typography variant="subtitle1" > {price} zł </Typography> 
+                                            <div className={classes.cCardLabelTitle} > Cena: </div> 
+                                            <div className={classes.cCardLabelText} > {price} zł </div> 
                                     </Grid>
                                     <Grid item xs>
                                         <Grid item xs container justify='space-between' className = {classes.data}>
-                                            <Typography variant="subtitle1" >Kategoria: </Typography> 
+                                            <div className={classes.cCardLabelTitle} >Kategoria: </div> 
                                             <Chip   label = {type.name}
                                                     size = 'small'
                                                     clickable = {false}
@@ -47,8 +47,8 @@ class CakeCard extends React.Component{
                                         </Grid>
                                     </Grid>
                                     <Grid item xs container justify='space-between' className = {classes.data} >
-                                        <Typography variant="subtitle1"> bezglutenowe: </Typography>
-                                        <Typography variant="subtitle1"> {glutenFree ? ' tak': ' nie'} </Typography>
+                                        <div className={classes.cCardLabelTitle}> bezglutenowe: </div>
+                                        <div className={classes.cCardLabelText}> {glutenFree ? ' tak': ' nie'} </div>
                                     </Grid>
                                 </Grid>
                             </Grid>

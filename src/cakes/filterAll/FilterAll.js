@@ -44,7 +44,7 @@ class FilterAll extends React.Component{
         
         return (<>
             <Grid   container 
-                    spacing={2} 
+                    
                     justify='center' 
                     alignContent='center' 
                     className = {classes.grid}

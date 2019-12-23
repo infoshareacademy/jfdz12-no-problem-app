@@ -11,7 +11,7 @@ export const styles= {
         height: '120px',
     },
     data:{
-        padding:'5px 10px',
+        padding:'0px 10px',
     },
 
     gridPaddingLeft:{
@@ -23,6 +23,19 @@ export const styles= {
     typeLabel:{
         color: 'white',
         fontWeight: 'bold',
+        padding: '7px 0px',
+    },
+    cCardLabelTitle:{
+        fontSize: '14px',
+        textAlign: 'center',
+        alignSelf:'center',
+        padding: '7px 0px',
+    },
+    cCardLabelText: {
+        alignSelf:'center',
+        fontSize: '14px',
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     fCardHeader: {
         padding: '20px 10px', 
