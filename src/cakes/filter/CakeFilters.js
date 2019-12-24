@@ -44,59 +44,71 @@ class CakeFilters extends React.Component{
 
         return <> 
             <Grid container 
-                    justify='center' 
-                    alignContent='center' 
-                    style = {filterStyle.Grid}>
-                
-                <Box style = {filterStyle.Box}  >
-                                
-                    <FilterInput 
+                justify='space-evenly' 
+                alignContent='center' 
+                alignItems='center'
+                style = {filterStyle.Grid}
+            >
+                <Grid item>
+                    <FilterInput
+                         
                         value={this.props.filterCakeName}
                         onChange={this.handleFilterChange}
                         onClick = {this.reset}
                         label = "szukaj ciasto"
                         inputName = "filterCake"
-                     />
-                   
+                    />
+                </Grid>
+                
+                <Grid item>
                     <FilterInput 
                         value={this.props.filterCookName}
                         onChange={this.handleFilterChange}
                         label = "szukaj cukiernika"
                         inputName = "filterCook"
                         onClick = {this.reset}
-                     />
-                    
+                        />
+                </Grid>
+
+                <Grid item>
                     <FilterInput 
                         value={this.props.filterLocationCity}
                         onChange={this.handleFilterChange}
                         label = "szukaj miasta"
                         inputName = "filterLocation"
                         onClick = {this.reset}
-                     />
-
+                        />
+                </Grid>
+                
+                <Grid item >
                     <FormControlLabel
-                        style= {filterStyle.FormControlLabel}
+                        style= {{margin: '0px', padding:"5px"}}
                         control={
-                            <Checkbox label='' 
-                                    checked = {this.props.checkboxChecked} 
-                                    onClick = {this.handleFilterChange}
-                                    color = 'secondary'
-                                    name = 'filterChecked'
+                            <Checkbox label='bex' 
+                            checked = {this.props.checkboxChecked} 
+                            onClick = {this.handleFilterChange}
+                            color = 'secondary'
+                            name = 'filterChecked'
                             />
                         }
                         label="bezglutenowe"
-                    />
-                    
+                        />
+                </Grid>
+                
+                <Grid item >
                     <FilterDropdown 
                         filterTypesId = {this.props.filterTypesId}
                         types = {this.props.types}
                         onCheckedType = {this.handleChangeType}
                     />
-                    <FilterButton
+                </Grid>
+                
+                <Grid item >
+                    <FilterButton 
                         filterAllToogle = {this.props.filterAllToogle}
                         onHandleToogleChange = {this.handleToogleChange}
                     />
-                </Box>
+                </Grid>
             </Grid>    
         </>
     }

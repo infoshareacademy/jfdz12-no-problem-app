@@ -5,12 +5,16 @@ import { withStyles, FormControl, InputLabel, Select, MenuItem, Chip } from '@ma
 const styles = {
 
   root: {
+        '& .MuiSelect-root': {
+            // paddingBottom: '10px',
+            // marginBottom:'1px',
+            //paddingTop: '0px',
+            minWidth: '0px',
+        },
         '& .MuiSelect-select': {
             backgroundColor: 'white',
             borderRadius: '10px',
-        },
-        '& .MuiSelect-root':{
-
+            padding: '0px, 0px, 10px'
         },
         '& .MuiInputBase-root': {  
             backgroundColor: '#ffffff',
@@ -28,8 +32,8 @@ const styles = {
     },
 
     formControl: {
-        margin: '10px 10px',
-        minWidth: 150,
+        minWidth: 100,
+        //marginBottom: '1px',
     },
 
     chips: {
@@ -42,7 +46,6 @@ const styles = {
         fontSize: '10px',
     },
     inputLabel: {
-        padding: '0px 5px',
         backgroundColor: 'white',
     }
 }
@@ -73,12 +76,13 @@ class FilterDropdown extends React.Component {
           };
 
         return <>
-            <FormControl color='secondary'
+            <FormControl 
+                color='secondary'
                 margin='dense'
                 variant='outlined'
                 className={clsx(classes.formControl, classes.root)}
             >
-                <InputLabel id="select-label" className={classes.inputLabel} >Typ ciasta</InputLabel>
+                <InputLabel id="select-label" className={classes.inputLabel} >Typ</InputLabel>
                 <Select
                     multiple
                     labelId='select-label'

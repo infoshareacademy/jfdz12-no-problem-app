@@ -32,7 +32,7 @@ export const styles={
         margin: '10px 0px',
     },
     input: {
-        width: '80%',
+        width: '100%',
         marginLeft: '5px',
         padding: '2px 0px',
         flex: '1',
@@ -40,7 +40,6 @@ export const styles={
     },
     iconButton: {
         padding: 8,
-        minWidth:'37.5px',
     },
     divider: {
         height: 28,

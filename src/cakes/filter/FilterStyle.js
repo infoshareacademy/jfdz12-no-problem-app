@@ -16,5 +16,6 @@ export const filterStyle = {
 
     Grid: {
         maxWidth: 'lg',
+        border: '1px solid black',
     }
 }

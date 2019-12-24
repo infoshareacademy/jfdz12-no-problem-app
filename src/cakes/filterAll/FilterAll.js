@@ -47,32 +47,38 @@ class FilterAll extends React.Component{
                     justify='center' 
                     alignContent='center' 
                     className = {classes.grid}
+                    style={{padding: '0px 5px'}}
             >
                 <Paper component="form" className={classes.PaperStyle}>
-                    <Grid container direction='column' justify='center' alignContent='center' >
-                        <Grid container>
-                            <Grid item className={classes.gridSearch}>
-                                <IconButton className={classes.iconButton} aria-label="search">
-                                    <SearchIcon />
-                                </IconButton>
-                                <InputBase 
-                                    onChange={this.handleFilterChange}
-                                    value={this.props.filterAll}
-                                    className={classes.input}
-                                    placeholder="ciasto cukiernik lokalizacja ..."
-                                    name = "filterAll" 
-                                />
+                    <Grid container wrap='wrap' direction='row' justify='space-between' alignContent='center' >
+                        <Grid item xs={12} sm  container className={classes.gridSearch}>
+                            <IconButton className={classes.iconButton} aria-label="search">
+                                <SearchIcon />
+                            </IconButton>
+                            <Grid item xs ={10}>
+                            <InputBase 
+                                onChange={this.handleFilterChange}
+                                value={this.props.filterAll}
+                                className={classes.input}
+                                placeholder="ciasto cukiernik lokalizacja ..."
+                                name = "filterAll" 
+                            />
                             </Grid>
+                        </Grid>
+                        <Hidden only='xs'>
                             <Divider className={classes.divider} orientation="vertical" />
-                              
+                        </Hidden>
+
+                        <Grid item xs={12} sm={3} container justify='space-evenly' wrap='nowrap'>  
                             <Grid item >
                                 <Button color="primary" 
                                         className={classes.iconButton}
                                         aria-controls="long-menu"
                                         aria-haspopup="true"
                                         onClick={this.handleTypeClick}
+                                        size = 'medium'
                                 >
-                                    Kategorie
+                                    Typ
                                 </Button>
                                 <RenderFilterAllMenu 
                                     anchorEl = {anchorEl}
@@ -85,15 +91,13 @@ class FilterAll extends React.Component{
                                 />
                             </Grid>
                             <Divider className={classes.divider} orientation="vertical" />       
-                             <Hidden only={['xs']}>   
-                                <Grid item >
-                                    
-                                    <FilterButton 
-                                        filterAllToogle = {this.props.filterAllToogle}
-                                        onHandleToogleChange = {this.handleToogleChange}
-                                    />   
-                                </Grid>
-                            </Hidden>
+                            <Grid item >
+                                
+                                <FilterButton 
+                                    filterAllToogle = {this.props.filterAllToogle}
+                                    onHandleToogleChange = {this.handleToogleChange}
+                                />   
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Paper>

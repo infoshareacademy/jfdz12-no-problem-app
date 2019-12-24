@@ -125,12 +125,12 @@ export class CakesList extends React.Component{
         if (!cakeCardOpen && !loading) {
             return <>
                 <Container maxWidth = "lg" >
-                    <Box>
+                    {/* <Box>
                         <FilterVisibleToogle
                             filterVisibility = {filterVisibility}
                             onFilterVisibility = {this.filterVisibility}
                         />
-                    </Box>
+                    </Box> */}
                     {filterVisibility && filterAllToogle && 
                         <CakeFilters 
                             types = {types}
