@@ -1,10 +1,9 @@
 import React from 'react';
 import CakeFilters from './filter/CakeFilters';
-import { CircularProgress, Container, Box } from '@material-ui/core';
+import { CircularProgress, Container } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
 import {RenderCakesList} from './RenderCakesList';
 import './Cake.css'
-import { FilterVisibleToogle} from './FilterVisibleToogle';
 import FilterAll from './filterAll/FilterAll'
 
 export class CakesList extends React.Component{
@@ -20,7 +19,6 @@ export class CakesList extends React.Component{
             filterLocation:'',
             filterAll: '',
             filterChecked: false,
-            filterVisibility: true,
             cakeCardOpen: false,
             CakeCardOpenId: null,
             loading: true,
@@ -30,7 +28,7 @@ export class CakesList extends React.Component{
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
         this.handleFilterAllChange = this.handleFilterAllChange.bind(this);    
-        this.filterVisibility = this.filterVisibility.bind(this);
+        
     }
 
     componentDidMount() {
@@ -90,13 +88,6 @@ export class CakesList extends React.Component{
         })
     }
     
-    filterVisibility (){
-        this.setState( prevState => ({
-            filterVisibility: !prevState.filterVisibility
-            })
-        )
-    }
-    
     handleToogleChange(e) { 
         this.setState(prevState => ({
             filterAllToogle:  !prevState.filterAllToogle,
@@ -117,20 +108,15 @@ export class CakesList extends React.Component{
                 filterCake,
                 filterLocation, 
                 filterChecked, 
-                filterVisibility, 
                 filterAllToogle,
                 filterTypesId,
             } = this.state;
 
+        const { filterVisibility } = this.props;
+
         if (!cakeCardOpen && !loading) {
             return <>
                 <Container maxWidth = "lg" >
-                    {/* <Box>
-                        <FilterVisibleToogle
-                            filterVisibility = {filterVisibility}
-                            onFilterVisibility = {this.filterVisibility}
-                        />
-                    </Box> */}
                     {filterVisibility && filterAllToogle && 
                         <CakeFilters 
                             types = {types}

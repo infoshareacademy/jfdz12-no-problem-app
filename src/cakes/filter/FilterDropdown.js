@@ -32,7 +32,7 @@ const styles = {
     },
 
     formControl: {
-        minWidth: 100,
+        minWidth: 160,
         //marginBottom: '1px',
     },
 

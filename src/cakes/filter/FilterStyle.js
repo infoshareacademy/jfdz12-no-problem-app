@@ -16,6 +16,11 @@ export const filterStyle = {
 
     Grid: {
         maxWidth: 'lg',
-        border: '1px solid black',
+        //border: '1px solid black',
+        padding: '5px',
+    },
+
+    cfPaper:{
+        margin: '5px',
     }
 }
