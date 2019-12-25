@@ -1,52 +1,70 @@
 import React from 'react';
-import { Image, Card, Icon, Button, Label } from 'semantic-ui-react';
-import TypeLabel from './TypeLabel';
+import { CardMedia, withStyles, Grid, Typography, Paper, Card, CardActionArea, Chip } from '@material-ui/core';
 import CookLabel from './CookLabel';
+import {styles} from './CakeStyles';
 
 class CakeCard extends React.Component{
     
-    render(){
-        const { name, imgURL, typeId, cookId, price, description, glutenFree } = this.props.cakes;
+    openCakeCard = (id,e) => this.props.onCakeCardOpen(id,e);
 
-        return <Card>
-            <Card.Content>
-                <Card.Header as='h2' textAlign='center'>{name} </Card.Header>
-                <Image size='small' floated='left' src={imgURL} wrapped ui={true} />
-                <Card.Meta textAlign='right'>
-                    <Button as='div' size='mini' labelPosition='left' >
-                        <Label as='a' basic pointing='right' size='mini'>
-                            48
-                        </Label>
-                        <Button icon size='mini'>
-                            <Icon name='heart' />
-                            Like
-                        </Button>
-                    </Button>
-                </Card.Meta>
+    render(){
+        const { name, imgURL, price, glutenFree, id } = this.props.cake;
+        const { type } = this.props;
+        const { classes } = this.props;
+
+        return(
+            <Grid container spacing={1}>
+                <Grid item xs={12}>
+                    <Card className = {classes.paper} >
+                        <Typography variant="h6"> {name}</Typography> 
+                    </Card> 
+                </Grid>
+                    
+                <Grid item xs>
+                    <Paper className = {classes.paper}>
+                        <CardActionArea onClick = {(e) => this.openCakeCard( id, e )} >
+                            <Grid item xs={12} container wrap = 'nowrap'>
+                                <Grid item xs={5} className = {classes.gridPaddingLeft}>
+                                    <CardMedia image = {imgURL} 
+                                        className = {classes.media} 
+                                    />
+                                </Grid>
+                                <Grid item xs={7} className = {classes.gridPaddingRight}>
+                                    <Grid item xs container justify='space-between' className = {classes.data}>
+                                            <Typography variant="subtitle1" > Cena: </Typography> 
+                                            <Typography variant="subtitle1" > {price} zł </Typography> 
+                                    </Grid>
+                                    <Grid item xs>
+                                        <Grid item xs container justify='space-between' className = {classes.data}>
+                                            <Typography variant="subtitle1" >Kategoria: </Typography> 
+                                            <Chip   label = {type.name}
+                                                    size = 'small'
+                                                    clickable = {false}
+                                                    className={classes.typeLabel} 
+                                                    style={{backgroundColor: type.color}}
+                                                    wrap='wrap'
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item xs container justify='space-between' className = {classes.data} >
+                                        <Typography variant="subtitle1"> bezglutenowe: </Typography>
+                                        <Typography variant="subtitle1"> {glutenFree ? ' tak': ' nie'} </Typography>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </CardActionArea>
+                    </Paper>         
+                </Grid>
+            
+                <Grid item xs= {12}>
+                    <Paper className={classes.paper}> 
+                        <CookLabel cook = {this.props.cook} />
+                    </Paper>    
+                </Grid>
                 
-                <Card.Meta textAlign='left' style = {{paddingTop:'0.4em'}}>
-                    <span className='colorMeta'>cena:
-                        <span style = {{fontWeight: 'bold', float:'right'}}> 
-                            {price} zł
-                        </span>
-                    </span>
-                </Card.Meta>
-                <Card.Meta style = {{paddingTop:'0.4em'}} textAlign='left'> 
-                    <TypeLabel  typeId = {typeId} />
-                </Card.Meta>
-                <Card.Meta style = {{paddingTop:'0.4em'}} textAlign='left'>
-                    bezglutenowe: <span className='floatRight'>{glutenFree ? ' tak': ' nie'}</span> 
-                </Card.Meta>
-                
-                <Card.Description textAlign='left'>
-                    {description}  
-                </Card.Description>
-            </Card.Content>
-            <Card.Content>
-                <CookLabel cookId = {cookId} />
-            </Card.Content>
-        </Card>
+            </Grid>
+        )
     }
 }
 
-export default CakeCard;
+export default withStyles(styles)(CakeCard);

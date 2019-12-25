@@ -1,59 +1,107 @@
 import React from 'react';
-import { Input, Button, Checkbox, Segment} from 'semantic-ui-react';
-import FilterDropdown from './FilterDropdown'
+import { Checkbox, Grid, Box, FormControlLabel } from '@material-ui/core';
+import FilterDropdown from './FilterDropdown';
+import FilterInput from './FilterInput';
+import {styleFilter} from './FilterStyle';
+import {FilterButton} from '../FilterButton';
+
 
 class CakeFilters extends React.Component{
-
-    handleChange = (event) => {
-        this.props.onNameChange(event.target.value);
-      }
-    
-    reset = () => {
-        this.props.onReset();
+    constructor (props){
+        super(props);
+        this.handleFilterChange = this.handleFilterChange.bind(this);
+        this.reset = this.reset.bind(this);
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+        this.handleChangeType = this.handleChangeType.bind(this);
+        this.handleToogleChange = this.handleToogleChange.bind(this);
     }
 
-    handleCheckboxChange = (event) =>{
+    handleFilterChange (event) {
+        this.props.onFilterChange(event);
+    }
+
+    reset (id) { 
+        this.props.onReset(id) 
+    };
+
+    handleCheckboxChange (event) {
         this.props.onChecked(event.target.checked)
+     }
+
+    handleChangeType (event) {
+        this.props.onCheckedType (event)
     }
 
-    handleChangeType = (event, data) =>{
-        this.props.onCheckedType (event, data)
+    filterVisibility () {
+        this.props.onButtonClick();
     }
-    
+
+    handleToogleChange (){
+        this.props.onHandleToogleChange();
+    }
+
     render(){
 
         return <> 
-            <Segment style={{visibility: this.props.filterPropVisible,
-                            position: 'fixed', 
-                            zIndex:99, 
-                            left: 0, 
-                            top:60 }}>
-
-                <Input  icon='search' 
-                        placeholder='wpisz nazwę ciasta' 
-                        value={this.props.filterNameValue}
-                        onChange={this.handleChange} 
-                />
-                <span> </span>
-
-                <Button onClick = {this.reset}> 
-                    wyczyść 
-                </Button>
-                <p></p>
+            <Grid container 
+                    spacing={2} 
+                    justify='center' 
+                    alignContent='center' 
+                    style = {styleFilter.Grid}>
                 
-                <Checkbox label='bezglutenowe' 
-                        checked = {this.props.checkboxChecked} 
-                        onClick = {this.handleCheckboxChange}  
-                />
-                <p></p>
-                
-                <FilterDropdown 
-                    onCheckedType = {this.handleChangeType}
-                />
-            
-            </Segment>
+                <Box style = {styleFilter.Box}  >
+                                
+                    <FilterInput 
+                        value={this.props.filterCakeName}
+                        onChange={this.handleFilterChange}
+                        onClick = {this.reset}
+                        label = "szukaj ciasto"
+                        inputName = "filterCake"
+                     />
+                   
+                    <FilterInput 
+                        value={this.props.filterCookName}
+                        onChange={this.handleFilterChange}
+                        label = "szukaj cukiernika"
+                        inputName = "filterCook"
+                        onClick = {this.reset}
+                     />
+                    
+                    <FilterInput 
+                        value={this.props.filterLocationCity}
+                        onChange={this.handleFilterChange}
+                        label = "szukaj miasta"
+                        inputName = "filterLocation"
+                        onClick = {this.reset}
+                     />
+
+                    <FormControlLabel
+                        style= {styleFilter.FormControlLabel}
+                        control={
+                            <Checkbox label='' 
+                                    checked = {this.props.checkboxChecked} 
+                                    onClick = {this.handleFilterChange}
+                                    color = 'secondary'
+                                    name = 'filterChecked'
+                            />
+                        }
+                        label="bezglutenowe"
+                    />
+                    
+                    <FilterDropdown 
+                        filterTypesId = {this.props.filterTypesId}
+                        types = {this.props.types}
+                        onCheckedType = {this.handleChangeType}
+                    />
+                    <FilterButton
+                        filterAllToogle = {this.props.filterAllToogle}
+                        onHandleToogleChange = {this.handleToogleChange}
+                    />
+                </Box>
+            </Grid>    
         </>
     }
 }
 
+//export default withStyles(styles)(CakeFilters);
 export default CakeFilters;

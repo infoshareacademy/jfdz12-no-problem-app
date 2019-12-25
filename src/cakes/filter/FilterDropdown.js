@@ -1,49 +1,117 @@
 import React from 'react';
-import {Segment, Dropdown } from 'semantic-ui-react';
+import clsx from 'clsx';
+import { withStyles, FormControl, InputLabel, Select, MenuItem, Chip } from '@material-ui/core';
 
+const styles = {
 
-class FilterDropdown extends React.Component{
-    state = {
-        types: []
+  root: {
+        '& .MuiSelect-select': {
+            backgroundColor: 'white',
+            borderRadius: '10px',
+        },
+        '& .MuiSelect-root':{
+
+        },
+        '& .MuiInputBase-root': {  
+            backgroundColor: '#ffffff',
+            border: 'none',
+            borderRadius: '20px',
+        },
+        '& .MuiChip-root':{
+            borderRadius: '10px',
+        },
+        '& .MuiChip-label': {
+            paddingLeft: '4px',
+            paddingRight: '4px',
+        },
+
+    },
+
+    formControl: {
+        margin: '10px 10px',
+        minWidth: 150,
+    },
+
+    chips: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+
+    chip: {
+        margin: '0px 2px',
+        fontSize: '10px',
+    },
+    inputLabel: {
+        padding: '0px 5px',
+        backgroundColor: 'white',
     }
-    
-    fetchType = () => {fetch ('./types.json')
-        .then(res => res.json())
-        .then(res => this.setState({ 
-            types: res.map((type) =>{
-                return {
-                    key: type.name,
-                    text: type.name,
-                    value: type.id,
-                    color: type.color
-                }})
-        }))
+}
+
+
+class FilterDropdown extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChangeType = this.handleChangeType.bind(this);
     }
 
-    componentDidMount() {
-        this.fetchType();
+    handleChangeType(event) {
+        this.props.onCheckedType(event)
     }
 
-    handleChangeType = (event, data) =>{
-        this.props.onCheckedType (event, data)
-    }
-    
-    render(){
-        const {types} = this.state;
+    render() {
+        const { classes } = this.props;
+        const { types, filterTypesId } = this.props;
 
-        return <> 
-            <Segment style = {{width: '300px' , margin: 'auto'}}>
-                <Dropdown placeholder='kategorie' 
-                            fluid
-                            multiple 
-                            selection  
-                            options = {types}
-                            onChange = {this.handleChangeType} />
-           
-            </Segment>
-           
+        const MenuProps = {
+            PaperProps: {
+              style: {
+                marginTop: 45,
+                maxHeight: 300,
+                width: 150,
+              },
+            },
+          };
+
+        return <>
+            <FormControl color='secondary'
+                margin='dense'
+                variant='outlined'
+                className={clsx(classes.formControl, classes.root)}
+            >
+                <InputLabel id="select-label" className={classes.inputLabel} >Typ ciasta</InputLabel>
+                <Select
+                    multiple
+                    labelId='select-label'
+                    value={filterTypesId}
+                    onChange={this.handleChangeType}
+                    MenuProps={MenuProps}
+ 
+                    renderValue={selected => (
+                        <div className={classes.chips}>
+                            {selected.map(value => {
+                                const type = types.filter(el => el.id === value )[0];
+                                return(  
+                                <Chip key = {type.id}
+                                    label = {type.name}
+                                    size = 'small'
+                                    variant = 'outlined'
+                                    style = {{color: type.color, border: `1px solid ${type.color}`}}
+                                    className = {classes.chip} 
+                                />
+                                )}
+                            )}
+                        </div>
+                    )}
+                >
+                    {types.map(type => (
+                        <MenuItem key={type.id} value={type.id} >
+                            {type.name}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
         </>
     }
 }
 
-export default FilterDropdown;
+export default withStyles(styles)(FilterDropdown);

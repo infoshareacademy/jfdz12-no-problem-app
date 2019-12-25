@@ -1,0 +1,42 @@
+.cakesFilters-box{
+    position: realtive;
+    display: flex;
+    z-index:99;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+  }
+  
+.cakesFiltersButton {
+  margin: 5px; 
+  padding: 4px;
+}
+
+.cakesFilter-textField {
+  margin: 10px 2px;
+}
+  
+
+/* 
+root: {
+    '& .MuiTextField-root': {
+      margin: '5px', 
+      width: 200,
+    },
+    '& .MuiButton-root':{
+        margin: '5px',
+        pading: '4px',
+    },
+    '& .MuiBox-root':{
+        position: 'realtive',
+        display: 'flex',
+        zIndex:'99',
+        flexDirection: 'row',
+        flexWrap: 'wrap', 
+        alignItems:'center',
+        justifyContent: 'center',
+        maxWidth: '1200px'
+    }
+}	 */

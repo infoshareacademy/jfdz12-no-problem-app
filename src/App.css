@@ -9,3 +9,29 @@
 .floatRight{
   float: right;
 }
+
+.cardHeader{
+  font-size: 50px;
+}
+
+
+.card{
+
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.cookLabelCard{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cookLabelHeader{
+  text-align: left;
+}
+
+.typeClass{
+  color: red;
+  background-color: blue;
+}
+
