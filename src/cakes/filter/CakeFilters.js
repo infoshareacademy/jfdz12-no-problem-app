@@ -5,6 +5,7 @@ import FilterInput from './FilterInput';
 import {filterStyle} from './FilterStyle';
 import {FilterButton} from '../FilterButton';
 import FilterInputNumber from './FilterInputNumber';
+import FilterSelect from './FilterSelect';
 
 
 class CakeFilters extends React.Component{
@@ -17,6 +18,7 @@ class CakeFilters extends React.Component{
         this.handleChangeType = this.handleChangeType.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
         this.handleChangePrice = this.handleChangePrice.bind(this);
+        this.handleSortBy = this.handleSortBy.bind(this);
     }
 
     handleFilterChange (event) {
@@ -47,9 +49,13 @@ class CakeFilters extends React.Component{
         this.props.onHandleChangePrice(event, newValue);
     }
 
+    handleSortBy(event){
+        this.props.onHandleSortBy(event);
+    }
+
     render(){
         const {cfPaper, cfGrid} = filterStyle;
-
+        
         return <> 
             <Paper style={cfPaper}>
                 <Grid container 
@@ -113,12 +119,6 @@ class CakeFilters extends React.Component{
                     </Grid>
                     
                     <Grid item xs={11} sm style={cfGrid}>
-                        <FilterButton 
-                            filterAllToogle = {this.props.filterAllToogle}
-                            onHandleToogleChange = {this.handleToogleChange}
-                        />
-                    </Grid>
-                    <Grid item xs={11} sm style={cfGrid}>
                         Cena od:
                         <FilterInputNumber
                             value={this.props.priceRange[0]}
@@ -133,7 +133,20 @@ class CakeFilters extends React.Component{
                             label = "do"
                             inputName = "max"
                         />
+                    </Grid>
 
+                    <Grid item xs={11} sm style={cfGrid}>
+                        <FilterSelect
+                            onHandleSortBy = {this.handleSortBy}
+                            sortById = {this.props.sortById}
+                        />
+                    </Grid>
+
+                    <Grid item xs={11} sm style={cfGrid}>
+                        <FilterButton 
+                            filterAllToogle = {this.props.filterAllToogle}
+                            onHandleToogleChange = {this.handleToogleChange}
+                        />
                     </Grid>
                 </Grid>
             </Paper>    

@@ -25,10 +25,12 @@ export class CakesList extends React.Component{
             filterTypesId:[],
             filterAllToogle: false,
             priceRange: [],
+            sortById: 0,
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
         this.handleChangePrice = this.handleChangePrice.bind(this);
+        this.handleSortBy = this.handleSortBy.bind(this);
     }
 
     componentDidMount() {
@@ -105,6 +107,12 @@ export class CakesList extends React.Component{
             priceRange: [min,max],
         })
     }
+
+    handleSortBy(event){
+        this.setState({
+            sortById: event.target.value,
+        })
+    }
     
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
@@ -123,6 +131,7 @@ export class CakesList extends React.Component{
                 filterAllToogle,
                 filterTypesId,
                 priceRange,
+                sortById,
             } = this.state;
         
         const { filterVisibility } = this.props;
@@ -140,12 +149,14 @@ export class CakesList extends React.Component{
                                     filterLocationCity = {filterLocation}
                                     filterAllToogle = {filterAllToogle}
                                     checkboxChecked ={filterChecked}
-                                    priceRange = {priceRange} 
+                                    priceRange = {priceRange}
+                                    sortById = {sortById} 
                                     onFilterChange = {this.filterChange}
                                     onReset = {this.reset}
                                     onCheckedType = {this.handleChangeType}
                                     onHandleToogleChange= {this.handleToogleChange}
                                     onHandleChangePrice = {this.handleChangePrice}
+                                    onHandleSortBy = {this.handleSortBy}
                                 />
                             </Grid>
                         }
@@ -179,7 +190,7 @@ export class CakesList extends React.Component{
 
         if(cakeCardOpen && !loading){
             const oneCake = this.findDataById (cakes, cakeCardOpenId);
-           
+
             return (
                 <CakeCardFull 
                     onCakeCardOpen = {this.openCakeCard}
