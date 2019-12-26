@@ -38,19 +38,19 @@ export class RenderCakesList extends React.Component {
                 priceRange } = this.props.state;
 
         return cakes
-                .filter (cake => {
-                    return(
-                    filterCondition( cake, 
-                        filterAllToogle ? filterCake : filterAll, 
-                        filterChecked, 
-                        filterTypesId, 
-                        this.findDataById(cooks, cake.cookId),
-                        filterAllToogle ? filterCook : filterAll,
-                        filterAllToogle ? filterLocation : filterAll,
-                        filterAllToogle,
-                        priceRange )
-                    )
-                });
+            .filter (cake => {
+                return(
+                filterCondition( cake, 
+                    filterAllToogle ? filterCake : filterAll, 
+                    filterChecked, 
+                    filterTypesId, 
+                    this.findDataById(cooks, cake.cookId),
+                    filterAllToogle ? filterCook : filterAll,
+                    filterAllToogle ? filterLocation : filterAll,
+                    filterAllToogle,
+                    priceRange )
+                )
+            });
     }
 
     getSorteredCakes(){
@@ -81,9 +81,8 @@ export class RenderCakesList extends React.Component {
         const { cooks, types } = this.props.state;
         const filteredSortedCakes = this.getSorteredCakes();
         
-        
         return(    
-            <Grid container spacing={2}  justify='center' >
+            <Grid container spacing={1} justify='center' >
                 {filteredSortedCakes.map((cake)=>{
                     return (
                         <Grid container wrap='wrap' key = {cake.id} item xs={12} sm={6} md={4}  >
