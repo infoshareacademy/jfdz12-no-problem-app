@@ -1,14 +1,14 @@
 import React from 'react';
 import { TextField, InputAdornment, IconButton, withStyles } from '@material-ui/core';
+import ClearIcon from '@material-ui/icons/Clear';
 import SearchIcon from '@material-ui/icons/Search';
-import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 
 const styles = {
     root: {
         '& .MuiOutlinedInput-root':{
             borderRadius: '20px',
-            margin: '5px',
-            minWidth: '160px',
+            margin: '0px',
+            minWidth: '100px',
             width: '100%',
         },
         '& .MuiIconButton-root': {
@@ -43,8 +43,8 @@ class FilterInput extends React.Component{
         const endAdormentObj = {
             endAdornment: (
                 <IconButton onClick = {(id) => this.reset(this.props.inputName)} 
-                            color="secondary" aria-label="reset">
-                    <HighlightOffRoundedIcon />
+                            aria-label="reset">
+                    <ClearIcon />
                 </IconButton>
             ),
         };

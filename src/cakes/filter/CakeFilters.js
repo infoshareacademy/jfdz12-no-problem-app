@@ -1,19 +1,22 @@
 import React from 'react';
-import { Checkbox, Grid, FormControlLabel, Paper } from '@material-ui/core';
+import { Checkbox, Grid, FormControlLabel, Paper, } from '@material-ui/core';
 import FilterDropdown from './FilterDropdown';
 import FilterInput from './FilterInput';
 import {filterStyle} from './FilterStyle';
 import {FilterButton} from '../FilterButton';
+import FilterInputNumber from './FilterInputNumber';
 
 
 class CakeFilters extends React.Component{
     constructor (props){
         super(props);
+       
         this.handleFilterChange = this.handleFilterChange.bind(this);
         this.reset = this.reset.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.handleChangeType = this.handleChangeType.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
+        this.handleChangePrice = this.handleChangePrice.bind(this);
     }
 
     handleFilterChange (event) {
@@ -25,11 +28,11 @@ class CakeFilters extends React.Component{
     };
 
     handleCheckboxChange (event) {
-        this.props.onChecked(event.target.checked)
+        this.props.onChecked(event.target.checked);
      }
 
-    handleChangeType (event) {
-        this.props.onCheckedType (event)
+    handleChangeType (event,value) {
+        this.props.onCheckedType (event,value);
     }
 
     filterVisibility () {
@@ -40,75 +43,97 @@ class CakeFilters extends React.Component{
         this.props.onHandleToogleChange();
     }
 
+    handleChangePrice(event, newValue){
+        this.props.onHandleChangePrice(event, newValue);
+    }
+
     render(){
+        const {cfPaper, cfGrid} = filterStyle;
 
         return <> 
-            <Paper style={filterStyle.cfPaper}>
+            <Paper style={cfPaper}>
                 <Grid container 
-                    spacing={1}
+                    direction='column'
                     justify='space-evenly' 
-                    alignContent='center' 
-                    alignItems='center'
+                    alignContent = 'center' 
+                    alignItems = 'center'
                     style = {filterStyle.Grid}
                 >
-                    <Grid xs={11} sm item>
+                    <Grid item xs={11} sm style={cfGrid} >
+                        <FilterDropdown 
+                            filterTypesId = {this.props.filterTypesId}
+                            filterTypesId2 = {this.props.filterTypesId2}
+                            types = {this.props.types}
+                            onCheckedType = {this.handleChangeType}
+                        />
+                    </Grid>
+                    
+                    <Grid xs={11} sm item style={cfGrid}>
                         <FilterInput
                             value={this.props.filterCakeName}
                             onChange={this.handleFilterChange}
                             onClick = {this.reset}
-                            label = "szukaj ciasto"
+                            label = "ciasto"
                             inputName = "filterCake"
                         />
                     </Grid>
                     
-                    <Grid xs={11} sm  item>
+                    <Grid xs={11} sm item style={cfGrid}>
                         <FilterInput 
                             value={this.props.filterCookName}
                             onChange={this.handleFilterChange}
-                            label = "szukaj cukiernika"
+                            label = "cukiernik"
                             inputName = "filterCook"
                             onClick = {this.reset}
                             />
                     </Grid>
 
-                    <Grid xs={11} sm item>
+                    <Grid xs={11} sm item style={cfGrid}>
                         <FilterInput 
                             value={this.props.filterLocationCity}
                             onChange={this.handleFilterChange}
-                            label = "szukaj miasta"
+                            label = "miasto"
                             inputName = "filterLocation"
                             onClick = {this.reset}
                             />
                     </Grid>
                     
-                    <Grid xs={11} sm item >
+                    <Grid xs={11} sm item style={cfGrid}>
                         <FormControlLabel
-                            style= {{margin: '0px', padding:"5px"}}
                             control={
-                                <Checkbox label='bex' 
-                                checked = {this.props.checkboxChecked} 
-                                onClick = {this.handleFilterChange}
-                                color = 'secondary'
-                                name = 'filterChecked'
+                                <Checkbox label='box' 
+                                    checked = {this.props.checkboxChecked} 
+                                    onClick = {this.handleFilterChange}
+                                    color = 'secondary'
+                                    name = 'filterChecked'
                                 />
                             }
                             label="bezglutenowe"
                             />
                     </Grid>
                     
-                    <Grid item xs={11} sm  >
-                        <FilterDropdown 
-                            filterTypesId = {this.props.filterTypesId}
-                            types = {this.props.types}
-                            onCheckedType = {this.handleChangeType}
-                        />
-                    </Grid>
-                    
-                    <Grid item xs={11} sm >
+                    <Grid item xs={11} sm style={cfGrid}>
                         <FilterButton 
                             filterAllToogle = {this.props.filterAllToogle}
                             onHandleToogleChange = {this.handleToogleChange}
                         />
+                    </Grid>
+                    <Grid item xs={11} sm style={cfGrid}>
+                        Cena od:
+                        <FilterInputNumber
+                            value={this.props.priceRange[0]}
+                            onChange={this.handleChangePrice}
+                            label = "od"
+                            inputName = "min"
+                        />
+                        do:
+                        <FilterInputNumber
+                            value={this.props.priceRange[1]}
+                            onChange={this.handleChangePrice}
+                            label = "do"
+                            inputName = "max"
+                        />
+
                     </Grid>
                 </Grid>
             </Paper>    
@@ -116,5 +141,4 @@ class CakeFilters extends React.Component{
     }
 }
 
-//export default withStyles(styles)(CakeFilters);
 export default CakeFilters;

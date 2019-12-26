@@ -1,14 +1,26 @@
 
-export const filterCondition = (cake, filterCake, filterChecked, filterTypes, cook, filterCook, filterLocation, filterAllToogle ) => {
+export const filterCondition = (cake, 
+                                filterCake, 
+                                filterChecked, 
+                                filterTypes, 
+                                cook, 
+                                filterCook, 
+                                filterLocation, 
+                                filterAllToogle,
+                                priceRange ) => {
     let condition = true;
     let cName = true;
     let cType = true;
     let cGluten = true;
     let cCookName = true;
     let cLocation = true;
+    let cPriceMin = true;
+    let cPriceMax = true;
+
     const cookName = `${cook.name} ${cook.surname}`;
     const locationCity = cook.location.city;
-   
+    const priceMin = parseFloat (priceRange[0]);
+    const priceMax = parseFloat (priceRange[1]);
 
     if (filterCake !== '' && cake.name.toLowerCase().includes(filterCake.toLowerCase())){
         cName = true;
@@ -50,8 +62,20 @@ export const filterCondition = (cake, filterCake, filterChecked, filterTypes, co
         }
     }
     
+    if (cake.price >= priceMin ){
+        cPriceMin = true;
+    } else {
+        cPriceMin = false;
+    }
+
+    if (cake.price <= priceMax || isNaN(priceMax) ){
+        cPriceMax = true;
+    } else {
+        cPriceMax = false;
+    }
+    
     if (filterAllToogle) {
-        if (cType && cName && cGluten && cCookName &&cLocation){
+        if (cType && cName && cGluten && cCookName && cLocation && cPriceMin && cPriceMax){
             condition = true
         } else {condition = false}
     }
@@ -61,9 +85,6 @@ export const filterCondition = (cake, filterCake, filterChecked, filterTypes, co
             condition = true
         } else {condition = false}
     }
-
-    
-
 
     return condition;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, IconButton, Hidden } from '@material-ui/core';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import { Button } from '@material-ui/core';
 
 export class FilterButton extends React.Component{
 
@@ -12,11 +11,12 @@ export class FilterButton extends React.Component{
        const myStyle = {
            borderRadius: this.props.filterAllToogle ? '20px': '5px',
            margin: '2px 0px',
-           maxWidth:'150px',
-           padding: '5px'
+           maxWidth:'300px',
+           padding: '5px',
+           width:'100%',
         };
         return <>
-            <Hidden only='xs'>
+        
                     <Button
                         style ={myStyle}
                         onClick = {this.handleToogleChange}
@@ -27,16 +27,7 @@ export class FilterButton extends React.Component{
                     > 
                         {this.props.filterAllToogle ? "mniej" : "więcej" } 
                     </Button>
-            </Hidden>
-            <Hidden smUp>
-                <IconButton aria-label="FilterListIcon"
-                            onClick = {this.handleToogleChange}
-                            color="default" 
-                            size="medium"
-                >
-                    <FilterListIcon />
-                </IconButton>
-            </Hidden>
+        
         </>
     }
 }

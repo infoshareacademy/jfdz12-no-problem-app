@@ -60,14 +60,17 @@ class FilterAll extends React.Component{
                                 onChange={this.handleFilterChange}
                                 value={this.props.filterAll}
                                 className={classes.input}
-                                placeholder="ciasto cukiernik lokalizacja ..."
+                                placeholder="ciasto, cukiernik, lokalizacja ..."
                                 name = "filterAll" 
                             />
                             </Grid>
                         </Grid>
+                        
                         <Hidden only='xs'>
                             <Divider className={classes.divider} orientation="vertical" />
                         </Hidden>
+                        
+                        <Hidden smUp ><Divider variant= 'middle' width='90%' /> </Hidden>
 
                         <Grid item xs={12} sm={3} container justify='space-evenly' wrap='nowrap'>  
                             <Grid item >

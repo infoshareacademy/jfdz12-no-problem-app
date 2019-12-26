@@ -1,6 +1,6 @@
 import React from 'react';
 import CakeFilters from './filter/CakeFilters';
-import { CircularProgress, Container } from '@material-ui/core';
+import { CircularProgress, Container, Grid } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
 import {RenderCakesList} from './RenderCakesList';
 import './Cake.css'
@@ -24,11 +24,11 @@ export class CakesList extends React.Component{
             loading: true,
             filterTypesId:[],
             filterAllToogle: false,
+            priceRange: [],
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
-        this.handleFilterAllChange = this.handleFilterAllChange.bind(this);    
-        
+        this.handleChangePrice = this.handleChangePrice.bind(this);
     }
 
     componentDidMount() {
@@ -36,30 +36,33 @@ export class CakesList extends React.Component{
             fetch('./cakes.json').then(res => res.json()),
             fetch('./cooks.json').then(res => res.json()),
             fetch('./types.json').then(res => res.json()),
-        ]).then(data => this.setState({
-            cakes: data[0],
-            cooks: data[1],
-            types: data[2],
-            loading: false,
-        }))
+        ]).then(data => {
+            const price = data[0].map(el => el.price); 
+            this.setState({
+                cakes: data[0],
+                cooks: data[1],
+                types: data[2],
+                priceRange: [Math.min(...price),Math.max(...price)],
+                loading: false,
+            })
+        })
     }
         
     filterChange (event){
-        const value =
-            event.target.type === 'checkbox'
-                ? event.target.checked
-                : event.target.value;
+        let value = null;
+
+        if(event.target.type === 'checkbox'){
+            value = event.target.checked;
+        }else{
+            value = (/^[a-zA-Z0-9]+$/.test(event.target.value) || event.target.value==="")
+                ? event.target.value
+                : this.state[event.target.name]
+        }
 
         this.setState ({
-            [event.target.name] : value,
-        });
+            [event.target.name]: value,
+        })           
     } 
-        
-    handleFilterAllChange (event){
-        this.setState({
-            filterAll: event.target.value,
-        });
-    }
 
     handleTypeToggle = value => {
         const {filterTypesId} = this.state;
@@ -82,9 +85,9 @@ export class CakesList extends React.Component{
                         cakeCardOpenId: id,});
     };
 
-    handleChangeType = (e) => {
+    handleChangeType = (event,value) => {
         this.setState({ 
-            filterTypesId: e.target.value, 
+            filterTypesId: value.map(el =>el.id), 
         })
     }
     
@@ -94,6 +97,15 @@ export class CakesList extends React.Component{
         })) 
     }
 
+    handleChangePrice(event ){
+        const min = event.target.name === 'min' ? event.target.value : this.state.priceRange[0];
+        const max = event.target.name === 'max' ? event.target.value : this.state.priceRange[1]; 
+        
+        this.setState({
+            priceRange: [min,max],
+        })
+    }
+    
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
     render(){    
@@ -110,43 +122,57 @@ export class CakesList extends React.Component{
                 filterChecked, 
                 filterAllToogle,
                 filterTypesId,
+                priceRange,
             } = this.state;
-
+        
         const { filterVisibility } = this.props;
 
         if (!cakeCardOpen && !loading) {
             return <>
                 <Container maxWidth = "lg" >
-                    {filterVisibility && filterAllToogle && 
-                        <CakeFilters 
-                            types = {types}
-                            filterTypesId = {filterTypesId}
-                            filterCakeName = {filterCake}
-                            filterCookName = {filterCook}
-                            filterLocationCity = {filterLocation}
-                            filterAllToogle = {filterAllToogle}
-                            checkboxChecked ={filterChecked} 
-                            onFilterChange = {this.filterChange}
-                            onReset = {this.reset}
-                            onCheckedType = {this.handleChangeType}
-                            onHandleToogleChange= {this.handleToogleChange}
-                        />
-                    }
-                    {filterVisibility && !filterAllToogle &&
-                        <FilterAll
-                            filterTypesId ={filterTypesId} 
-                            filterAll = {filterAll}
-                            filterAllToogle = {filterAllToogle}
-                            types = {types}
-                            onHandleToogleChange= {this.handleToogleChange}
-                            onFilterChange = {this.filterChange}
-                            onHandleTypeToggle = {this.handleTypeToggle}
-                        />
-                    }
-                    <RenderCakesList
-                        state = {this.state}
-                        onCakeCardOpen = {this.openCakeCard}
-                    />
+                    <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
+                        {filterVisibility && filterAllToogle &&
+                            <Grid item xs={12} sm={3} md={2}> 
+                                <CakeFilters 
+                                    types = {types}
+                                    filterCakeName = {filterCake}
+                                    filterCookName = {filterCook}
+                                    filterLocationCity = {filterLocation}
+                                    filterAllToogle = {filterAllToogle}
+                                    checkboxChecked ={filterChecked}
+                                    priceRange = {priceRange} 
+                                    onFilterChange = {this.filterChange}
+                                    onReset = {this.reset}
+                                    onCheckedType = {this.handleChangeType}
+                                    onHandleToogleChange= {this.handleToogleChange}
+                                    onHandleChangePrice = {this.handleChangePrice}
+                                />
+                            </Grid>
+                        }
+                        {filterVisibility && !filterAllToogle &&
+                            <Grid item xs={12} >
+                                <FilterAll
+                                    filterTypesId ={filterTypesId} 
+                                    filterAll = {filterAll}
+                                    filterAllToogle = {filterAllToogle}
+                                    types = {types}
+                                    onHandleToogleChange= {this.handleToogleChange}
+                                    onFilterChange = {this.filterChange}
+                                    onHandleTypeToggle = {this.handleTypeToggle}
+                                />
+                            </Grid>
+                        }
+                        <Grid item 
+                            xs={12} 
+                            sm={filterVisibility && filterAllToogle ? 9 : 12}
+                            md={filterVisibility && filterAllToogle ? 10 : 12}
+                        >
+                            <RenderCakesList
+                                state = {this.state}
+                                onCakeCardOpen = {this.openCakeCard}
+                            />
+                        </Grid>   
+                    </Grid> 
                 </Container>
             </>
         }
