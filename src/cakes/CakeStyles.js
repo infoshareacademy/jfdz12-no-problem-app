@@ -11,7 +11,7 @@ export const styles= {
         height: '120px',
     },
     data:{
-        padding:'5px 10px',
+        padding:'0px 10px',
     },
 
     gridPaddingLeft:{
@@ -23,5 +23,62 @@ export const styles= {
     typeLabel:{
         color: 'white',
         fontWeight: 'bold',
+        padding: '7px 0px',
     },
+    cCardLabelTitle:{
+        fontSize: '14px',
+        textAlign: 'center',
+        alignSelf:'center',
+        padding: '7px 0px',
+    },
+    cCardLabelText: {
+        alignSelf:'center',
+        fontSize: '14px',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    fCardHeader: {
+        padding: '20px 10px', 
+        margin: '10px',
+        borderColor: '#e0e0e0',
+        border: "0.5px solid",
+    },
+    fCardWrapMedia:{
+        padding: '10px',
+    },
+    fCardMedia:{
+        width: '100%', 
+        minHeight: '100px',
+        height:'100%', 
+        padding: '10px',
+        borderRadius: '10px',
+    },
+    fCardPaper:{
+        margin: '10px', 
+        padding:'10px 20px',
+        textAlign: 'left',
+        borderColor: '#e0e0e0', 
+        border: "0.5px solid",
+    },
+    fCardPrice:{
+        padding:'0px 0px 10px', 
+    },
+    fCardText:{
+        fontSize: '14px',
+        fontWeight: 'bold',
+    },
+    fCardSubText:{
+        fontWeight: 'normal',
+        fontSize: '14px',
+    },
+    fCardType:{
+        marginLeft: '10px',
+        color: 'white',
+        padding: '6px 12px',
+        borderRadius: '20px',
+    },
+    fCardWrapType:{
+        padding: '10px 0px',
+    },
+
 }

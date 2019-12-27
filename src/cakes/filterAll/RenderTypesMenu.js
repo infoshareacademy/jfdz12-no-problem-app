@@ -30,7 +30,7 @@ export class RenderTypesMenu extends React.Component{
                             disableRipple
                         />
                     </ListItemIcon>
-                    <div style = {{color: type.color}}>{type.name}</div>
+                    <div >{type.name}</div>
                 </MenuItem>
                 ))
             }   

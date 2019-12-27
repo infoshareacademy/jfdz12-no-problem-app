@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, withStyles, IconButton, InputBase,Paper, Divider } from '@material-ui/core';
+import { Button, Grid, withStyles, IconButton, InputBase,Paper, Divider, Hidden } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import RenderFilterAllMenu from './RenderFilterAllMenu'
 import {styles} from './FilterAllStyle';
@@ -44,52 +44,63 @@ class FilterAll extends React.Component{
         
         return (<>
             <Grid   container 
-                    spacing={2} 
                     justify='center' 
                     alignContent='center' 
                     className = {classes.grid}
+                    style={{padding: '0px 5px'}}
             >
                 <Paper component="form" className={classes.PaperStyle}>
-                    <Grid container direction='column' justify='center' alignContent='center' >
-                        <Grid container>
+                    <Grid container wrap='wrap' direction='row' justify='space-between' alignContent='center' >
+                        <Grid item xs={12} sm  container className={classes.gridSearch}>
                             <IconButton className={classes.iconButton} aria-label="search">
                                 <SearchIcon />
                             </IconButton>
-                            <InputBase
+                            <Grid item xs ={10}>
+                            <InputBase 
                                 onChange={this.handleFilterChange}
                                 value={this.props.filterAll}
                                 className={classes.input}
-                                placeholder="ciasto cukiernik lokalizacja ..."
+                                placeholder="ciasto, cukiernik, lokalizacja ..."
                                 name = "filterAll" 
                             />
+                            </Grid>
+                        </Grid>
                         
+                        <Hidden only='xs'>
                             <Divider className={classes.divider} orientation="vertical" />
+                        </Hidden>
+                        
+                        <Hidden smUp ><Divider variant= 'middle' width='90%' /> </Hidden>
 
-                            <Button color="primary" 
-                                    className={classes.iconButton}
-                                    aria-controls="long-menu"
-                                    aria-haspopup="true"
-                                    onClick={this.handleTypeClick}
-                            >
-                                Kategorie
-                            </Button>
-                            <RenderFilterAllMenu
-                                anchorEl = {anchorEl}
-                                filterChecked = {filterChecked}
-                                types = {types} 
-                                filterTypesId = {filterTypesId}
-                                onHandleTypeClose = {this.handleTypeClose}
-                                onHandleFilterChange = {this.handleFilterChange}
-                                onHandleTypeToggle = {this.handleTypeToggle}
-                            />
-                            
-                            <Divider className={classes.divider} orientation="vertical" />
-
-                            <FilterButton
-                                filterAllToogle = {this.props.filterAllToogle}
-                                onHandleToogleChange = {this.handleToogleChange}
-                            />   
-                            
+                        <Grid item xs={12} sm={3} container justify='space-evenly' wrap='nowrap'>  
+                            <Grid item >
+                                <Button color="primary" 
+                                        className={classes.iconButton}
+                                        aria-controls="long-menu"
+                                        aria-haspopup="true"
+                                        onClick={this.handleTypeClick}
+                                        size = 'medium'
+                                >
+                                    Typ
+                                </Button>
+                                <RenderFilterAllMenu 
+                                    anchorEl = {anchorEl}
+                                    filterChecked = {filterChecked}
+                                    types = {types} 
+                                    filterTypesId = {filterTypesId}
+                                    onHandleTypeClose = {this.handleTypeClose}
+                                    onHandleFilterChange = {this.handleFilterChange}
+                                    onHandleTypeToggle = {this.handleTypeToggle}
+                                />
+                            </Grid>
+                            <Divider className={classes.divider} orientation="vertical" />       
+                            <Grid item >
+                                
+                                <FilterButton 
+                                    filterAllToogle = {this.props.filterAllToogle}
+                                    onHandleToogleChange = {this.handleToogleChange}
+                                />   
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Paper>

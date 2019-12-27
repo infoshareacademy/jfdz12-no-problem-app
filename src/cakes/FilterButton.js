@@ -10,20 +10,24 @@ export class FilterButton extends React.Component{
     render(){    
        const myStyle = {
            borderRadius: this.props.filterAllToogle ? '20px': '5px',
-           marginLeft: '10px',
-           marginRight: '10px',
+           margin: '2px 0px',
+           maxWidth:'300px',
+           padding: '5px',
+           width:'100%',
         };
         return <>
-            <Button
-                style ={myStyle}
-                onClick = {this.handleToogleChange}
-                variant= {this.props.filterAllToogle ? "outlined" : "text"} 
-                color="default" 
-                size="small"
-            > 
-                {this.props.filterAllToogle ? "mniej filtrów" : "więcej filtrów" } 
-            </Button>
-           
+        
+                    <Button
+                        style ={myStyle}
+                        onClick = {this.handleToogleChange}
+                        variant= {this.props.filterAllToogle ? "outlined" : "text"} 
+                        color="default" 
+                        size="medium"
+                        
+                    > 
+                        {this.props.filterAllToogle ? "mniej" : "więcej" } 
+                    </Button>
+        
         </>
     }
 }

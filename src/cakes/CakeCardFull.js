@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Typography, Button, Grid, CardMedia, Paper } from '@material-ui/core';
-import CookLabel from './CookLabel';
+import { Container, Typography, Button, Grid, CardMedia, Paper, withStyles } from '@material-ui/core';
+import {styles} from './CakeStyles';
+import CookLabelFull from './CookLabelFull';
 
 class CakeCardFull extends React.Component{
     constructor(props){
@@ -13,47 +14,82 @@ class CakeCardFull extends React.Component{
     }
 
     render(){
-        const { cake, cook, type } = this.props; 
+        const { cake, cook, type } = this.props;
+        const { classes }  = this.props;
+        const typeColor = type.color;
+
         return (
             <Container maxWidth = "lg" >
                 <Grid >
 
-                    <Paper style={{padding: '30px 10px', margin: '10px'}}>
+                    <Paper className = {classes.fCardHeader} >
                         <Typography variant="h4">{cake.name}</Typography>
                     </Paper>
                     
                     <Grid container wrap='wrap'>
-                        <Grid item xs={6} style={{padding:'10px'}}>
-                            <CardMedia image={cake.imgURL} style={{width: '100%', height:'100%', padding: '10px'}}/>
+                        
+                        <Grid item xs={12} sm={6} className = {classes.fCardWrapMedia}>
+                            <CardMedia image={cake.imgURL} className = {classes.fCardMedia}/>
                         </Grid>
-                        <Grid container item xs={6} direction='column'>
-                            <Paper style={{margin: '10px', padding:'40px 10px'}}>
+                        
+                        <Grid container item xs={12} sm={6} direction='column'>
+                            <Paper className={classes.fCardPaper}>
                                 
-                                <Typography variant='h2'>
-                                    Cena:{cake.price}
+                                <Typography variant='h4' className={classes.fCardPrice}> 
+                                    Cena: {cake.price} zł/kg
+                                </Typography>
+                                <Typography  >
+                                        <span className={classes.fCardSubText}>cena za porcję/sztukę: </span> 
+                                        <span className={classes.fCardText}>{cake.priceForPortion} zł,</span>
+                                </Typography>
+                                <Typography>
+                                        <span className={classes.fCardSubText}>porcja: </span> 
+                                        <span className={classes.fCardText}>{cake.portionDescription}</span>
                                 </Typography>
                                 
                             </Paper>
-                            <Paper style={{margin: '10px', padding:'40px 10px'}}>
-                                <h2>katrgoria: {type.name}</h2>
+                            <Paper className={classes.fCardPaper}>
+                                
+                                <Typography variant='body1' className={classes.fCardWrapType}>
+                                    <span className={classes.fCardSubText}>kategoria:</span>
+                                    <span className={classes.fCardType} style= {{backgroundColor: typeColor}}>
+                                        {type.name}
+                                    </span>
+                                </Typography>
+                                
+                                <Typography>
+                                    <span className={classes.fCardSubText}>opis: </span>
+                                    <span className={classes.fCardText}>{type.description} </span> 
+                                </Typography>
+
+                                <Typography>
+                                    <span className={classes.fCardSubText}>bezglutenowe: </span>
+                                    <span className={classes.fCardText}>
+                                        {cake.glutenFree ? "tak" : "nie"} 
+                                    </span> 
+                                </Typography>
+                                
                             </Paper>
-                            <Paper style={{margin: '10px', padding:'40px 10px'}}>
+                            <Paper className={classes.fCardPaper}>
                                 opis ciasta: 
-                                <h3>{cake.description}</h3>
+                                <Typography >
+                                    <span className={classes.fCardText}>{cake.description}</span>
+                                </Typography>
                             </Paper> 
 
                         </Grid>
                             
                     </Grid>
                     
-                    <Paper style={{margin:'10px'}}>
-                        <CookLabel cook = {cook}/>
+                    <Paper className={classes.fCardPaper}>
+                        <CookLabelFull cook = {cook}/>
                     </Paper>
                     
                     
                     <Button onClick={this.openCakeCard} 
                             variant="outlined" 
                             color="secondary"
+                            style = {{margin: '20px auto'}}
                     > 
                         powrót 
                     </Button>
@@ -65,4 +101,4 @@ class CakeCardFull extends React.Component{
 
 }
 
-export default CakeCardFull;
+export default withStyles(styles)(CakeCardFull);

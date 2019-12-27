@@ -1,4 +1,4 @@
-export const styleFilter = {
+export const filterStyle = {
     
     Box: {
         display: 'flex',
@@ -16,5 +16,16 @@ export const styleFilter = {
 
     Grid: {
         maxWidth: 'lg',
-    }
+        padding: '5px',
+    },
+
+    cfPaper:{
+        margin: '5px',
+        border: "0.5px solid #e0e0e0",
+    },
+    cfGrid:{
+        maxWidth:'235px',
+        padding:'5px',
+        width: '100%',
+    },
 }
