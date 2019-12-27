@@ -1,4 +1,4 @@
-export const SORTOPTION = [
+export const SORTOPTIONS = [
     {
         id:0,
         name: "brak",
@@ -17,14 +17,14 @@ export const SORTOPTION = [
         id:2,
         name: "cena rosnąco",
         field: "price",
-        order: "desc",
+        order: "asc",
         type: "number",
     },
     {
         id:3,
         name: "cena malejąco",
         field: "price",
-        order: "asc",
+        order: "desc",
         type: "number",
     },
 ];

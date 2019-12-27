@@ -3,7 +3,7 @@ import {filterCondition} from './filter/FilterCondition'
 import CakeCard from './CakeCard';
 import {styles} from './CakeStyles';
 import { Grid, Paper, withStyles } from '@material-ui/core';
-import {SORTOPTION} from '../constans/filterConstans'
+import {SORTOPTIONS} from '../constans/filterConstans'
 
 function MyPaperRaw (props) {
     const { classes, ...other } = props;
@@ -56,7 +56,7 @@ export class RenderCakesList extends React.Component {
     getSorteredCakes(){
         const filteredCakes = this.getFilteredCakes();
         const { sortById } = this.props.state;
-        const sortData = SORTOPTION.find(sortoption => sortoption.id === sortById);
+        const sortData = SORTOPTIONS.find(sortoption => sortoption.id === sortById);
 
         const sortedCakes =
             filteredCakes.sort((a, b) => {

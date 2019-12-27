@@ -2,10 +2,10 @@ import React from 'react';
 import CakeFilters from './filter/CakeFilters';
 import { CircularProgress, Container, Grid, Button } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
-import {RenderCakesList} from './RenderCakesList';
+import { RenderCakesList } from './RenderCakesList';
 import './Cake.css';
 import FilterAll from './filterAll/FilterAll';
-import {CakeAddForm} from './CakeAddForm';
+import CakeAddForm from './CakeAddForm/CakeAddForm';
 
 export class CakesList extends React.Component{
     constructor(props){
@@ -151,7 +151,7 @@ export class CakesList extends React.Component{
                 <Container maxWidth = "lg" >
                     <Grid>
                         <Button onClick= {this.handleCakeAddForm} variant='outlined' >
-                            dodaj nowe cistko
+                            dodaj nowe cisto
                         </Button>
                     </Grid>
                     <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
@@ -220,6 +220,7 @@ export class CakesList extends React.Component{
         if(cakeAddFormOpen && !loading ){
             return <CakeAddForm 
                 onHandleCakeAddForm = {this.handleCakeAddForm}
+                cooks = {cooks}
             />
         }
 

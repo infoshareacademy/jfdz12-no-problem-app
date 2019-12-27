@@ -58,7 +58,7 @@ class FilterInput extends React.Component{
     render(){
         const { classes } = this.props;
         
-        return (
+        return (    
             <TextField 
                 id="outlined-search"
                 className={classes.root}
