@@ -6,7 +6,7 @@ export class CakeAddForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            filePath: './img/ciacha/3bit.jpg',
+            filePath: '',
         }
         this.handleCakeAddForm = this.handleCakeAddForm.bind(this);
     }
@@ -40,7 +40,7 @@ export class CakeAddForm extends React.Component{
             </label>
            
             <hr/>
-            <CardMedia image={this.state.filePath} style = {{width:'200px', height:'150px'}}/>
+            {this.state.filePath !=='' && <CardMedia image={this.state.filePath} style = {{width:'200px', height:'150px'}}/> }
             <hr/>
             <Button onClick={this.handleCakeAddForm} 
                             variant="outlined" 
