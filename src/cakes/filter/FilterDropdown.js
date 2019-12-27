@@ -1,35 +1,40 @@
 import React from 'react';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import clsx from 'clsx';
-import { withStyles, FormControl, InputLabel, Select, MenuItem, Chip } from '@material-ui/core';
+import { TextField, withStyles, FormControl, InputLabel, Select, MenuItem, Chip } from '@material-ui/core';
 
 const styles = {
 
   root: {
-        '& .MuiSelect-select': {
-            backgroundColor: 'white',
-            borderRadius: '10px',
+        '& .MuiSelect-root': {
+            minWidth: '0px',
         },
-        '& .MuiSelect-root':{
-
+        '& .MuiSelect-select': {
+            // backgroundColor: 'white',
+            // borderRadius: '10px',
+            // padding: '0px, 0px, 10px'
         },
         '& .MuiInputBase-root': {  
-            backgroundColor: '#ffffff',
-            border: 'none',
+            // backgroundColor: '#ffffff',
+            // border: 'none',
+            //width: '100%',
             borderRadius: '20px',
         },
         '& .MuiChip-root':{
-            borderRadius: '10px',
+            // borderRadius: '10px',
         },
         '& .MuiChip-label': {
-            paddingLeft: '4px',
-            paddingRight: '4px',
+            // paddingLeft: '4px',
+            // paddingRight: '4px',
         },
 
     },
 
     formControl: {
-        margin: '10px 10px',
-        minWidth: 150,
+        minWidth: '100px',
+        maxWidth: '235%',
+        flex: '1 1',
     },
 
     chips: {
@@ -42,7 +47,6 @@ const styles = {
         fontSize: '10px',
     },
     inputLabel: {
-        padding: '0px 5px',
         backgroundColor: 'white',
     }
 }
@@ -51,17 +55,17 @@ const styles = {
 class FilterDropdown extends React.Component {
     constructor(props) {
         super(props);
+        this.toggle = false;
         this.handleChangeType = this.handleChangeType.bind(this);
     }
 
-    handleChangeType(event) {
-        this.props.onCheckedType(event)
+    handleChangeType(event,value) {
+        this.props.onCheckedType(event,value);
     }
 
     render() {
         const { classes } = this.props;
         const { types, filterTypesId } = this.props;
-
         const MenuProps = {
             PaperProps: {
               style: {
@@ -73,7 +77,31 @@ class FilterDropdown extends React.Component {
           };
 
         return <>
-            <FormControl color='secondary'
+            {!this.toggle && (
+                <Autocomplete
+                    className={clsx(classes.formControl, classes.root)}
+                    onChange = {(event,value)=>this.handleChangeType(event,value)}
+                    multiple
+                    id="size-small-outlined-multi"
+                    size="small"
+                    options={this.props.types}
+                    getOptionLabel={option => option.name}
+                    renderInput={params => (
+                    <TextField
+                        {...params}
+                        variant="outlined"
+                        label="Typ ciasta"
+                        placeholder="szukaj"
+                        color='secondary'
+                        fullWidth
+                    />
+                    )}
+                />
+            )}
+
+
+            {this.toggle && ( <FormControl 
+                color='secondary'
                 margin='dense'
                 variant='outlined'
                 className={clsx(classes.formControl, classes.root)}
@@ -85,7 +113,7 @@ class FilterDropdown extends React.Component {
                     value={filterTypesId}
                     onChange={this.handleChangeType}
                     MenuProps={MenuProps}
- 
+
                     renderValue={selected => (
                         <div className={classes.chips}>
                             {selected.map(value => {
@@ -95,7 +123,7 @@ class FilterDropdown extends React.Component {
                                     label = {type.name}
                                     size = 'small'
                                     variant = 'outlined'
-                                    style = {{color: type.color, border: `1px solid ${type.color}`}}
+                                    style = {{border: `1px solid ${type.color}`}}
                                     className = {classes.chip} 
                                 />
                                 )}
@@ -110,6 +138,7 @@ class FilterDropdown extends React.Component {
                     ))}
                 </Select>
             </FormControl>
+            )}
         </>
     }
 }

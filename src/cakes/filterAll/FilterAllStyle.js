@@ -29,17 +29,24 @@ export const styles={
         border: "0.5px solid",
     },
     grid:{
-        margin: '10px',
+        margin: '10px 0px',
     },
     input: {
-        marginLeft: '10px',
-        flex: 1,
+        width: '100%',
+        marginLeft: '5px',
+        padding: '2px 0px',
+        flex: '1',
+
     },
     iconButton: {
-        padding: 10,
+        padding: 8,
     },
     divider: {
         height: 28,
         margin: 4,
     },
+    gridSearch:{
+        flexGrow:'1', 
+        textAlign:'left',
+    }
 }

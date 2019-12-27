@@ -1,14 +1,15 @@
 import React from 'react';
 import { TextField, InputAdornment, IconButton, withStyles } from '@material-ui/core';
+import ClearIcon from '@material-ui/icons/Clear';
 import SearchIcon from '@material-ui/icons/Search';
-import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 
 const styles = {
     root: {
         '& .MuiOutlinedInput-root':{
             borderRadius: '20px',
-            margin: '5px',
-            width: '180px',
+            margin: '0px',
+            minWidth: '100px',
+            width: '100%',
         },
         '& .MuiIconButton-root': {
             padding: '6px',
@@ -42,8 +43,8 @@ class FilterInput extends React.Component{
         const endAdormentObj = {
             endAdornment: (
                 <IconButton onClick = {(id) => this.reset(this.props.inputName)} 
-                            color="secondary" aria-label="reset">
-                    <HighlightOffRoundedIcon />
+                            aria-label="reset">
+                    <ClearIcon />
                 </IconButton>
             ),
         };
@@ -59,6 +60,7 @@ class FilterInput extends React.Component{
         
         return (
             <TextField 
+                id="outlined-search"
                 className={classes.root}
                 InputProps = {this.renderResetIcon()}
                 name = {this.props.inputName} 
