@@ -1,25 +1,29 @@
 import React from 'react';
 import {styles} from '../CakeStyles';
-import { Button, CardMedia, MenuItem, TextField, withStyles, Paper, Grid, Container } from '@material-ui/core';
-import { Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText} from '@material-ui/core'
+import { Button, CardMedia, withStyles, Paper, Grid, Container, Divider } from '@material-ui/core';
 import CakeAddInput from './CakeAddInput';
+import CakeAddTypesSelect from './CakeAddTypesSelect';
+import CakeAddSelect from './CakeAddSelect';
+import {YESNOSELECT} from '../../constans/selectConstans'
+import { CakeAddCookList } from './CakeAddCookList';
+import CookLabelFull from '../CookLabelFull';
 
 class CakeAddForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             cookList: false,
-            cakeAdd: {
-                name : '',
-                price: '',
-                priceForPortion: '',
-                portionDescription: '',
-                typeId: 18,
-                cookId: 1,
-                description: '',
-                glutenFree: true,
-                imgURL:'',
-            },
+            // cakeAdd: {
+            //     name : '',
+            //     price: '',
+            //     priceForPortion: '',
+            //     portionDescription: '',
+            //     typeId: 0,
+            //     cookId: null,
+            //     description: '',
+            //     glutenFree: false,
+            //     imgURL:'',
+            // },
         }
         this.handleCakeAddForm = this.handleCakeAddForm.bind(this);
     }
@@ -31,12 +35,12 @@ class CakeAddForm extends React.Component{
     handleFileAdd = (event) => {
         const fileName = event.target.files[0].name;
        
-        this.setState(prevState => ({
+        this.props.onHandleCakeAddChange({
             cakeAdd:{
-                ...prevState.cakeAdd,
+                ...this.props.cakeAdd,
                 imgURL : `./img/ciacha/${fileName}` 
             } 
-        }))
+        })
     }
 
     handleClickOpen = () => {
@@ -46,29 +50,37 @@ class CakeAddForm extends React.Component{
       };
 
     handleSelectCook = (value) =>{
-        this.setState(prevState => ({
+        console.log('cookid', value)
+        this.props.onHandleCakeAddChange ({
             cakeAdd: {
-                ...prevState.cakeAdd,
+                ...this.props.cakeAdd,
                 cookId: value,
             },
+        });
+        this.setState(prevState =>({
             cookList: !prevState.cookList,
         }))
     }
 
     handleCakeChange =(event) => {
         const {name, value} = event.target; 
-        this.setState(prevState => ({
+        
+        this.props.onHandleCakeAddChange ({
             cakeAdd:{
-                ...prevState.cakeAdd,
+                ...this.props.cakeAdd,
                 [name]: value,
             },
-        }))
+        });
     }
+
+     
+
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     render(){
-        const {cooks, classes} = this.props;
+
+        const {cooks, types, classes} = this.props;
         const { name, 
                 price, 
                 priceForPortion, 
@@ -77,11 +89,12 @@ class CakeAddForm extends React.Component{
                 typeId,
                 description,
                 glutenFree,
-                imgURL} = this.state.cakeAdd;
+                imgURL} = this.props.cakeAdd;
 
         const selectedCook = this.findDataById(cooks, cookId);
-        const toSave = Object.entries(this.state.cakeAdd);
-
+        const selectetType = this.findDataById(types,typeId);
+        const toSave = Object.entries(this.props.cakeAdd);  
+        
         return(<div>
             <Container maxWidth = "lg" >
                 <Grid >
@@ -91,7 +104,8 @@ class CakeAddForm extends React.Component{
                             onHandleCakeChange = {this.handleCakeChange}
                             value = {name}
                             name = "name"
-                            label = "Nazwa ciasta"
+                            label = "Nazwa ciasta: "
+                            styleProp = "header"
                         /> 
                     </Paper>
                     
@@ -119,46 +133,51 @@ class CakeAddForm extends React.Component{
                             </label>
                         </Grid>
                         
-                        <Grid container item xs={12} sm={6} direction='column'>
+                        <Grid container item xs={12} sm={6} direction='column' wrap="wrap">
                             <Paper className={classes.fCardPaper}>
                                 <CakeAddInput
                                     onHandleCakeChange = {this.handleCakeChange}
                                     value = {price}
                                     name = "price"
-                                    label = "Cena zł/kg"
+                                    label = "Cena zł/kg: "
                                 />
                                 <CakeAddInput
                                     onHandleCakeChange = {this.handleCakeChange}
                                     value = {priceForPortion}
                                     name = "priceForPortion"
-                                    label = "cena za porcję/sztukę:"
+                                    label = "cena za porcję/sztukę: "
                                 />
                                 <CakeAddInput
                                     onHandleCakeChange = {this.handleCakeChange}
                                     value = {portionDescription}
                                     name = "portionDescription"
-                                    label = "porcja"
+                                    label = "porcja: "
+                                    styleDirect = {{width: "300px"}}
                                 />  
                                 
                             </Paper>
                             <Paper className={classes.fCardPaper}>
-                                <CakeAddInput
+                                <CakeAddTypesSelect
                                     onHandleCakeChange = {this.handleCakeChange}
+                                    types = {types}
                                     value = {typeId}
                                     name = "typeId"
-                                    label = "Typ ciasta"
+                                    label = "Typ ciasta: "
                                 />
                                 <CakeAddInput
-                                    onHandleCakeChange = {this.handleCakeChange}
-                                    value = {typeId}
-                                    name = "typeId"
-                                    label = "Opis typu: "
+                                    value = {selectetType.description||""}
+                                    label = "Opis: "
+                                    rows="2"
+                                    multiline = {true}
+                                    disabled = {true}
+                                    styleDirect = {{width: "300px"}}
                                 />
-                                <CakeAddInput
+                                <CakeAddSelect
                                     onHandleCakeChange = {this.handleCakeChange}
                                     value = {glutenFree}
                                     name = "glutenFree"
                                     label = "bezglutenowe"
+                                    options={YESNOSELECT}
                                 />
                                                                 
                             </Paper>
@@ -168,6 +187,9 @@ class CakeAddForm extends React.Component{
                                     value = {description}
                                     name = "description"
                                     label = "opis ciasta:"
+                                    rows="4"
+                                    multiline = {true}
+                                    styleDirect = {{width: "400px"}}
                                 />
                             </Paper> 
 
@@ -176,48 +198,30 @@ class CakeAddForm extends React.Component{
                     </Grid>
                     
                     <Paper className={classes.fCardPaper}>
-                        <Button onClick={this.handleClickOpen}>dodaj kucharza</Button>
-                        <Dialog
-                            open={this.state.cookList}
-                            onClose={this.handleClickOpen}
-                            scroll={'paper'}
-                            aria-labelledby="scroll-dialog-title"
-                            aria-describedby="scroll-dialog-description"
-                        >
-                            <DialogTitle id="scroll-dialog-title">Lista kucharzy</DialogTitle>
-                            
-                            <DialogContent dividers={true}>
-                                <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
-
-                                    {this.props.cooks.map((cook) =>(
-                                        <MenuItem key={cook.id} onClick={() => this.handleSelectCook(cook.id)}>
-                                            {cook.name} {cook.surname} {cook.location.city}
-                                        </MenuItem>
-                                        ))
-                                    }
-                                
-                                </DialogContentText>
-                            </DialogContent>
-
-                            <DialogActions>
-                                <Button onClick={this.handleClickOpen} color="primary">
-                                    Cancel
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
-                        <TextField 
-                            id="outlined-search"
-                            type = "text"
-                            variant = "outlined"
-                            value = { `${selectedCook.name} ${selectedCook.surname}` }
-                            color = 'secondary'
-                            size = 'small'
-                            disabled = {true}
-                        />
-                        
+                        <Grid>
+                            <Button onClick={this.handleClickOpen} 
+                                    variant='outlined'
+                                    style={{marginBottom: '10px'}}
+                            >
+                                dodaj kucharza
+                            </Button>
+                            <Divider />
+                        </Grid>
+                        <Grid>
+                            {cookId !== null 
+                            ? <CookLabelFull 
+                                    cook = {selectedCook}
+                                />
+                            : ''
+                            }
+                        </Grid>
                     </Paper>
-                    
-                    
+                    <CakeAddCookList 
+                        cookList = {this.state.cookList}
+                        onHandleClickOpen = {this.handleClickOpen}
+                        onHandleSelectCook = {this.handleSelectCook}
+                        cooks = {cooks}
+                    />
                     <Button onClick={this.handleCakeAddForm} 
                             variant="outlined" 
                             color="secondary"
@@ -231,7 +235,7 @@ class CakeAddForm extends React.Component{
                 <Grid item xs={12}>
                     <div>
 
-                        {toSave.map((el,idx) => (<div key={idx}> {el[0]} : {el[1]}  </div>))}
+                        {toSave.map((el,idx) => (<div key={idx}> {el[0]} : {typeof (el[1]) === 'boolean'? (el[1]? "tak":"nie") :el[1]}  </div>))}
 
                     </div>
                     

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormControl, InputLabel, MenuItem, Select, withStyles, } from '@material-ui/core';
-import {SORTOPTIONS} from '../../constans/filterConstans'
+import {SORTOPTIONS} from '../../constans/selectConstans'
 import clsx from 'clsx';
 
 const styles = {
@@ -37,7 +37,7 @@ const {classes} = props;
                 sortowanie
             </InputLabel>
             <Select
-                labelId="selecwt-outlined-label"
+                labelId="select-outlined-label"
                 id="select-outlined"
                 value={props.sortById}
                 onChange={props.onHandleSortBy}

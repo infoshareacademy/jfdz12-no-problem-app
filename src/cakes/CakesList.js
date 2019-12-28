@@ -28,6 +28,18 @@ export class CakesList extends React.Component{
             priceRange: [],
             sortById: 0,
             cakeAddFormOpen: false,
+            cakeAdd: {
+                id: null,
+                name : '',
+                price: '',
+                priceForPortion: '',
+                portionDescription: '',
+                typeId: 0,
+                cookId: null,
+                description: '',
+                glutenFree: false,
+                imgURL:'',
+            },
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
@@ -118,9 +130,17 @@ export class CakesList extends React.Component{
     }
 
     handleCakeAddForm(){
+        //const cake = this.findDataById(this.state.cakes, 10);
         this.setState(prevState =>({
             cakeAddFormOpen: !prevState.cakeAddFormOpen,
+           // cakeAdd: {...prevState.cakeAdd, ...cake},
         }))
+    }
+
+    handleCakeAddChange = (newCake) => {
+        this.setState(prevState =>({
+            ...prevState.cakeAdd, ...newCake,
+        }) )
     }
     
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
@@ -142,6 +162,7 @@ export class CakesList extends React.Component{
                 priceRange,
                 sortById,
                 cakeAddFormOpen,
+                cakeAdd,
             } = this.state;
         
         const { filterVisibility } = this.props;
@@ -220,7 +241,10 @@ export class CakesList extends React.Component{
         if(cakeAddFormOpen && !loading ){
             return <CakeAddForm 
                 onHandleCakeAddForm = {this.handleCakeAddForm}
+                onHandleCakeAddChange = {this.handleCakeAddChange}
                 cooks = {cooks}
+                types = {types}
+                cakeAdd = {cakeAdd}
             />
         }
 

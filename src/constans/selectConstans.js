@@ -28,3 +28,16 @@ export const SORTOPTIONS = [
         type: "number",
     },
 ];
+
+export const YESNOSELECT = [
+    {
+        id:1,
+        name: "Tak",
+        value: true,
+    },
+    {
+        id:2,
+        name: "Nie",
+        value: false,
+    },
+];

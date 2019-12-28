@@ -3,7 +3,7 @@ import {filterCondition} from './filter/FilterCondition'
 import CakeCard from './CakeCard';
 import {styles} from './CakeStyles';
 import { Grid, Paper, withStyles } from '@material-ui/core';
-import {SORTOPTIONS} from '../constans/filterConstans'
+import {SORTOPTIONS} from '../constans/selectConstans'
 
 function MyPaperRaw (props) {
     const { classes, ...other } = props;
