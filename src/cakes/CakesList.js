@@ -12,6 +12,7 @@ export class CakesList extends React.Component{
         super(props);
         this.state = {
             cakes: [],
+           // cakes2: [],
             cooks: [],
             types:[],
             cakesAndCooks:[],
@@ -53,12 +54,14 @@ export class CakesList extends React.Component{
             fetch('./cakes.json').then(res => res.json()),
             fetch('./cooks.json').then(res => res.json()),
             fetch('./types.json').then(res => res.json()),
+            //fetch('http://localhost:4000/cakes').then(res => res.json()),
         ]).then(data => {
             const price = data[0].map(el => el.price); 
             this.setState({
                 cakes: data[0],
                 cooks: data[1],
                 types: data[2],
+              //  cakes2: data[3],
                 priceRange: [Math.min(...price),Math.max(...price)],
                 loading: false,
             })
@@ -146,6 +149,7 @@ export class CakesList extends React.Component{
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
     render(){    
+        //console.log(this.state.cakes2);
         const { cakeCardOpen, 
                 cakeCardOpenId, 
                 cakes, 
@@ -172,7 +176,7 @@ export class CakesList extends React.Component{
                 <Container maxWidth = "lg" >
                     <Grid>
                         <Button onClick= {this.handleCakeAddForm} variant='outlined' >
-                            dodaj nowe cisto
+                            dodaj nowe ciasto
                         </Button>
                     </Grid>
                     <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
