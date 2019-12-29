@@ -1,15 +1,21 @@
 import React from 'react';
-import { MenuItem, Checkbox, ListItemIcon } from '@material-ui/core';
+import { MenuItem, Checkbox, ListItemIcon, Divider } from '@material-ui/core';
+import {RenderGlutenFreeCheckbox} from './RederGlutenFreeCheckbox'
 
 export function RenderTypesMenu (props) {
-    const {types, filterTypesId} = props;
+    const {types, filterTypesId, filterChecked} = props;
 
     const sortTypes = types.map((el)=> ({
             ...el,
             checked: filterTypesId.indexOf(el.id) > -1 ? true : false ,
         })).sort( (a,b) => b.checked - a.checked);
 
-    return (<>
+    return (<div>
+        <RenderGlutenFreeCheckbox
+            filterChecked = {filterChecked}
+            onHandleFilterChange = {props.onHandleFilterChange}
+        />        
+        <Divider/>
         {sortTypes.map(type => (
             <MenuItem key={type.id} onClick={() => props.onHandleTypeToggle(type.id)}>
                 <ListItemIcon  >
@@ -24,7 +30,7 @@ export function RenderTypesMenu (props) {
             </MenuItem>
             ))
         }   
-    </>
+    </div>
     )
 }
 
@@ -68,3 +74,4 @@ export function RenderTypesMenu (props) {
 //     }
     
 // }
+

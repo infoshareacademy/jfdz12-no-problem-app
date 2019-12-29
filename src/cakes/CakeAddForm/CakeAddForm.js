@@ -13,17 +13,6 @@ class CakeAddForm extends React.Component{
         super(props);
         this.state = {
             cookList: false,
-            // cakeAdd: {
-            //     name : '',
-            //     price: '',
-            //     priceForPortion: '',
-            //     portionDescription: '',
-            //     typeId: 0,
-            //     cookId: null,
-            //     description: '',
-            //     glutenFree: false,
-            //     imgURL:'',
-            // },
         }
         this.handleCakeAddForm = this.handleCakeAddForm.bind(this);
     }
@@ -50,7 +39,6 @@ class CakeAddForm extends React.Component{
       };
 
     handleSelectCook = (value) =>{
-        console.log('cookid', value)
         this.props.onHandleCakeAddChange ({
             cakeAdd: {
                 ...this.props.cakeAdd,
@@ -72,9 +60,6 @@ class CakeAddForm extends React.Component{
             },
         });
     }
-
-     
-
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 

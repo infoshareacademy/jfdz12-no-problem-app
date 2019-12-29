@@ -130,10 +130,10 @@ export class CakesList extends React.Component{
     }
 
     handleCakeAddForm(){
-        //const cake = this.findDataById(this.state.cakes, 10);
+        // const cake = this.findDataById(this.state.cakes, 10);
         this.setState(prevState =>({
             cakeAddFormOpen: !prevState.cakeAddFormOpen,
-           // cakeAdd: {...prevState.cakeAdd, ...cake},
+        //    cakeAdd: { ...cake},
         }))
     }
 

@@ -1,13 +1,12 @@
 import React from 'react';
 import { Menu, withStyles, Divider } from '@material-ui/core';
 import {styles} from './FilterAllStyle';
-import {RenderGlutenFreeCheckbox} from './RederGlutenFreeCheckbox'
 import {RenderTypesMenu} from './RenderTypesMenu';
 
 function RenderFilterAllMenu (props) {
     const {classes, anchorEl, filterChecked, types, filterTypesId} = props;
-
-    return (<>
+    
+    return (<div>
         <Menu
             id="long-menu"
             anchorEl={anchorEl}
@@ -24,20 +23,18 @@ function RenderFilterAllMenu (props) {
                 horizontal: 'center',
             }}
             className ={classes.root}
-        >
-            <RenderGlutenFreeCheckbox
-                filterChecked = {filterChecked}
-                onHandleFilterChange = {props.onHandleFilterChange}
-            />
+        >            
             <Divider/>
             <RenderTypesMenu 
                 types = {types} 
                 filterTypesId = {filterTypesId}
                 onHandleTypeToggle = {props.onHandleTypeToggle}
+                filterChecked = {filterChecked}
+                onHandleFilterChange = {props.onHandleFilterChange}
             />
 
         </Menu>
-    </>
+    </div>
     )
 }
 

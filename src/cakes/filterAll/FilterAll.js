@@ -92,6 +92,7 @@ class FilterAll extends React.Component{
                                     onHandleFilterChange = {this.handleFilterChange}
                                     onHandleTypeToggle = {this.handleTypeToggle}
                                 />
+                                           
                             </Grid>
                             <Divider className={classes.divider} orientation="vertical" />       
                             <Grid item >
@@ -112,4 +113,3 @@ class FilterAll extends React.Component{
 } 
 
 export default  withStyles(styles)(FilterAll);
-
