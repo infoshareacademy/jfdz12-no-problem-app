@@ -214,6 +214,13 @@ class CakeAddForm extends React.Component{
                     > 
                         powrót 
                     </Button>
+                    <Button onClick={this.props.onAddCakeFetch} 
+                            variant="outlined" 
+                            color="primary"
+                            style = {{margin: '20px'}}
+                    > 
+                        zapisz
+                    </Button>
                     
                 </Grid >
                     
