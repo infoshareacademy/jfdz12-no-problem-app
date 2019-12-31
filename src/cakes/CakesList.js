@@ -6,13 +6,13 @@ import { RenderCakesList } from './RenderCakesList';
 import './Cake.css';
 import FilterAll from './filterAll/FilterAll';
 import CakeAddForm from './CakeAddForm/CakeAddForm';
+import { CAKEADDOBJ } from '../constans/emptyObject'
 
 export class CakesList extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             cakes: [],
-           // cakes2: [],
             cooks: [],
             types:[],
             cakesAndCooks:[],
@@ -29,34 +29,22 @@ export class CakesList extends React.Component{
             priceRange: [],
             sortById: 0,
             cakeAddFormOpen: false,
-            cakeAdd: {
-                //id: null,
-                name : '',
-                price: '',
-                priceForPortion: '',
-                portionDescription: '',
-                typeId: 0,
-                cookId: null,
-                description: '',
-                glutenFree: false,
-                imgURL:'',
-            },
+            cakesMaxId: 0,
+            cakeAdd: {},
+            saveCake: false,
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
         this.handleChangePrice = this.handleChangePrice.bind(this);
         this.handleSortBy = this.handleSortBy.bind(this);
         this.handleCakeAddForm = this.handleCakeAddForm.bind(this);
-        this.addCakeFetch = this.addCakeFetch.bind(this);
+        this.saveCake = this.saveCake.bind(this);
     }
-
-
-    
 
     componentDidMount() {
         Promise.all([
-            fetch('http://localhost:4000/cakes').then(res => res.json()),
-            //fetch('./cakes.json').then(res => res.json()),
+            //fetch('http://localhost:4000/cakes').then(res => res.json()),
+            fetch('./cakes.json').then(res => res.json()),
             fetch('./cooks.json').then(res => res.json()),
             fetch('./types.json').then(res => res.json()),
             
@@ -66,10 +54,34 @@ export class CakesList extends React.Component{
                 cakes: data[0],
                 cooks: data[1],
                 types: data[2],
-              //  cakes2: data[3],
                 priceRange: [Math.min(...price),Math.max(...price)],
+                cakesMaxId: Math.max(...data[0].map(el => (el.id))), 
                 loading: false,
             })
+            console.log('didmount!');
+        })
+    }
+
+    componentDidUpdate(){
+        if (this.state.saveCake) {
+            
+            // fetch('http://localhost:4000/cakes')
+            //     .then(res => res.json())
+            //     .then(data => {
+            //         const price = data.map(el => el.price); 
+            //         this.setState({
+            //             cakes: data,
+            //             priceRange: [Math.min(...price),Math.max(...price)],
+            //             cakesMaxId: Math.max(...data.map(el => (el.id))),
+            //         })
+            //     })
+            this.setState({saveCake: false})
+        }
+    }
+
+    saveCake(){
+        this.setState({
+            saveCake: true,
         })
     }
 
@@ -138,10 +150,10 @@ export class CakesList extends React.Component{
     }
 
     handleCakeAddForm(){
-        // const cake = this.findDataById(this.state.cakes, 10);
         this.setState(prevState =>({
+            cakeAdd:  {...CAKEADDOBJ},
             cakeAddFormOpen: !prevState.cakeAddFormOpen,
-        //    cakeAdd: { ...cake},
+            saveCake: false,
         }))
     }
 
@@ -152,29 +164,6 @@ export class CakesList extends React.Component{
     }
     
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
-    
-    addCakeFetch(){
-    const {cakes} = this.state;
-    const maxCakeId = Math.max(...cakes.map(el => (el.id)));
-    const cake = {id: maxCakeId+1, ...this.state.cakeAdd}
-    
-    fetch("http://localhost:4000/cakespost", {
-            method: "post",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(cake)
-        })
-        .then(res => res.json())   
-        .then(res => {
-            console.log("Dodałem ciastko:");
-            console.log(res);
-        })
-        .catch(error => console.log("Błąd: ", error));
-
-        this.handleCakeAddForm();
-
-    }
 
     render(){    
  
@@ -195,6 +184,7 @@ export class CakesList extends React.Component{
                 sortById,
                 cakeAddFormOpen,
                 cakeAdd,
+                cakesMaxId,
             } = this.state;
         
         const { filterVisibility } = this.props;
@@ -274,10 +264,11 @@ export class CakesList extends React.Component{
             return <CakeAddForm 
                 onHandleCakeAddForm = {this.handleCakeAddForm}
                 onHandleCakeAddChange = {this.handleCakeAddChange}
-                onAddCakeFetch = {this.addCakeFetch}
                 cooks = {cooks}
                 types = {types}
                 cakeAdd = {cakeAdd}
+                cakesMaxId = {cakesMaxId}
+                onSaveCake = {this.saveCake}
             />
         }
 

@@ -15,9 +15,15 @@ class CakeAddForm extends React.Component{
             cookList: false,
         }
         this.handleCakeAddForm = this.handleCakeAddForm.bind(this);
+        this.addCakeFetch = this.addCakeFetch.bind(this);
+        this.saveCake = this.saveCake.bind(this);
+    }
+       
+    saveCake(){
+        this.props.onSaveCake();
     }
 
-    handleCakeAddForm(){
+    handleCakeAddForm() {
         this.props.onHandleCakeAddForm();
     }
     
@@ -60,6 +66,31 @@ class CakeAddForm extends React.Component{
             },
         });
     }
+
+    addCakeFetch(){
+        const { cakesMaxId, cakeAdd } = this.props;
+        
+        const cake = { ...cakeAdd, id: cakesMaxId+1 };
+
+        console.log('przed zapisem do API', cake);
+        // fetch("http://localhost:4000/cakespost", {
+        //         method: "post",
+        //         headers: {
+        //             "Content-type": "application/json"
+        //         },
+        //         body: JSON.stringify(cake)
+        //     })
+        //     .then(res => res.json())   
+        //     .then(res => {
+        //         console.log(res);
+                this.saveCake();
+        //     })
+        //     .catch(error => console.log("Błąd: ", error));
+            
+            this.handleCakeAddForm();
+    
+        }
+    
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
@@ -214,7 +245,7 @@ class CakeAddForm extends React.Component{
                     > 
                         powrót 
                     </Button>
-                    <Button onClick={this.props.onAddCakeFetch} 
+                    <Button onClick={this.addCakeFetch} 
                             variant="outlined" 
                             color="primary"
                             style = {{margin: '20px'}}
