@@ -1,32 +1,39 @@
 import React from 'react';
 import { IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles } from '@material-ui/core/styles';
 
 
-export class FilterVisibleToogle extends React.Component{
-    constructor(props){
-        super(props);
-        
-    }
+export const FilterVisibleToogle = (props) => {
+   
+    const handleFilterVisibility = () => {
+       props.handleFilterVisibility();
+    };
 
-    handleFilterVisibility = () => {
-        this.props.handleFilterVisibility();
-    }
+    const useStyles = makeStyles(theme => ({
+        filterIcon: {
+          position: "fixed",
+          top: "90vh",
+          left: "90vw",
+          backgroundColor: "darkgrey",
+          color: "white"
+      }
+    }));
+    const classes = useStyles();
 
-    render(){
-        return(
-            <div  >
-                <IconButton aria-label="search"
-                    onClick={this.handleFilterVisibility}
-                    
-                >
-                    <SearchIcon />
-                 </IconButton>
-                
-            </div>
-        )
+    return(
+        <div  >
+            <IconButton aria-label="search"
+                onClick={handleFilterVisibility}
+                className={classes.filterIcon}
+            >
+                <SearchIcon />
+                </IconButton>
+            
+        </div>
+    )
 
-    }
+    
 
 }
 
