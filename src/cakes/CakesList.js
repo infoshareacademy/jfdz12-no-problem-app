@@ -4,9 +4,14 @@ import { CircularProgress, Container, Grid } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
 import {RenderCakesList} from './RenderCakesList';
 import './Cake.css'
-import FilterAll from './filterAll/FilterAll'
+import FilterAll from './filterAll/FilterAll';
+import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
+
+
+
 
 export class CakesList extends React.Component{
+   
     constructor(props){
         super(props);
         this.state = {
@@ -26,11 +31,13 @@ export class CakesList extends React.Component{
             filterAllToogle: false,
             priceRange: [],
             sortById: 0,
+            filterVisibility: false,
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
         this.handleChangePrice = this.handleChangePrice.bind(this);
         this.handleSortBy = this.handleSortBy.bind(this);
+        this.handleFilterVisibility = this.handleFilterVisibility.bind(this);
     }
 
     componentDidMount() {
@@ -49,7 +56,17 @@ export class CakesList extends React.Component{
             })
         })
     }
+    
+    handleFilterVisibility(){
+    
+        this.setState( prevState => ({
+            filterVisibility: !prevState.filterVisibility,
+            })
+        );
+        console.log(this.state.filterVisibility)
         
+      }
+
     filterChange (event){
         let value = null;
 
@@ -115,6 +132,8 @@ export class CakesList extends React.Component{
     }
     
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
+
+    
       
     render(){    
         const { cakeCardOpen, 
@@ -134,11 +153,12 @@ export class CakesList extends React.Component{
                 sortById,
             } = this.state;
         
-        const { filterVisibility } = this.props;
-
+        const filterVisibility = this.state.filterVisibility;
+       
+       
         if (!cakeCardOpen && !loading) {
             return <>
-                <Container maxWidth = "lg" >
+                <Container maxWidth = "lg" style={{paddingTop:'75px'}}>
                     <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
                         {filterVisibility && filterAllToogle &&
                             <Grid item xs={12} sm={3} md={2}> 
@@ -184,6 +204,7 @@ export class CakesList extends React.Component{
                             />
                         </Grid>   
                     </Grid> 
+                    <FilterVisibleToogle handleFilterVisibility={this.handleFilterVisibility}/>
                 </Container>
             </>
         }

@@ -1,38 +1,47 @@
 import React from 'react';
 import { IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles } from '@material-ui/core/styles';
 
-export class FilterVisibleToogle extends React.Component{
-    constructor(props){
-        super(props);
-        this.handleFilterVisibility = this.handleFilterVisibility.bind(this);
-    }
 
-    handleFilterVisibility(e){
-        this.props.onHandleFilterVisibility(e);
-    }
+export const FilterVisibleToogle = (props) => {
+   
+    const handleFilterVisibility = () => {
+       props.handleFilterVisibility();
+    };
 
-    render(){
-        return(
-            <div  >
-                <IconButton aria-label="search"
-                    onClick={this.handleFilterVisibility}
-                >
-                    <SearchIcon />
-                 </IconButton>
-                
-            </div>
-        )
+    const useStyles = makeStyles(theme => ({
+        filterIcon: {
+          position: "fixed",
+          top: "90vh",
+          left: "90vw",
+          backgroundColor: "darkgrey",
+          color: "white"
+      }
+    }));
+    const classes = useStyles();
 
-    }
+    return(
+        <div  >
+            <IconButton aria-label="search"
+                onClick={handleFilterVisibility}
+                className={classes.filterIcon}
+            >
+                <SearchIcon />
+            </IconButton>
+            
+        </div>
+    )
+
+    
 
 }
 
 
 
-// <Switch
-//                     size = 'medium'
-//                     checked={this.props.filterVisibility}
-//                     onChange={this.handleFilterVisibility}
-//                     inputProps={{ 'aria-label': 'secondary checkbox' }}
-//                 />
+/* <Switch
+                    size = 'medium'
+                    checked={this.props.filterVisibility}
+                    onChange={this.handleFilterVisibility}
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                />  */

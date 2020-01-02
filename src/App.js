@@ -1,39 +1,29 @@
 import React from 'react';
 import {CakesList} from './cakes/CakesList'
-import {Menu} from './menu/Menu'
+import MenuAppBar from './menu/MenuAppBar'
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
+import Dashboard from './dashboard/Dashboard'
+import CooksList from './cooks/CooksList'
+import AddCake from './cakes/AddCake'
+import UserAccount from'./user/UserAccount'
+import { BrowserRouter, Route } from 'react-router-dom';
 
 
 class App extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      filterVisibility: false,
-    }
-    this.handleFilterVisibility = this.handleFilterVisibility.bind(this);
-  }
-  
-  handleFilterVisibility (){
-    this.setState( prevState => ({
-        filterVisibility: !prevState.filterVisibility,
-        })
-    )
-  }
-
   render(){
     return (
-      <div className="App">
-        <Menu
-          filterVisibility = {this.state.filterVisibility}
-          onHandleFilterVisibility = {this.handleFilterVisibility}
-        />
-       
-        <CakesList
-          filterVisibility = {this.state.filterVisibility}
-        />
-  
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <MenuAppBar/>
+          <Route exact path='/' component={Dashboard} />
+          <Route path='/userAccount' component={UserAccount} />
+          <Route path='/cakes' component={CakesList} />
+          <Route path='/cooks' component={CooksList} />
+          <Route path='/addCake' component={AddCake} />
+    
+        </div>
+      </BrowserRouter>
     );
 
   }
