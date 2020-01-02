@@ -22,7 +22,7 @@ export function SignIn(props) {
                     <Typography component="h1" variant="h5">
                         Wpisz email
                     </Typography>
-                    <form className={'form'} noValidate>
+                    <form className={'form'} >
                     <TextField
                         onChange = {props.onHandleInput}
                         variant="outlined"
@@ -52,7 +52,7 @@ export function SignIn(props) {
                         label="Zapametaj"
                     />
                     <Button
-                        type="submit"
+                        //type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"

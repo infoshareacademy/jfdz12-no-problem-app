@@ -18,7 +18,7 @@ export function UserList(props){
             </TableHead>
             <TableBody>
             {users.map(user => (
-                <TableRow key={user.id}>
+                <TableRow hover key={user.id} onClick={() => props.onHandleOpenUser(user.id)}>
                 <TableCell component="th" scope="row">
                     {user.id}
                 </TableCell>

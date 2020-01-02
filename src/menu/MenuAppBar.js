@@ -106,7 +106,7 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose} component={Link} to='/userAccount'>Moje konto</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to='/user'>Moje konto</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to='/addCake'>Dodaj ciasto</MenuItem>
                 <MenuItem onClick={handleChange} component={Link} to='/'>Wyloguj się</MenuItem>
               </Menu>

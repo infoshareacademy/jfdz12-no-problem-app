@@ -1,7 +1,6 @@
 import React from 'react';
 import { getUser } from '../api/userApi'
 import { Button } from '@material-ui/core';
-import { SignIn } from './SignIn';
 import { UserList } from './UserList';
 import { UserCard } from './UserCard';
 
@@ -9,19 +8,17 @@ export class User extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            isLoading: false,
+            isLoading: false,   
             isError: false,
             error: '',
             users: [],
-            openSignIn: false,
             openUserCard: false,
             openUserList: false,
-            email:'',
+            userId: null,
         }
-        this.handleOpenUserCard = this.handleOpenUserCard.bind(this);
+        this.handleOpenUser = this.handleOpenUser.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
     }
-
-
 
     componentDidMount(){
    
@@ -44,17 +41,9 @@ export class User extends React.Component{
             }))
     }
 
-    
-    handleOpen = (name) => {  
-        this.setState( prevState=> ({
+    handleOpen (name) {
+        this.setState(prevState => ({
             [name]: !prevState[name],
-        }))
-    }
-
-    handleOpenUserCard (){
-        this.setState(prevState => ( {
-            openSignIn: !prevState.openSignIn,
-            openUserCard: !prevState.openUserCard,
         }))
     }
 
@@ -64,47 +53,38 @@ export class User extends React.Component{
         })           
     }
 
-    findDataById = (data, id) => data.find((data) => data.id === id) || {};
-    
-    findUserById (){
-        const {users, email} = this.state;
-        return users.find((user) => user.contact.mail === email) || {};
+    handleOpenUser (userId) {
+        this.setState(prevState => ({
+            userId: userId,
+            openUserList: !prevState.openUserList,
+            openUserCard: !prevState.openUserCard,
+        }))
     }
 
+    findDataById = (data, id) => data.find((data) => data.id === id) || {};
+    
     render(){
-        const { email, openUserCard, openSignIn, openUserList, users, isLoading, error, isError} = this.state;
-        
+        const { userId, openUserCard, openUserList, users, isLoading, error, isError} = this.state;
+       
         return <div>
-            <Button 
+            {!isLoading && !openUserCard && <Button 
                 variant='outlined' 
                 onClick = {() => this.handleOpen('openUserList')}
                 style = {{margin:'10px'}}
             >
                 {openUserList ? 'ukryj listę uzytkowników' : 'pokaż listę użytkowników'}
-            </Button>
-            <Button 
-                variant='outlined' 
-                onClick = {() => this.handleOpen('openSignIn')} 
-                style = {{margin:'10px'}}
-            >
-                pokaż dane użytkownika
-            </Button>            
-            <SignIn
-                onHandleInput = {this.handleInput}
-                openSignIn = {openSignIn}
-                email={email}
-                onHandleOpenUserCard = {this.handleOpenUserCard}
-            />
+            </Button>}
+                        
             {!isLoading && openUserList &&
                 <UserList 
                     users = {users}
-                
+                    onHandleOpenUser= {this.handleOpenUser}
                 />
             }
 
             {!isLoading && openUserCard &&
                 <UserCard 
-                    user = {this.findUserById()}
+                    user = {this.findDataById(users, userId)}
                     onHandleOpen = {this.handleOpen}
 
                 />
