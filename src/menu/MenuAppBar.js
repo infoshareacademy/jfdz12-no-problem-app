@@ -4,27 +4,28 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { AppBar, MenuItem, Menu, IconButton, Typography, Toolbar } from '@material-ui/core/';
 import { Link } from 'react-router-dom';
 import SwipeableTemporaryDrawer from './SwipeableDrawer';
-
+import Logo from '../logo.png'
 
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+    paddingLeft: '45px',
+    color: "#95a0a3"
   },
   
   customWidth: {
-    minWidth: 150
+    minWidth: 85,
+    marginRight:'-20px'
   },
   label: {
-    fontSize: 15,
-    paddingLeft: 2
+    fontSize: 15, 
   },
   navStyle: {
     top: 0,
@@ -70,15 +71,14 @@ export default function MenuAppBar() {
 
   return (
     <div className={classes.root} position="static">
-      
-      <AppBar  className={classes.navStyle}>
+      <AppBar className={classes.navStyle}>
         <Toolbar>
           <SwipeableTemporaryDrawer auth={auth} logOut={logOut} logIn={logIn}/>
-          <Link to='/'>
-            <Typography variant="h6" className={classes.title} >
+         
+          <Typography variant="h6" className={classes.title+' onHover'} component={Link} to='/'>
               Ale Ciacha!
-            </Typography>
-          </Link>
+          </Typography>
+         
           {auth ? (
             <div>
               <IconButton
@@ -88,7 +88,6 @@ export default function MenuAppBar() {
                 onClick={handleMenu}
                 color="inherit"
                 className={classes.customWidth}
-               
               >
                 <AccountCircle />
               </IconButton>
@@ -107,9 +106,9 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <Link to='/userAccount'><MenuItem onClick={handleClose}>Moje konto</MenuItem></Link>
-                <Link to='/addCake'><MenuItem onClick={handleClose}>Dodaj ciasto</MenuItem></Link>
-                <Link to='/'><MenuItem onClick={handleChange}>Wyloguj się</MenuItem></Link>
+                <MenuItem onClick={handleClose} component={Link} to='/userAccount'>Moje konto</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to='/addCake'>Dodaj ciasto</MenuItem>
+                <MenuItem onClick={handleChange} component={Link} to='/'>Wyloguj się</MenuItem>
               </Menu>
             </div>
           ) : (
@@ -121,8 +120,9 @@ export default function MenuAppBar() {
               className={classes.customWidth}      
               
             > 
-             
-              <div className={classes.label}>Zaloguj</div>
+            <div className={classes.label}>
+              Zaloguj
+            </div>
             </IconButton>
            
           </div>

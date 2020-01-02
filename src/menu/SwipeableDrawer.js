@@ -47,30 +47,21 @@ export default function SwipeableTemporaryDrawer(props) {
     >
       
       <List>
-          <Link to='/cakes'>
-            <ListItem button key={"Lista ciast"}>
-              <ListItemIcon> <Icon>cake</Icon></ListItemIcon>
-              <ListItemText primary={'Lista ciast'} />
-            </ListItem>
-          </Link>
-          <Link to='/cooks'>
-            <ListItem button key={"Lista cukierników"}>
-              <ListItemIcon> <EmojiPeopleIcon /></ListItemIcon>
-              <ListItemText primary={'Lista cukierników'} />
-            </ListItem>
-          </Link>
-        
+          <ListItem button key={"Lista ciast"} component={Link} to='/cakes'>
+            <ListItemText primary={'Lista ciast'} />
+          </ListItem>
+    
+          <ListItem button key={"Lista cukierników"} component={Link} to='/cooks'>
+            <ListItemText primary={'Lista cukierników'} />
+          </ListItem>
       </List>
       <Divider />
       <List>
-       
           <ListItem button key={'Zaloguj'} onClick={props.logIn}>
-            <ListItemIcon> <Icon>face</Icon> </ListItemIcon>
             <ListItemText primary={'Zaloguj'}  />
           </ListItem>
-         
-      
       </List>
+
     </div>
   )} else {
     sideList = (side) => (
@@ -81,42 +72,25 @@ export default function SwipeableTemporaryDrawer(props) {
         onKeyDown={toggleDrawer(side, false)}
       >
         
-        <List>
-            <Link to='/cakes'>
-              <ListItem button key={"Lista ciast"}>
-                <ListItemIcon> <Icon>cake</Icon></ListItemIcon>
-                <ListItemText primary={'Lista ciast'} />
-              </ListItem>
-            </Link>
-            <Link to='/cooks'>
-              <ListItem button key={"Lista cukierników"}>
-                <ListItemIcon> <EmojiPeopleIcon /></ListItemIcon>
-                <ListItemText primary={'Lista cukierników'} />
-              </ListItem>
-            </Link>
-          
-        </List>
-        <Divider />
-        <List>
-            <Link to='/userAccount'>
-            <ListItem button key={'Moje konto'}>
-              <ListItemIcon> <Icon>face</Icon> </ListItemIcon>
-              <ListItemText primary={'Moje konto'} />
-            </ListItem>
-            </Link>
-            <Link to='/addCake'>
-            <ListItem button key={'Dodaj ciasto'}>
-              <ListItemIcon> <ControlPointIcon /> </ListItemIcon>
-              <ListItemText primary={'Dodaj ciasto'} />
-            </ListItem>
-            </Link>
-            <Link to='/'>
-            <ListItem button key={'Wyloguj'} onClick={props.logOut}>
-              <ListItemIcon> <ExitToAppIcon /> </ListItemIcon>
-              <ListItemText primary={'Wyloguj'} />
-            </ListItem>
-            </Link>
-        
+      <List>
+          <ListItem button key={"Lista ciast"} component={Link} to='/cakes'>
+            <ListItemText primary={'Lista ciast'} />
+          </ListItem>
+          <ListItem button key={"Lista cukierników"} component={Link} to='/cooks'>
+            <ListItemText primary={'Lista cukierników'} />
+          </ListItem>
+      </List>
+      <Divider />
+      <List>
+          <ListItem button key={'Moje konto'} component={Link} to='/userAccount'>
+            <ListItemText primary={'Moje konto'} />
+          </ListItem>
+          <ListItem button key={'Dodaj ciasto'} component={Link} to='/addCake'>
+            <ListItemText primary={'Dodaj ciasto'} />
+          </ListItem>
+          <ListItem button key={'Wyloguj'} onClick={props.logOut} component={Link} to='/'>
+            <ListItemText primary={'Wyloguj'} />
+          </ListItem>
         </List>
       </div>
     )
