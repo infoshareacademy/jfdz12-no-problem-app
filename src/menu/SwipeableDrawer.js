@@ -7,12 +7,12 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   list: {
@@ -47,15 +47,18 @@ export default function SwipeableTemporaryDrawer(props) {
     >
       
       <List>
-  
-          <ListItem button key={"Lista ciast"}>
-            <ListItemIcon> <Icon>cake</Icon></ListItemIcon>
-            <ListItemText primary={'Lista ciast'} />
-          </ListItem>
-          <ListItem button key={"Lista cukierników"}>
-            <ListItemIcon> <EmojiPeopleIcon /></ListItemIcon>
-            <ListItemText primary={'Lista cukierników'} />
-          </ListItem>
+          <Link to='/cakes'>
+            <ListItem button key={"Lista ciast"}>
+              <ListItemIcon> <Icon>cake</Icon></ListItemIcon>
+              <ListItemText primary={'Lista ciast'} />
+            </ListItem>
+          </Link>
+          <Link to='/cooks'>
+            <ListItem button key={"Lista cukierników"}>
+              <ListItemIcon> <EmojiPeopleIcon /></ListItemIcon>
+              <ListItemText primary={'Lista cukierników'} />
+            </ListItem>
+          </Link>
         
       </List>
       <Divider />
@@ -79,32 +82,40 @@ export default function SwipeableTemporaryDrawer(props) {
       >
         
         <List>
-    
-            <ListItem button key={"Lista ciast"}>
-              <ListItemIcon> <Icon>cake</Icon></ListItemIcon>
-              <ListItemText primary={'Lista ciast'} />
-            </ListItem>
-            <ListItem button key={"Lista cukierników"}>
-              <ListItemIcon> <EmojiPeopleIcon /></ListItemIcon>
-              <ListItemText primary={'Lista cukierników'} />
-            </ListItem>
+            <Link to='/cakes'>
+              <ListItem button key={"Lista ciast"}>
+                <ListItemIcon> <Icon>cake</Icon></ListItemIcon>
+                <ListItemText primary={'Lista ciast'} />
+              </ListItem>
+            </Link>
+            <Link to='/cooks'>
+              <ListItem button key={"Lista cukierników"}>
+                <ListItemIcon> <EmojiPeopleIcon /></ListItemIcon>
+                <ListItemText primary={'Lista cukierników'} />
+              </ListItem>
+            </Link>
           
         </List>
         <Divider />
         <List>
-         
+            <Link to='/userAccount'>
             <ListItem button key={'Moje konto'}>
               <ListItemIcon> <Icon>face</Icon> </ListItemIcon>
               <ListItemText primary={'Moje konto'} />
             </ListItem>
+            </Link>
+            <Link to='/addCake'>
             <ListItem button key={'Dodaj ciasto'}>
               <ListItemIcon> <ControlPointIcon /> </ListItemIcon>
               <ListItemText primary={'Dodaj ciasto'} />
             </ListItem>
+            </Link>
+            <Link to='/'>
             <ListItem button key={'Wyloguj'} onClick={props.logOut}>
               <ListItemIcon> <ExitToAppIcon /> </ListItemIcon>
               <ListItemText primary={'Wyloguj'} />
             </ListItem>
+            </Link>
         
         </List>
       </div>

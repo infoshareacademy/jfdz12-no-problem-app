@@ -28,7 +28,7 @@ export const FilterVisibleToogle = (props) => {
                 className={classes.filterIcon}
             >
                 <SearchIcon />
-                </IconButton>
+            </IconButton>
             
         </div>
     )

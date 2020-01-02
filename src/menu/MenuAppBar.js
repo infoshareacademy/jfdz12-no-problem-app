@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { AppBar, MenuItem, Menu, IconButton, Typography, Toolbar } from '@material-ui/core/';
-
+import { Link } from 'react-router-dom';
 import SwipeableTemporaryDrawer from './SwipeableDrawer';
 
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     top: 0,
     left: "auto",
     right: 0,
-    position: "static",
+    position: "fixed",
     backgroundColor: "white",
     color: "#757575",
     zIndex: 100,
@@ -74,9 +74,11 @@ export default function MenuAppBar() {
       <AppBar  className={classes.navStyle}>
         <Toolbar>
           <SwipeableTemporaryDrawer auth={auth} logOut={logOut} logIn={logIn}/>
-          <Typography variant="h6" className={classes.title}>
-            Ale Ciacha!
-          </Typography>
+          <Link to='/'>
+            <Typography variant="h6" className={classes.title} >
+              Ale Ciacha!
+            </Typography>
+          </Link>
           {auth ? (
             <div>
               <IconButton
@@ -105,9 +107,9 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Moje konto</MenuItem>
-                <MenuItem onClick={handleClose}>Dodaj ciasto</MenuItem>
-                <MenuItem onClick={handleChange}>Wyloguj się</MenuItem>
+                <Link to='/userAccount'><MenuItem onClick={handleClose}>Moje konto</MenuItem></Link>
+                <Link to='/addCake'><MenuItem onClick={handleClose}>Dodaj ciasto</MenuItem></Link>
+                <Link to='/'><MenuItem onClick={handleChange}>Wyloguj się</MenuItem></Link>
               </Menu>
             </div>
           ) : (
@@ -120,7 +122,7 @@ export default function MenuAppBar() {
               
             > 
              
-              <div className={classes.label}>  Zaloguj</div>
+              <div className={classes.label}>Zaloguj</div>
             </IconButton>
            
           </div>
