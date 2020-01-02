@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
-export default class Dashboard extends Component {
+
+export default class AddCake extends Component {
     render() {
         return (
             <div style={{paddingTop: '100px', paddingBottom:'100px'}}>
-                <h1>Witamy łasuchów!</h1>
+                <h1>Dodaj ciasto do swojej oferty</h1>
             </div>
         )
     }

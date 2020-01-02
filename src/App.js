@@ -1,70 +1,32 @@
 import React from 'react';
-import {CakesList} from './cakes/CakesList';
-import {Menu} from './menu/Menu';
-import {User} from './user/User';
-import 'semantic-ui-css/semantic.min.css';
+import {CakesList} from './cakes/CakesList'
+import MenuAppBar from './menu/MenuAppBar'
+import 'semantic-ui-css/semantic.min.css'
 import './App.css';
-import { Grid, Button } from '@material-ui/core';
+import Dashboard from './dashboard/Dashboard'
+import CooksList from './cooks/CooksList'
+import AddCake from './cakes/AddCake'
+import UserAccount from'./user/UserAccount'
+import { BrowserRouter, Route } from 'react-router-dom';
 
 
 class App extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      filterVisibility: false,
-      openCakeList: false,
-      openUser: false,
-
-    }
-    this.handleFilterVisibility = this.handleFilterVisibility.bind(this);
-  }
-  
-  handleFilterVisibility (){
-    this.setState( prevState => ({
-        filterVisibility: !prevState.filterVisibility,
-        })
-    )
-  }
-
-  handleOpen(value) {
-    const name = value === 'user' ? 'openUser' : 'openCakeList';
-    this.setState(prevState => ({
-      [name]: !prevState[name], 
-    }))
-  }
-
   render(){
-    const {openUser, openCakeList} = this.state;
-
+   
     return (
-      <div className="App">
-        <Grid>
-          <Menu
-            filterVisibility = {this.state.filterVisibility}
-            onHandleFilterVisibility = {this.handleFilterVisibility}
-          />
-
-          <Grid>
-            <Button onClick={() => this.handleOpen('user')} variant='outlined' style={{margin: '10px'}}>
-              { openUser ? 'ukryj użytkownika' : 'pokaż użytkownika' } 
-            </Button>
-            <Button onClick={() => this.handleOpen('cake')} variant='outlined' style={{margin: '10px'}}>
-              { openUser ? 'ukryj  listę ciast' : 'pokaż listę ciast' }
-            </Button>
-          </Grid>
-
-          {openCakeList && 
-            <CakesList
-              filterVisibility = {this.state.filterVisibility}
-            />
-          }
-        
-          {openUser && <User />}
-
-        </Grid>
-       
-  
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <MenuAppBar/>
+          <div style ={{paddingTop:'75px'}}>
+            <Route exact path='/' component={Dashboard} />
+            <Route path='/userAccount' component={UserAccount} />
+            <Route path='/cakes' component={CakesList} />
+            <Route path='/cooks' component={CooksList} />
+            <Route path='/addCake' component={AddCake} />
+          </div>
+    
+        </div>
+      </BrowserRouter>
     );
 
   }

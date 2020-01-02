@@ -7,8 +7,10 @@ import './Cake.css';
 import FilterAll from './filterAll/FilterAll';
 import CakeAddForm from './CakeAddForm/CakeAddForm';
 import { CAKEADDOBJ } from '../constans/emptyObject'
+import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
 
 export class CakesList extends React.Component{
+   
     constructor(props){
         super(props);
         this.state = {
@@ -32,6 +34,7 @@ export class CakesList extends React.Component{
             cakesMaxId: 0,
             cakeAdd: {},
             saveCake: false,
+            filterVisibility: false,
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
@@ -39,6 +42,7 @@ export class CakesList extends React.Component{
         this.handleSortBy = this.handleSortBy.bind(this);
         this.handleCakeAddForm = this.handleCakeAddForm.bind(this);
         this.saveCake = this.saveCake.bind(this);
+        this.handleFilterVisibility = this.handleFilterVisibility.bind(this);
     }
 
     componentDidMount() {
@@ -84,6 +88,16 @@ export class CakesList extends React.Component{
             saveCake: true,
         })
     }
+    
+    handleFilterVisibility(){
+    
+        this.setState( prevState => ({
+            filterVisibility: !prevState.filterVisibility,
+            })
+        );
+        console.log(this.state.filterVisibility)
+        
+      }
 
     filterChange (event){
         let value = null;
@@ -165,6 +179,8 @@ export class CakesList extends React.Component{
     
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
+    
+      
     render(){    
  
         const { cakeCardOpen, 
@@ -187,16 +203,17 @@ export class CakesList extends React.Component{
                 cakesMaxId,
             } = this.state;
         
-        const { filterVisibility } = this.props;
+        const { filterVisibility } = this.state;
 
         if (!cakeAddFormOpen && !cakeCardOpen && !loading) {
             return <>
-                <Container maxWidth = "lg" >
+                <Container maxWidth = "lg">
                     <Grid>
                         <Button onClick= {this.handleCakeAddForm} variant='outlined' >
                             dodaj nowe ciasto
                         </Button>
                     </Grid>
+       
                     <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
                         {filterVisibility && filterAllToogle &&
                             <Grid item xs={12} sm={3} md={2}> 
@@ -242,6 +259,7 @@ export class CakesList extends React.Component{
                             />
                         </Grid>   
                     </Grid> 
+                    <FilterVisibleToogle handleFilterVisibility={this.handleFilterVisibility}/>
                 </Container>
             </>
         }
