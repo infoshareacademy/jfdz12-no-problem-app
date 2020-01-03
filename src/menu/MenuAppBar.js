@@ -7,6 +7,7 @@ import SwipeableTemporaryDrawer from './SwipeableDrawer';
 import Logo from '../logo.png'
 
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -14,15 +15,16 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
-    flexGrow: 1,
+  logo: {
+    maxWidth: '170px',
     paddingLeft: '45px',
     color: "#95a0a3"
   },
   
   customWidth: {
-    minWidth: 85,
-    marginRight:'-20px'
+    minWidth: 75,
+    minHeight: 75,
+    marginRight:'-10px'
   },
   label: {
     fontSize: 15, 
@@ -35,19 +37,23 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "white",
     color: "#757575",
     zIndex: 100,
+  },
+  flex: {
+    display: "flex",
+    justifyContent: "space-between"
   }
 }));
 
 
 
-export default function MenuAppBar() {
+export default function MenuAppBar(props) {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(false);
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   const handleChange = () => {
-    setAuth(false);
+    props.setAuth();
     setAnchorEl(null);
   };
 
@@ -60,11 +66,11 @@ export default function MenuAppBar() {
   };
 
   const logOut = () => {
-    setAuth(false);
+    props.setAuth();
   }
 
   const logIn = () => {
-    setAuth(true)
+    props.setAuth();
   }
 
   
@@ -72,14 +78,13 @@ export default function MenuAppBar() {
   return (
     <div className={classes.root} position="static">
       <AppBar className={classes.navStyle}>
-        <Toolbar>
-          <SwipeableTemporaryDrawer auth={auth} logOut={logOut} logIn={logIn}/>
+        <Toolbar className={classes.flex}>
+          <SwipeableTemporaryDrawer auth={props.auth} logOut={logOut} logIn={logIn}/>
+          <Link to='/'>
+            <img src={Logo} className={classes.logo} />
+          </Link>
          
-          <Typography variant="h6" className={classes.title+' onHover'} component={Link} to='/'>
-              Ale Ciacha!
-          </Typography>
-         
-          {auth ? (
+          {props.auth ? (
             <div>
               <IconButton
                 aria-label="account of current user"
@@ -105,7 +110,7 @@ export default function MenuAppBar() {
                 }}
                 open={open}
                 onClose={handleClose}
-              >
+            >
                 <MenuItem onClick={handleClose} component={Link} to='/userAccount'>Moje konto</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to='/addCake'>Dodaj ciasto</MenuItem>
                 <MenuItem onClick={handleChange} component={Link} to='/'>Wyloguj się</MenuItem>
@@ -115,7 +120,7 @@ export default function MenuAppBar() {
             <div>
             <IconButton
               aria-label="account of current user"
-              onClick={logIn}
+              onClick={props.setAuth}
               color="inherit"
               className={classes.customWidth}      
               
