@@ -207,13 +207,14 @@ export class CakesList extends React.Component{
 
         if (!cakeAddFormOpen && !cakeCardOpen && !loading) {
             return <>
-                <Container maxWidth = "lg">
+                <Container maxWidth = "lg" style={{paddingTop:'100px'}}>
                     <Grid>
                         <Button onClick= {this.handleCakeAddForm} variant='outlined' >
                             dodaj nowe ciasto
                         </Button>
                     </Grid>
        
+                
                     <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
                         {filterVisibility && filterAllToogle &&
                             <Grid item xs={12} sm={3} md={2}> 

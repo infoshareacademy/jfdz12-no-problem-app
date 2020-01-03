@@ -7,26 +7,37 @@ import CooksList from './cooks/CooksList'
 import AddCake from './cakes/AddCake'
 import { BrowserRouter, Route } from 'react-router-dom';
 import {User} from './user/User'
+import MenuAppBar from './menu/resMenu/MenuAppBar'
 
 
 class App extends React.Component {
+  state = {
+    auth: false
+  };
+
+  setAuth = () => {
+    if (this.state.auth === false) {
+      this.setState({
+           auth: true
+      })} else {
+        this.setState({
+          auth: false
+      })}
+    };
+    
   render(){
    
     return (
-      <div className="App">
-        
-        <BrowserRouter>
-            <MenuAppBar/>
-            <div style ={{paddingTop:'75px'}}>
-              <Route exact path='/' component={Dashboard} />
-              <Route path='/user' component={User} />
-              <Route path='/cakes' component={CakesList} />
-              <Route path='/cooks' component={CooksList} />
-              <Route path='/addCake' component={AddCake} />
-            </div>
-      
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <MenuAppBar setAuth={this.setAuth} auth={this.state.auth}/>
+          <Route exact path='/' component={Dashboard} />
+          <Route path='/user' component={UserAccount} />
+          <Route path='/cakes' component={CakesList} />
+          <Route path='/cooks' component={CooksList} />
+          <Route path='/addCake' component={AddCake} />
+        </div>
+      </BrowserRouter>
     );
 
   }
