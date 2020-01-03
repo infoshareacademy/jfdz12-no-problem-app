@@ -13,19 +13,20 @@ class App extends React.Component {
   render(){
    
     return (
-      <BrowserRouter>
-        <div className="App">
-          <MenuAppBar/>
-          <div style ={{paddingTop:'75px'}}>
-            <Route exact path='/' component={Dashboard} />
-            <Route path='/user' component={User} />
-            <Route path='/cakes' component={CakesList} />
-            <Route path='/cooks' component={CooksList} />
-            <Route path='/addCake' component={AddCake} />
-          </div>
-    
-        </div>
-      </BrowserRouter>
+      <div className="App">
+        
+        <BrowserRouter>
+            <MenuAppBar/>
+            <div style ={{paddingTop:'75px'}}>
+              <Route exact path='/' component={Dashboard} />
+              <Route path='/user' component={User} />
+              <Route path='/cakes' component={CakesList} />
+              <Route path='/cooks' component={CooksList} />
+              <Route path='/addCake' component={AddCake} />
+            </div>
+      
+        </BrowserRouter>
+      </div>
     );
 
   }

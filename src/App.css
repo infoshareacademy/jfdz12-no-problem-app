@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-size: 10px;
 }
 
 .colorMeta{
@@ -10,9 +11,9 @@
   float: right;
 }
 
-/* .cardHeader{
+.cardHeader{
   font-size: 50px;
-} */
+}
 
 
 .card{
