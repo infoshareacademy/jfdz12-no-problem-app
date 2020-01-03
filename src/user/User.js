@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUser } from '../api/userApi'
+import { getUsers } from '../api/Api'
 import { Button } from '@material-ui/core';
 import { UserList } from './UserList';
 import { UserCard } from './UserCard';
@@ -25,7 +25,7 @@ export class User extends React.Component{
         this.setState({
             isLoading: true,
             isError: false,
-        }, () => getUser()
+        }, () => getUsers()
             .then( data => {
                 this.setState ({
                     users: data,
