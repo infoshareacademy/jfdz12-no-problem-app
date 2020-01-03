@@ -62,7 +62,7 @@ class FilterInput extends React.Component{
             <TextField 
                 id="outlined-search"
                 className={classes.root}
-                InputProps = {this.renderResetIcon()}
+               // InputProps = {this.renderResetIcon()}
                 name = {this.props.inputName} 
                 placeholder = {this.props.label} 
                 type = "search"
@@ -71,6 +71,7 @@ class FilterInput extends React.Component{
                 onChange = {this.handleChange}
                 color = 'secondary'
                 size = 'small'
+                margin = 'dense'
             />
         )
     }
