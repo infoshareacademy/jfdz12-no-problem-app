@@ -158,7 +158,7 @@ export class CakesList extends React.Component{
        
         if (!cakeCardOpen && !loading) {
             return <>
-                <Container maxWidth = "lg" style={{paddingTop:'75px'}}>
+                <Container maxWidth = "lg" style={{paddingTop:'100px'}}>
                     <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
                         {filterVisibility && filterAllToogle &&
                             <Grid item xs={12} sm={3} md={2}> 
