@@ -1,13 +1,12 @@
 import React from 'react';
 import {CakesList} from './cakes/CakesList'
-import MenuAppBar from './menu/MenuAppBar'
 import './App.css';
 import Dashboard from './dashboard/Dashboard'
 import CooksList from './cooks/CooksList'
 import AddCake from './cakes/AddCake'
 import UserAccount from'./user/UserAccount'
 import { BrowserRouter, Route } from 'react-router-dom';
-import MenuAppBar2 from './menu/resMenu/MenuAppBar2'
+import MenuAppBar from './menu/resMenu/MenuAppBar'
 
 
 class App extends React.Component {
@@ -30,8 +29,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="App">
-          {/* <MenuAppBar setAuth={this.setAuth} auth={this.state.auth}/> */}
-          <MenuAppBar2 setAuth={this.setAuth} auth={this.state.auth}/>
+          <MenuAppBar setAuth={this.setAuth} auth={this.state.auth}/>
           <Route exact path='/' component={Dashboard} />
           <Route path='/userAccount' component={UserAccount} />
           <Route path='/cakes' component={CakesList} />
