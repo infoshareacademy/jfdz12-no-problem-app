@@ -1,49 +1,43 @@
-export function getUsers(){
-    
-    return fetch('./users.json')
-        .then(res => res.json())
-        .then (data => {
-            const users = data;
-            return Promise.resolve( users )
-        });
-     
-}
-
-export function getTypes(){
-    
-    return fetch('./types.json')
-        .then(res => res.json())
-        .then (data => {
-            return Promise.resolve( data )
-        });
-     
-}
-
-export function getCooks(){
-    
-    return fetch('./cooks.json')
-        .then(res => res.json())
-        .then (data => {
-            return Promise.resolve( data )
-        });
-     
-}
-
 class DataManager {
     constructor(){
         this.users = [];
+        this.types = [];
+        this.cooks = [];
         fetch('./users.json')
+        .then (res => res.json())
+        .then (data => {
+            this.users = data;        
+        }); 
+        fetch('./cooks.json')
+            .then (res => res.json())
+            .then (data => {this.cooks = data}); 
+        fetch('./types.json')
             .then(res => res.json())
-            .then (data => {
-                this.users = data;        
-            })    
+            .then (data => this.types = data);  
+
     } 
 
     getUsers = () =>{
-        return Promise.resolve(this.users)
+        console.log('pobrałem users');
+        return (this.users);
     }
 
-
+    getUserById = (id) => {
+        const user = this.users.find ((data)=> data.id === parseInt(id));
+        return user;
+    }
+    
+    getCooks = () => {
+        console.log('pobrałem cooks');
+        return this.cooks;
+         
+    }
+    
+    getTypes = () => {
+        console.log('pobrałem types');
+        return this.types;
+    }
+    
 }
 
 const dataManager = new DataManager() 

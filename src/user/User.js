@@ -1,5 +1,4 @@
 import React from 'react';
-import { getUsers } from '../api/Api'
 import { Button } from '@material-ui/core';
 import { UserList } from './UserList';
 import { UserCard } from './UserCard';
@@ -13,60 +12,27 @@ export class User extends React.Component{
             isLoading: false,   
             isError: false,
             error: '',
-            users: [],
+            users: dataManager.getUsers(),
             openUserCard: false,
             openUserList: false,
             userId: '',
-            openSignIn: true,
+            openSignIn: false,
         };
-        //this.newData = dataManager.getUsers();
-        // dataManager.getUsers()
-        //     .then (data =>{
-        //         this.setState({
-        //             users: data,
-        //         })
-        //     })
-
+     
         this.handleOpenUser = this.handleOpenUser.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.handleUserChange=this.handleUserChange.bind(this);
         this.handleOpenUserCard = this.handleOpenUserCard.bind(this);
     }
 
-    componentDidMount(){
-        //const userList = dataManager.getUsers(); 
+    // componentDidMount(){
+    //     const data = dataManager.getUsers(); 
         
-        dataManager.getUsers()
-            .then (data =>{
-                this.setState({
-                    users: data,
-                })
-            }) 
+    //     this.setState({
+    //                 users: data,
+    //             })
+    // } 
          
-       //console.log('newdata', userList)
-        
-       
-        
-        
-        // this.setState({
-        //     isLoading: true,
-        //     isError: false,
-        // }, () => userList
-        //     .then( data => {
-        //         this.setState ({
-        //             users: data,
-        //             isLoading: false,  
-        //         })
-        //     })
-        //     .catch (error => {
-        //         this.setState({
-        //             isError: true,
-        //             error: `błąd: ${error.toString()}`,
-        //             isLoading: false,
-        //         })
-        //     }))
-    }
-
     handleOpen (name) {
         this.setState(prevState => ({
             [name]: !prevState[name],
@@ -115,8 +81,6 @@ export class User extends React.Component{
     
     render(){
         const { userId, openSignIn, openUserCard, openUserList, users, isLoading, error, isError} = this.state;
-        const newusers = dataManager.getUsers();
-        console.log('newusers',this.newData);
 
         return <div style={{marginTop:'100px'}}>
             {!isLoading && openSignIn &&<SignIn

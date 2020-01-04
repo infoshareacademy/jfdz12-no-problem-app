@@ -1,9 +1,10 @@
 import React from "react";
 import {Table, TableBody, TableCell, TableRow, TableHead} from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 export function UserList(props){
     const {users} = props;
-
+   
     return(<div style={{width:'800px', margin: '10px auto'}}>
         
 
@@ -18,11 +19,14 @@ export function UserList(props){
             </TableHead>
             <TableBody>
             {users.map(user => (
-                <TableRow hover key={user.id} onClick={() => props.onHandleOpenUser(user.id)}>
+               // <TableRow hover key={user.id} onClick={() => props.onHandleOpenUser(user.id)}>
+               <TableRow hover key={user.id} >
                 <TableCell component="th" scope="row">
                     {user.id}
                 </TableCell>
-                <TableCell align="right">{user.name}</TableCell>
+                <TableCell align="right" >
+                <Link to={`/userAccount/user/${user.id}`}>{user.name}</Link>
+                </TableCell>
                 <TableCell align="right">{user.surname}</TableCell>
                 <TableCell align="right">{user.contact.mail}</TableCell>
                 </TableRow>

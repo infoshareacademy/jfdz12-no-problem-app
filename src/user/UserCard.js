@@ -1,9 +1,15 @@
 import React from 'react';
 import { Button, Container, Grid, Paper, Typography, Divider, MenuList, MenuItem } from '@material-ui/core';
 import './UserCard.css';
+import {dataManager} from '../api/Api'
+import { Link } from 'react-router-dom'
 
 
 export function UserCard (props){
+    const userIdRef = props.match.params.id;
+    
+    const user = dataManager.getUserById(userIdRef) || {}; 
+
 
     return (
         <div>
@@ -46,13 +52,13 @@ export function UserCard (props){
 
                                 </Grid>
                                 <Grid item xs={7} container direction='column' className={'gridStyle'}>
-                                    <div className={'labelLeft'}>{props.user.nick}</div>
-                                    <div className={'labelLeft'}> {props.user.name}</div>
-                                    <div className={'labelLeft'}>{props.user.surname}</div>
-                                    <div className={'labelLeft'}>{props.user.gender}</div>
+                                    <div className={'labelLeft'}>{user.nick}</div>
+                                    <div className={'labelLeft'}> {user.name}</div>
+                                    <div className={'labelLeft'}>{user.surname}</div>
+                                    <div className={'labelLeft'}>{user.gender}</div>
                                     <Divider variant = 'middle'/>
-                                    <div className={'labelLeft'}>{props.user.contact.mail}</div>
-                                    <div className={'labelLeft'}>{props.user.contact.mobile}</div>
+                                    <div className={'labelLeft'}>{user.contact.mail}</div>
+                                    <div className={'labelLeft'}>{user.contact.mobile}</div>
                                 </Grid>
 
                             </Grid>
@@ -67,7 +73,8 @@ export function UserCard (props){
                         style={{margin:'20px'}} 
                         variant='outlined'
                         color = 'secondary'
-                        onClick = {() => props.onHandleOpen('openUserCard')}
+                        component = {Link} to={'/userAccount'}
+                       // onClick = {() => props.onHandleOpen('openUserCard')}
                     >
                         zamknij
                     </Button>    
