@@ -16,7 +16,7 @@ export function SignIn(props) {
         >
             <Container component="main" width="xs" style={{padding:'0px'}}>
                 <div className={'paper'}>
-                    <Avatar className = {'avatar'} style={{backgroundColor: '#f50057'}}>
+                    <Avatar className = {'avatar'}>
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">

@@ -58,14 +58,24 @@ export class User extends React.Component{
             userId: userId,
             openUserList: !prevState.openUserList,
             openUserCard: !prevState.openUserCard,
-        }))
+        }));
+        this.addIdToSesionStorage(userId);
     }
+
+    addIdToSesionStorage(userId){
+        sessionStorage.setItem('userId', userId);
+    }
+
+    getIdFromSesionStorage(){
+        sessionStorage.getItem('userId');
+    }
+
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
     
     render(){
         const { userId, openUserCard, openUserList, users, isLoading, error, isError} = this.state;
-       
+        
         return <div style={{marginTop:'100px'}}>
             {!isLoading && !openUserCard && <Button 
                 variant='outlined' 
