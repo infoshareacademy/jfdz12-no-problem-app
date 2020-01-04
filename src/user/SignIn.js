@@ -1,18 +1,15 @@
 import React from 'react';
-import {Avatar, Dialog, Button, TextField, FormControlLabel, Checkbox} from '@material-ui/core';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import {Grid, Link, Typography, Container, Avatar, Dialog, Button, TextField, FormControlLabel, Checkbox} from '@material-ui/core';
 import './SignIn.css';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import UserSelect from './UserSelect';
 
 export function SignIn(props) {
-
+    console.log('signin', props)
   return (
     <div>
         <Dialog
-            open={true}
+            open={props.openSignIn}
         >
             <Container component="main" width="xs" style={{padding:'0px'}}>
                 <div className={'paper'}>
@@ -23,6 +20,13 @@ export function SignIn(props) {
                         Wpisz email
                     </Typography>
                     <form className={'form'} >
+                    <UserSelect 
+                        options = {props.users}
+                        name = {'userId'}
+                        value = {props.userId}
+                        autoFocus
+                        onHandleUserChange = {props.onHandleUserChange}
+                    />
                     <TextField
                         onChange = {props.onHandleInput}
                         variant="outlined"
@@ -33,7 +37,7 @@ export function SignIn(props) {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
-                        autoFocus
+                        
                         value={props.email}
                     />
                     <TextField

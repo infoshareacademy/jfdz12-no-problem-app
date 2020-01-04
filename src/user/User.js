@@ -3,6 +3,7 @@ import { getUsers } from '../api/Api'
 import { Button } from '@material-ui/core';
 import { UserList } from './UserList';
 import { UserCard } from './UserCard';
+import {SignIn} from './SignIn'
 
 export class User extends React.Component{
     constructor(props){
@@ -14,10 +15,13 @@ export class User extends React.Component{
             users: [],
             openUserCard: false,
             openUserList: false,
-            userId: null,
+            userId: '',
+            openSignIn: true,
         }
         this.handleOpenUser = this.handleOpenUser.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
+        this.handleUserChange=this.handleUserChange.bind(this);
+        this.handleOpenUserCard = this.handleOpenUserCard.bind(this);
     }
 
     componentDidMount(){
@@ -62,8 +66,22 @@ export class User extends React.Component{
         this.addIdToSesionStorage(userId);
     }
 
+    handleOpenUserCard(){
+        this.setState(prevState =>({
+            openUserCard: !prevState.openUserCard,
+            openSignIn: !prevState.openSignIn,
+        }))
+    }
+
     addIdToSesionStorage(userId){
         sessionStorage.setItem('userId', userId);
+    }
+
+    handleUserChange(event){
+        console.log('name:', event.target.name, 'userid:', event.target.value )
+        this.setState({
+            [event.target.name]: event.target.value, 
+        })
     }
 
     getIdFromSesionStorage(){
@@ -74,9 +92,19 @@ export class User extends React.Component{
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
     
     render(){
-        const { userId, openUserCard, openUserList, users, isLoading, error, isError} = this.state;
-        
+        const { userId, openSignIn, openUserCard, openUserList, users, isLoading, error, isError} = this.state;
+         
         return <div style={{marginTop:'100px'}}>
+            {!isLoading && openSignIn &&<SignIn
+                //onHandleInput = {this.handleInput}
+                onHandleUserChange = {this.handleUserChange}
+                openSignIn = {openSignIn}
+                users={users}
+                userId={userId}
+                //email={email}
+                onHandleOpenUserCard = {this.handleOpenUserCard}
+            />}
+            
             {!isLoading && !openUserCard && <Button 
                 variant='outlined' 
                 onClick = {() => this.handleOpen('openUserList')}
@@ -85,6 +113,7 @@ export class User extends React.Component{
                 {openUserList ? 'ukryj listę uzytkowników' : 'pokaż listę użytkowników'}
             </Button>}
                         
+            
             {!isLoading && openUserList &&
                 <UserList 
                     users = {users}
