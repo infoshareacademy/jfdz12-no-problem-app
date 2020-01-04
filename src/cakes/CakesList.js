@@ -62,7 +62,6 @@ export class CakesList extends React.Component{
                 cakesMaxId: Math.max(...data[0].map(el => (el.id))), 
                 loading: false,
             })
-            console.log('didmount!');
         })
     }
 

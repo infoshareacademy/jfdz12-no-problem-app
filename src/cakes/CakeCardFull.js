@@ -19,8 +19,8 @@ class CakeCardFull extends React.Component{
         const typeColor = type.color;
 
         return (
-            <Container maxWidth = "lg" >
-                <Grid >
+            <Container maxWidth = "lg" style={{paddingTop:'100px'}}>
+                <Grid>
 
                     <Paper className = {classes.fCardHeader} >
                         <Typography variant="h4">{cake.name}</Typography>

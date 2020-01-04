@@ -28,3 +28,23 @@ export function getCooks(){
         });
      
 }
+
+class DataManager {
+    constructor(){
+        this.users = [];
+        fetch('./users.json')
+            .then(res => res.json())
+            .then (data => {
+                this.users = data;        
+            })    
+    } 
+
+    getUsers = () =>{
+        return Promise.resolve(this.users)
+    }
+
+
+}
+
+const dataManager = new DataManager() 
+export {dataManager}

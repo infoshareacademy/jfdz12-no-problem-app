@@ -50,12 +50,11 @@ export const styles= {
         width: '100%', 
         minHeight: '100px',
         height:'100%', 
-        padding: '10px',
         borderRadius: '10px',
     },
     fCardPaper:{
         minWidth: '200px',
-        width:'100%',
+      
         margin: '10px', 
         padding:'10px 20px',
         textAlign: 'left',

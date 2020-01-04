@@ -5,7 +5,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import UserSelect from './UserSelect';
 
 export function SignIn(props) {
-    console.log('signin', props)
+    //console.log('signin', props)
   return (
     <div>
         <Dialog

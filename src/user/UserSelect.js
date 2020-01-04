@@ -21,7 +21,7 @@ const styles = {
 
 
 function UserSelect (props) {
-console.log('userselect',props)
+//console.log('userselect',props)
 const {classes, options} = props;
 
     return( 
