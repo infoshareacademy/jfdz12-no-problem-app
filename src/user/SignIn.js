@@ -12,7 +12,7 @@ export function SignIn(props) {
   return (
     <div>
         <Dialog
-            open={props.openSignIn}
+            open={true}
         >
             <Container component="main" width="xs" style={{padding:'0px'}}>
                 <div className={'paper'}>

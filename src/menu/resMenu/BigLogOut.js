@@ -48,7 +48,7 @@ export default function BigLogIn(props) {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Logowanie">
-                        <IconButton onClick={props.log} className={classes.menuIcon}>
+                        <IconButton component={Link} to="/signin" onClick={props.log} className={classes.menuIcon}>
                             <FaceIcon className={classes.menuIconInner}/>
                         </IconButton>
                     </Tooltip>

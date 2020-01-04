@@ -66,7 +66,7 @@ export class User extends React.Component{
     render(){
         const { userId, openUserCard, openUserList, users, isLoading, error, isError} = this.state;
        
-        return <div>
+        return <div style={{marginTop:'100px'}}>
             {!isLoading && !openUserCard && <Button 
                 variant='outlined' 
                 onClick = {() => this.handleOpen('openUserList')}
