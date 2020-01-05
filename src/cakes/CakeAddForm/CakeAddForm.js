@@ -109,7 +109,7 @@ class CakeAddForm extends React.Component{
 
         const selectedCook = this.findDataById(cooks, cookId);
         const selectetType = this.findDataById(types,typeId);
-        const toSave = Object.entries(this.props.cakeAdd);  
+        //const toSave = Object.entries(this.props.cakeAdd);  
         
         return(<div>
             <Container maxWidth = "lg" style={{paddingTop:'100px'}}>
@@ -254,15 +254,6 @@ class CakeAddForm extends React.Component{
                     </Button>
                     
                 </Grid >
-                    
-                <Grid item xs={12}>
-                    <div>
-
-                        {toSave.map((el,idx) => (<div key={idx}> {el[0]} : {typeof (el[1]) === 'boolean'? (el[1]? "tak":"nie") :el[1]}  </div>))}
-
-                    </div>
-                    
-                </Grid>
             </Container>
             
         </div>)

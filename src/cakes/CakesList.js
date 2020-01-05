@@ -1,13 +1,13 @@
 import React from 'react';
 import CakeFilters from './filter/CakeFilters';
-import { CircularProgress, Container, Grid, Button } from '@material-ui/core';
+import { CircularProgress, Container, Grid } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
 import { RenderCakesList } from './RenderCakesList';
-import './Cake.css';
 import FilterAll from './filterAll/FilterAll';
 import CakeAddForm from './CakeAddForm/CakeAddForm';
 import { CAKEADDOBJ } from '../constans/emptyObject'
 import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
+import CakeAddButton  from './CakeAddForm/CakeAddButton';
 
 export class CakesList extends React.Component{
    
@@ -94,7 +94,7 @@ export class CakesList extends React.Component{
             filterVisibility: !prevState.filterVisibility,
             })
         );
-        console.log(this.state.filterVisibility)
+        //console.log(this.state.filterVisibility)
         
       }
 
@@ -206,13 +206,7 @@ export class CakesList extends React.Component{
 
         if (!cakeAddFormOpen && !cakeCardOpen && !loading) {
             return <>
-                <Container maxWidth = "lg" style={{paddingTop:'100px'}}>
-                    <Grid>
-                        <Button onClick= {this.handleCakeAddForm} variant='outlined' >
-                            dodaj nowe ciasto
-                        </Button>
-                    </Grid>
-       
+                <Container maxWidth = "lg" style={{paddingTop:'100px'}}>       
                 
                     <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
                         {filterVisibility && filterAllToogle &&
@@ -260,6 +254,11 @@ export class CakesList extends React.Component{
                         </Grid>   
                     </Grid> 
                     <FilterVisibleToogle handleFilterVisibility={this.handleFilterVisibility}/>
+                
+                    <CakeAddButton
+                        onHandleCakeAddChange={this.handleCakeAddForm} 
+                    />
+
                 </Container>
             </>
         }

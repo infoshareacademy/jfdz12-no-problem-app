@@ -25,7 +25,7 @@ export function UserList(props){
                     {user.id}
                 </TableCell>
                 <TableCell align="right" >
-                <Link to={`/userAccount/user/${user.id}`}>{user.name}</Link>
+                    <Link to={`/userAccount/user/${user.id}`} style ={{textDecoration:'none'}}>{user.name}</Link>
                 </TableCell>
                 <TableCell align="right">{user.surname}</TableCell>
                 <TableCell align="right">{user.contact.mail}</TableCell>

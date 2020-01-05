@@ -50,13 +50,13 @@ export default function SmallLogIn(props) {
                         id="menu-appbar"
                         anchorEl={props.anchorEl}
                         anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
+                            vertical: 'top',
+                            horizontal: 'right',
                         }}
                         keepMounted
                         transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
+                            vertical: 'top',
+                            horizontal: 'right',
                         }}
                         className={classes.userAccount}
                         open={props.open}

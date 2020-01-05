@@ -4,8 +4,8 @@ import { IconButton, Tooltip, Toolbar } from '@material-ui/core/';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import FaceIcon from '@material-ui/icons/Face';
 import CakeIcon from '@material-ui/icons/Cake';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 const useStyles = makeStyles(theme => ({
     logo: {
@@ -48,8 +48,8 @@ export default function BigLogIn(props) {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Logowanie">
-                        <IconButton component={Link} to="/signin" onClick={props.log} className={classes.menuIcon}>
-                            <FaceIcon className={classes.menuIconInner}/>
+                        <IconButton component={Link} to="/SignIn" onClick={props.log} className={classes.menuIcon}>
+                            <LockOpenIcon className={classes.menuIconInner}/>
                         </IconButton>
                     </Tooltip>
                 </div>

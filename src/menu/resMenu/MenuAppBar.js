@@ -34,8 +34,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-
 export default function MenuAppBar(props) {
   const classes = useStyles();
   const matches = useMediaQuery('(max-width:600px)');
@@ -59,16 +57,27 @@ export default function MenuAppBar(props) {
     props.setAuth()
   }
   
- 
-  
-
   let content;
   
       if (props.auth&&matches) {
-          content = <SmallLogIn auth={props.auth} log={log} handleChange={handleChange} handleClose={handleClose} handleMenu={handleMenu} open={open} anchorEl={anchorEl}/>;
+          content = <SmallLogIn 
+                      auth={props.auth} 
+                      log={log} 
+                      handleChange={handleChange} 
+                      handleClose={handleClose} 
+                      handleMenu={handleMenu} 
+                      open={open} 
+                      anchorEl={anchorEl}
+                    />;
       };
       if (!props.auth&&matches) {
-          content = <SmallLogOut auth={props.auth} log={log} handleChange={handleChange} handleClose={handleClose} handleMenu={handleMenu}/>
+          content = <SmallLogOut 
+                      auth={props.auth} 
+                      log={log} 
+                      handleChange={handleChange} 
+                      handleClose={handleClose} 
+                      handleMenu={handleMenu}
+                    />
       };
       if (props.auth&&!matches) {
           content = <BigLogIn log={log}/>
@@ -82,6 +91,7 @@ export default function MenuAppBar(props) {
   return (
     
     <div className={classes.root} position="static">
+      
       <AppBar className={classes.navStyle}>
        
            {content}

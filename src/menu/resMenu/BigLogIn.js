@@ -4,7 +4,7 @@ import { IconButton, Tooltip, Toolbar } from '@material-ui/core/';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import ControlPointIcon from '@material-ui/icons/ControlPoint';
+//import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import FaceIcon from '@material-ui/icons/Face';
 import CakeIcon from '@material-ui/icons/Cake';
@@ -31,6 +31,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function BigLogIn(props) {
     const classes = useStyles();
+    const userId = sessionStorage.getItem('userId')
+
     return (
         <div>
             <Toolbar className={classes.flex}>
@@ -51,15 +53,15 @@ export default function BigLogIn(props) {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Twoje konto">
-                        <IconButton component={Link} to="/userAccount" className={classes.menuIcon}>
+                    <IconButton component={Link} to={`/userAccount/user/${userId}`} className={classes.menuIcon}>
                             <FaceIcon className={classes.menuIconInner}/>
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="Dodaj ciasto">
+                    {/* <Tooltip title="Dodaj ciasto">
                         <IconButton component={Link} to="/addCake" className={classes.menuIcon}>
                             <ControlPointIcon className={classes.menuIconInner}/>
                         </IconButton>
-                    </Tooltip>
+                    </Tooltip> */}
                     <Tooltip title="Wylogowanie">
                         <IconButton onClick={props.log} className={classes.menuIcon}>
                             <ExitToAppIcon className={classes.menuIconInner}/>

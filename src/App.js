@@ -10,6 +10,7 @@ import MenuAppBar from './menu/resMenu/MenuAppBar';
 import { User } from './user/User'
 import { UserCard } from './user/UserCard'
 import { dataManager } from './api/Api'
+import { SignIn } from './user/SignIn';
 
 class App extends React.Component {
   constructor(){
@@ -23,7 +24,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-
+    let i=0;
     this.setState({
              isLoading: true,
              isError: false,
@@ -32,22 +33,29 @@ class App extends React.Component {
             const data = dataManager.getUsers();
             const data2 = dataManager.getCooks();
             const data3 = dataManager.getTypes();
-
-            let i=0;
+            
             if (data.length > 0 && data2.length > 0 && data3.length>0){
                 this.setState ({
                   isLoading: false, 
                 })
                 clearInterval(waitingData)
-                console.log('App.js -> załadowane', data, data2, data3)
+                console.log('App.js -> załadowane')
               } else {
-                console.log('czekam', i++ )
+                i++;
+                console.log('czekam', i );
+                if (i>20){
+                  clearInterval(waitingData);
+                  this.setState({
+                    isError: true,
+                    error: 'nie mogę pobrać danych!!',
+                    isLoading: false,
+                  })
+                }
               }
-            }, 10)
+            }, 100)
          }) 
   }
   
-
   setAuth = () => {
     this.setState(prevState =>({
         auth: !prevState.auth,
@@ -57,12 +65,9 @@ class App extends React.Component {
   render(){
     const { isLoading, isError, error } = this.state;
 
-    return (
-      <div>
-
-        { !isLoading &&
-    
-            <BrowserRouter>
+    if (!isLoading && !isError){
+      return (
+      <BrowserRouter>
               <MenuAppBar setAuth={this.setAuth} auth={this.state.auth}/>
               <div className="App">  
                 <Route exact path='/' component={Dashboard} />
@@ -71,16 +76,23 @@ class App extends React.Component {
                 <Route path='/cakes' component={CakesList} />
                 <Route path='/cooks' component={CooksList} />
                 <Route path='/addCake' component={AddCake} />
+                <Route path='/SignIn' component={SignIn} />
               </div>    
             </BrowserRouter>
-          }
-          
-        {isLoading && <CircularProgress color="secondary" />}
-
-        {isError && <div> {error} </div> }
-
-      </div>
-    );
+      )}
+    
+    if(isLoading && !isError) {
+      return (
+        <div className="App">
+          <CircularProgress color="secondary" />
+        </div>
+      )
+    }
+    
+    if(isError) { return (
+      <div className="App"> {error} </div>
+      )} 
+  
   }
 }
 

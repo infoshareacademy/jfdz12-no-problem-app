@@ -72,10 +72,7 @@ export class User extends React.Component{
         })
     }
 
-    getIdFromSesionStorage(){
-        sessionStorage.getItem('userId');
-    }
-
+    
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
     
@@ -113,7 +110,6 @@ export class User extends React.Component{
                 <UserCard 
                     user = {this.findDataById(users, userId)}
                     onHandleOpen = {this.handleOpen}
-
                 />
             
             }

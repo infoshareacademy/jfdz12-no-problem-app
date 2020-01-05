@@ -4,16 +4,13 @@ import './UserCard.css';
 import {dataManager} from '../api/Api'
 import { Link } from 'react-router-dom'
 
-
 export function UserCard (props){
     const userIdRef = props.match.params.id;
-    
-    const user = dataManager.getUserById(userIdRef) || {}; 
-
+    let user = dataManager.getUserById(userIdRef);
 
     return (
         <div>
-            <Container maxWidth='lg' style={{boxSizing:'border-box'}}>
+            <Container maxWidth='lg'>
                 <Grid container>
                     <Grid item xs={12} className={'gridStyle'}>
                         <Paper>
@@ -73,8 +70,7 @@ export function UserCard (props){
                         style={{margin:'20px'}} 
                         variant='outlined'
                         color = 'secondary'
-                        component = {Link} to={'/userAccount'}
-                       // onClick = {() => props.onHandleOpen('openUserCard')}
+                        component = {Link} to={'/'}
                     >
                         zamknij
                     </Button>    

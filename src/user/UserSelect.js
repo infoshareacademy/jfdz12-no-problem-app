@@ -21,7 +21,8 @@ const styles = {
 
 
 function UserSelect (props) {
-//console.log('userselect',props)
+//console.log('userselect',props);
+
 const {classes, options} = props;
 
     return( 
@@ -36,7 +37,7 @@ const {classes, options} = props;
                     labelId = "userIdselect"
                     name = {props.name}
                     value = {props.value}
-                    onChange = {props.onHandleUserChange}
+                    onChange = {props.onHandleChange}
                     labelWidth={130}
                     >
                         <MenuItem >
