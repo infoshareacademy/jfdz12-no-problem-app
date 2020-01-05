@@ -17,6 +17,7 @@ class App extends React.Component {
     super();
     this.state = {
       auth: false,
+      userId: '',
       isLoading: false,
       isError:false,
       error:'',
@@ -63,22 +64,24 @@ class App extends React.Component {
   };
     
   render(){
-    const { isLoading, isError, error } = this.state;
+    const { isLoading, isError, error, auth } = this.state;
 
     if (!isLoading && !isError){
       return (
-      <BrowserRouter>
-              <MenuAppBar setAuth={this.setAuth} auth={this.state.auth}/>
-              <div className="App">  
-                <Route exact path='/' component={Dashboard} />
-                <Route exact path='/userAccount' component={User} />
-                <Route exact path='/userAccount/user/:id' component={UserCard}/>
-                <Route path='/cakes' component={CakesList} />
-                <Route path='/cooks' component={CooksList} />
-                <Route path='/addCake' component={AddCake} />
-                <Route path='/SignIn' component={SignIn} />
-              </div>    
-            </BrowserRouter>
+        <BrowserRouter>
+          <MenuAppBar setAuth={this.setAuth} 
+                      auth={auth}
+          />
+          <div className="App">  
+            <Route exact path='/' component={Dashboard} />
+            <Route exact path='/userAccount' component={User} />
+            <Route exact path='/userAccount/user' component={UserCard}/>
+            <Route path='/cakes' component={CakesList} />
+            <Route path='/cooks' component={CooksList} />
+            <Route path='/addCake' component={AddCake} />
+            <Route path='/SignIn' component={SignIn} />
+          </div>    
+        </BrowserRouter>
       )}
     
     if(isLoading && !isError) {

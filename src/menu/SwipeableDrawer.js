@@ -54,7 +54,7 @@ export default function SwipeableTemporaryDrawer(props) {
       </List>
       <Divider />
       <List>
-          <ListItem button key={'Zaloguj'} onClick={props.log}>
+          <ListItem button key={'Zaloguj'} onClick={props.log} component={Link} to='/SignIn'>
             <ListItemText primary={'Zaloguj'}  />
           </ListItem>
       </List>
@@ -79,7 +79,7 @@ export default function SwipeableTemporaryDrawer(props) {
       </List>
       <Divider />
       <List>
-          <ListItem button key={'Moje konto'} component={Link} to='/user'>
+          <ListItem button key={'Moje konto'} component={Link} to='/userAccount/user'>
             <ListItemText primary={'Moje konto'} />
           </ListItem>
           <ListItem button key={'Dodaj ciasto'} component={Link} to='/addCake'>

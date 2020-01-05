@@ -43,6 +43,7 @@ export default function SmallLogOut(props) {
                     onClick={props.log}
                     color="inherit"
                     className={classes.label}
+                    component={Link} to='/SignIn'
                 > 
                     <div>
                         Zaloguj

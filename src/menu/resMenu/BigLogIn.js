@@ -31,7 +31,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function BigLogIn(props) {
     const classes = useStyles();
-    const userId = sessionStorage.getItem('userId')
 
     return (
         <div>
@@ -53,7 +52,7 @@ export default function BigLogIn(props) {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Twoje konto">
-                    <IconButton component={Link} to={`/userAccount/user/${userId}`} className={classes.menuIcon}>
+                    <IconButton component={Link} to={`/userAccount/user`} className={classes.menuIcon}>
                             <FaceIcon className={classes.menuIconInner}/>
                         </IconButton>
                     </Tooltip>

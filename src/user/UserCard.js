@@ -5,7 +5,7 @@ import {dataManager} from '../api/Api'
 import { Link } from 'react-router-dom'
 
 export function UserCard (props){
-    const userIdRef = props.match.params.id;
+    const userIdRef = sessionStorage.getItem('userId');
     let user = dataManager.getUserById(userIdRef);
 
     return (
