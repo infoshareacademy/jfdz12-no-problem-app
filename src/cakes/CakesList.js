@@ -2,13 +2,12 @@ import React from 'react';
 import CakeFilters from './filter/CakeFilters';
 import { CircularProgress, Container, Grid } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
-import {RenderCakesList} from './RenderCakesList';
-import './Cake.css'
+import { RenderCakesList } from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
+import CakeAddForm from './CakeAddForm/CakeAddForm';
+import { CAKEADDOBJ } from '../constans/emptyObject'
 import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
-
-
-
+import CakeAddButton  from './CakeAddForm/CakeAddButton';
 
 export class CakesList extends React.Component{
    
@@ -31,20 +30,28 @@ export class CakesList extends React.Component{
             filterAllToogle: false,
             priceRange: [],
             sortById: 0,
+            cakeAddFormOpen: false,
+            cakesMaxId: 0,
+            cakeAdd: {},
+            saveCake: false,
             filterVisibility: false,
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
         this.handleChangePrice = this.handleChangePrice.bind(this);
         this.handleSortBy = this.handleSortBy.bind(this);
+        this.handleCakeAddForm = this.handleCakeAddForm.bind(this);
+        this.saveCake = this.saveCake.bind(this);
         this.handleFilterVisibility = this.handleFilterVisibility.bind(this);
     }
 
     componentDidMount() {
         Promise.all([
+            //fetch('http://localhost:4000/cakes').then(res => res.json()),
             fetch('./cakes.json').then(res => res.json()),
             fetch('./cooks.json').then(res => res.json()),
             fetch('./types.json').then(res => res.json()),
+            
         ]).then(data => {
             const price = data[0].map(el => el.price); 
             this.setState({
@@ -52,8 +59,32 @@ export class CakesList extends React.Component{
                 cooks: data[1],
                 types: data[2],
                 priceRange: [Math.min(...price),Math.max(...price)],
+                cakesMaxId: Math.max(...data[0].map(el => (el.id))), 
                 loading: false,
             })
+        })
+    }
+
+    componentDidUpdate(){
+        if (this.state.saveCake) {
+            
+            // fetch('http://localhost:4000/cakes')
+            //     .then(res => res.json())
+            //     .then(data => {
+            //         const price = data.map(el => el.price); 
+            //         this.setState({
+            //             cakes: data,
+            //             priceRange: [Math.min(...price),Math.max(...price)],
+            //             cakesMaxId: Math.max(...data.map(el => (el.id))),
+            //         })
+            //     })
+            this.setState({saveCake: false})
+        }
+    }
+
+    saveCake(){
+        this.setState({
+            saveCake: true,
         })
     }
     
@@ -63,7 +94,7 @@ export class CakesList extends React.Component{
             filterVisibility: !prevState.filterVisibility,
             })
         );
-        console.log(this.state.filterVisibility)
+        //console.log(this.state.filterVisibility)
         
       }
 
@@ -130,12 +161,27 @@ export class CakesList extends React.Component{
             sortById: event.target.value,
         })
     }
+
+    handleCakeAddForm(){
+        this.setState(prevState =>({
+            cakeAdd:  {...CAKEADDOBJ},
+            cakeAddFormOpen: !prevState.cakeAddFormOpen,
+            saveCake: false,
+        }))
+    }
+
+    handleCakeAddChange = (newCake) => {
+        this.setState(prevState =>({
+            ...prevState.cakeAdd, ...newCake,
+        }) )
+    }
     
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     
       
     render(){    
+ 
         const { cakeCardOpen, 
                 cakeCardOpenId, 
                 cakes, 
@@ -151,14 +197,17 @@ export class CakesList extends React.Component{
                 filterTypesId,
                 priceRange,
                 sortById,
+                cakeAddFormOpen,
+                cakeAdd,
+                cakesMaxId,
             } = this.state;
         
-        const filterVisibility = this.state.filterVisibility;
-       
-       
-        if (!cakeCardOpen && !loading) {
+        const { filterVisibility } = this.state;
+
+        if (!cakeAddFormOpen && !cakeCardOpen && !loading) {
             return <>
-                <Container maxWidth = "lg" style={{paddingTop:'100px'}}>
+                <Container maxWidth = "lg" style={{paddingTop:'100px'}}>       
+                
                     <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
                         {filterVisibility && filterAllToogle &&
                             <Grid item xs={12} sm={3} md={2}> 
@@ -205,6 +254,11 @@ export class CakesList extends React.Component{
                         </Grid>   
                     </Grid> 
                     <FilterVisibleToogle handleFilterVisibility={this.handleFilterVisibility}/>
+                
+                    <CakeAddButton
+                        onHandleCakeAddChange={this.handleCakeAddForm} 
+                    />
+
                 </Container>
             </>
         }
@@ -221,6 +275,18 @@ export class CakesList extends React.Component{
                     cook = {this.findDataById(cooks, oneCake.cookId)}
                 />
             )
+        }
+
+        if(cakeAddFormOpen && !loading ){
+            return <CakeAddForm 
+                onHandleCakeAddForm = {this.handleCakeAddForm}
+                onHandleCakeAddChange = {this.handleCakeAddChange}
+                cooks = {cooks}
+                types = {types}
+                cakeAdd = {cakeAdd}
+                cakesMaxId = {cakesMaxId}
+                onSaveCake = {this.saveCake}
+            />
         }
 
         if(loading){

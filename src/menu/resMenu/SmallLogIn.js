@@ -50,19 +50,19 @@ export default function SmallLogIn(props) {
                         id="menu-appbar"
                         anchorEl={props.anchorEl}
                         anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
+                            vertical: 'top',
+                            horizontal: 'right',
                         }}
                         keepMounted
                         transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
+                            vertical: 'top',
+                            horizontal: 'right',
                         }}
                         className={classes.userAccount}
                         open={props.open}
                         onClose={props.handleClose}
                     >
-                        <MenuItem onClick={props.handleClose} component={Link} to='/userAccount'>Moje konto</MenuItem>
+                        <MenuItem onClick={props.handleClose} component={Link} to='/userAccount/user'>Moje konto</MenuItem>
                         <MenuItem onClick={props.handleClose} component={Link} to='/addCake'>Dodaj ciasto</MenuItem>
                         <MenuItem onClick={props.handleChange} component={Link} to='/'>Wyloguj się</MenuItem>
                     </Menu>

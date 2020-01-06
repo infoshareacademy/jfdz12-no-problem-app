@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormControl, InputLabel, MenuItem, Select, withStyles, } from '@material-ui/core';
+import {SORTOPTIONS} from '../../constans/selectConstans'
 import clsx from 'clsx';
 
 const styles = {
@@ -22,49 +23,84 @@ const styles = {
   };
 
 
-class FilterSelect extends React.Component{
-    constructor(props){
-        super(props);
-        this.handleSortBy = this.handleSortBy.bind(this);
-    }
+function FilterSelect (props) {
     
-    handleSortBy(event){
-        this.props.onHandleSortBy(event);
-    }
-
-    render(){
-    const {classes} = this.props;
+const {classes} = props;
+    
+    return( <div>
+        <FormControl variant="outlined" 
+                    className={clsx(classes.root, classes.formControl)}
+                    color='secondary'
+                    margin='dense'
+        >
+            <InputLabel id="select-outlined-label">
+                sortowanie
+            </InputLabel>
+            <Select
+                labelId="select-outlined-label"
+                id="select-outlined"
+                value={props.sortById}
+                onChange={props.onHandleSortBy}
+                labelWidth={70}
+                >
+                    {SORTOPTIONS.map(option => (
+                            <MenuItem key={option.id} value={option.id}>{option.name}</MenuItem>
+                        ))    
+                    }
+            </Select>
+        </FormControl>
         
-        return( <div>
-            <FormControl variant="outlined" 
-                        className={clsx(classes.root, classes.formControl)}
-                        color='secondary'
-                        margin='dense'
-            >
-                <InputLabel id="select-outlined-label">
-                    sortowanie
-                </InputLabel>
-                <Select
-                    labelId="selecwt-outlined-label"
-                    id="select-outlined"
-                    value={this.props.sortById}
-                    onChange={this.handleSortBy}
-                    labelWidth={70}
-                    >
-                    <MenuItem value={0}>
-                        <em>brak</em>
-                    </MenuItem>
-                        <MenuItem value={1}>Nazwa ciasta</MenuItem>
-                        <MenuItem value={2}>Cena malejąco</MenuItem>
-                        <MenuItem value={3}>Cana rosnąco</MenuItem>
-                </Select>
-            </FormControl>
-            
-           </div>
-        )
-    }
-
+        </div>
+    )
 }
 
 
+
+
 export default withStyles (styles)(FilterSelect);
+
+
+// class FilterSelect extends React.Component{
+//     constructor(props){
+//         super(props);
+//         this.handleSortBy = this.handleSortBy.bind(this);
+//     }
+    
+//     handleSortBy(event){
+//         this.props.onHandleSortBy(event);
+//     }
+
+//     render(){
+//     const {classes} = this.props;
+        
+//         return( <div>
+//             <FormControl variant="outlined" 
+//                         className={clsx(classes.root, cladescsses.formControl)}
+//                         color='secondary'
+//                         margin='dense'
+//             >
+//                 <InputLabel id="select-outlined-label">
+//                     sortowanie
+//                 </InputLabel>
+//                 <Select
+//                     labelId="selecwt-outlined-label"
+//                     id="select-outlined"
+//                     value={this.props.sortById}
+//                     onChange={this.handleSortBy}
+//                     labelWidth={70}
+//                     >
+//                         {SORTOPTIONS.map(option => (
+//                                 <MenuItem key={option.id} value={option.id}>{option.name}</MenuItem>
+//                             ))    
+//                         }
+//                 </Select>
+//             </FormControl>
+            
+//            </div>
+//         )
+//     }
+
+// }
+
+
+// export default withStyles (styles)(FilterSelect);

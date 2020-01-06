@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -22,14 +22,15 @@ export const FilterVisibleToogle = (props) => {
     const classes = useStyles();
 
     return(
-        <div  >
-            <IconButton aria-label="search"
-                onClick={handleFilterVisibility}
-                className={classes.filterIcon}
-            >
-                <SearchIcon />
-            </IconButton>
-            
+        <div>
+            <Tooltip title="Wyszukaj ciasto" placement="left">
+                <IconButton aria-label="search"
+                    onClick={handleFilterVisibility}
+                    className={classes.filterIcon}
+                >
+                    <SearchIcon />
+                </IconButton>
+            </Tooltip>
         </div>
     )
 

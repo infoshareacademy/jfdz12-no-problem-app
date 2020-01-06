@@ -19,8 +19,8 @@ class CakeCardFull extends React.Component{
         const typeColor = type.color;
 
         return (
-            <Container maxWidth = "lg" >
-                <Grid >
+            <Container maxWidth = "lg" style={{paddingTop:'100px'}}>
+                <Grid>
 
                     <Paper className = {classes.fCardHeader} >
                         <Typography variant="h4">{cake.name}</Typography>
@@ -51,7 +51,7 @@ class CakeCardFull extends React.Component{
                             <Paper className={classes.fCardPaper}>
                                 
                                 <Typography variant='body1' className={classes.fCardWrapType}>
-                                    <span className={classes.fCardSubText}>kategoria:</span>
+                                    <span className={classes.fCardSubText}>typ ciasta:</span>
                                     <span className={classes.fCardType} style= {{backgroundColor: typeColor}}>
                                         {type.name}
                                     </span>
