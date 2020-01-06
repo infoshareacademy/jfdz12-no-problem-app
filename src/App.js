@@ -34,8 +34,9 @@ class App extends React.Component {
             const data = dataManager.getUsers();
             const data2 = dataManager.getCooks();
             const data3 = dataManager.getTypes();
+            const data4 = dataManager.getLikes();
             
-            if (data.length > 0 && data2.length > 0 && data3.length>0){
+            if (data.length > 0 && data2.length > 0 && data3.length>0 && data4.length>0){
                 this.setState ({
                   isLoading: false, 
                 })

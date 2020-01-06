@@ -1,73 +1,73 @@
 [
     {
         "id" : 1,
-        "idUser" : 1,
-        "idCake": 2
+        "userId" : 1,
+        "cakeId": 2
     },
     {
         "id" : 2,
-        "idUser" : 1,
-        "idCake": 3
+        "userId" : 1,
+        "cakeId": 3
     },
     {
         "id" : 3,
-        "idUser" : 2,
-        "idCake": 4
+        "userId" : 2,
+        "cakeId": 4
     },
     {
         "id" : 4,
-        "idUser" : 3,
-        "idCake": 5
+        "userId" : 3,
+        "cakeId": 5
     },
     {
         "id" : 5,
-        "idUser" : 4,
-        "idCake": 6
+        "userId" : 4,
+        "cakeId": 6
     },
     {
         "id" : 6,
-        "idUser" : 5,
-        "idCake": 7
+        "userId" : 5,
+        "cakeId": 7
     },
     {
         "id" : 7,
-        "idUser" : 6,
-        "idCake": 8
+        "userId" : 6,
+        "cakeId": 8
     },
     {
         "id" : 8,
-        "idUser" : 6,
-        "idCake": 9
+        "userId" : 6,
+        "cakeId": 9
     },
     {
         "id" : 9,
-        "idUser" : 6,
-        "idCake": 10
+        "userId" : 6,
+        "cakeId": 10
     },
     {
         "id" : 10,
-        "idUser" : 7,
-        "idCake": 11
+        "userId" : 7,
+        "cakeId": 11
     },
     {
         "id" : 11,
-        "idUser" : 8,
-        "idCake": 12
+        "userId" : 8,
+        "cakeId": 12
     },
     {
         "id" : 12,
-        "idUser" : 9,
-        "idCake": 13
+        "userId" : 9,
+        "cakeId": 13
     },
     {
         "id" : 13,
-        "idUser" : 10,
-        "idCake": 14
+        "userId" : 10,
+        "cakeId": 14
     },
     {
         "id" : 14,
-        "idUser" : 11,
-        "idCake": 15
+        "userId" : 11,
+        "cakeId": 15
     }
 
 ]

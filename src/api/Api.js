@@ -3,6 +3,8 @@ class DataManager {
         this.users = [];
         this.types = [];
         this.cooks = [];
+        this.likes = [];
+        this.cakes = [];
         fetch('./users.json')
             .then (res => res.json())
             .then (data => {this.users = data;})
@@ -10,11 +12,19 @@ class DataManager {
         fetch('./cooks.json')
             .then (res => res.json())
             .then (data => {this.cooks = data})
-            .catch(error => console.log(`Nie mogę pobrać danych cooks ${error.toString()}`)); ; 
+            .catch(error => console.log(`Nie mogę pobrać danych cooks ${error.toString()}`)); 
+        fetch('./cakes.json')
+            .then (res => res.json())
+            .then (data => {this.cakes = data})
+            .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
         fetch('./types.json')
             .then(res => res.json())
             .then (data => this.types = data)  
-            .catch(error => console.log(`Nie mogę pobrać danych types ${error.toString()}`)); ; 
+            .catch(error => console.log(`Nie mogę pobrać danych types ${error.toString()}`));
+        fetch('./likes.json')
+            .then(res => res.json())
+            .then (data => this.likes = data)  
+            .catch(error => console.log(`Nie mogę pobrać danych likes ${error.toString()}`)); ;  
     } 
 
     getUsers = () =>{
@@ -50,6 +60,31 @@ class DataManager {
         
         return this.types;
     }
+
+    getLikes = () => {
+        this.likes.length>0 
+            ? console.log('Api getLikes likes') 
+            : console.log('Api getLikes nie udalo się załadowac danych');
+        
+        return this.likes;
+    }
+
+    getLikesWithData = (logedUdserId) =>{
+
+        const filteredData = this.likes.filter((like) => like.userId === parseInt(logedUdserId));
+
+        const data = filteredData.map ((like)=>{
+            const newData = {
+                id: like.id,
+                user: this.users.find((user) => like.userId === user.id),
+                cake: this.cakes.find((cake) => like.cakeId === cake.id),
+            }
+            return newData;
+        });
+
+        return data;
+    }
+
 }
 
 const dataManager = new DataManager() 

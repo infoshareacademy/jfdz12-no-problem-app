@@ -13,6 +13,7 @@ export class UserCard extends React.Component{
         this.userIdRef = sessionStorage.getItem('userId');
         this.state ={
             user: {},
+            likeData:{},
             isLoading: true,
             selectedMenu: {
                 basic : true,
@@ -24,8 +25,10 @@ export class UserCard extends React.Component{
     componentDidMount(){
         setTimeout (() => {
             const userData = dataManager.getUserById(this.userIdRef);
+            const likeData = dataManager.getLikesWithData(this.userIdRef);
             this.setState ({
                 user: userData,
+                likes: likeData,
                 isLoading: false,  
             }) ;
         }, 200) 
@@ -46,8 +49,9 @@ export class UserCard extends React.Component{
     }
 
     render(){
-        const {user, isLoading, selectedMenu} =  this.state;
-      
+        const {user, likes, isLoading, selectedMenu} =  this.state;
+        console.log(likes);
+
         return (
             <div>
         
@@ -68,10 +72,14 @@ export class UserCard extends React.Component{
                              
                         </Grid>
                         <Grid item xs className={'gridStyle'}>
-                            {selectedMenu.basic &&<UserBasicData  
-                                user = {user}
+                            {selectedMenu.basic &&
+                                <UserBasicData  
+                                    user = {user}
                                 />}
-                            {selectedMenu.like && <UserLikeData/> }
+                            {selectedMenu.like && 
+                                <UserLikeData
+                                    likes = {likes}
+                                /> }
                                 
                         </Grid>
     
