@@ -52,7 +52,7 @@ export default function BigLogIn(props) {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Twoje konto">
-                    <IconButton component={Link} to={`/userAccount/user`} className={classes.menuIcon}>
+                    <IconButton component={Link} to={`/oneuser`} className={classes.menuIcon}>
                             <FaceIcon className={classes.menuIconInner}/>
                         </IconButton>
                     </Tooltip>

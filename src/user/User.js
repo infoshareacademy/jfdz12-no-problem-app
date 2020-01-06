@@ -6,8 +6,8 @@ import {SignIn} from './SignIn'
 import {dataManager} from '../api/Api'
 
 export class User extends React.Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state = {
             isLoading: false,   
             isError: false,

@@ -6,15 +6,15 @@ class DataManager {
         fetch('./users.json')
             .then (res => res.json())
             .then (data => {this.users = data;})
-            .catch(error => console.log(`Nie mogęe pobrać damnych users ${error.toString()}`)); 
+            .catch(error => console.log(`Nie mogę pobrać danych users ${error.toString()}`)); 
         fetch('./cooks.json')
             .then (res => res.json())
             .then (data => {this.cooks = data})
-            .catch(error => console.log(`Nie mogęe pobrać damnych cooks ${error.toString()}`)); ; 
+            .catch(error => console.log(`Nie mogę pobrać danych cooks ${error.toString()}`)); ; 
         fetch('./types.json')
             .then(res => res.json())
             .then (data => this.types = data)  
-            .catch(error => console.log(`Nie mogęe pobrać damnych types ${error.toString()}`)); ; 
+            .catch(error => console.log(`Nie mogę pobrać danych types ${error.toString()}`)); ; 
     } 
 
     getUsers = () =>{
@@ -29,7 +29,7 @@ class DataManager {
         const user = this.users.find ((data)=> data.id === parseInt(id));
         
         user !== {} 
-            ? console.log('Api getUserById user', user) 
+            ? console.log('Api getUserById user') 
             : console.log('Api getUserById brak danych lub nie udalo się załadowac danych');
         
         return user;
@@ -41,7 +41,6 @@ class DataManager {
             : console.log('Api getCook nie udalo się załadowac danych');
         
         return this.cooks;
-         
     }
     
     getTypes = () => {
@@ -51,8 +50,8 @@ class DataManager {
         
         return this.types;
     }
-    
 }
 
 const dataManager = new DataManager() 
-export {dataManager}
+export {dataManager};
+

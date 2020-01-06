@@ -1,5 +1,5 @@
 import React from 'react';
-import { CircularProgress, } from '@material-ui/core'
+import { CircularProgress, } from '@material-ui/core';
 import { CakesList } from './cakes/CakesList';
 import './App.css';
 import Dashboard from './dashboard/Dashboard';
@@ -7,9 +7,9 @@ import CooksList from './cooks/CooksList';
 import AddCake from './cakes/AddCake';
 import { BrowserRouter, Route, } from 'react-router-dom';
 import MenuAppBar from './menu/resMenu/MenuAppBar';
-import { User } from './user/User'
-import { UserCard } from './user/UserCard'
-import { dataManager } from './api/Api'
+import { User } from './user/User';
+import { UserCard } from './user/UserCard';
+import { dataManager } from './api/Api';
 import { SignIn } from './user/SignIn';
 
 class App extends React.Component {
@@ -74,8 +74,8 @@ class App extends React.Component {
           />
           <div className="App">  
             <Route exact path='/' component={Dashboard} />
-            <Route exact path='/userAccount' component={User} />
-            <Route exact path='/userAccount/user' component={UserCard}/>
+            <Route path='/userAccount' component={User} />
+            <Route path='/oneuser' component={UserCard} />
             <Route path='/cakes' component={CakesList} />
             <Route path='/cooks' component={CooksList} />
             <Route path='/addCake' component={AddCake} />
