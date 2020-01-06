@@ -11,7 +11,7 @@ export function UserCard (props){
     return (
         <div>
             <Container maxWidth='lg'>
-                <Grid container>
+                <Grid container style={{marginTop:'100px', minWidth:'210px'}}>
                     <Grid item xs={12} className={'gridStyle'}>
                         <Paper>
                             <Typography variant='h4'className='headerTitle'>
@@ -19,7 +19,7 @@ export function UserCard (props){
                             </Typography>
                         </Paper>
                     </Grid>
-                    <Grid item xs={3} className={'gridStyle'}>
+                    <Grid item xs={12} sm ={3} className={'gridStyle'} style={{minWidth:'200px'}}>
                         <Paper>
                             <MenuList>
                                 <MenuItem>
@@ -30,12 +30,9 @@ export function UserCard (props){
                                     <div className={'leftTextMenu'}> Twoje polubienia</div>
                                 </MenuItem>
                             </MenuList>
-                            
-                            
-
                         </Paper>
                     </Grid>
-                    <Grid item xs={9} className={'gridStyle'}>
+                    <Grid item xs className={'gridStyle'}>
                         <Paper >
                             <Grid container >
                                 <Grid xs={5} item container  direction='column' className={'gridStyle'}>

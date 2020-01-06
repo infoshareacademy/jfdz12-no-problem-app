@@ -27,8 +27,9 @@ class DataManager {
 
     getUserById = (id) => {
         const user = this.users.find ((data)=> data.id === parseInt(id));
-        this.user !== {} 
-            ? console.log('Api getUserById user') 
+        
+        user !== {} 
+            ? console.log('Api getUserById user', user) 
             : console.log('Api getUserById brak danych lub nie udalo się załadowac danych');
         
         return user;
