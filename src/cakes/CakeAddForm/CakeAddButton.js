@@ -8,14 +8,15 @@ const styles = {
     root :{
         padding: 5,
         '&:hover': {
-                backgroundColor: '#17a3b84d',  
+                backgroundColor: '#17a3b8f0',
+                transform: 'scale(1.1)',  
             },
     },
     WrapIconButtonStyle:{
         position: 'fixed',
         top: '80vh',
         left: '90vw',
-        backgroundColor: '#17a3b8',
+        backgroundColor: '#17a3b8a0',
         color: 'white',
     }, 
     IconButtonStyle:{

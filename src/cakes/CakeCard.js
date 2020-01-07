@@ -3,16 +3,15 @@ import { CardMedia, withStyles, Grid, Typography, Paper, Card, CardActionArea, C
 import CookLabel from './CookLabel';
 import {styles} from './CakeStyles';
 
-class CakeCard extends React.Component{
-    
-    openCakeCard = (id,e) => this.props.onCakeCardOpen(id,e);
 
-    render(){
-        const { name, imgURL, price, glutenFree, id } = this.props.cake;
-        const { type } = this.props;
-        const { classes } = this.props;
+function CakeCard (props) {
 
-        return(
+    const { name, imgURL, price, glutenFree, id } = props.cake;
+    const { type } = props;
+    const { classes } = props;
+
+    return(
+        <Paper className={classes.paper}>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <Card className = {classes.paper} >
@@ -22,7 +21,7 @@ class CakeCard extends React.Component{
                     
                 <Grid item xs>
                     <Paper className = {classes.paper}>
-                        <CardActionArea onClick = {(e) => this.openCakeCard( id, e )} >
+                        <CardActionArea onClick = {(e) => props.onCakeCardOpen( id, e )} >
                             <Grid item xs={12} container wrap = 'nowrap'>
                                 <Grid item xs={5} className = {classes.gridPaddingLeft}>
                                     <CardMedia image = {imgURL} 
@@ -58,13 +57,13 @@ class CakeCard extends React.Component{
             
                 <Grid item xs= {12}>
                     <Paper className={classes.paper}> 
-                        <CookLabel cook = {this.props.cook} />
+                        <CookLabel cook = {props.cook} />
                     </Paper>    
                 </Grid>
                 
             </Grid>
-        )
-    }
+        </Paper>
+    )
 }
 
 export default withStyles(styles)(CakeCard);

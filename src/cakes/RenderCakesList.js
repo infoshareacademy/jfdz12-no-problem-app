@@ -1,16 +1,10 @@
 import React from 'react';
 import {filterCondition} from './filter/FilterCondition'
+import CakeCard2 from './CakeCard2';
 import CakeCard from './CakeCard';
-import {styles} from './CakeStyles';
-import { Grid, Paper, withStyles } from '@material-ui/core';
+import { Grid,  } from '@material-ui/core';
 import {SORTOPTIONS} from '../constans/selectConstans'
 
-function MyPaperRaw (props) {
-    const { classes, ...other } = props;
-    return <Paper className={classes.paper} {...other} />;
-}
-  
-const MyPaper = withStyles(styles)(MyPaperRaw);
 
 export class RenderCakesList extends React.Component {
     
@@ -78,22 +72,34 @@ export class RenderCakesList extends React.Component {
         };
 
     render(){
-        const { cooks, types } = this.props.state;
+        const { cooks, types, toogleView } = this.props.state;
         const filteredSortedCakes = this.getSorteredCakes();
         
         return(    
             <Grid container spacing={1} justify='center' >
                 {filteredSortedCakes.map((cake)=>{
                     return (
-                        <Grid container wrap='wrap' key = {cake.id} item xs={12} sm={6} md={4}  >
-                            <MyPaper >
-                                <CakeCard 
+                        <Grid 
+                            container wrap='wrap' 
+                            key = {cake.id} 
+                            item 
+                            xs={12} sm={6} md={4}
+                        >
+                            {toogleView 
+                                ? <CakeCard2 
+                                    cake = {cake}
+                                    type = {this.findDataById(types, cake.typeId)}
+                                    cook = {this.findDataById(cooks, cake.cookId)}
+                                    onCakeCardOpen = {this.openCakeCard}
+                                /> 
+                                : <CakeCard 
                                     cake = {cake}
                                     type = {this.findDataById(types, cake.typeId)}
                                     cook = {this.findDataById(cooks, cake.cookId)}
                                     onCakeCardOpen = {this.openCakeCard}
                                 />
-                            </MyPaper>
+                            }
+                            
                         </Grid>
                     )}
                 )}

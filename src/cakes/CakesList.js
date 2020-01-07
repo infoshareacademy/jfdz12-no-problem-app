@@ -8,6 +8,7 @@ import CakeAddForm from './CakeAddForm/CakeAddForm';
 import { CAKEADDOBJ } from '../constans/emptyObject'
 import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
 import CakeAddButton  from './CakeAddForm/CakeAddButton';
+import ToogleView from './ToogleView';
 
 export class CakesList extends React.Component{
    
@@ -35,6 +36,7 @@ export class CakesList extends React.Component{
             cakeAdd: {},
             saveCake: false,
             filterVisibility: false,
+            toogleView: false,
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
@@ -175,7 +177,15 @@ export class CakesList extends React.Component{
             ...prevState.cakeAdd, ...newCake,
         }) )
     }
-    
+   
+    handleToogleView = () =>{
+        this.setState(prevState =>({
+            toogleView: !prevState.toogleView,
+        }))
+    }
+
+
+
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     
@@ -200,6 +210,7 @@ export class CakesList extends React.Component{
                 cakeAddFormOpen,
                 cakeAdd,
                 cakesMaxId,
+                toogleView,
             } = this.state;
         
         const { filterVisibility } = this.state;
@@ -250,9 +261,16 @@ export class CakesList extends React.Component{
                             <RenderCakesList
                                 state = {this.state}
                                 onCakeCardOpen = {this.openCakeCard}
+                                toogleView = {toogleView}
                             />
                         </Grid>   
                     </Grid> 
+                    
+                    <ToogleView 
+                        onHandleToogleView = {this.handleToogleView} 
+                        toogleView = {toogleView}
+                    />
+
                     <FilterVisibleToogle handleFilterVisibility={this.handleFilterVisibility}/>
                 
                     <CakeAddButton

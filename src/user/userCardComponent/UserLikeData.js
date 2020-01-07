@@ -10,10 +10,13 @@ export function UserLikeData(props){
         if(likes.length>0){
             return likes.map ((like) => { 
                 return (
-                    <div style={{margin: '10px'}}> 
-                        {like.cake.name} 
-                        {like.cake.description} 
-                    </div>
+                    <div style={{margin: '10px'}}>
+                        <img src = {like.cake.imgURL} alt="cake foto" style={{width:'200px', height:'100px'}}></img>
+                        <div>data: {like.date}</div>
+                        <div>opis:{like.content}</div> 
+                        <div>nazwa ciasta:{like.cake.name}</div> 
+                        <div>opis ciasta: {like.cake.description}</div> 
+                    </div>  
                     )})
         }else{ return "" }
     }

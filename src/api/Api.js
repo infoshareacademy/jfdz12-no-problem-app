@@ -75,8 +75,7 @@ class DataManager {
 
         const data = filteredData.map ((like)=>{
             const newData = {
-                id: like.id,
-                user: this.users.find((user) => like.userId === user.id),
+                ...like,
                 cake: this.cakes.find((cake) => like.cakeId === cake.id),
             }
             return newData;
