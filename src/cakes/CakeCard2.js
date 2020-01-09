@@ -3,8 +3,6 @@ import { withStyles, Grid, Typography, IconButton, Avatar, Divider,} from '@mate
 import { CardMedia, Card, CardActions, CardContent, CardHeader } from '@material-ui/core';
 import CookLabel from './CookLabel';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const styles ={
@@ -18,7 +16,6 @@ const styles ={
         margin: '6px',  
         width:'100%',
         minWidth: '250px',
-        padding: '10px',
         "&:hover" :{
             boxShadow: 'rgba(0, 0, 0, 0.08) 0px 0px 2px 1px, rgba(0, 0, 0, 0.16) 0px 4px 8px 0px',
             transform: 'scale(1.03)',
@@ -92,12 +89,7 @@ function CakeCard2 (props) {
                     <IconButton aria-label="add to favorites">
                         <FavoriteIcon />
                     </IconButton>
-                        <IconButton aria-label="share">
-                        <ShareIcon />
-                    </IconButton>
-                    <IconButton>
-                        <ExpandMoreIcon />
-                    </IconButton>
+
                 </CardActions>
                 
                 </Card>

@@ -74,9 +74,16 @@ class DataManager {
         const filteredData = this.likes.filter((like) => like.userId === parseInt(logedUdserId));
 
         const data = filteredData.map ((like)=>{
+            const likeCake = this.cakes.find((cake) => like.cakeId === cake.id);
+            const cakeType = this.types.find((type) => type.id = likeCake.typeId);
+
             const newData = {
                 ...like,
-                cake: this.cakes.find((cake) => like.cakeId === cake.id),
+                cake: {
+                    ...likeCake,
+                    typeName: cakeType.name,
+                    typeColor: cakeType.color,
+                },
             }
             return newData;
         });

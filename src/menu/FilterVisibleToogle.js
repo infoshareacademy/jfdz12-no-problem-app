@@ -20,8 +20,8 @@ export const FilterVisibleToogle = (props) => {
         },
         WrapIconButtonStyle:{
             position: 'fixed',
-            top: '90vh',
-            left: '90vw',
+            right: '15px',
+            bottom: '15px',
             backgroundColor: '#607d8ba0',
             color: 'white',
         }, 

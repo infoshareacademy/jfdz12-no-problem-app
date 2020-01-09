@@ -1,11 +1,11 @@
 import React from 'react';
-import {dataManager} from '../api/Api';
+import { dataManager } from '../api/Api';
 import { Button, Container, Grid, Paper, Typography, } from '@material-ui/core';
 import './UserCard.css';
 import { Link } from 'react-router-dom';
 import { UserBasicData } from './userCardComponent/UserBasicData';
 import { UserMenu } from './userCardComponent/UserMenu';
-import { UserLikeData } from './userCardComponent/UserLikeData';
+import UserLikeData from './userCardComponent/UserLikeData';
 
 export class UserCard extends React.Component{ 
     constructor(){
@@ -50,8 +50,7 @@ export class UserCard extends React.Component{
 
     render(){
         const {user, likes, isLoading, selectedMenu} =  this.state;
-        console.log(likes);
-
+ 
         return (
             <div>
         

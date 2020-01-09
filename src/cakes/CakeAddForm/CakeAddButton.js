@@ -14,8 +14,8 @@ const styles = {
     },
     WrapIconButtonStyle:{
         position: 'fixed',
-        top: '80vh',
-        left: '90vw',
+        right: '15px',
+        bottom: '75px',
         backgroundColor: '#17a3b8a0',
         color: 'white',
     }, 
