@@ -75,16 +75,19 @@ class DataManager {
 
         const data = filteredData.map ((like)=>{
             const likeCake = this.cakes.find((cake) => like.cakeId === cake.id);
-            const cakeType = this.types.find((type) => type.id = likeCake.typeId);
-
+            const cakeType = this.types.find((type) => type.id === likeCake.typeId);
+            const cookCake = this.cooks.find((cook) => cook.id === likeCake.cookId);
+           
             const newData = {
                 ...like,
                 cake: {
                     ...likeCake,
                     typeName: cakeType.name,
                     typeColor: cakeType.color,
+                    cookName: `${cookCake.name} ${cookCake.surname} `,
                 },
             }
+
             return newData;
         });
 

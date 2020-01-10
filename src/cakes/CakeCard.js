@@ -31,7 +31,7 @@ function CakeCard (props) {
                                 <Grid item xs={7} className = {classes.gridPaddingRight}>
                                     <Grid item xs container justify='space-between' className = {classes.data}>
                                             <div className={classes.cCardLabelTitle} > Cena: </div> 
-                                            <div className={classes.cCardLabelText} > {price} zł </div> 
+                                            <div className={classes.cCardLabelText} > {price} zł/kg </div> 
                                     </Grid>
                                     <Grid item xs>
                                         <Grid item xs container justify='space-between' className = {classes.data}>

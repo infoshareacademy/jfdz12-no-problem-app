@@ -1,63 +1,62 @@
 import React from 'react';
-import { Grid, Paper, Typography, Divider, Avatar, withStyles } from '@material-ui/core';
+import { Grid, Paper, Typography, Divider, Box } from '@material-ui/core';
 
 
-const styles ={
-    avatar:{
-        fontSize: '12px',
-        fontWeight: 'bold',
-        width: 80,
-        height: 30,
-    },
-    gird:{
-        padding: '8px',
-    }
-}
+export default function UserLikeData(props){
 
-function UserLikeData(props){
-
-    const {likes, classes} = props;
+    const {likes} = props;
 
     const likesToRender = () => {
         if(likes.length>0){
             return likes.map ((like) => { 
-                return (
-                    <div>
-                    <Grid key={like.id} xs ={12} container item style={{margin: '10px'}}>
-                        <Grid item xs={2}>
-                            <img src = {like.cake.imgURL} alt="cake foto" style={{width:'100%', height:'100%'}}></img>
-                        </Grid>
-                        <Divider orientation='vertical'/>
-                        <Grid item xs={2} container justify='center' alignItems='center'>
-                            <Grid>
-                                {like.date}
-                            </Grid>
-                            <Grid>
-                                <Avatar 
-                                    variant="rounded" 
-                                    className = {classes.avatar} 
-                                    style={{backgroundColor: like.cake.typeColor}}
-                                >
-                                    <div style={{display:'block'}}>{like.cake.typeName}</div> 
-                                </Avatar>
-                                
-                            </Grid> 
-                        </Grid>
-                        <Divider orientation='vertical'/>
-                        
-                        <Grid style={{padding:'7px'}} item xs={3} container  alignContent='center'>
-                            <Typography >nazwa ciasta: </Typography>
-                            <Typography >{like.cake.name}</Typography>
-                        </Grid>
-                        <Divider orientation='vertical'/> 
-                        <Grid containter justify = 'flex-start' item xs style={{padding:'7px', align: 'left'}}>
-                            <Typography align='left'>opis:</Typography>
-                            <Typography align='left'>{like.content}</Typography>
-                        </Grid> 
-                    </Grid>  
-                    <Divider />
+                return (<div key={like.id}>
+                    <Grid item xs={12}>
+                       <Divider/>
+                    </Grid>
                     
-                    </div>)})
+                    <Grid  xs ={12} container item style={{margin: '5px',}}>
+                        
+                        <Grid item xs={3} sm={3} md={2} >
+                            <img src = {like.cake.imgURL} 
+                                alt="cake foto" 
+                                style={{ width:'100%', height:'100px'}}></img>
+                           
+                        </Grid>
+                            
+                        <Grid item xs
+                            container 
+                            direction='column' 
+                            justify='space-evenly' 
+                            alignItems='flex-start'
+                        >
+                            
+                            <Grid item>
+                                <Box px='10px'>
+                                    <span style={{paddingRight:'5px'}}>{like.date}</span>
+                                    opinia: {like.content}
+                                </Box>
+                            </Grid>
+                            <Grid item 
+                                container 
+                                justify='space-between' 
+                                alignContent='flex-start'
+                                direction='column'
+                            >
+                                <Box px="10px" align='left'>
+                                    <div >
+                                        ciasto: {like.cake.name}
+                                    </div>
+                                    <div >
+                                        cukiernik: {like.cake.cookName}
+                                    </div>
+                                </Box >
+                            </Grid>
+                            
+                             
+                        </Grid>  
+                    </Grid>
+                    
+                   </div> )})
         }else{ return "" }
     }
 
@@ -65,7 +64,7 @@ function UserLikeData(props){
     return (
         <Paper >
             <Typography variant='h6'>Twoje polubione ciasta</Typography>
-            <Divider/>
+ 
             <Grid container >
                 {likesToRender()}
 
@@ -75,4 +74,65 @@ function UserLikeData(props){
         )
 }
 
-export default withStyles(styles)(UserLikeData);
+
+
+
+// return (<>
+//     <Grid item xs={12}>
+//        <Divider/>
+//     </Grid>
+    
+//     <Grid key={like.id} xs ={12} container item style={{margin: '5px',}}>
+        
+//         <Grid item xs={12} sm={4} container>
+//             <Grid item xs={6}>
+//                 <img src = {like.cake.imgURL} alt="cake foto" style={{width:'100%', maxHeight:'100px'}}></img>
+//             </Grid>
+            
+//             <Grid item  xs={6}
+//                 container 
+//                 direction='column' 
+//                 justify='space-evenly' 
+//                 alignItems='center'
+//             >
+//                 <Divider orientation="vertical"/>
+//                 <Box>
+//                     {like.date}
+//                 </Box> 
+//                 <Avatar 
+//                     variant="rounded" 
+//                     className = {classes.avatar} 
+//                     style={{backgroundColor: like.cake.typeColor}}
+//                 >
+//                     <div >{like.cake.typeName}</div> 
+//                 </Avatar>
+//             </Grid>
+//         </Grid>
+        
+//         <Grid item container xs={12} sm={8} >
+//             <Grid item xs={5} 
+//                 container 
+//                 justify='space-between' 
+//                 alignContent='flex-start'
+//                 direction='column'
+//             >
+//                 <Divider orientation='vertical'/>
+//                 <Box px="5px" align='left'>
+//                     <div style ={{padding: '3px'}}>ciasto: {like.cake.name}</div>
+//                     <div style ={{padding: '3px'}}>cukiernik: {like.cake.cookName}</div>
+//                 </Box >
+//             </Grid>
+            
+//             <Grid item xs={7}
+//                 container 
+//                 justify = 'flex-start'  
+//                 alignItems='flex-start'
+//             >
+//                 <Divider orientation='vertical' /> 
+//                 <Box align='left' style={{paddingLeft: '5px'}}>opis:</Box>
+//                 <Box align='left' style={{paddingLeft: '5px'}}>{like.content}</Box>
+//             </Grid> 
+//         </Grid>  
+//     </Grid>
+    
+//    </> )})

@@ -4,7 +4,7 @@ import { Button, Container, Grid, Paper, Typography, } from '@material-ui/core';
 import './UserCard.css';
 import { Link } from 'react-router-dom';
 import { UserBasicData } from './userCardComponent/UserBasicData';
-import { UserMenu } from './userCardComponent/UserMenu';
+import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
 
 export class UserCard extends React.Component{ 
@@ -63,7 +63,7 @@ export class UserCard extends React.Component{
                                 </Typography>
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} sm ={3} className={'gridStyle'} style={{minWidth:'170px'}}>
+                        <Grid item xs={12} sm ={3} className={'gridStyle'} style={{minWidth:'190px'}}>
                              <UserMenu 
                                 onHandleClick = {this.handleClick}
                                 selectedMenu = {selectedMenu}
