@@ -11,6 +11,7 @@ import { User } from './user/User';
 import { UserCard } from './user/UserCard';
 import { dataManager } from './api/Api';
 import { SignIn } from './user/SignIn';
+import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 
 class App extends React.Component {
   constructor(){
@@ -78,6 +79,7 @@ class App extends React.Component {
             <Route path='/userAccount' component={User} />
             <Route path='/oneuser' component={UserCard} />
             <Route path='/cakes' component={CakesList} />
+            <Route path='/cakesAdd/:id' component={CakeAddForm} />
             <Route path='/cooks' component={CooksList} />
             <Route path='/addCake' component={AddCake} />
             <Route path='/SignIn' component={SignIn} />
