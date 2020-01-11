@@ -168,7 +168,7 @@ class CakeAddForm extends React.Component{
                                     value = {portionDescription}
                                     name = "portionDescription"
                                     label = "porcja: "
-                                    styleDirect = {{width: "300px"}}
+                                    styleDirect = {{width: "95%"}}
                                 />  
                                 
                             </Paper>
@@ -186,7 +186,7 @@ class CakeAddForm extends React.Component{
                                     rows="2"
                                     multiline = {true}
                                     disabled = {true}
-                                    styleDirect = {{width: "300px"}}
+                                    styleDirect = {{width: "95%"}}
                                 />
                                 <CakeAddSelect
                                     onHandleCakeChange = {this.handleCakeChange}
@@ -205,7 +205,7 @@ class CakeAddForm extends React.Component{
                                     label = "opis ciasta:"
                                     rows="4"
                                     multiline = {true}
-                                    styleDirect = {{width: "400px"}}
+                                    styleDirect = {{width: "95%"}}
                                 />
                             </Paper> 
 

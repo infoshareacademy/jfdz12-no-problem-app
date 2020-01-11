@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, FormControl, MenuItem, Select, withStyles, ListItemIcon, Typography,} from '@material-ui/core';
+import { Grid, FormControl, MenuItem, Select, withStyles, Typography, } from '@material-ui/core';
 import clsx from 'clsx';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import Crop32Icon from '@material-ui/icons/Crop32';
 
 const styles = {
     root: {
@@ -42,19 +42,20 @@ const {classes, types} = props;
                     onChange = {props.onHandleCakeChange}
                     >
                         <MenuItem key={0} value={0}>
-                            <ListItemIcon>
-                                <FiberManualRecordIcon fontSize="small" />
-                            </ListItemIcon>
-                            <em>Brak</em>
+                            <Typography variant="inherit" style={{display: 'flex', alignItems:'center'}}>
+                                <Crop32Icon style={{paddingRight:'10px'}}/> 
+                                brak
+                            </Typography>
+                            
                         </MenuItem>
                         {types.map(type => (
                             <MenuItem key={type.id} 
                                         value={type.id}
-                            >
-                                <ListItemIcon style={{color:type.color}}>
-                                    <FiberManualRecordIcon />
-                                </ListItemIcon>
-                                <Typography variant="inherit" style={{paddingBottom:'5px'}}>{type.name}</Typography>
+                            >                              
+                                <Typography variant="inherit" style={{display: 'flex', alignItems:'center', fontSize: '14px'}}>
+                                    <Crop32Icon style ={{color:type.color, paddingRight:'10px' }} /> 
+                                    {type.name}
+                                </Typography>
                             </MenuItem>
                             ))    
                         }
@@ -66,3 +67,8 @@ const {classes, types} = props;
 }
 
 export default withStyles (styles)(CakeAddTypesSelect);
+
+
+// <ListItemIcon style={{color:type.color}}>
+//                                     <FiberManualRecordIcon />
+//                                 </ListItemIcon>
