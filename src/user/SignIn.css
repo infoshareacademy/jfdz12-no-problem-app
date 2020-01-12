@@ -1,15 +1,16 @@
 .paper {
-    width:400px;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #eeeeee;
+    background-color:#ae6dab1a; /* #eeeeee; */
     padding: 30px;
+    border-radius: 20px;
   }
 
 .avatar {
     margin: 8px;
-    background-color: #f50057;
+    background-color: #DF9A63;
 }
 
 .form {

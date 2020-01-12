@@ -4,10 +4,8 @@ import { CircularProgress, Container, Grid } from '@material-ui/core';
 import CakeCardFull from './CakeCardFull';
 import { RenderCakesList } from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
-import CakeAddForm from './CakeAddForm/CakeAddForm';
-import { CAKEADDOBJ } from '../constans/emptyObject'
 import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
-import CakeAddButton  from './CakeAddForm/CakeAddButton';
+import ToogleView from './ToogleView';
 
 export class CakesList extends React.Component{
    
@@ -30,18 +28,14 @@ export class CakesList extends React.Component{
             filterAllToogle: false,
             priceRange: [],
             sortById: 0,
-            cakeAddFormOpen: false,
             cakesMaxId: 0,
-            cakeAdd: {},
-            saveCake: false,
             filterVisibility: false,
+            toogleView: false,
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
         this.handleChangePrice = this.handleChangePrice.bind(this);
         this.handleSortBy = this.handleSortBy.bind(this);
-        this.handleCakeAddForm = this.handleCakeAddForm.bind(this);
-        this.saveCake = this.saveCake.bind(this);
         this.handleFilterVisibility = this.handleFilterVisibility.bind(this);
     }
 
@@ -64,29 +58,6 @@ export class CakesList extends React.Component{
             })
         })
     }
-
-    componentDidUpdate(){
-        if (this.state.saveCake) {
-            
-            // fetch('http://localhost:4000/cakes')
-            //     .then(res => res.json())
-            //     .then(data => {
-            //         const price = data.map(el => el.price); 
-            //         this.setState({
-            //             cakes: data,
-            //             priceRange: [Math.min(...price),Math.max(...price)],
-            //             cakesMaxId: Math.max(...data.map(el => (el.id))),
-            //         })
-            //     })
-            this.setState({saveCake: false})
-        }
-    }
-
-    saveCake(){
-        this.setState({
-            saveCake: true,
-        })
-    }
     
     handleFilterVisibility(){
     
@@ -94,8 +65,6 @@ export class CakesList extends React.Component{
             filterVisibility: !prevState.filterVisibility,
             })
         );
-        //console.log(this.state.filterVisibility)
-        
       }
 
     filterChange (event){
@@ -162,23 +131,13 @@ export class CakesList extends React.Component{
         })
     }
 
-    handleCakeAddForm(){
+    handleToogleView = () =>{
         this.setState(prevState =>({
-            cakeAdd:  {...CAKEADDOBJ},
-            cakeAddFormOpen: !prevState.cakeAddFormOpen,
-            saveCake: false,
+            toogleView: !prevState.toogleView,
         }))
     }
 
-    handleCakeAddChange = (newCake) => {
-        this.setState(prevState =>({
-            ...prevState.cakeAdd, ...newCake,
-        }) )
-    }
-    
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
-
-    
       
     render(){    
  
@@ -197,14 +156,12 @@ export class CakesList extends React.Component{
                 filterTypesId,
                 priceRange,
                 sortById,
-                cakeAddFormOpen,
-                cakeAdd,
-                cakesMaxId,
+                toogleView,
             } = this.state;
         
         const { filterVisibility } = this.state;
 
-        if (!cakeAddFormOpen && !cakeCardOpen && !loading) {
+        if (!cakeCardOpen && !loading) {
             return <>
                 <Container maxWidth = "lg" style={{paddingTop:'100px'}}>       
                 
@@ -250,15 +207,18 @@ export class CakesList extends React.Component{
                             <RenderCakesList
                                 state = {this.state}
                                 onCakeCardOpen = {this.openCakeCard}
+                                toogleView = {toogleView}
                             />
                         </Grid>   
                     </Grid> 
-                    <FilterVisibleToogle handleFilterVisibility={this.handleFilterVisibility}/>
-                
-                    <CakeAddButton
-                        onHandleCakeAddChange={this.handleCakeAddForm} 
+                    
+                    <ToogleView 
+                        onHandleToogleView = {this.handleToogleView} 
+                        toogleView = {toogleView}
                     />
 
+                    <FilterVisibleToogle handleFilterVisibility={this.handleFilterVisibility}/>
+                
                 </Container>
             </>
         }
@@ -275,18 +235,6 @@ export class CakesList extends React.Component{
                     cook = {this.findDataById(cooks, oneCake.cookId)}
                 />
             )
-        }
-
-        if(cakeAddFormOpen && !loading ){
-            return <CakeAddForm 
-                onHandleCakeAddForm = {this.handleCakeAddForm}
-                onHandleCakeAddChange = {this.handleCakeAddChange}
-                cooks = {cooks}
-                types = {types}
-                cakeAdd = {cakeAdd}
-                cakesMaxId = {cakesMaxId}
-                onSaveCake = {this.saveCake}
-            />
         }
 
         if(loading){

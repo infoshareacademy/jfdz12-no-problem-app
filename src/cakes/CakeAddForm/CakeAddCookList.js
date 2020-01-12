@@ -44,13 +44,3 @@ export function CakeAddCookList(props) {
         </Dialog>
     )
 } 
-
-
-
-// {props.cooks.map((cook) =>(
-//     <MenuItem key={cook.id} onClick={() => props.onHandleSelectCook(cook.id)}>
-//         {cook.name} {cook.surname} {cook.location.city}
-//     </MenuItem>
-//     ))
-// }
-

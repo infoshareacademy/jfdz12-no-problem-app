@@ -20,12 +20,12 @@ export function UserList(props){
             <TableBody>
             {users.map(user => (
                // <TableRow hover key={user.id} onClick={() => props.onHandleOpenUser(user.id)}>
-               <TableRow hover key={user.id} >
+               <TableRow hover key={`tb${user.id}`} >
                 <TableCell component="th" scope="row">
                     {user.id}
                 </TableCell>
                 <TableCell align="right" >
-                    <Link to={`/userAccount/user/${user.id}`} style ={{textDecoration:'none'}}>{user.name}</Link>
+                    <Link to={`/oneuser`} style ={{textDecoration:'none'}}>{user.name}</Link>
                 </TableCell>
                 <TableCell align="right">{user.surname}</TableCell>
                 <TableCell align="right">{user.contact.mail}</TableCell>

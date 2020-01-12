@@ -13,13 +13,9 @@
     box-sizing: border-box;
 }
 
-.leftTextMenu{
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
-    padding: 10px 10px;
-}
+
 
 .headerTitle{
-    padding: 20px;
+    padding: 20px 10px;
+    min-width: 170px;
 }
