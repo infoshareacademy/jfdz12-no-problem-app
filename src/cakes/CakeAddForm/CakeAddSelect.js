@@ -47,9 +47,7 @@ const {classes, options} = props;
                             <MenuItem key={option.id} 
                                         value={option.value}
                             >
-                                <Typography variant="inherit" 
-                                            style={{paddingBottom:'5px'}}
-                                >
+                                <Typography variant="inherit" >
                                     {option.name}
                                 </Typography>
                             </MenuItem>

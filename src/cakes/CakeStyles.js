@@ -3,7 +3,7 @@ export const styles= {
         padding: '5px 2px',
         margin: '2px 5px',
         borderColor: '#e0e0e0', //e0e0e0 bdbdbd
-        border: "0.5px solid",
+        //border: "0.5px solid",
     },
     media:{
         width: '100%',
@@ -41,7 +41,7 @@ export const styles= {
         padding: '10px 26px 10px', 
         margin: '10px',
         borderColor: '#e0e0e0',
-        border: "0.5px solid",
+        //border: "0.5px solid",
     },
     fCardWrapMedia:{
         padding: '10px',
