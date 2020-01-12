@@ -2,7 +2,7 @@ import React from 'react';
 import { CardMedia, withStyles, Grid, Typography, Paper, Card, CardActionArea, Chip } from '@material-ui/core';
 import CookLabel from './CookLabel';
 import {styles} from './CakeStyles';
-
+import {Link} from 'react-router-dom';
 
 function CakeCard (props) {
 
@@ -21,7 +21,7 @@ function CakeCard (props) {
                     
                 <Grid item xs>
                     <Paper className = {classes.paper}>
-                        <CardActionArea onClick = {(e) => props.onCakeCardOpen( id, e )} >
+                        <CardActionArea component={Link} to={`/cake/${id}`} > 
                             <Grid item xs={12} container wrap = 'nowrap'>
                                 <Grid item xs={5} className = {classes.gridPaddingLeft}>
                                     <CardMedia image = {imgURL} 

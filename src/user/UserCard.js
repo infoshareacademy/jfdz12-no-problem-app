@@ -1,11 +1,11 @@
 import React from 'react';
-import { dataManager } from '../api/Api';
 import { Button, Container, Grid, Paper, Typography, } from '@material-ui/core';
 import './UserCard.css';
 import { Link } from 'react-router-dom';
 import { UserBasicData } from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
+import {getLikesWithData, getUserById } from '../api/Api2';
 
 export class UserCard extends React.Component{ 
     constructor(){
@@ -23,15 +23,20 @@ export class UserCard extends React.Component{
     }
 
     componentDidMount(){
-        setTimeout (() => {
-            const userData = dataManager.getUserById(this.userIdRef);
-            const likeData = dataManager.getLikesWithData(this.userIdRef);
+
+        Promise.all([
+            getUserById(this.userIdRef),
+            getLikesWithData(this.userIdRef),
+        ])
+        .then(data =>
             this.setState ({
-                user: userData,
-                likes: likeData,
-                isLoading: false,  
-            }) ;
-        }, 200) 
+                user: data[0],
+                likes: data[1],
+            })) 
+        .catch(error => console.log('bład addformfetch', error.toString()))
+        .finally(() => this.setState({
+                isLoading: false,
+            }))
     }
 
     handleClick = (name) => {
@@ -93,14 +98,6 @@ export class UserCard extends React.Component{
                         >
                             zamknij
                         </Button>
-                        < Button
-                            style={{margin:'20px'}} 
-                            variant='outlined'
-                            color = 'primary'
-                            component = {Link} to={'/userAccount'}
-                        >
-                            wróć do listy
-                        </Button>    
                     </Grid>
                 </Container>}    
             </div>

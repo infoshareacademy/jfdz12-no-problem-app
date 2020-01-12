@@ -8,15 +8,6 @@ import {SORTOPTIONS} from '../constans/selectConstans'
 
 export class RenderCakesList extends React.Component {
     
-    constructor(props){
-        super(props);
-        this.openCakeCard = this.openCakeCard.bind(this);
-    }
-
-    openCakeCard(id,e) {
-        this.props.onCakeCardOpen(id,e)
-    };
-
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     getFilteredCakes(){
@@ -90,13 +81,13 @@ export class RenderCakesList extends React.Component {
                                     cake = {cake}
                                     type = {this.findDataById(types, cake.typeId)}
                                     cook = {this.findDataById(cooks, cake.cookId)}
-                                    onCakeCardOpen = {this.openCakeCard}
+                                    
                                 /> 
                                 : <CakeCard 
                                     cake = {cake}
                                     type = {this.findDataById(types, cake.typeId)}
                                     cook = {this.findDataById(cooks, cake.cookId)}
-                                    onCakeCardOpen = {this.openCakeCard}
+                                    
                                 />
                             }
                             

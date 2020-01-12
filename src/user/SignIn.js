@@ -1,11 +1,10 @@
 import React from 'react';
-import { withStyles, Grid, Link, Typography, Container, Avatar, Dialog, Button, TextField, FormControlLabel, Checkbox} from '@material-ui/core';
+import { withStyles, Grid, Link, Typography, Container, Avatar, Dialog, Button, TextField, FormControlLabel, Checkbox ,CircularProgress} from '@material-ui/core';
 import './SignIn.css';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { UserSelect } from './UserSelect';
-import { dataManager } from '../api/Api'
 import {Link as Rlink} from 'react-router-dom';
-
+import {getUsers} from '../api/Api2';
 
 const styles = {
     root :{
@@ -42,13 +41,22 @@ const styles = {
 class SignIn extends React.Component{
     constructor(props){
         super(props);
-        this.users = dataManager.getUsers(); 
         this.state = {
             openSignIn: true,
             userId: '',
+            users:[],
+            isLoading: true,
+            error:"",
         };
     }
  
+    componentDidMount(){
+        getUsers()
+            .then(data => this.setState({users: data}))
+            .catch(error => this.setState({error: error.toString()}))
+            .finally(() => this.setState({isLoading: false}))
+    }
+
     handleChange = (event) => {
         const {name, value} = event.target;
         this.setState({
@@ -66,8 +74,20 @@ class SignIn extends React.Component{
     }
 
     render(){
-        const { openSignIn, userId } = this.state;
+        const { openSignIn, userId, users, isLoading, error } = this.state;
         const { classes } = this.props;
+        
+        if(isLoading){
+            return (<div style={{paddingTop:'100px'}}>
+                        <CircularProgress color="secondary" />
+                </div>)
+        }
+
+        if(error !==""){
+            return (<div style={{paddingTop:'100px'}}>
+                       {error}
+                </div>)
+        }
 
         return (
             <div>
@@ -86,7 +106,7 @@ class SignIn extends React.Component{
                             </Typography>
                             <Grid  >
                                 <UserSelect 
-                                    options = {this.users}
+                                    options = {users}
                                     name = {'userId'}
                                     value = {userId}
                                     autoFocus
