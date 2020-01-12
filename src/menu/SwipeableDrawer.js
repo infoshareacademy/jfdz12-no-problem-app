@@ -6,9 +6,15 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import InboxIcon from '@material-ui/icons/Inbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import ControlPointIcon from '@material-ui/icons/ControlPoint';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import FaceIcon from '@material-ui/icons/Face';
+import CakeIcon from '@material-ui/icons/Cake';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+
 
 import { Link } from 'react-router-dom'
 
@@ -45,19 +51,27 @@ export default function SwipeableTemporaryDrawer(props) {
     >
       
       <List>
-          <ListItem button key={"Lista ciast"} component={Link} to='/cakes'>
-            <ListItemText primary={'Lista ciast'} />
-          </ListItem>
-    
-          <ListItem button key={"Lista cukierników"} component={Link} to='/cooks'>
-            <ListItemText primary={'Lista cukierników'} />
-          </ListItem>
+          <>
+            <ListItem button key={"Lista ciast"} component={Link} to='/cakes'>
+              <ListItemIcon><CakeIcon/></ListItemIcon>
+              <ListItemText primary={'Lista ciast'} />
+            </ListItem>
+          </>
+          <>
+            <ListItem button key={"Lista cukierników"} component={Link} to='/cooks'>
+              <ListItemIcon><EmojiPeopleIcon/></ListItemIcon>
+              <ListItemText primary={'Lista cukierników'} />
+            </ListItem>
+          </>
       </List>
       <Divider />
       <List>
-          <ListItem button key={'Zaloguj'} onClick={props.log} component={Link} to='/SignIn'>
-            <ListItemText primary={'Zaloguj'}  />
-          </ListItem>
+          <>
+            <ListItem button key={'Zaloguj'} onClick={props.log} component={Link} to='/SignIn'>
+              <ListItemIcon><LockOpenIcon/></ListItemIcon>
+              <ListItemText primary={'Zaloguj'}  />
+            </ListItem>
+          </>
       </List>
 
     </div>
@@ -71,25 +85,39 @@ export default function SwipeableTemporaryDrawer(props) {
       >
         
       <List>
+          <>
           <ListItem button key={"Lista ciast"} component={Link} to='/cakes'>
+            <ListItemIcon><CakeIcon/></ListItemIcon>  
             <ListItemText primary={'Lista ciast'} />
           </ListItem>
+          </>
+          <>
           <ListItem button key={"Lista cukierników"} component={Link} to='/cooks'>
+            <ListItemIcon><EmojiPeopleIcon/></ListItemIcon>
             <ListItemText primary={'Lista cukierników'} />
           </ListItem>
+          </>
       </List>
       <Divider />
       <List>
-          <ListItem button key={'Moje konto'} component={Link} to='/oneuser'>
-            <ListItemText primary={'Moje konto'} />
-            
-          </ListItem>
-          <ListItem button key={'Dodaj ciasto'} component={Link} to='/cakesAdd/empty'>
-            <ListItemText primary={'Dodaj ciasto'} />
-          </ListItem> */}
-          <ListItem button key={'Wyloguj'} onClick={props.log} component={Link} to='/'>
-            <ListItemText primary={'Wyloguj'} />
-          </ListItem>
+          <>
+            <ListItem button key={'Moje konto'} component={Link} to='/oneuser'>
+              <ListItemIcon><FaceIcon/></ListItemIcon>
+              <ListItemText primary={'Moje konto'} />
+            </ListItem>
+          </>
+          <>
+            <ListItem button key={'Dodaj ciasto'} component={Link} to='/cakesAdd/empty'>
+              <ListItemIcon><ControlPointIcon/></ListItemIcon>
+              <ListItemText primary={'Dodaj ciasto'} />
+            </ListItem>
+          </>
+          <>
+            <ListItem button key={'Wyloguj'} onClick={props.log} component={Link} to='/'>
+              <ListItemIcon><ExitToAppIcon/></ListItemIcon>
+              <ListItemText primary={'Wyloguj'} />
+            </ListItem>
+          </>
         </List>
       </div>
     )
