@@ -4,7 +4,7 @@ import { IconButton, Tooltip, Toolbar } from '@material-ui/core/';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-//import ControlPointIcon from '@material-ui/icons/ControlPoint';
+// import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import FaceIcon from '@material-ui/icons/Face';
 import CakeIcon from '@material-ui/icons/Cake';

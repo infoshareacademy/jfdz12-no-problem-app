@@ -5,7 +5,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import InboxIcon from '@material-ui/icons/Inbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -79,12 +80,16 @@ export default function SwipeableTemporaryDrawer(props) {
       </List>
       <Divider />
       <List>
+          
           <ListItem button key={'Moje konto'} component={Link} to='/userAccount/user'>
+            <ListItemIcon><InboxIcon /></ListItemIcon>
             <ListItemText primary={'Moje konto'} />
+            
           </ListItem>
-          <ListItem button key={'Dodaj ciasto'} component={Link} to='/addCake'>
+         
+          {/* <ListItem button key={'Dodaj ciasto'} component={Link} to='/addCake'>
             <ListItemText primary={'Dodaj ciasto'} />
-          </ListItem>
+          </ListItem> */}
           <ListItem button key={'Wyloguj'} onClick={props.log} component={Link} to='/'>
             <ListItemText primary={'Wyloguj'} />
           </ListItem>
