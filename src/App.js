@@ -10,7 +10,7 @@ import MenuAppBar from './menu/resMenu/MenuAppBar';
 import { User } from './user/User';
 import { UserCard } from './user/UserCard';
 import { dataManager } from './api/Api';
-import { SignIn } from './user/SignIn';
+import SignIn from './user/SignIn';
 import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 
 class App extends React.Component {

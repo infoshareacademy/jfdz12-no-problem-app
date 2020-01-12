@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { UserList } from './UserList';
 import { UserCard } from './UserCard';
-import {SignIn} from './SignIn'
+import SignIn from './SignIn'
 import {dataManager} from '../api/Api'
 
 export class User extends React.Component{

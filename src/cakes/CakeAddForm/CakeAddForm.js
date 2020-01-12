@@ -30,9 +30,7 @@ class CakeAddForm extends React.Component{
     }
        
     componentDidMount(){
-        
-        
-        
+
         Promise.all([
             //fetch('http://localhost:4000/cakes').then(res => res.json()),
             fetch('../cakes.json').then(res => res.json()),
@@ -85,7 +83,7 @@ class CakeAddForm extends React.Component{
         this.setState(prevState => ({
             cakeAdd:{
                 ...prevState.cakeAdd,
-                imgURL : `../img/ciacha/${fileName}` 
+                imgURL : `/img/ciacha/${fileName}` 
             } 
         }))
     }

@@ -1,12 +1,45 @@
 import React from 'react';
-import {Grid, Link, Typography, Container, Avatar, Dialog, Button, TextField, FormControlLabel, Checkbox} from '@material-ui/core';
+import { withStyles, Grid, Link, Typography, Container, Avatar, Dialog, Button, TextField, FormControlLabel, Checkbox} from '@material-ui/core';
 import './SignIn.css';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { UserSelect } from './UserSelect';
 import { dataManager } from '../api/Api'
 import {Link as Rlink} from 'react-router-dom';
 
-export class SignIn extends React.Component{
+
+const styles = {
+    root :{
+        '& .MuiPaper-rounded' :{
+            borderRadius: '20px',
+            color: '#47817E',
+            border: '5px solid #47817E' 
+        }
+    },
+    paper: {
+        maxWidth: '400px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: '#ae6dab1a', /* #eeeeee, */
+        padding: '30px',
+      },
+    
+    avatar: {
+        margin: '8px',
+        backgroundColor: '#DF9A63',
+    },
+    
+    form: {
+        width: '100%', 
+        marginTop: '8px',
+    },
+    
+    submit: {
+        margin: '24px 0px 16px',
+     },
+}
+
+class SignIn extends React.Component{
     constructor(props){
         super(props);
         this.users = dataManager.getUsers(); 
@@ -34,15 +67,18 @@ export class SignIn extends React.Component{
 
     render(){
         const { openSignIn, userId } = this.state;
- 
+        const { classes } = this.props;
+
         return (
             <div>
+                
                 <Dialog
                     open={openSignIn}
+                    className ={classes.root}
                 >
-                    <Container component="main" width="xs" style={{padding:'0px'}}>
-                        <div className={'paper'}>
-                            <Avatar className = {'avatar'}>
+                    <Container component="main" width="xs" style={{padding:'0px', }}>
+                        <div className={classes.paper} >
+                            <Avatar className = {classes.avatar}>
                                 <LockOutlinedIcon />
                             </Avatar>
                             <Typography component="h1" variant="h5">
@@ -90,7 +126,7 @@ export class SignIn extends React.Component{
                                     name='userId'
                                     variant="contained"
                                     color="primary"
-                                    className={'submit'}
+                                    className={classes.submit}
                                     component = {Rlink} to={'/'}
                                     onClick = {this.handleClose}
                                 >
@@ -117,3 +153,5 @@ export class SignIn extends React.Component{
       );
     }
 }
+
+export default withStyles(styles)(SignIn);
