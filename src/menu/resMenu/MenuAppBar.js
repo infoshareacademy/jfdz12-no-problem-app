@@ -6,6 +6,7 @@ import BigLogIn from './BigLogIn';
 import SmallLogIn from './SmallLogIn';
 import SmallLogOut from'./SmallLogOut';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MenuAppBar(props) {
+function MenuAppBar(props) {
   const classes = useStyles();
   const matches = useMediaQuery('(max-width:600px)');
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,7 +43,8 @@ export default function MenuAppBar(props) {
 
   const handleChange = () => {
     props.setAuth();
-    setAnchorEl(null)
+    setAnchorEl(null);
+    props.history.push('/')
   };
 
   const handleMenu = event => {
@@ -54,7 +56,8 @@ export default function MenuAppBar(props) {
   };
 
   const log = () => {
-    props.setAuth()
+    props.setAuth();
+    props.history.push('/')
   }
   
   let content;
@@ -101,3 +104,5 @@ export default function MenuAppBar(props) {
     </div>
   );
 }
+
+export default withRouter(MenuAppBar);

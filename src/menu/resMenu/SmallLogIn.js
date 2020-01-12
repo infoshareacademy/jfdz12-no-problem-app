@@ -4,7 +4,9 @@ import FaceIcon from '@material-ui/icons/Face';
 import { MenuItem, Menu, IconButton, Toolbar, Tooltip } from '@material-ui/core/';
 import { Link } from 'react-router-dom';
 import SwipeableTemporaryDrawer from '../SwipeableDrawer';
-import Logo from '../../logo.png'
+import Logo from '../../logo.png';
+
+
 
 const useStyles = makeStyles(theme => ({
     logo: {
