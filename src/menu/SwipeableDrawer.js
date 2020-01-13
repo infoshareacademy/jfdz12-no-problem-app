@@ -107,7 +107,7 @@ export default function SwipeableTemporaryDrawer(props) {
             </ListItem>
           </>
           <>
-            <ListItem button key={'Dodaj ciasto'} component={Link} to='/cakesAdd/empty'>
+            <ListItem button key={'Dodaj ciasto'} component={Link} to='/cakeAdd/empty'>
               <ListItemIcon><ControlPointIcon/></ListItemIcon>
               <ListItemText primary={'Dodaj ciasto'} />
             </ListItem>

@@ -21,9 +21,10 @@ export class RenderCakesList extends React.Component {
                 filterAll, 
                 filterAllToogle,
                 priceRange } = this.props.state;
-
+                
         return cakes
             .filter (cake => {
+                
                 return(
                 filterCondition( cake, 
                     filterAllToogle ? filterCake : filterAll, 

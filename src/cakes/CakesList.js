@@ -40,6 +40,7 @@ export class CakesList extends React.Component{
     componentDidMount() {
         getFullData()
             .then(data => {
+                
                 const price = data[0].map(el => el.price); 
                 this.setState({
                     cakes: data[0],

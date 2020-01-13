@@ -1,13 +1,15 @@
 [
     {
-        "id": 1,
+        "id": 51,
+        "nick": "",
         "name": "Zosia",
         "surname": "Gessler",
         "contact": {
             "mail": "zg@gessler.pl",
             "mobile": "48518456789"
         },
-        "cakesId": [1,2],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdańsk",
             "district": "Oliwa",
@@ -18,14 +20,16 @@
         "likes": 5
     },
     {
-        "id": 2,
+        "id": 52,
+        "nick": "",
         "name": "Zbigniew",
         "surname": "Makłowicz",
         "contact": {
             "mail": "zyga.maklowicz@wp.pl",
             "mobile": "48518456789"
         },
-        "cakesId": [3,4],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdańsk",
             "district": "Oliwa",
@@ -36,14 +40,16 @@
         "likes": 53
     },
     {
-        "id": 3,
+        "id": 53,
+        "nick": "",
         "name": "Anna",
         "surname": "Starmach",
         "contact": {
             "mail": "annas100@wp.pl",
             "mobile": "48222333666"
         },
-        "cakesId": [5,6],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdańsk",
             "district": "Wrzeszcz",
@@ -54,14 +60,16 @@
         "likes": 11
     },
     {
-        "id": 4,
+        "id": 54,
+        "nick": "",
         "name": "Maria",
         "surname": "Lewandowska",
         "contact": {
             "mail": "marysia@o2.com",
             "mobile": "48589666322"
         },
-        "cakesId": [7,8],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdańsk",
             "district": "Orunia",
@@ -72,14 +80,16 @@
         "likes": 12
     },
     {
-        "id": 5,
+        "id": 55,
+        "nick": "",
         "name": "Marek",
         "surname": "Kucharz",
         "contact": {
             "mail": "kucharz@kucharz.com",
             "mobile": "48888547123"
         },
-        "cakesId": [9,10],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdańsk",
             "district": "Orunia",
@@ -90,14 +100,16 @@
         "likes": 102
     },
     {
-        "id": 6,
+        "id": 56,
+        "nick": "",
         "name": "Joanna",
         "surname": "Malinowska",
         "contact": {
             "mail": "joannamalinowska@buziaczek.com",
             "mobile": "48874111255"
         },
-        "cakesId": [11,12],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdańsk",
             "district": "Osowa",
@@ -108,14 +120,16 @@
         "likes": 15
     },
     {
-        "id": 7,
+        "id": 57,
+        "nick": "",
         "name": "Mariola",
         "surname": "Pawluczuk",
         "contact": {
             "mail": "mapaw@interia.com",
             "mobile": "48555477899"
         },
-        "cakesId": [13,14],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdańsk",
             "district": "Chełm",
@@ -126,14 +140,16 @@
         "likes": 45
     },
     {
-        "id": 8,
+        "id": 58,
+        "nick": "",
         "name": "Kamil",
         "surname": "Richert",
         "contact": {
             "mail": "kamil@richert.com",
             "mobile": "48516968478"
         },
-        "cakesId": [15,16],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdynia",
             "district": "Wielki Kack",
@@ -144,14 +160,16 @@
         "likes": 355
     },
     {
-        "id": 9,
+        "id": 59,
+        "nick": "",
         "name": "Martyna",
         "surname": "Wojdowska",
         "contact": {
             "mail": "wojdowska@wojdowska.com",
             "mobile": "48774852136"
         },
-        "cakesId": [17,18],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdynia",
             "district": "Orłowo",
@@ -162,14 +180,16 @@
         "likes": 355
     },
     {
-        "id": 10,
+        "id": 60,
+        "nick": "",
         "name": "Julia",
         "surname": "Kowalik",
         "contact": {
             "mail": "julkakowalik88@gmail.pl",
             "mobile": "48698745214"
         },
-        "cakesId": [19,20],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdynia",
             "district": "Orłowo",
@@ -180,14 +200,16 @@
         "likes": 55
     },
     {
-        "id": 11,
+        "id": 61,
+        "nick": "",
         "name": "Marian",
         "surname": "Nowak",
         "contact": {
             "mail": "nowak@buziaczek.com",
             "mobile": "48222478596"
         },
-        "cakesId": [21,22],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdynia",
             "district": "Śródmieście",
@@ -198,14 +220,16 @@
         "likes": 5
     },
     {
-        "id": 12,
+        "id": 62,
+        "nick": "",
         "name": "Zofia",
         "surname": "Małek",
         "contact": {
             "mail": "zofiamałek@wp.com",
             "mobile": "48742698456"
         },
-        "cakesId": [23,24],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdynia",
             "district": "Śródmieście",
@@ -216,14 +240,16 @@
         "likes": 555
     },
     {
-        "id": 13,
+        "id": 63,
+        "nick": "",
         "name": "Natalia",
         "surname": "Tkaczyk",
         "contact": {
             "mail": "natalka89@interia.com",
             "mobile": "48459752145"
         },
-        "cakesId": [25,26],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Gdynia",
             "district": "Śródmieście",
@@ -234,14 +260,16 @@
         "likes": 5
     },
     {
-        "id": 14,
+        "id": 64,
+        "nick": "",
         "name": "Manuela",
         "surname": "Wawrzyniecka",
         "contact": {
             "mail": "manka@gmail.pl",
             "mobile": "48587412369"
         },
-        "cakesId": [27,28],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Sopot",
             "district": "Karlikowo",
@@ -252,14 +280,16 @@
         "likes": 29
     },
     {
-        "id": 15,
+        "id": 65,
+        "nick": "",
         "name": "Patrycja",
         "surname": "Woroniecka",
         "contact": {
             "mail": "pati99@o2.pl",
             "mobile": "48598741563"
         },
-        "cakesId": [29,30],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Sopot",
             "district": "Karlikowo",
@@ -270,14 +300,16 @@
         "likes": 31
     },
     {
-        "id": 16,
+        "id": 66,
+        "nick": "",
         "name": "Karolina",
         "surname": "Małomiejska",
         "contact": {
             "mail": "malakarola@wp.com",
             "mobile": "48429746316"
         },
-        "cakesId": [31,32],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Reda",
             "district": "Betlejem",
@@ -288,14 +320,16 @@
         "likes": 3
     },
     {
-        "id": 17,
+        "id": 67,
+        "nick": "",
         "name": "Damian",
         "surname": "Perkowski",
         "contact": {
             "mail": "perkowski@wp.com",
             "mobile": "48744855966"
         },
-        "cakesId": [33,34],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Reda",
             "district": "Ciechocino",
@@ -306,14 +340,16 @@
         "likes": 43
     },
     {
-        "id": 18,
+        "id": 68,
+        "nick": "",
         "name": "Anna",
         "surname": "Mikołajewska",
         "contact": {
             "mail": "amikołajewska@onet.com",
             "mobile": "48596314785"
         },
-        "cakesId": [35,36],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Rumia",
             "district": "Biała Rzeka",
@@ -324,14 +360,16 @@
         "likes": 12
     },
     {
-        "id": 19,
+        "id": 69,
+        "nick": "",
         "name": "Weronika",
         "surname": "Psiuk",
         "contact": {
             "mail": "werapsiuk87@o2.com",
             "mobile": "488741256387"
         },
-        "cakesId": [37,38],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Rumia",
             "district": "Zagórze",
@@ -342,14 +380,16 @@
         "likes": 40
     },
     {
-        "id": 20,
+        "id": 70,
+        "nick": "",
         "name": "Agnieszka",
         "surname": "Tarnowska",
         "contact": {
             "mail": "aga7@buziaczek.com",
             "mobile": "48847123654"
         },
-        "cakesId": [39,40],
+        "gender": "male",
+        "userType": "cook",
         "location": {
             "city":"Kartuzy",
             "district": "Kartuzy",
