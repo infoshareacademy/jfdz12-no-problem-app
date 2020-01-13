@@ -1,21 +1,30 @@
 import React from 'react';
-import { CardMedia, withStyles, Grid, Typography, Paper, Card, CardActionArea, Chip } from '@material-ui/core';
+import { IconButton, CardMedia, withStyles, Grid, Typography, Paper, Card, CardActionArea, Chip } from '@material-ui/core';
 import CookLabel from './CookLabel';
 import {styles} from './CakeStyles';
 import {Link} from 'react-router-dom';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 function CakeCard (props) {
 
-    const { name, imgURL, price, glutenFree, id } = props.cake;
-    const { type } = props;
+    const { name, imgURL, price, glutenFree, id, likes } = props.cake;
+    const { type, likedCake } = props;
     const { classes } = props;
+    const likeColor = likedCake ? 'red' : 'grey';
 
     return(
         <Paper className={classes.paper}>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <Card className = {classes.paper} >
-                        <Typography variant="h6"> {name}</Typography> 
+                        <Grid container justify='space-between' alignItems='center'>
+                            <Typography style={{marginLeft:'20px'}} variant="h6">
+                                {name}
+                            </Typography>
+                            <IconButton aria-label="add to favorites">
+                                <FavoriteIcon  style={{color: likeColor}}/>
+                            </IconButton>    
+                        </Grid>
                     </Card> 
                 </Grid>
                     
@@ -48,6 +57,10 @@ function CakeCard (props) {
                                     <Grid item xs container justify='space-between' className = {classes.data} >
                                         <div className={classes.cCardLabelTitle}> bezglutenowe: </div>
                                         <div className={classes.cCardLabelText}> {glutenFree ? ' tak': ' nie'} </div>
+                                    </Grid>
+                                    <Grid item xs container justify='space-between' className = {classes.data} >
+                                        <div className={classes.cCardLabelTitle}> liczba lajków: </div>
+                                        <div className={classes.cCardLabelText}> {likes} </div>
                                     </Grid>
                                 </Grid>
                             </Grid>

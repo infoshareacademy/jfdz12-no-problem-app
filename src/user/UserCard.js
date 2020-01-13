@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { UserBasicData } from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
-import {getLikesWithData, getUserById } from '../api/Api2';
+import {getLikesWithData,getLikesWithData2, getUserById } from '../api/Api2';
 
 export class UserCard extends React.Component{ 
     constructor(){
@@ -13,7 +13,7 @@ export class UserCard extends React.Component{
         this.userIdRef = sessionStorage.getItem('userId');
         this.state ={
             user: {},
-            likeData:{},
+            likes:[],
             isLoading: true,
             selectedMenu: {
                 basic : true,
@@ -27,12 +27,13 @@ export class UserCard extends React.Component{
         Promise.all([
             getUserById(this.userIdRef),
             getLikesWithData(this.userIdRef),
+            getLikesWithData2(this.userIdRef),
         ])
-        .then(data =>
+        .then(data =>{
             this.setState ({
                 user: data[0],
-                likes: data[1],
-            })) 
+                likes: data[2],
+            })}) 
         .catch(error => console.log('bład addformfetch', error.toString()))
         .finally(() => this.setState({
                 isLoading: false,

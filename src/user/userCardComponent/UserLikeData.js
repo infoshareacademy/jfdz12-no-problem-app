@@ -1,5 +1,6 @@
 import React from 'react';
-import { Grid, Paper, Typography, Divider, Box } from '@material-ui/core';
+import { Grid, Paper, Typography, Divider, Box, IconButton } from '@material-ui/core';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 
 export default function UserLikeData(props){
@@ -9,7 +10,7 @@ export default function UserLikeData(props){
     const likesToRender = () => {
         if(likes.length>0){
             return likes.map ((like) => { 
-                return (<div key={like.id}>
+                return (<div key={like.cake.id}>
                     <Grid item xs={12}>
                        <Divider/>
                     </Grid>
@@ -28,14 +29,8 @@ export default function UserLikeData(props){
                             direction='column' 
                             justify='space-evenly' 
                             alignItems='flex-start'
-                        >
+                        > 
                             
-                            <Grid item>
-                                <Box px='10px'>
-                                    <span style={{paddingRight:'5px'}}>{like.date}</span>
-                                    opinia: {like.content}
-                                </Box>
-                            </Grid>
                             <Grid item 
                                 container 
                                 justify='space-between' 
@@ -49,11 +44,20 @@ export default function UserLikeData(props){
                                     <div >
                                         cukiernik: {like.cake.cookName}
                                     </div>
+                                    <div>
+                                        liczba lików: {like.cake.likes}
+                                    </div>
                                 </Box >
                             </Grid>
-                            
                              
                         </Grid>  
+                        <Grid item>
+                            <Box px='10px'>
+                                <IconButton aria-label="add to favorites">
+                                    <FavoriteIcon />
+                                </IconButton>
+                            </Box>
+                        </Grid>
                     </Grid>
                     
                    </div> )})

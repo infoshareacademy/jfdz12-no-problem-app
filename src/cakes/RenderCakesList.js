@@ -7,7 +7,8 @@ import {SORTOPTIONS} from '../constans/selectConstans'
 
 
 export class RenderCakesList extends React.Component {
-    
+    userIdRef = sessionStorage.getItem('userId') || '';
+
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     getFilteredCakes(){
@@ -66,10 +67,14 @@ export class RenderCakesList extends React.Component {
     render(){
         const { cooks, types, toogleView } = this.props.state;
         const filteredSortedCakes = this.getSorteredCakes();
+
         
         return(    
             <Grid container spacing={1} justify='center' >
+                
                 {filteredSortedCakes.map((cake)=>{
+                    const likedCake = cake.likesUsersId.includes(parseInt(this.userIdRef));
+                    console.log(likedCake)
                     return (
                         <Grid 
                             container wrap='wrap' 
@@ -82,13 +87,13 @@ export class RenderCakesList extends React.Component {
                                     cake = {cake}
                                     type = {this.findDataById(types, cake.typeId)}
                                     cook = {this.findDataById(cooks, cake.cookId)}
-                                    
+                                    likedCake = {likedCake}
                                 /> 
                                 : <CakeCard 
                                     cake = {cake}
                                     type = {this.findDataById(types, cake.typeId)}
                                     cook = {this.findDataById(cooks, cake.cookId)}
-                                    
+                                    likedCake = {likedCake}
                                 />
                             }
                             
