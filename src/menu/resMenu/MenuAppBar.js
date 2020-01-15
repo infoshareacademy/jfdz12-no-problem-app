@@ -8,26 +8,37 @@ import SmallLogOut from'./SmallLogOut';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { withRouter } from 'react-router-dom';
 
+
+
+
+
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    
   },
   logo: {
     maxWidth: '170px',
     paddingLeft: '45px',
+   
   },
   label: {
     fontSize: 15, 
   },
+  
   navStyle: {
     top: 0,
     left: "auto",
     right: 0,
     position: "fixed",
-    backgroundColor: "white",
+    
     color: "#757575",
     zIndex: 100,
-    minWidth: '300px'
+    minWidth: '300px',
+   
+    
   },
   flex: {
     display: "flex",
@@ -40,6 +51,18 @@ function MenuAppBar(props) {
   const matches = useMediaQuery('(max-width:600px)');
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  let style = props.styleColor;
+// let style = {backgroundColor:'rgba(255,255,255, 0.3)'};
+
+  
+const changeCol = () => {
+   if (window.pageYOffset <10) {
+     style={backgroundColor:'white'};
+   } else {
+    style={backgroundColor:'red'}; 
+   }
+}
 
   const handleChange = () => {
     props.setAuth();
@@ -95,7 +118,7 @@ function MenuAppBar(props) {
     
     <div className={classes.root} position="static">
       
-      <AppBar className={classes.navStyle}>
+      <AppBar className={classes.navStyle} style={style} onScroll={changeCol}>
        
            {content}
       

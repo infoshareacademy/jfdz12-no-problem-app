@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: '25px'
     },
     menuIcon: {
-        color: "hotpink",
+        color: "rgb(185, 19, 124)",
         marginRight: '30px'
     },
     menuIconInner: {

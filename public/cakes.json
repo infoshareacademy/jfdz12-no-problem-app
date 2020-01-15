@@ -9,7 +9,8 @@
         "cookId": 1,
         "description": "tradycyjny makowiec",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/makowiec1.jpg"
+        "imgURL": "./img/ciacha/makowiec1.jpg",
+        "likes": 15
     },
     {
         "id": 2,
@@ -21,7 +22,8 @@
         "cookId": 1,
         "description": "tradycyjny pączek polany lukrem z nadzieniem różanym",
         "glutenFree": true,
-        "imgURL": "./img/ciacha/paczek1.jpg"
+        "imgURL": "./img/ciacha/paczek1.jpg",
+        "likes": 85
     },
     {
         "id": 3,
@@ -33,7 +35,8 @@
         "cookId": 2,
         "description": "drożdzowa babka z kruszonką",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/babkadrozdzowa.jpg"
+        "imgURL": "./img/ciacha/babkadrozdzowa.jpg",
+        "likes": 105
     },
     {
         "id": 4,
@@ -45,7 +48,8 @@
         "cookId": 2,
         "description": "ciasto francuskie z nadzieniem malinowym",
         "glutenFree": true,
-        "imgURL": "./img/ciacha/francuskiemaliny.jpeg"
+        "imgURL": "./img/ciacha/francuskiemaliny.jpeg",
+        "likes": 114
     },
     {
         "id": 5,
@@ -57,7 +61,8 @@
         "cookId": 3,
         "description": "ciasto z galaretką i malinami z nadzieniem kremowym",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/galaretkamaliny.jpg"
+        "imgURL": "./img/ciacha/galaretkamaliny.jpg",
+        "likes": 45
     },
     {
         "id": 6,
@@ -69,7 +74,8 @@
         "cookId": 3,
         "description": "ciasto czekoladowe z polewą czekoladową tzw. murzynek",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/murzynek.jpg"
+        "imgURL": "./img/ciacha/murzynek.jpg",
+        "likes": 65
     },
     {
         "id": 7,
@@ -81,7 +87,8 @@
         "cookId": 4,
         "description": "makowiec w formie rolady",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/makowiecrolada.jpg"
+        "imgURL": "./img/ciacha/makowiecrolada.jpg",
+        "likes": 96
     },
     {
         "id": 8,
@@ -93,7 +100,8 @@
         "cookId": 4,
         "description": "tort Pavlova",
         "glutenFree": true,
-        "imgURL": "./img/ciacha/bezaPavlova.jpg"
+        "imgURL": "./img/ciacha/bezaPavlova.jpg",
+        "likes": 87
     },
     {
         "id": 9,
@@ -105,7 +113,8 @@
         "cookId": 5,
         "description": "piernik tradycyjny z powidłami",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/piernikpowidla.jpg"
+        "imgURL": "./img/ciacha/piernikpowidla.jpg",
+        "likes": 13
     },
     {
         "id": 10,
@@ -117,7 +126,8 @@
         "cookId": 5,
         "description": "babka kokosowa posypana cukrem pudrem",
         "glutenFree": true,
-        "imgURL": "./img/ciacha/babkakokosowa.jpg"  
+        "imgURL": "./img/ciacha/babkakokosowa.jpg",
+        "likes": 56
     },
     {
         "id": 11,
@@ -129,7 +139,8 @@
         "cookId": 6,
         "description": "sernik wiedeński z polewą czekoladową",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/sernikwiedenski.jpg"
+        "imgURL": "./img/ciacha/sernikwiedenski.jpg",
+        "likes": 41
     },
     {
         "id": 12,
@@ -141,7 +152,8 @@
         "cookId": 6,
         "description": "wyjątkowe brownie bananowe",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/browniebananowe.jpg"
+        "imgURL": "./img/ciacha/browniebananowe.jpg",
+        "likes": 160
     },
     {
         "id": 13,
@@ -153,7 +165,8 @@
         "cookId": 7,
         "description": "pyszne ciasto z owocami",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/biszkoptjablka.jpeg"
+        "imgURL": "./img/ciacha/biszkoptjablka.jpeg",
+        "likes": 63
     },
     {
         "id": 14,
@@ -165,7 +178,8 @@
         "cookId": 7,
         "description": "ciasto cukiniowe z migdałami, orzechami włoskimi i laskowymi",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/cukiniowe.jpg"
+        "imgURL": "./img/ciacha/cukiniowe.jpg",
+        "likes": 48
     },
     {
         "id": 15,
@@ -177,7 +191,8 @@
         "cookId": 8,
         "description": "kruche ciasto z bakaliami i karmelem",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/karmelowe.jpg"
+        "imgURL": "./img/ciacha/karmelowe.jpg",
+        "likes": 98
     },
     {
         "id": 16,
@@ -189,7 +204,8 @@
         "cookId": 8,
         "description": "miękkie i wigotne, pachnace owocami lata",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/kefirowe.jpg"
+        "imgURL": "./img/ciacha/kefirowe.jpg",
+        "likes": 74
     },
     {
         "id": 17,
@@ -201,7 +217,8 @@
         "cookId": 9,
         "description": "idealne na lato",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/raffaello.jpg"
+        "imgURL": "./img/ciacha/raffaello.jpg",
+        "likes": 41
     },
     {
         "id": 18,
@@ -213,7 +230,8 @@
         "cookId": 9,
         "description": "herbatniki, budyń, kajmak, bita śmietana i czekolada",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/3bit.jpg"
+        "imgURL": "./img/ciacha/3bit.jpg",
+        "likes": 63
     },
     {
         "id": 19,
@@ -225,7 +243,8 @@
         "cookId": 10,
         "description": "Doskonałe ciasto na imieniny.",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/karpatka.jpg"
+        "imgURL": "./img/ciacha/karpatka.jpg",
+        "likes": 64
     },
     {
         "id": 20,
@@ -237,7 +256,8 @@
         "cookId": 10,
         "description": "Mnóstwo bakalii (rodzynki, morele, daktyle, skórka pomarańczowa) nasączonych rumem i delikatne ciasto",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/keksangielski.jpeg"
+        "imgURL": "./img/ciacha/keksangielski.jpeg",
+        "likes": 47
     },
     {
         "id": 21,
@@ -249,7 +269,8 @@
         "cookId": 11,
         "description": "znany też jako tort Szwarcwaldzki",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/czarnylas.jpg"
+        "imgURL": "./img/ciacha/czarnylas.jpg",
+        "likes": 22
     },
     {
         "id": 22,
@@ -261,7 +282,8 @@
         "cookId": 11,
         "description": "Przepyszne połączenie chrupiącej bezy, kwaskowej frużeliny z czarnej porzeczki i delikatnej śmietany porzeczkowej.",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/bezaczarnaporzeczka.jpg"
+        "imgURL": "./img/ciacha/bezaczarnaporzeczka.jpg",
+        "likes": 25
     },
     {
         "id": 23,
@@ -273,7 +295,8 @@
         "cookId": 12,
         "description": "super ciasto w paski",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/zebra.jpg"
+        "imgURL": "./img/ciacha/zebra.jpg",
+        "likes": 88
     },
     {
         "id": 24,
@@ -285,7 +308,8 @@
         "cookId": 12,
         "description": "kruche ciasto, dżem z czarnej porzeczki, beza z migdałami i krem budyniowy",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/pychotka.jpg"
+        "imgURL": "./img/ciacha/pychotka.jpg",
+        "likes": 63
     },
     {
         "id": 25,
@@ -297,7 +321,8 @@
         "cookId": 13,
         "description": "ciasto orzechowe z brzoskwniami",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/orzechowebrzoskwinie.jpeg"
+        "imgURL": "./img/ciacha/orzechowebrzoskwinie.jpeg",
+        "likes": 44
     },
     {
         "id": 26,
@@ -309,7 +334,8 @@
         "cookId": 13,
         "description": "jabłecznik z budyniem na kruchym cieście",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/jablecznik.webp"
+        "imgURL": "./img/ciacha/jablecznik.webp",
+        "likes": 99
     },
     {
         "id": 27,
@@ -321,7 +347,8 @@
         "cookId": 14,
         "description": "apple pie :)",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/applepie.jpg"
+        "imgURL": "./img/ciacha/applepie.jpg",
+        "likes": 76
     },
     {
         "id": 28,
@@ -333,7 +360,8 @@
         "cookId": 14,
         "description": "smakuje jak tradycyjna szarlotka z jabłkami",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/szarlotkarabarbar.jpg"
+        "imgURL": "./img/ciacha/szarlotkarabarbar.jpg",
+        "likes": 55
     },
     {
         "id": 29,
@@ -345,7 +373,8 @@
         "cookId": 15,
         "description": "biszkoptowo - budyniowa o kwaskowym smaku",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/babkaagrest.jpg"
+        "imgURL": "./img/ciacha/babkaagrest.jpg",
+        "likes": 94
     },
     {
         "id": 30,
@@ -357,7 +386,8 @@
         "cookId": 15,
         "description": "Znana i lubiana babka łaciata w dwóch kolorach.",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/babkalaciata.jpg"
+        "imgURL": "./img/ciacha/babkalaciata.jpg",
+        "likes": 55
     },
     {
         "id": 31,
@@ -369,7 +399,8 @@
         "cookId": 16,
         "description": "w smaku jak piernik",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/ciastocukinia.jpg"
+        "imgURL": "./img/ciacha/ciastocukinia.jpg",
+        "likes": 36
     },
     {
         "id": 32,
@@ -381,7 +412,8 @@
         "cookId": 16,
         "description": "ciasto miodowe, krem z kaszy manny i orzechy",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/miodownik.jpg"
+        "imgURL": "./img/ciacha/miodownik.jpg",
+        "likes": 97
     },
     {
         "id": 33,
@@ -393,7 +425,8 @@
         "cookId": 17,
         "description": "w smaku jak piernik",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/ciastocukinia.jpg"
+        "imgURL": "./img/ciacha/ciastocukinia.jpg",
+        "likes": 55
     },
     {
         "id": 34,
@@ -405,7 +438,8 @@
         "cookId": 17,
         "description": "ciasto miodowe, krem z kaszy manny i orzechy",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/miodownik.jpg"
+        "imgURL": "./img/ciacha/miodownik.jpg",
+        "likes": 44
     },
     {
         "id": 35,
@@ -417,7 +451,8 @@
         "cookId": 18,
         "description": "oryginalna wersja klasycznej Pavlovej",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/kawowapavlova.jpg"
+        "imgURL": "./img/ciacha/kawowapavlova.jpg",
+        "likes": 36
     },
     {
         "id": 36,
@@ -429,7 +464,8 @@
         "cookId": 18,
         "description": "Tort bezowy z gorzką czekoladą i kremem mascarpone",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/tortbezowymas.jpg"
+        "imgURL": "./img/ciacha/tortbezowymas.jpg",
+        "likes": 105
     },
     {
         "id": 37,
@@ -441,7 +477,8 @@
         "cookId": 19,
         "description": "Sernik na zimno z musem jagodowym",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/sernikjagody.jpg"
+        "imgURL": "./img/ciacha/sernikjagody.jpg",
+        "likes": 112
     },
     {
         "id": 38,
@@ -453,7 +490,8 @@
         "cookId": 19,
         "description": "biszkopt z masą cytrynową, bitą śmietaną i herbatnikami oblanymi lukrem",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/cytrusek.jpg"
+        "imgURL": "./img/ciacha/cytrusek.jpg",
+        "likes": 5
     },
     {
         "id": 39,
@@ -465,7 +503,8 @@
         "cookId": 20,
         "description": "na biszkopcie, bardzo truskawkowe",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/truskawkowe.jpg"
+        "imgURL": "./img/ciacha/truskawkowe.jpg",
+        "likes": 11
     },
     {
         "id": 40,
@@ -477,6 +516,7 @@
         "cookId": 20,
         "description": "Mięciutkie i delikatne kruche ciasto ",
         "glutenFree": false,
-        "imgURL": "./img/ciacha/kruchetruskawki.jpeg"
+        "imgURL": "./img/ciacha/kruchetruskawki.jpeg",
+        "likes": 66
     }    
 ]

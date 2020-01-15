@@ -14,12 +14,12 @@ const useStyles = makeStyles(theme => ({
       paddingTop: '5px'
     },
     userAccount: {
-     color: 'hotpink'
+     color: 'rgb(185, 19, 124)'
     },
     flex: {
       display: "flex",
       justifyContent: "space-between",
-      color: 'hotpink'
+      color: 'rgb(185, 19, 124)'
     }
   }));
 
