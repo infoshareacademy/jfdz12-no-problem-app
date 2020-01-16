@@ -15,7 +15,6 @@ export class CakesList extends React.Component{
             cakes: [],
             cooks: [],
             types:[],
-            cakesAndCooks:[],
             filterCake: '', 
             filterCook: '',
             filterLocation:'',

@@ -1,33 +1,51 @@
 import React from 'react';
-import { Grid, Paper, Typography, Divider, Box, IconButton } from '@material-ui/core';
+import { Grid, Paper, Typography, Divider, IconButton, withStyles } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
+const styles = {
+    img : {
+        width:'100%', 
+        height:'100px',
+    },
+    grid:{
+        padding: '5px',
+    },
+    text:{
+        paddingLeft:'10px',
+    },
+    icon:{
+        color: 'red',
+    }
+    
+}
 
-export default function UserLikeData(props){
+function UserLikeData(props){
 
-    const {likes} = props;
+    const {likes, classes} = props;
 
     const likesToRender = () => {
         if(likes.length>0){
-            return likes.map ((like) => { 
+            return likes.map ((like,idx) => {
+                const backColor = idx % 2 === 0 ? '#fce4ec50' : '';
                 return (<div key={like.cake.id}>
                     <Grid item xs={12}>
                        <Divider/>
                     </Grid>
                     
-                    <Grid  xs ={12} container item style={{margin: '5px',}}>
+                    <Grid  xs ={12} container item className={classes.grid} style ={{backgroundColor: backColor}}>
                         
                         <Grid item xs={3} sm={3} md={2} >
                             <img src = {like.cake.imgURL} 
                                 alt="cake foto" 
-                                style={{ width:'100%', height:'100px'}}></img>
+                                className={classes.img}>    
+                            </img>
                            
                         </Grid>
                             
                         <Grid item xs
                             container 
                             direction='column' 
-                            justify='space-evenly' 
+                            //justify='space-evenly' 
                             alignItems='flex-start'
                         > 
                             
@@ -37,33 +55,35 @@ export default function UserLikeData(props){
                                 alignContent='flex-start'
                                 direction='column'
                             >
-                                <Box px="10px" align='left'>
-                                    <div >
-                                        ciasto: {like.cake.name}
+                                <Grid item container alignItems='flex-start' direction='column'>
+                                    <div className={classes.text}>
+                                        ciasto: 
+                                        <Typography className={classes.text} component='span' variant='h6'> 
+                                            {like.cake.name}
+                                        </Typography>
                                     </div>
-                                    <div >
-                                        cukiernik: {like.cake.cookName}
+                                    <div className={classes.text}>
+                                        cukiernik: <Typography className={classes.text} component='span' variant='h6'> {like.cake.cookName}</Typography>
                                     </div>
-                                    <div>
-                                        liczba lików: {like.cake.likes}
+                                    <div className={classes.text}>
+                                        polubienia: <Typography className={classes.text} component='span' variant='h6'>{like.cake.likes}</Typography>
                                     </div>
-                                </Box >
+                                </Grid >
                             </Grid>
                              
                         </Grid>  
-                        <Grid item>
-                            <Box px='10px'>
+                        <Grid item >
+                            
                                 <IconButton aria-label="add to favorites">
-                                    <FavoriteIcon />
+                                    <FavoriteIcon  className={classes.icon}/>
                                 </IconButton>
-                            </Box>
+                            
                         </Grid>
                     </Grid>
                     
                    </div> )})
         }else{ return "" }
     }
-
 
     return (
         <Paper >
@@ -78,7 +98,7 @@ export default function UserLikeData(props){
         )
 }
 
-
+export default withStyles(styles)(UserLikeData);
 
 
 // return (<>

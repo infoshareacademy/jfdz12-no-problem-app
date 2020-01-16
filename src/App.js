@@ -6,7 +6,7 @@ import Dashboard from './dashboard/Dashboard';
 import CooksList from './cooks/CooksList';
 import { BrowserRouter, Route } from 'react-router-dom';
 import MenuAppBar from './menu/resMenu/MenuAppBar';
-import { UserCard } from './user/UserCard';
+import UserCard from './user/UserCard';
 import SignIn from './user/SignIn';
 import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 import CakeCardFull from './cakes/CakeCardFull';
@@ -41,7 +41,7 @@ class App extends React.Component {
                         auth={auth}
             />
               <Route exact path='/' component={Dashboard} />
-              <Route path='/oneuser' component={UserCard} />
+              <Route path='/userCard' component={UserCard} />
               <Route path='/cakes' component={CakesList} />
               <Route path='/cakeAdd/:id' component={CakeAddForm} />
               <Route path='/cake/:id' component={CakeCardFull} />

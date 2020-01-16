@@ -68,9 +68,8 @@ class CakeFilters extends React.Component{
                     <Grid item xs={11} sm style={cfGrid} >
                         <FilterDropdown 
                             filterTypesId = {this.props.filterTypesId}
-                            filterTypesId2 = {this.props.filterTypesId2}
                             types = {this.props.types}
-                            onCheckedType = {this.handleChangeType}
+                            onHandleChangeType = {this.handleChangeType}
                         />
                     </Grid>
                     

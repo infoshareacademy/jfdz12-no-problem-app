@@ -101,7 +101,7 @@ export default function SwipeableTemporaryDrawer(props) {
       <Divider />
       <List>
           <>
-            <ListItem button key={'Moje konto'} component={Link} to='/oneuser'>
+            <ListItem button key={'Moje konto'} component={Link} to='/userCard'>
               <ListItemIcon><FaceIcon/></ListItemIcon>
               <ListItemText primary={'Moje konto'} />
             </ListItem>

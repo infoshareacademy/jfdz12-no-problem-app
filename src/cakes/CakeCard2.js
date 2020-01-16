@@ -36,9 +36,10 @@ const styles ={
 function CakeCard2 (props) {
     
     const { name, imgURL, price, glutenFree, id,} = props.cake;
-    const { type } = props;
+    const { type, likedCake } = props;
     const { classes } = props;
     const typeBackGrColor = `${type.color}08`;
+    const likeColor = likedCake ? 'red' : 'grey';
 
     return(
         <Grid container >
@@ -88,7 +89,7 @@ function CakeCard2 (props) {
     
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
+                        <FavoriteIcon style={{color: likeColor}}/>
                     </IconButton>
 
                 </CardActions>

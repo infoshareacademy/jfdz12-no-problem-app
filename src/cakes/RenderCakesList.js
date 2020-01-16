@@ -74,7 +74,7 @@ export class RenderCakesList extends React.Component {
                 
                 {filteredSortedCakes.map((cake)=>{
                     const likedCake = cake.likesUsersId.includes(parseInt(this.userIdRef));
-                    console.log(likedCake)
+                    
                     return (
                         <Grid 
                             container wrap='wrap' 

@@ -21,9 +21,7 @@ function CakeCard (props) {
                             <Typography style={{marginLeft:'20px'}} variant="h6">
                                 {name}
                             </Typography>
-                            <IconButton aria-label="add to favorites">
-                                <FavoriteIcon  style={{color: likeColor}}/>
-                            </IconButton>    
+                                
                         </Grid>
                     </Card> 
                 </Grid>
@@ -58,9 +56,21 @@ function CakeCard (props) {
                                         <div className={classes.cCardLabelTitle}> bezglutenowe: </div>
                                         <div className={classes.cCardLabelText}> {glutenFree ? ' tak': ' nie'} </div>
                                     </Grid>
-                                    <Grid item xs container justify='space-between' className = {classes.data} >
-                                        <div className={classes.cCardLabelTitle}> liczba lajków: </div>
-                                        <div className={classes.cCardLabelText}> {likes} </div>
+                                    <Grid item xs 
+                                        container 
+                                        justify='space-between'
+                                        alignItems='center' 
+                                        className = {classes.data} 
+                                        >
+                                            <div className={classes.cCardLabelTitle}> 
+                                                polubienia: {likes}
+                                            </div>
+                                            <div className={classes.cCardLabelText}> 
+                                                
+                                                <IconButton style={{padding: '0px'}}>
+                                                    <FavoriteIcon  style={{color: likeColor}}/>
+                                                </IconButton> 
+                                            </div>
                                     </Grid>
                                 </Grid>
                             </Grid>
