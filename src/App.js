@@ -71,7 +71,7 @@ class App extends React.Component {
                 })
                 clearInterval(waitingData)
                 console.log('App.js -> załadowane')
-                console.log(this.state)
+               
               } else {
                 i++;
                 console.log('czekam', i );

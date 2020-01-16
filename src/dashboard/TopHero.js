@@ -1,40 +1,46 @@
 import React from 'react';
 import Hero from '../hero.jpg';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
     backgroundDiv: {
-        backgroundImage:`url(${Hero})`, 
-        backgroundSize: ' cover',
-        backgroundRepeat: 'no-repeat',
-        minHeight: '650px',
-        backgroundPosition: 'center',
-       
+        width: '100vw',    
         position: 'relative',
-       
-      
-        flexDirection: 'column',
-        flexWrap: "nowrap",
-        display: 'flex',
-        justifyContent: "flex-end",
-        alignItems: 'flex-end',
-        color: 'rgb(185, 19, 124)', 
-        fontSize: '2em', 
-        textAlign: 'right'
-
+        fontSize: '2vw'
     },
     
-    paragraph: {
-        backgroundColor: 'rgba(255,255,255, 0.7)', 
-        padding: '5px', 
-        borderRadius: '5px',
-        alignSelf: "right",
-        margin: '5px',
-        marginRight: '15px',
-        marginBottom: '-15px'
-       
+    paragraphsAll: {
+        textAlign: 'right',
+        color: 'rgb(185, 19, 124)', 
+        position: 'absolute',
+        right: '15px',
+        bottom: '2vw'
     },
-  
+    img: {
+        width: "100vw"
+    },
+    paragraph: {
+        backgroundColor: 'rgba(255,255,255, 0.7)',
+        display: 'inline-block',
+        marginBottom: '5px',
+        marginRight: '15px',
+        padding: '5px',
+        borderRadius: '10px',
+    },
+    btn: {
+        backgroundColor: 'rgb(185, 19, 124)',
+        color: 'white',
+        marginRight: '15px',
+        fontSize: '1vw',
+        borderRadius: '10px',
+        "&:hover": {
+            backgroundColor: "rgb(185, 19, 124, 0.7)"
+          }
+      
+      
+    }
   });
 
 export default function TopHero() {
@@ -42,13 +48,18 @@ export default function TopHero() {
     return (
         <div className={classes.backgroundDiv}>
           
-               
-                    <div className={classes.paragraph}>Niech jedzą ciastka!</div>
-                    <br/>
-                    <div className={classes.paragraph}>Cała Twoja rodzina, wszyscy przyjaciele i znajomi z pracy.</div>
-                    <br/>
-                    <div className={classes.paragraph} style={{marginBottom: '15px'}}>I niech myślą, że sam piekłeś!</div>
-             
+                    <img src={Hero} className={classes.img} alt="eat cakes"/>
+                    <div className={classes.paragraphsAll}>
+                        <div className={classes.paragraph}>Niech jedzą ciastka!</div>
+                  <br/>
+                        <div className={classes.paragraph}>Cała Twoja rodzina, wszyscy przyjaciele i znajomi z pracy.</div>
+                  <br/>
+                        <div className={classes.paragraph}>I niech myślą, że sam piekłeś!</div>
+                <br/>
+                    <Link to='./SignOn' style={{textDecoration: 'none'}}>
+                        <Button className={classes.btn}>Dołącz!</Button>
+                    </Link>
+             </div>
                
         </div>
     )

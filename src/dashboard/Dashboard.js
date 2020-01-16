@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import TopHero from './TopHero'
 import BestCakes from './BestCakes';
 import NumberStats from './NumberStats';
-import TopHero2 from './TopHero2';
-import Chart from './Chart'
+
+import ChartPie from './ChartPie';
+import ChartLine from './ChartLine';
+
 
 
 
@@ -13,10 +15,12 @@ export default class Dashboard extends Component {
        
         return (
             <div>
-                <TopHero2 />
+
+                <TopHero />
                 <BestCakes cakes={this.props.cakes} />
                 <NumberStats />
-                <Chart cakes={this.props.cakes}/>
+                <ChartPie cakes={this.props.cakes}/>
+                <ChartLine />
             </div>
         )
     }

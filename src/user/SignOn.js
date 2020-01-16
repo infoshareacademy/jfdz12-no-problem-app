@@ -7,7 +7,7 @@ export default class SignOn extends Component {
         return (
             <div style={{paddingTop: '100px'}}>
                <h1> Możliwość rejestracji już wkrótce! </h1>
-               <Link to='/'>
+               <Link to='/' style={{textDecoration: 'none'}}>
                <Button color="secondary">Strona główna</Button>
                </Link>
             </div>

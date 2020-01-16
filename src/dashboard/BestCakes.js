@@ -11,15 +11,22 @@ import Typography from '@material-ui/core/Typography';
 
 
 const useStyles = makeStyles({
-   
+   mainContainer: {
+    paddingTop:'50px', 
+    paddingBottom: '50px'
+   },
     card: {
-      width: '80%',
+      width: '97%',
       height: '100%',
-      
     },
     media: {
       height: 200,
     },
+    more: {
+      textAlign: 'center',
+      color: 'rgb(185, 19, 124)',
+      paddingTop: 5
+    }
   });
 
  const BestCakes = (props) => {
@@ -28,10 +35,10 @@ const useStyles = makeStyles({
     const sortedCakes = props.cakes.sort((a,b)=>b.likes-a.likes);
     const slicedSortCakes = sortedCakes.slice(0,3);
     const cakes =  slicedSortCakes.map(cake=> 
-      <Grid item   
+      <Grid key={cake.id} item   
               xs={12} 
               md={4}
-              style={{marginBottom:'5%'}}>
+              >
       <Card className={classes.card} >
             <CardActionArea>
             <CardMedia
@@ -53,7 +60,7 @@ const useStyles = makeStyles({
        </Grid>);
 
 return(
-    <Container maxWidth = "80%" style={{paddingTop:'100px', paddingBottom:'100px'}}>
+    <Container>
       <h1>Nasze najbardziej lubiane ciasta</h1>
          <Grid container>
           
@@ -63,8 +70,8 @@ return(
             </Grid>
        
     
-       <Link to='/cakes'>
-       <p>Zobacz więcej</p>
+       <Link to='/cakes' style={{textDecoration: 'none'}}>
+       <p className={classes.more}>Zobacz więcej</p>
        </Link>
     </Container>
    
