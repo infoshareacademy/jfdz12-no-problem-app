@@ -25,25 +25,20 @@ class App extends React.Component {
       error:'',
       cakes:[],
       cooks:[],
-      styleColor: {backgroundColor:'rgba(255,255,255, 0.3)'}
+      styleColor: 'rgba(255,255,255, 0.3)'
     };
    
   }
 
+  handleScroll = () => {
+    this.setState({
+      styleColor: window.pageYOffset===0 ? 'rgba(255,255,255, 0.3)' : 'white',
+    }); 
+  };
 
   componentDidMount(){
-    window.onscroll = () => {
-      this.setState({
-        styleColor:{backgroundColor:'white'}
-      }); 
-      if (window.pageYOffset===0) {
-        this.setState({
-          styleColor:{backgroundColor:'rgba(255,255,255, 0.3)'}}
-          )
-      }
-    };
-    
 
+    window.addEventListener('scroll', this.handleScroll, true)
    
     fetch('./cakes.json')
         .then (res => res.json())

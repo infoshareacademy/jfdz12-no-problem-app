@@ -118,7 +118,7 @@ const changeCol = () => {
     
     <div className={classes.root} position="static">
       
-      <AppBar className={classes.navStyle} style={style} onScroll={changeCol}>
+      <AppBar className={classes.navStyle} style={{backgroundColor: style}} onScroll={changeCol}>
        
            {content}
       
