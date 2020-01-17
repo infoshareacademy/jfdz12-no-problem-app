@@ -25,20 +25,11 @@ class App extends React.Component {
       error:'',
       cakes:[],
       cooks:[],
-      styleColor: 'rgba(255,255,255, 0.3)'
     };
    
   }
 
-  handleScroll = () => {
-    this.setState({
-      styleColor: window.pageYOffset===0 ? 'rgba(255,255,255, 0.3)' : 'white',
-    }); 
-  };
-
   componentDidMount(){
-
-    window.addEventListener('scroll', this.handleScroll, true)
    
     fetch('./cakes.json')
         .then (res => res.json())
@@ -61,7 +52,6 @@ class App extends React.Component {
           <BrowserRouter>
             <MenuAppBar setAuth={this.setAuth} 
                         auth={auth}
-                        styleColor={this.state.styleColor}
             />
               <Route exact path='/'>
                 <Dashboard cakes={this.state.cakes} cooks={this.state.cooks} />
