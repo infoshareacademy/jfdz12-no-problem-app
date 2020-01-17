@@ -4,14 +4,12 @@ import { CakesList } from './cakes/CakesList';
 import './App.css';
 import Dashboard from './dashboard/Dashboard';
 import CooksList from './cooks/CooksList';
-import AddCake from './cakes/AddCake';
 import { BrowserRouter, Route } from 'react-router-dom';
 import MenuAppBar from './menu/resMenu/MenuAppBar';
-import { User } from './user/User';
-import { UserCard } from './user/UserCard';
-import { dataManager } from './api/Api';
+import UserCard from './user/UserCard';
 import SignIn from './user/SignIn';
 import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
+import CakeCardFull from './cakes/CakeCardFull';
 
 
 class App extends React.Component {
@@ -25,40 +23,6 @@ class App extends React.Component {
       error:'',
     };
   }
-
-  componentDidMount(){
-    let i=0;
-    this.setState({
-             isLoading: true,
-             isError: false,
-         }, () =>{
-          const waitingData = setInterval(()=>{
-            const data = dataManager.getUsers();
-            const data2 = dataManager.getCooks();
-            const data3 = dataManager.getTypes();
-            const data4 = dataManager.getLikes();
-            
-            if (data.length > 0 && data2.length > 0 && data3.length>0 && data4.length>0){
-                this.setState ({
-                  isLoading: false, 
-                })
-                clearInterval(waitingData)
-                console.log('App.js -> załadowane')
-              } else {
-                i++;
-                console.log('czekam', i );
-                if (i>20){
-                  clearInterval(waitingData);
-                  this.setState({
-                    isError: true,
-                    error: 'nie mogę pobrać danych!!',
-                    isLoading: false,
-                  })
-                }
-              }
-            }, 100)
-         }) 
-  }
   
   setAuth = () => {
     this.setState(prevState =>({
@@ -71,21 +35,20 @@ class App extends React.Component {
 
     if (!isLoading && !isError){
       return (
-        <BrowserRouter>
-          <MenuAppBar setAuth={this.setAuth} 
-                      auth={auth}
-          />
-          <div className="App">  
-            <Route exact path='/' component={Dashboard} />
-            <Route path='/userAccount' component={User} />
-            <Route path='/oneuser' component={UserCard} />
-            <Route path='/cakes' component={CakesList} />
-            <Route path='/cakesAdd/:id' component={CakeAddForm} />
-            <Route path='/cooks' component={CooksList} />
-            <Route path='/addCake' component={AddCake} />
-            <Route path='/SignIn' component={SignIn} />
-          </div>    
-        </BrowserRouter>
+        <div className="App">
+          <BrowserRouter>
+            <MenuAppBar setAuth={this.setAuth} 
+                        auth={auth}
+            />
+              <Route exact path='/' component={Dashboard} />
+              <Route path='/userCard' component={UserCard} />
+              <Route path='/cakes' component={CakesList} />
+              <Route path='/cakeAdd/:id' component={CakeAddForm} />
+              <Route path='/cake/:id' component={CakeCardFull} />
+              <Route path='/cooks' component={CooksList} />
+              <Route path='/SignIn' component={SignIn} />
+          </BrowserRouter>
+        </div>
       )}
     
     if(isLoading && !isError) {

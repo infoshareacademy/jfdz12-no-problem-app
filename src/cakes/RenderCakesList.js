@@ -7,15 +7,7 @@ import {SORTOPTIONS} from '../constans/selectConstans'
 
 
 export class RenderCakesList extends React.Component {
-    
-    constructor(props){
-        super(props);
-        this.openCakeCard = this.openCakeCard.bind(this);
-    }
-
-    openCakeCard(id,e) {
-        this.props.onCakeCardOpen(id,e)
-    };
+    userIdRef = sessionStorage.getItem('userId') || '';
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
@@ -30,9 +22,10 @@ export class RenderCakesList extends React.Component {
                 filterAll, 
                 filterAllToogle,
                 priceRange } = this.props.state;
-
+                
         return cakes
             .filter (cake => {
+                
                 return(
                 filterCondition( cake, 
                     filterAllToogle ? filterCake : filterAll, 
@@ -74,10 +67,14 @@ export class RenderCakesList extends React.Component {
     render(){
         const { cooks, types, toogleView } = this.props.state;
         const filteredSortedCakes = this.getSorteredCakes();
+
         
         return(    
             <Grid container spacing={1} justify='center' >
+                
                 {filteredSortedCakes.map((cake)=>{
+                    const likedCake = cake.likesUsersId.includes(parseInt(this.userIdRef));
+                    
                     return (
                         <Grid 
                             container wrap='wrap' 
@@ -90,13 +87,13 @@ export class RenderCakesList extends React.Component {
                                     cake = {cake}
                                     type = {this.findDataById(types, cake.typeId)}
                                     cook = {this.findDataById(cooks, cake.cookId)}
-                                    onCakeCardOpen = {this.openCakeCard}
+                                    likedCake = {likedCake}
                                 /> 
                                 : <CakeCard 
                                     cake = {cake}
                                     type = {this.findDataById(types, cake.typeId)}
                                     cook = {this.findDataById(cooks, cake.cookId)}
-                                    onCakeCardOpen = {this.openCakeCard}
+                                    likedCake = {likedCake}
                                 />
                             }
                             

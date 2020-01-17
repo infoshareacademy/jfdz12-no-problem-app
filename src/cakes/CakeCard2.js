@@ -1,9 +1,10 @@
 import React from 'react';
 import { withStyles, Grid, Typography, IconButton, Avatar, Divider,} from '@material-ui/core';
-import { CardMedia, Card, CardActions, CardContent, CardHeader } from '@material-ui/core';
+import { CardMedia, Card, CardActions, CardContent, CardHeader, CardActionArea } from '@material-ui/core';
 import CookLabel from './CookLabel';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {Link} from 'react-router-dom';
 
 const styles ={
     avatar:{
@@ -35,14 +36,14 @@ const styles ={
 function CakeCard2 (props) {
     
     const { name, imgURL, price, glutenFree, id,} = props.cake;
-    const { type } = props;
+    const { type, likedCake } = props;
     const { classes } = props;
     const typeBackGrColor = `${type.color}08`;
+    const likeColor = likedCake ? 'red' : 'grey';
 
     return(
         <Grid container >
             <Card className={classes.card} 
-                onClick = {(e) => props.onCakeCardOpen( id, e )}
                 style={{backgroundColor:typeBackGrColor}}
             >
                 <CardHeader
@@ -56,6 +57,7 @@ function CakeCard2 (props) {
                     subheaderTypographyProps={{align: "left"}}
                     subheader={`Cena: ${price} zł/kg` }
                 />
+                <CardActionArea component={Link} to={`/cake/${id}`} >
                 <CardMedia
                     className={classes.media}
                     image={imgURL}
@@ -74,7 +76,7 @@ function CakeCard2 (props) {
                             bezglutenowe:  {glutenFree ? ' tak': ' nie'}
                         </Typography>
                     </Grid>
-    
+                    
                     <Divider />
                     
                     <Typography variant="body2" color="textSecondary" component="div">
@@ -82,12 +84,12 @@ function CakeCard2 (props) {
                     </Typography>
     
                 </CardContent>
-    
+                </CardActionArea>
                 <Divider />
     
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
+                        <FavoriteIcon style={{color: likeColor}}/>
                     </IconButton>
 
                 </CardActions>

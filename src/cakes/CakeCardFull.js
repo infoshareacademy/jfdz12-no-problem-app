@@ -1,22 +1,40 @@
 import React from 'react';
-import { Container, Typography, Button, Grid, CardMedia, Paper, withStyles } from '@material-ui/core';
+import { Container, Typography, Button, Grid, CardMedia, Paper, withStyles, CircularProgress } from '@material-ui/core';
 import {styles} from './CakeStyles';
 import CookLabelFull from './CookLabelFull';
+import {getFullCakeById, } from '../api/Api2';
+import {Link} from 'react-router-dom';
+
 
 class CakeCardFull extends React.Component{
     constructor(props){
         super(props);
-        this.openCakeCard = this.openCakeCard.bind(this);    
+        this.state ={
+            cake:{},
+            isLoading: true,
+            error: '',
+        }
     }
 
-    openCakeCard(id,e) {
-        this.props.onCakeCardOpen(id,e);
+    componentDidMount(){
+        const cakeId = this.props.match.params.id;
+        getFullCakeById(cakeId)
+            .then(data => this.setState({cake: data}))
+            .catch(error => this.setState({error: error.toString()}))
+            .finally(() => this.setState({isLoading: false}))
     }
 
+ 
     render(){
-        const { cake, cook, type } = this.props;
+        const { type, cook } = this.state.cake;
         const { classes }  = this.props;
-        const typeColor = type.color;
+        const { isLoading, cake} = this.state;
+ 
+        if(isLoading){
+            return (<div style={{paddingTop:'100px'}}>
+                        <CircularProgress color="secondary" />
+                </div>)
+        }
 
         return (
             <Container maxWidth = "lg" style={{paddingTop:'100px'}}>
@@ -52,7 +70,7 @@ class CakeCardFull extends React.Component{
                                 
                                 <Typography variant='body1' className={classes.fCardWrapType}>
                                     <span className={classes.fCardSubText}>typ ciasta:</span>
-                                    <span className={classes.fCardType} style= {{backgroundColor: typeColor}}>
+                                    <span className={classes.fCardType} style= {{backgroundColor: type.color}}>
                                         {type.name}
                                     </span>
                                 </Typography>
@@ -86,7 +104,7 @@ class CakeCardFull extends React.Component{
                     </Paper>
                     
                     
-                    <Button onClick={this.openCakeCard} 
+                    <Button component={Link} to={`/cakes`} 
                             variant="outlined" 
                             color="secondary"
                             style = {{margin: '20px auto'}}

@@ -17,16 +17,15 @@ export class FilterButton extends React.Component{
         };
         return <>
         
-                    <Button
-                        style ={myStyle}
-                        onClick = {this.handleToogleChange}
-                        variant= {this.props.filterAllToogle ? "outlined" : "text"} 
-                        color="default" 
-                        size="medium"
-                        
-                    > 
-                        {this.props.filterAllToogle ? "mniej" : "więcej" } 
-                    </Button>
+            <Button
+                style ={myStyle}
+                onClick = {this.handleToogleChange}
+                variant= {this.props.filterAllToogle ? "outlined" : "text"} 
+                color="default" 
+                size="medium"
+            > 
+                {this.props.filterAllToogle ? "mniej" : "więcej" } 
+            </Button>
         
         </>
     }

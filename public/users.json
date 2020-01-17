@@ -1,602 +1,1101 @@
 [
     {
-    "id": 1,
-    "nick": "Barbara",
-    "name": "Barbara",
-    "surname": "Zielińska",
-    "contact": {
-        "mail": "basia@gmail.pl",
-        "mobile": "48518445469"
+        "id": 1,
+        "nick": "Barbara",
+        "name": "Barbara",
+        "surname": "Zielińska",
+        "contact": {
+            "mail": "basia@gmail.pl",
+            "mobile": "48518445469"
+        },
+        "gender": "female",
+        "likeCakesId": [1,2,3,4],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 2,
-    "nick": "Naki2",
-    "name": "Natan",
-    "surname": "Kiedrowski",
-    "contact": {
-        "mail": "natek@gmail.pl",
-        "mobile": "48715236485"
+    {
+        "id": 2,
+        "nick": "Naki2",
+        "name": "Natan",
+        "surname": "Kiedrowski",
+        "contact": {
+            "mail": "natek@gmail.pl",
+            "mobile": "48715236485"
+        },
+        "gender": "male",
+        "likeCakesId":[5],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 3,
-    "nick": "Zośka",
-    "name": "Zofia",
-    "surname": "Pobielak",
-    "contact": {
-        "mail": "zofija@wp.com",
-        "mobile": "48584789632"
+    {
+        "id": 3,
+        "nick": "Zośka",
+        "name": "Zofia",
+        "surname": "Pobielak",
+        "contact": {
+            "mail": "zofija@wp.com",
+            "mobile": "48584789632"
+        },
+        "gender": "female",
+        "likeCakesId":[6],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 4,
-    "nick": "Wojtek84",
-    "name": "Wojciech",
-    "surname": "Wojdyłło",
-    "contact": {
-        "mail": "ww84a@interia.com",
-        "mobile": "48750365412"
+    {
+        "id": 4,
+        "nick": "Wojtek84",
+        "name": "Wojciech",
+        "surname": "Wojdyłło",
+        "contact": {
+            "mail": "ww84a@interia.com",
+            "mobile": "48750365412"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 5,
-    "nick": "Andy",
-    "name": "Andrzej",
-    "surname": "Lelkowski",
-    "contact": {
-        "mail": "lelek@gmail.pl",
-        "mobile": "48514874569"
+    {
+        "id": 5,
+        "nick": "Andy",
+        "name": "Andrzej",
+        "surname": "Lelkowski",
+        "contact": {
+            "mail": "lelek@gmail.pl",
+            "mobile": "48514874569"
+        },
+        "gender": "male",
+        "likeCakesId":[1,2,11],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 6,
-    "nick": "Anula",
-    "name": "Anna",
-    "surname": "Kowalska",
-    "contact": {
-        "mail": "aniathebest@interia.com",
-        "mobile": "48777596841"
+    {
+        "id": 6,
+        "nick": "Anula",
+        "name": "Anna",
+        "surname": "Kowalska",
+        "contact": {
+            "mail": "aniathebest@interia.com",
+            "mobile": "48777596841"
+        },
+        "gender": "female",
+        "likeCakesId":[2,3,20],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 7,
-    "nick": "Pitbull",
-    "name": "Piotr",
-    "surname": "Surmacz",
-    "contact": {
-        "mail": "piosur74@o2.com",
-        "mobile": "48896321478"
+    {
+        "id": 7,
+        "nick": "Pitbull",
+        "name": "Piotr",
+        "surname": "Surmacz",
+        "contact": {
+            "mail": "piosur74@o2.com",
+            "mobile": "48896321478"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 8,
-    "nick": "Madonna",
-    "name": "Maria",
-    "surname": "Boska",
-    "contact": {
-        "mail": "boska@boska.com",
-        "mobile": "48541236856"
+    {
+        "id": 8,
+        "nick": "Madonna",
+        "name": "Maria",
+        "surname": "Boska",
+        "contact": {
+            "mail": "boska@boska.com",
+            "mobile": "48541236856"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 9,
-    "nick": "Ja18",
-    "name": "Joanna",
-    "surname": "Mazurek",
-    "contact": {
-        "mail": "jomaz@interia.com",
-        "mobile": "48589632145"
+    {
+        "id": 9,
+        "nick": "Ja18",
+        "name": "Joanna",
+        "surname": "Mazurek",
+        "contact": {
+            "mail": "jomaz@interia.com",
+            "mobile": "48589632145"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 10,
-    "nick": "Koza",
-    "name": "Marek",
-    "surname": "Kozłowski",
-    "contact": {
-        "mail": "koza58@gmail.pl",
-        "mobile": "48863514289"
+    {
+        "id": 10,
+        "nick": "Koza",
+        "name": "Marek",
+        "surname": "Kozłowski",
+        "contact": {
+            "mail": "koza58@gmail.pl",
+            "mobile": "48863514289"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 11,
-    "nick": "Michał",
-    "name": "Michał",
-    "surname": "Tarnowski",
-    "contact": {
-        "mail": "michałt@tarnowskimeble.com",
-        "mobile": "48514745963"
+    {
+        "id": 11,
+        "nick": "Michał",
+        "name": "Michał",
+        "surname": "Tarnowski",
+        "contact": {
+            "mail": "michałt@tarnowskimeble.com",
+            "mobile": "48514745963"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 12,
-    "nick": "Piła456",
-    "name": "Zuzanna",
-    "surname": "Piłkowska",
-    "contact": {
-        "mail": "zuzapila@gmail.pl",
-        "mobile": "48586965412"
+    {
+        "id": 12,
+        "nick": "Piła456",
+        "name": "Zuzanna",
+        "surname": "Piłkowska",
+        "contact": {
+            "mail": "zuzapila@gmail.pl",
+            "mobile": "48586965412"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 13,
-    "nick": "Mania15",
-    "name": "Manuela",
-    "surname": "Kidawa",
-    "contact": {
-        "mail": "mania15@wp.com",
-        "mobile": "48569874569"
+    {
+        "id": 13,
+        "nick": "Mania15",
+        "name": "Manuela",
+        "surname": "Kidawa",
+        "contact": {
+            "mail": "mania15@wp.com",
+            "mobile": "48569874569"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 14,
-    "nick": "Kasiula",
-    "name": "Katarzyna",
-    "surname": "Maniecka",
-    "contact": {
-        "mail": "maniara@wp.com",
-        "mobile": "48451123658"
+    {
+        "id": 14,
+        "nick": "Kasiula",
+        "name": "Katarzyna",
+        "surname": "Maniecka",
+        "contact": {
+            "mail": "maniara@wp.com",
+            "mobile": "48451123658"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 15,
-    "nick": "Pysia",
-    "name": "Patrycja",
-    "surname": "Wawelka",
-    "contact": {
-        "mail": "pawawel@gmail.pl",
-        "mobile": "48586478852"
+    {
+        "id": 15,
+        "nick": "Pysia",
+        "name": "Patrycja",
+        "surname": "Wawelka",
+        "contact": {
+            "mail": "pawawel@gmail.pl",
+            "mobile": "48586478852"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 16,
-    "nick": "Antek92",
-    "name": "Antoni",
-    "surname": "Michałowski",
-    "contact": {
-        "mail": "michal@o2.com",
-        "mobile": "48789456123"
+    {
+        "id": 16,
+        "nick": "Antek92",
+        "name": "Antoni",
+        "surname": "Michałowski",
+        "contact": {
+            "mail": "michal@o2.com",
+            "mobile": "48789456123"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 17,
-    "nick": "Anka",
-    "name": "Anastazja",
-    "surname": "Romanowa",
-    "contact": {
-        "mail": "princess@buziaczek.com",
-        "mobile": "48896321478"
+    {
+        "id": 17,
+        "nick": "Anka",
+        "name": "Anastazja",
+        "surname": "Romanowa",
+        "contact": {
+            "mail": "princess@buziaczek.com",
+            "mobile": "48896321478"
+        },
+        "gender": "female" ,
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female" 
-},
 
-{
-    "id": 18,
-    "nick": "Pawello",
-    "name": "Paweł",
-    "surname": "Pawski",
-    "contact": {
-        "mail": "szef@pawski.com",
-        "mobile": "48512369563"
+    {
+        "id": 18,
+        "nick": "Pawello",
+        "name": "Paweł",
+        "surname": "Pawski",
+        "contact": {
+            "mail": "szef@pawski.com",
+            "mobile": "48512369563"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 19,
-    "nick": "Jelonek",
-    "name": "Halina",
-    "surname": "Rogacz",
-    "contact": {
-        "mail": "jelonek@interia.com",
-        "mobile": "48514745585"
+    {
+        "id": 19,
+        "nick": "Jelonek",
+        "name": "Halina",
+        "surname": "Rogacz",
+        "contact": {
+            "mail": "jelonek@interia.com",
+            "mobile": "48514745585"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 20,
-    "nick": "SuperJa",
-    "name": "Maryla",
-    "surname": "Piekarska",
-    "contact": {
-        "mail": "jestok@o2.pl",
-        "mobile": "48863514289"
+    {
+        "id": 20,
+        "nick": "SuperJa",
+        "name": "Maryla",
+        "surname": "Piekarska",
+        "contact": {
+            "mail": "jestok@o2.pl",
+            "mobile": "48863514289"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 21,
-    "nick": "Misio65",
-    "name": "Maurycy",
-    "surname": "Nowak",
-    "contact": {
-        "mail": "twojmisio@buziaczek.pl",
-        "mobile": "48412569856"
+    {
+        "id": 21,
+        "nick": "Misio65",
+        "name": "Maurycy",
+        "surname": "Nowak",
+        "contact": {
+            "mail": "twojmisio@buziaczek.pl",
+            "mobile": "48412569856"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 22,
-    "nick": "Pizzaman",
-    "name": "Mikołaj",
-    "surname": "Malanowski",
-    "contact": {
-        "mail": "pizza@pizzatime.pl",
-        "mobile": "48547236589"
+    {
+        "id": 22,
+        "nick": "Pizzaman",
+        "name": "Mikołaj",
+        "surname": "Malanowski",
+        "contact": {
+            "mail": "pizza@pizzatime.pl",
+            "mobile": "48547236589"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 23,
-    "nick": "Pinacolada",
-    "name": "Dorota",
-    "surname": "Marszewska",
-    "contact": {
-        "mail": "mardo@wp.com",
-        "mobile": "48515478962"
+    {
+        "id": 23,
+        "nick": "Pinacolada",
+        "name": "Dorota",
+        "surname": "Marszewska",
+        "contact": {
+            "mail": "mardo@wp.com",
+            "mobile": "48515478962"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 24,
-    "nick": "Monia",
-    "name": "Monika",
-    "surname": "Paprotka",
-    "contact": {
-        "mail": "paprtoka@o2.com",
-        "mobile": "48789621453"
+    {
+        "id": 24,
+        "nick": "Monia",
+        "name": "Monika",
+        "surname": "Paprotka",
+        "contact": {
+            "mail": "paprtoka@o2.com",
+            "mobile": "48789621453"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 25,
-    "nick": "Gary",
-    "name": "Grzegorz",
-    "surname": "Porowski",
-    "contact": {
-        "mail": "gporowski@gmail.pl",
-        "mobile": "48654258951"
+    {
+        "id": 25,
+        "nick": "Gary",
+        "name": "Grzegorz",
+        "surname": "Porowski",
+        "contact": {
+            "mail": "gporowski@gmail.pl",
+            "mobile": "48654258951"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 26,
-    "nick": "Papaja",
-    "name": "Alicja",
-    "surname": "Papadopulos",
-    "contact": {
-        "mail": "papadopulos@press.com",
-        "mobile": "48547854196"
+    {
+        "id": 26,
+        "nick": "Papaja",
+        "name": "Alicja",
+        "surname": "Papadopulos",
+        "contact": {
+            "mail": "papadopulos@press.com",
+            "mobile": "48547854196"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 27,
-    "nick": "Minia96",
-    "name": "Dominika",
-    "surname": "Masłowska",
-    "contact": {
-        "mail": "domi96@o2.com",
-        "mobile": "48588966744"
+    {
+        "id": 27,
+        "nick": "Minia96",
+        "name": "Dominika",
+        "surname": "Masłowska",
+        "contact": {
+            "mail": "domi96@o2.com",
+            "mobile": "48588966744"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 28,
-    "nick": "Poopa",
-    "name": "Marian",
-    "surname": "Pupka",
-    "contact": {
-        "mail": "marian@gmail.pl",
-        "mobile": "48741458974"
+    {
+        "id": 28,
+        "nick": "Poopa",
+        "name": "Marian",
+        "surname": "Pupka",
+        "contact": {
+            "mail": "marian@gmail.pl",
+            "mobile": "48741458974"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 29,
-    "nick": "Nick",
-    "name": "Alfons",
-    "surname": "Domalewski",
-    "contact": {
-        "mail": "doma@doma-install.com",
-        "mobile": "48412569874"
+    {
+        "id": 29,
+        "nick": "Nick",
+        "name": "Alfons",
+        "surname": "Domalewski",
+        "contact": {
+            "mail": "doma@doma-install.com",
+            "mobile": "48412569874"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 30,
-    "nick": "Karolinka78",
-    "name": "Karolina",
-    "surname": "Pawłowska",
-    "contact": {
-        "mail": "karolapaw@interia.com",
-        "mobile": "48587489632"
+    {
+        "id": 30,
+        "nick": "Karolinka78",
+        "name": "Karolina",
+        "surname": "Pawłowska",
+        "contact": {
+            "mail": "karolapaw@interia.com",
+            "mobile": "48587489632"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 31,
-    "nick": "Jolka",
-    "name": "Jolanta",
-    "surname": "Kaźmierska",
-    "contact": {
-        "mail": "jola56@o2.pl",
-        "mobile": "48587412966"
+    {
+        "id": 31,
+        "nick": "Jolka",
+        "name": "Jolanta",
+        "surname": "Kaźmierska",
+        "contact": {
+            "mail": "jola56@o2.pl",
+            "mobile": "48587412966"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 32,
-    "nick": "Nintendo",
-    "name": "Filip",
-    "surname": "Nowak",
-    "contact": {
-        "mail": "filipnowak85@gmail.pl",
-        "mobile": "48847596357"
+    {
+        "id": 32,
+        "nick": "Nintendo",
+        "name": "Filip",
+        "surname": "Nowak",
+        "contact": {
+            "mail": "filipnowak85@gmail.pl",
+            "mobile": "48847596357"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 33,
-    "nick": "Karol",
-    "name": "Karol",
-    "surname": "Milewski",
-    "contact": {
-        "mail": "milewski@milewski.com",
-        "mobile": "48478588511"
+    {
+        "id": 33,
+        "nick": "Karol",
+        "name": "Karol",
+        "surname": "Milewski",
+        "contact": {
+            "mail": "milewski@milewski.com",
+            "mobile": "48478588511"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 34,
-    "nick": "MałaCzarna",
-    "name": "Daria",
-    "surname": "Dworska",
-    "contact": {
-        "mail": "dariad75@o2.com",
-        "mobile": "48589687444"
+    {
+        "id": 34,
+        "nick": "MałaCzarna",
+        "name": "Daria",
+        "surname": "Dworska",
+        "contact": {
+            "mail": "dariad75@o2.com",
+            "mobile": "48589687444"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 35,
-    "nick": "Mario",
-    "name": "Mariusz",
-    "surname": "Marianowski",
-    "contact": {
-        "mail": "mariusz88@gmail.pl",
-        "mobile": "48777555333"
+    {
+        "id": 35,
+        "nick": "Mario",
+        "name": "Mariusz",
+        "surname": "Marianowski",
+        "contact": {
+            "mail": "mariusz88@gmail.pl",
+            "mobile": "48777555333"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 36,
-    "nick": "Nick2",
-    "name": "Dariusz",
-    "surname": "Gawryluk",
-    "contact": {
-        "mail": "napiszdomnie@buziaczek.com",
-        "mobile": "48777596841"
+    {
+        "id": 36,
+        "nick": "Nick2",
+        "name": "Dariusz",
+        "surname": "Gawryluk",
+        "contact": {
+            "mail": "napiszdomnie@buziaczek.com",
+            "mobile": "48777596841"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 37,
-    "nick": "Kinia",
-    "name": "Kinga",
-    "surname": "Paradowska",
-    "contact": {
-        "mail": "kinia99@gmail.pl",
-        "mobile": "48555415633"
+    {
+        "id": 37,
+        "nick": "Kinia",
+        "name": "Kinga",
+        "surname": "Paradowska",
+        "contact": {
+            "mail": "kinia99@gmail.pl",
+            "mobile": "48555415633"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 38,
-    "nick": "Gargamel",
-    "name": "Grzegorz",
-    "surname": "Warszawski",
-    "contact": {
-        "mail": "gwarszawski@interia.com",
-        "mobile": "48589644178"
+    {
+        "id": 38,
+        "nick": "Gargamel",
+        "name": "Grzegorz",
+        "surname": "Warszawski",
+        "contact": {
+            "mail": "gwarszawski@interia.com",
+            "mobile": "48589644178"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 39,
-    "nick": "Misia",
-    "name": "Michalina",
-    "surname": "Kownacka",
-    "contact": {
-        "mail": "misiakownacka@interia.com",
-        "mobile": "48888477155"
+    {
+        "id": 39,
+        "nick": "Misia",
+        "name": "Michalina",
+        "surname": "Kownacka",
+        "contact": {
+            "mail": "misiakownacka@interia.com",
+            "mobile": "48888477155"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 40,
-    "nick": "Tiger",
-    "name": "Rafał",
-    "surname": "Zawodnik",
-    "contact": {
-        "mail": "zawodnik@gmail.pl",
-        "mobile": "48748965855"
+    {
+        "id": 40,
+        "nick": "Tiger",
+        "name": "Rafał",
+        "surname": "Zawodnik",
+        "contact": {
+            "mail": "zawodnik@gmail.pl",
+            "mobile": "48748965855"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 41,
-    "nick": "ChceCiasto",
-    "name": "Monika",
-    "surname": "Starczewska",
-    "contact": {
-        "mail": "monikastarczewska@sluzbowy.com",
-        "mobile": "48588745965"
+    {
+        "id": 41,
+        "nick": "ChceCiasto",
+        "name": "Monika",
+        "surname": "Starczewska",
+        "contact": {
+            "mail": "monikastarczewska@sluzbowy.com",
+            "mobile": "48588745965"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 42,
-    "nick": "Kobra",
-    "name": "Grażyna",
-    "surname": "Wężykowska",
-    "contact": {
-        "mail": "kobra@gmail.pl",
-        "mobile": "48588744966"
+    {
+        "id": 42,
+        "nick": "Kobra",
+        "name": "Grażyna",
+        "surname": "Wężykowska",
+        "contact": {
+            "mail": "kobra@gmail.pl",
+            "mobile": "48588744966"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 43,
-    "nick": "Budda",
-    "name": "Kamil",
-    "surname": "Błoński",
-    "contact": {
-        "mail": "błonkikamil@wp.com",
-        "mobile": "48566966366"
+    {
+        "id": 43,
+        "nick": "Budda",
+        "name": "Kamil",
+        "surname": "Błoński",
+        "contact": {
+            "mail": "błonkikamil@wp.com",
+            "mobile": "48566966366"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 44,
-    "nick": "Mireczka55",
-    "name": "Mirosława",
-    "surname": "Szafrańska",
-    "contact": {
-        "mail": "mirka55@wp.com",
-        "mobile": "48555555555"
+    {
+        "id": 44,
+        "nick": "Mireczka55",
+        "name": "Mirosława",
+        "surname": "Szafrańska",
+        "contact": {
+            "mail": "mirka55@wp.com",
+            "mobile": "48555555555"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 45,
-    "nick": "Pati",
-    "name": "Patrycja",
-    "surname": "Anuszkiewicz",
-    "contact": {
-        "mail": "panusz@gmail.pl",
-        "mobile": "48866944722"
+    {
+        "id": 45,
+        "nick": "Pati",
+        "name": "Patrycja",
+        "surname": "Anuszkiewicz",
+        "contact": {
+            "mail": "panusz@gmail.pl",
+            "mobile": "48866944722"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-},
 
-{
-    "id": 46,
-    "nick": "Matula",
-    "name": "Kacper",
-    "surname": "Matulewski",
-    "contact": {
-        "mail": "kacperm88@o2.com",
-        "mobile": "48741458744"
+    {
+        "id": 46,
+        "nick": "Matula",
+        "name": "Kacper",
+        "surname": "Matulewski",
+        "contact": {
+            "mail": "kacperm88@o2.com",
+            "mobile": "48741458744"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 47,
-    "nick": "Sylwia",
-    "name": "Sylwia",
-    "surname": "Romanowska",
-    "contact": {
-        "mail": "sylka@buziaczek.com",
-        "mobile": "48888566977"
-    }, 
-    "gender": "female"
-},
-
-{
-    "id": 48,
-    "nick": "bhjsbcfkBWSDK",
-    "name": "Dominik",
-    "surname": "Karwowski",
-    "contact": {
-        "mail": "dominik@karwowski.com",
-        "mobile": "48452698741"
+    {
+        "id": 47,
+        "nick": "Sylwia",
+        "name": "Sylwia",
+        "surname": "Romanowska",
+        "contact": {
+            "mail": "sylka@buziaczek.com",
+            "mobile": "48888566977"
+        }, 
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 49,
-    "nick": "Honda",
-    "name": "Stanisław",
-    "surname": "Rogacz",
-    "contact": {
-        "mail": "uzywane@honda.com",
-        "mobile": "48547814963"
+    {
+        "id": 48,
+        "nick": "bhjsbcfkBWSDK",
+        "name": "Dominik",
+        "surname": "Karwowski",
+        "contact": {
+            "mail": "dominik@karwowski.com",
+            "mobile": "48452698741"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "male"
-},
 
-{
-    "id": 50,
-    "nick": "Natalia",
-    "name": "Natalia",
-    "surname": "Zawadzka",
-    "contact": {
-        "mail": "zawadzka@o2.pl",
-        "mobile": "48589641253"
+    {
+        "id": 49,
+        "nick": "Honda",
+        "name": "Stanisław",
+        "surname": "Rogacz",
+        "contact": {
+            "mail": "uzywane@honda.com",
+            "mobile": "48547814963"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "user"
     },
-    "gender": "female"
-}
 
+    {
+        "id": 50,
+        "nick": "Natalia",
+        "name": "Natalia",
+        "surname": "Zawadzka",
+        "contact": {
+            "mail": "zawadzka@o2.pl",
+            "mobile": "48589641253"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "user"
+    },
+    {
+        "id": 51,
+        "nick": "",
+        "name": "Zosia",
+        "surname": "Gessler",
+        "contact": {
+            "mail": "zg@gessler.pl",
+            "mobile": "48518456789"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdańsk",
+            "district": "Oliwa",
+            "street": "Grunwaldzka"
+        },
+        "description": "Piekę odkąd pamiętam. Zapraszam do zapoznania się z moją ofertą",
+        "avatar" :"./img/jenny.jpg"
+    },
+    {
+        "id": 52,
+        "nick": "",
+        "name": "Zbigniew",
+        "surname": "Makłowicz",
+        "contact": {
+            "mail": "zyga.maklowicz@wp.pl",
+            "mobile": "48518456789"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdańsk",
+            "district": "Oliwa",
+            "street": "Grunwaldzka"
+        },
+        "description": "Nie tylko kobiety mogą piec pyszne ciasta. Mnie uczyła Babcia. Jestem najlepszy! Spróbuj!",
+        "avatar" :"./img/elliot.jpg"
+    },
+    {
+        "id": 53,
+        "nick": "",
+        "name": "Anna",
+        "surname": "Starmach",
+        "contact": {
+            "mail": "annas100@wp.pl",
+            "mobile": "48222333666"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdańsk",
+            "district": "Wrzeszcz",
+            "street": "Dmowskiego"
+        },
+        "description": "Piekę fajne ciasta na każdą okazję. Specjalizuję się w sernikach i puszystych bezach. Mniam!",
+        "avatar" :"./img/molly.png"
+    },
+    {
+        "id": 54,
+        "nick": "",
+        "name": "Maria",
+        "surname": "Lewandowska",
+        "contact": {
+            "mail": "marysia@o2.com",
+            "mobile": "48589666322"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdańsk",
+            "district": "Orunia",
+            "street": "Platynowa"
+        },
+        "description": "Potrzebujesz ciasta? Napisz do mnie! Na pewno wybierzemy z mojej oferty coś pysznego dla Ciebie!",
+        "avatar" :"./img/jenny.jpg"
+    },
+    {
+        "id": 55,
+        "nick": "",
+        "name": "Marek",
+        "surname": "Kucharz",
+        "contact": {
+            "mail": "kucharz@kucharz.com",
+            "mobile": "48888547123"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdańsk",
+            "district": "Orunia",
+            "street": "Platynowa"
+        },
+        "description": "Nazwisko zobowiązuje! Na codzień pracuję w jednej z gdańskich restauracji, ale po pracy tez lubię coś upichcić. Moje ciasta to niebo w gębie. Przekonaj się sam.",
+        "avatar" :"./img/elliot.jpg"
+    },
+    {
+        "id": 56,
+        "nick": "",
+        "name": "Joanna",
+        "surname": "Malinowska",
+        "contact": {
+            "mail": "joannamalinowska@buziaczek.com",
+            "mobile": "48874111255"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdańsk",
+            "district": "Osowa",
+            "street": "Hokejowa"
+        },
+        "description": "Piekę od niedawna, ale sądzę, że mam talent :) Na pewno nie zafunduję Ci zakalca. Moi znajomi uwielbiają moje brownie. Ale blondie też dam radę upiec ;) ",
+        "avatar" : "./img/jenny.jpg"
+    },
+    {
+        "id": 57,
+        "nick": "",
+        "name": "Mariola",
+        "surname": "Pawluczuk",
+        "contact": {
+            "mail": "mapaw@interia.com",
+            "mobile": "48555477899"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdańsk",
+            "district": "Chełm",
+            "street": "Cieszyńskiego"
+        },
+        "description": "Wszyscy w mojej rodzinie pieką. Mama, Tata, Babcia Zosia... Ja zaczęłam, gdy miałam cztery lata - upiekłam sernik. Dla Ciebie też go mogę upiec",
+        "avatar" : "./img/molly.png"
+    },
+    {
+        "id": 58,
+        "nick": "",
+        "name": "Kamil",
+        "surname": "Richert",
+        "contact": {
+            "mail": "kamil@richert.com",
+            "mobile": "48516968478"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdynia",
+            "district": "Wielki Kack",
+            "street": "Orna"
+        },
+        "description": "Na co dzień pracuję w IT, ale moja prawdziwa pasja to pieczenie. Dzień zaczynam od sernika, w południe makowiec, na wieczór beza. Dla Ciebie też mogę coś upiec!",
+        "avatar" : "./img/elliot.jpg"
+    },
+    {
+        "id": 59,
+        "nick": "",
+        "name": "Martyna",
+        "surname": "Wojdowska",
+        "contact": {
+            "mail": "wojdowska@wojdowska.com",
+            "mobile": "48774852136"
+        },
+        "gender": "female",
+        "likeCakesId":[31],
+        "userType": "cook",
+        "location": {
+            "city":"Gdynia",
+            "district": "Orłowo",
+            "street": "Inżynierska"
+        },
+        "description": "Jeśli potrzebujesz ciasta a sam nie umiesz piec - skontaktuj się za mną!",
+        "avatar" : "./img/jenny.jpg"
+    },
+    {
+        "id": 60,
+        "nick": "",
+        "name": "Julia",
+        "surname": "Kowalik",
+        "contact": {
+            "mail": "julkakowalik88@gmail.pl",
+            "mobile": "48698745214"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdynia",
+            "district": "Orłowo",
+            "street": "Powstania Śląskiego"
+        },
+        "description": "Moje motto brzmi: Musi być pysznie! Obiecuję, że będzie. Napisz do mnie! Krótkie terminy realizacji zleceń!",
+        "avatar" : "./img/molly.png"
+    },
+    {
+        "id": 61,
+        "nick": "",
+        "name": "Marian",
+        "surname": "Nowak",
+        "contact": {
+            "mail": "nowak@buziaczek.com",
+            "mobile": "48222478596"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdynia",
+            "district": "Śródmieście",
+            "street": "Stoczniowców"
+        },
+        "description": "Mąka, masło i mój talent to niezbędne skłądniki każdego mojego wypieku. Nikt nie zaoferuje Ci nic lepszego. Jeśli nawet nie widzisz jakiegoś ciasta w mojej ofercie, to i tak pewnie damy radę się dogadać. Dla chcącego nic trudnego!",
+        "avatar" : "./img/elliot.jpg"
+    },
+    {
+        "id": 62,
+        "nick": "",
+        "name": "Zofia",
+        "surname": "Małek",
+        "contact": {
+            "mail": "zofiamałek@wp.com",
+            "mobile": "48742698456"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdynia",
+            "district": "Śródmieście",
+            "street": "Komandorska"
+        },
+        "description": "Jeśli chcesz prawdziwych babcinych wypieków, to potrzebujesz mnie - prawdziwej babci 10 wnucząt. One kochają moje wypieki. Ty też je pokochasz.",
+        "avatar" : "./img/jenny.jpg"
+    },
+    {
+        "id": 63,
+        "nick": "",
+        "name": "Natalia",
+        "surname": "Tkaczyk",
+        "contact": {
+            "mail": "natalka89@interia.com",
+            "mobile": "48459752145"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Gdynia",
+            "district": "Śródmieście",
+            "street": "Hozjusza"
+        },
+        "description": "Dobre ciasta w dobrej cenie. Cóż więcej potrzeba?",
+        "avatar" : "./img/jenny.jpg"
+    },
+    {
+        "id": 64,
+        "nick": "",
+        "name": "Manuela",
+        "surname": "Wawrzyniecka",
+        "contact": {
+            "mail": "manka@gmail.pl",
+            "mobile": "48587412369"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Sopot",
+            "district": "Karlikowo",
+            "street": "Łokietka"
+        },
+        "description": "Moim sekretem jest... No nie, tak łatwo go nie wyjawię ;) Ale Twoje ciasto dostarczę na czas!",
+        "avatar" : "./img/molly.png"
+    },
+    {
+        "id": 65,
+        "nick": "",
+        "name": "Patrycja",
+        "surname": "Woroniecka",
+        "contact": {
+            "mail": "pati99@o2.pl",
+            "mobile": "48598741563"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Sopot",
+            "district": "Karlikowo",
+            "street": "Architektów"
+        },
+        "description": "Wypieki z sercem.",
+        "avatar" : "./img/molly.png"
+    },
+    {
+        "id": 66,
+        "nick": "",
+        "name": "Karolina",
+        "surname": "Małomiejska",
+        "contact": {
+            "mail": "malakarola@wp.com",
+            "mobile": "48429746316"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Reda",
+            "district": "Betlejem",
+            "street": "Kwiatowa"
+        },
+        "description": "Czekam na Twoje zamówienia. Poradze sobie z każdym zleceniem. Specjalizuję się w ciastach droźdżowych",
+        "avatar" : "./img/molly.png"
+    },
+    {
+        "id": 67,
+        "nick": "",
+        "name": "Damian",
+        "surname": "Perkowski",
+        "contact": {
+            "mail": "perkowski@wp.com",
+            "mobile": "48744855966"
+        },
+        "gender": "male",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Reda",
+            "district": "Ciechocino",
+            "street": "Wiejska"
+        },
+        "description": "Jeśli potrzebujesz ciasta na urodziny, imieniny, święta, czy na dowolną inną okazję - napisz do mnie!",
+        "avatar" : "./img/elliot.jpg"
+    },
+    {
+        "id": 68,
+        "nick": "",
+        "name": "Anna",
+        "surname": "Mikołajewska",
+        "contact": {
+            "mail": "amikołajewska@onet.com",
+            "mobile": "48596314785"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Rumia",
+            "district": "Biała Rzeka",
+            "street": "Hetmańska"
+        },
+        "description": "Domowe ciasta i ciasteczka. Oferta bezglutenowa.",
+        "avatar" : "./img/molly.png"
+    },
+    {
+        "id": 69,
+        "nick": "",
+        "name": "Weronika",
+        "surname": "Psiuk",
+        "contact": {
+            "mail": "werapsiuk87@o2.com",
+            "mobile": "488741256387"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Rumia",
+            "district": "Zagórze",
+            "street": "Wyżynna"
+        },
+        "description": "Nigdy nie gotuję zgodnie z przepisem, bo wierzę, że zdolny cukiernik ich nie potrzebuje. Oferuję pięknie zdobione torty na każdą okazję.",
+        "avatar" : "./img/jenny.jpg"
+    },
+    {
+        "id": 70,
+        "nick": "",
+        "name": "Agnieszka",
+        "surname": "Tarnowska",
+        "contact": {
+            "mail": "aga7@buziaczek.com",
+            "mobile": "48847123654"
+        },
+        "gender": "female",
+        "likeCakesId":[],
+        "userType": "cook",
+        "location": {
+            "city":"Kartuzy",
+            "district": "Kartuzy",
+            "street": "Klasztorna"
+        },
+        "description": "Setki zadowolonych klientów to moja najlepsza rekomendacja! Nie wahaj się! To ja upiekę ciasto dla Ciebie!",
+        "avatar" : "./img/jenny.jpg"
+    }
 ]

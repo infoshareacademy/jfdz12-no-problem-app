@@ -52,12 +52,12 @@ export default function BigLogIn(props) {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Twoje konto">
-                    <IconButton component={Link} to={`/oneuser`} className={classes.menuIcon}>
+                    <IconButton component={Link} to={`/userCard`} className={classes.menuIcon}>
                             <FaceIcon className={classes.menuIconInner}/>
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Dodaj ciasto">
-                        <IconButton component={Link} to="/cakesAdd/empty" className={classes.menuIcon}>
+                        <IconButton component={Link} to="/cakeAdd/empty" className={classes.menuIcon}>
                             <ControlPointIcon className={classes.menuIconInner}/>
                         </IconButton>
                     </Tooltip>

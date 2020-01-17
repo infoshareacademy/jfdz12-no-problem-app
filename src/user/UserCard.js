@@ -1,19 +1,41 @@
 import React from 'react';
-import { dataManager } from '../api/Api';
-import { Button, Container, Grid, Paper, Typography, } from '@material-ui/core';
-import './UserCard.css';
+import { Button, Container, Grid, Paper, Typography, withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { UserBasicData } from './userCardComponent/UserBasicData';
+import UserBasicData from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
+import {getLikesWithData,getLikesWithData2, getUserById } from '../api/Api2';
 
-export class UserCard extends React.Component{ 
+const styles ={
+    gridStyle: {
+        padding: '10px',
+    },
+    gridStyle2:{
+        minWidth:'190px',
+        padding: '10px',
+    },
+    gridTop:{
+        marginTop:'100px', 
+        minWidth: 210,
+    },
+    headerTitle:{
+        padding: '20px 10px',
+        minWidth: '170px',
+        backgroundColor:'#F5F5F6',   //#e6fff380',
+    },
+    buttonStyle:{
+        margin:'20px'
+    }
+}
+
+
+class UserCard extends React.Component{ 
     constructor(){
         super();
         this.userIdRef = sessionStorage.getItem('userId');
         this.state ={
             user: {},
-            likeData:{},
+            likes:[],
             isLoading: true,
             selectedMenu: {
                 basic : true,
@@ -23,15 +45,21 @@ export class UserCard extends React.Component{
     }
 
     componentDidMount(){
-        setTimeout (() => {
-            const userData = dataManager.getUserById(this.userIdRef);
-            const likeData = dataManager.getLikesWithData(this.userIdRef);
+
+        Promise.all([
+            getUserById(this.userIdRef),
+            getLikesWithData(this.userIdRef),
+            getLikesWithData2(this.userIdRef),
+        ])
+        .then(data =>{
             this.setState ({
-                user: userData,
-                likes: likeData,
-                isLoading: false,  
-            }) ;
-        }, 200) 
+                user: data[0],
+                likes: data[2],
+            })}) 
+        .catch(error => console.log('bład addformfetch', error.toString()))
+        .finally(() => this.setState({
+                isLoading: false,
+            }))
     }
 
     handleClick = (name) => {
@@ -50,27 +78,28 @@ export class UserCard extends React.Component{
 
     render(){
         const {user, likes, isLoading, selectedMenu} =  this.state;
- 
+        const { classes } = this.props;
+
         return (
             <div>
         
                 { !isLoading && <Container maxWidth='lg'>
-                    <Grid container style={{marginTop:'100px', minWidth:210}}>
-                        <Grid item xs={12} className={'gridStyle'}>
+                    <Grid container className={classes.gridTop}>
+                        <Grid item xs={12} className={classes.gridStyle}>
                             <Paper>
-                                <Typography variant='h4'className='headerTitle'>
+                                <Typography variant='h4' className={classes.headerTitle}>
                                     Konto użytkownika
                                 </Typography>
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} sm ={3} className={'gridStyle'} style={{minWidth:'190px'}}>
+                        <Grid item xs={12} sm ={3} className={classes.gridStyle2} style={{}}>
                              <UserMenu 
                                 onHandleClick = {this.handleClick}
                                 selectedMenu = {selectedMenu}
                              />
                              
                         </Grid>
-                        <Grid item xs className={'gridStyle'}>
+                        <Grid item xs className={classes.gridStyle}>
                             {selectedMenu.basic &&
                                 <UserBasicData  
                                     user = {user}
@@ -86,21 +115,13 @@ export class UserCard extends React.Component{
                     </Grid>
                     <Grid>
                         < Button
-                            style={{margin:'20px'}} 
+                            className={classes.buttonStyle} 
                             variant='outlined'
                             color = 'secondary'
                             component = {Link} to={'/'}
                         >
                             zamknij
                         </Button>
-                        < Button
-                            style={{margin:'20px'}} 
-                            variant='outlined'
-                            color = 'primary'
-                            component = {Link} to={'/userAccount'}
-                        >
-                            wróć do listy
-                        </Button>    
                     </Grid>
                 </Container>}    
             </div>
@@ -108,3 +129,4 @@ export class UserCard extends React.Component{
     }
 }
 
+export default withStyles(styles)(UserCard);

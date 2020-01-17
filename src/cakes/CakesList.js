@@ -1,11 +1,11 @@
 import React from 'react';
 import CakeFilters from './filter/CakeFilters';
 import { CircularProgress, Container, Grid } from '@material-ui/core';
-import CakeCardFull from './CakeCardFull';
 import { RenderCakesList } from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
 import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
 import ToogleView from './ToogleView';
+import {getFullData} from '../api/Api2';
 
 export class CakesList extends React.Component{
    
@@ -15,14 +15,11 @@ export class CakesList extends React.Component{
             cakes: [],
             cooks: [],
             types:[],
-            cakesAndCooks:[],
             filterCake: '', 
             filterCook: '',
             filterLocation:'',
             filterAll: '',
             filterChecked: false,
-            cakeCardOpen: false,
-            CakeCardOpenId: null,
             loading: true,
             filterTypesId:[],
             filterAllToogle: false,
@@ -40,23 +37,20 @@ export class CakesList extends React.Component{
     }
 
     componentDidMount() {
-        Promise.all([
-            //fetch('http://localhost:4000/cakes').then(res => res.json()),
-            fetch('./cakes.json').then(res => res.json()),
-            fetch('./cooks.json').then(res => res.json()),
-            fetch('./types.json').then(res => res.json()),
-            
-        ]).then(data => {
-            const price = data[0].map(el => el.price); 
-            this.setState({
-                cakes: data[0],
-                cooks: data[1],
-                types: data[2],
-                priceRange: [Math.min(...price),Math.max(...price)],
-                cakesMaxId: Math.max(...data[0].map(el => (el.id))), 
-                loading: false,
+        getFullData()
+            .then(data => {
+                
+                const price = data[0].map(el => el.price); 
+                this.setState({
+                    cakes: data[0],
+                    cooks: data[1],
+                    types: data[2],
+                    priceRange: [Math.min(...price),Math.max(...price)],
+                    cakesMaxId: Math.max(...data[0].map(el => (el.id))), 
+                })
             })
-        })
+            .catch(error => this.setState({error: error.toString()}))
+            .finally(() => this.setState({loading: false}))
     }
     
     handleFilterVisibility(){
@@ -99,11 +93,6 @@ export class CakesList extends React.Component{
 
     reset = (id) => this.setState({[id]: ''});
 
-    openCakeCard = (id,e) => {
-        this.setState({ cakeCardOpen: this.state.cakeCardOpen ? false : true,
-                        cakeCardOpenId: id,});
-    };
-
     handleChangeType = (event,value) => {
         this.setState({ 
             filterTypesId: value.map(el =>el.id), 
@@ -141,11 +130,7 @@ export class CakesList extends React.Component{
       
     render(){    
  
-        const { cakeCardOpen, 
-                cakeCardOpenId, 
-                cakes, 
-                cooks, 
-                types, 
+        const { types, 
                 loading, 
                 filterAll,
                 filterCook, 
@@ -160,8 +145,14 @@ export class CakesList extends React.Component{
             } = this.state;
         
         const { filterVisibility } = this.state;
+        
+        if(loading){
+            return ( 
+               <CircularProgress/>
+            )
+        }
 
-        if (!cakeCardOpen && !loading) {
+        if (!loading) {
             return <>
                 <Container maxWidth = "lg" style={{paddingTop:'100px'}}>       
                 
@@ -206,7 +197,6 @@ export class CakesList extends React.Component{
                         >
                             <RenderCakesList
                                 state = {this.state}
-                                onCakeCardOpen = {this.openCakeCard}
                                 toogleView = {toogleView}
                             />
                         </Grid>   
@@ -222,27 +212,5 @@ export class CakesList extends React.Component{
                 </Container>
             </>
         }
-
-        if(cakeCardOpen && !loading){
-            const oneCake = this.findDataById (cakes, cakeCardOpenId);
-
-            return (
-                <CakeCardFull 
-                    onCakeCardOpen = {this.openCakeCard}
-                    cakeCardOpenId = {cakeCardOpenId}
-                    cake = {oneCake}
-                    type = {this.findDataById(types, oneCake.typeId)}
-                    cook = {this.findDataById(cooks, oneCake.cookId)}
-                />
-            )
-        }
-
-        if(loading){
-            return ( 
-               <CircularProgress/>
-            )
-        }
-
-
     }
 }
