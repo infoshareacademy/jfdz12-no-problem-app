@@ -151,7 +151,7 @@
         "glutenFree": false,
         "imgURL": "/img/ciacha/sernikwiedenski.jpg",
         "likesUsersId":[5],
-        "likes": 1
+        "likes": 10
     },
     {
         "id": 12,
@@ -291,7 +291,7 @@
         "glutenFree": false,
         "imgURL": "/img/ciacha/czarnylas.jpg",
         "likesUsersId":[],
-        "likes": 0
+        "likes": 6
     },
     {
         "id": 22,
@@ -361,7 +361,7 @@
         "glutenFree": false,
         "imgURL": "/img/ciacha/jablecznik.webp",
         "likesUsersId":[],
-        "likes": 0
+        "likes": 7
     },
     {
         "id": 27,
@@ -557,6 +557,6 @@
         "glutenFree": false,
         "imgURL": "/img/ciacha/kruchetruskawki.jpeg",
         "likesUsersId":[],
-        "likes": 0      
+        "likes": 8      
     }    
 ]

@@ -4,71 +4,94 @@ import FaceIcon from '@material-ui/icons/Face';
 import CakeIcon from '@material-ui/icons/Cake';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import RoomIcon from '@material-ui/icons/Room';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
     backgroundDiv: {
         backgroundColor: 'rgb(185, 19, 124, 0.6)',
         color: 'white',
-        fontSize: '2vw',
-        paddingTop: '1vw',
-        paddingBottom: '2vw'
+        fontSize: '25px',
+        paddingTop: '15px',
+        paddingBottom: '20px'
     },
     icon: {
         color: 'white',
-        fontSize: '5vw',
+        fontSize: '60px',
     },
-    lineFlex: {
-        display:'flex',
-        justifyContent: 'space-evenly',
-        paddingBottom: '2.5vw'
+    divGridItem: {
+        paddingTop: '1vw',
+        paddingBottom: '3vw',
     }
+  
    
   });
 
 export default function NumberStats() {
     const classes = useStyles();
-    return (
-        <div className={classes.backgroundDiv}>
-           
-            <h4 style={{paddingBottom: '0.5vw'}}>Nasza aplikacja to:</h4>
-            <div className={classes.lineFlex}>
-                <div>
-                    <div>
-                        <FaceIcon className={classes.icon}/>
-                    </div>
-                    <div>
-                        1230 użytkowników
-                    </div>
-                </div>
 
-                <div>
-                    <div>
-                        <EmojiPeopleIcon className={classes.icon}/>
-                    </div>
-                    <div>
-                        156 cukierników
-                    </div>
-                </div>
-                <div>
-                <div>
-                    <CakeIcon className={classes.icon}/>
-                </div>
-                <div>
-                    695 ciast w ofercie
-                </div>
-            </div>
-
+    const usersStat = (
+        <div className={classes.divGridItem}>
             <div>
-                <div>
-                    <RoomIcon className={classes.icon}/>
-                </div>
-                <div>
-                7 różnych miast
-                </div>
+                <FaceIcon className={classes.icon}/>
             </div>
+            <div>
+                1230 użytkowników
             </div>
-            
-         
         </div>
+    );
+
+    const cooksStat = (
+        <div className={classes.divGridItem}>
+            <div>
+                <EmojiPeopleIcon className={classes.icon}/>
+            </div>
+            <div>
+                156 cukierników
+            </div>
+        </div>
+    );
+
+    const cakesStat = (
+        <div className={classes.divGridItem}>
+            <div>
+                <CakeIcon className={classes.icon}/>
+            </div>
+            <div>
+                695 ciast w ofercie
+            </div>
+        </div>
+    );
+
+    const citiesStat = (
+        <div className={classes.divGridItem}>
+        <div>
+            <RoomIcon className={classes.icon}/>
+        </div>
+        <div>
+        7 różnych miast
+        </div>
+    </div>
+    )
+
+    return (
+        <Grid container
+            className={classes.backgroundDiv}
+            >
+           <Grid item lg={12} sm={12} xs={12}>
+            <h3 style={{paddingBottom: '0.5vw'}}>Nasza aplikacja to:</h3>
+            </Grid>
+            <Grid item lg={3} md={3} sm={6} xs={12}>
+                    {usersStat}
+            </Grid>
+            <Grid item lg={3} md={3} sm={6} xs={12}>
+                    {cooksStat}
+            </Grid>
+            <Grid item lg={3} md={3} sm={6} xs={12}>
+                    {cakesStat}
+            </Grid>
+            <Grid item lg={3} md={3} sm={6} xs={12}>
+                    {citiesStat}
+            </Grid>
+       </Grid>
     )
 }

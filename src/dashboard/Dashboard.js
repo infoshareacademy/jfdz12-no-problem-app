@@ -3,8 +3,8 @@ import TopHero from './TopHero'
 import BestCakes from './BestCakes';
 import NumberStats from './NumberStats';
 
-import ChartPie from './ChartPie';
-import ChartLine from './ChartLine';
+import ChartsGrid from './charts/ChartsGrid';
+
 
 
 
@@ -19,9 +19,9 @@ export default class Dashboard extends Component {
 
                 <TopHero />
                 <BestCakes cakes={this.props.cakes} />
+              
                 <NumberStats />
-                <ChartPie cakes={this.props.cakes}/>
-                <ChartLine />
+                <ChartsGrid /> 
             </div>
         )
     }
