@@ -1,11 +1,29 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import TopHero from './TopHero'
+import BestCakes from './BestCakes';
+import NumberStats from './NumberStats';
+
+import ChartsGrid from './charts/ChartsGrid';
+
+
+
+
 
 export default class Dashboard extends Component {
+
+
     render() {
+       
         return (
-            <div style={{paddingTop: '100px', paddingBottom:'100px'}}>
-                <h1>Witamy łasuchów!</h1>
+            <div>
+
+                <TopHero />
+                <BestCakes cakes={this.props.cakes} />
+              
+                <NumberStats />
+                <ChartsGrid /> 
             </div>
         )
     }
 }
+
