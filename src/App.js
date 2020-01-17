@@ -62,6 +62,7 @@ class App extends React.Component {
               <Route path='/cake/:id' component={CakeCardFull} />
               <Route path='/cooks' component={CooksList} />
               <Route path='/SignIn' component={SignIn} />
+              <Route path='/SignOn' component={SignOn} />
           </BrowserRouter>
         </div>
     )}
