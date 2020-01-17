@@ -8,8 +8,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import MenuAppBar from './menu/resMenu/MenuAppBar';
 import UserCard from './user/UserCard';
 import SignIn from './user/SignIn';
+import SignOn from './user/SignOn';
 import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 import CakeCardFull from './cakes/CakeCardFull';
+
 
 
 class App extends React.Component {
@@ -21,26 +23,54 @@ class App extends React.Component {
       isLoading: false,
       isError:false,
       error:'',
+      cakes:[],
+      cooks:[],
+      styleColor: {backgroundColor:'rgba(255,255,255, 0.3)'}
     };
+   
   }
-  
+
+
+  componentDidMount(){
+    window.onscroll = () => {
+      this.setState({
+        styleColor:{backgroundColor:'white'}
+      }); 
+      if (window.pageYOffset===0) {
+        this.setState({
+          styleColor:{backgroundColor:'rgba(255,255,255, 0.3)'}}
+          )
+      }
+    };
+    
+
+   
+    fetch('./cakes.json')
+        .then (res => res.json())
+        .then (data => {this.setState({cakes: data})})
+        .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
+  }
+      
   setAuth = () => {
     this.setState(prevState =>({
         auth: !prevState.auth,
     }))
   };
-    
+  
   render(){
     const { isLoading, isError, error, auth } = this.state;
-
+   
     if (!isLoading && !isError){
       return (
         <div className="App">
           <BrowserRouter>
             <MenuAppBar setAuth={this.setAuth} 
                         auth={auth}
+                        styleColor={this.state.styleColor}
             />
-              <Route exact path='/' component={Dashboard} />
+              <Route exact path='/'>
+                <Dashboard cakes={this.state.cakes} cooks={this.state.cooks} />
+              </Route>
               <Route path='/userCard' component={UserCard} />
               <Route path='/cakes' component={CakesList} />
               <Route path='/cakeAdd/:id' component={CakeAddForm} />
@@ -49,7 +79,7 @@ class App extends React.Component {
               <Route path='/SignIn' component={SignIn} />
           </BrowserRouter>
         </div>
-      )}
+    )}
     
     if(isLoading && !isError) {
       return (
@@ -64,6 +94,7 @@ class App extends React.Component {
       )} 
   
   }
+ 
 }
 
 export default App;
