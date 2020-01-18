@@ -18,6 +18,7 @@ const useStyles = makeStyles({
     card: {
       width: '97%',
       height: '100%',
+     
     },
     media: {
       height: 200,
@@ -39,8 +40,9 @@ const useStyles = makeStyles({
               xs={12} 
               md={4}
               >
-      <Card className={classes.card} >
-            <CardActionArea>
+     
+      <Card className={classes.card}  >
+            <CardActionArea component={Link} to={`/cake/${cake.id}`}>
             <CardMedia
                 className={classes.media}
                 image={cake.imgURL}
@@ -57,6 +59,7 @@ const useStyles = makeStyles({
             </CardActionArea>
            
        </Card>
+    
        </Grid>);
 
 return(
