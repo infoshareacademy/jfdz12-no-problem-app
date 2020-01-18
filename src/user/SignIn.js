@@ -102,7 +102,7 @@ class SignIn extends React.Component{
                                 <LockOutlinedIcon />
                             </Avatar>
                             <Typography component="h1" variant="h5">
-                                Wpisz email
+                                Logowanie
                             </Typography>
                             <Grid  >
                                 <UserSelect 
@@ -119,7 +119,7 @@ class SignIn extends React.Component{
                                     //fullWidth
                                     style={{width:'100%'}}
                                     id="email"
-                                    label="Email Address"
+                                    label="e-mail"
                                     name="email"
                                     autoComplete="email"
                                     disabled
@@ -130,7 +130,7 @@ class SignIn extends React.Component{
                                     // required
                                     fullWidth
                                     name="password"
-                                    label="Hasło"
+                                    label="hasło"
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
@@ -138,7 +138,7 @@ class SignIn extends React.Component{
                                 />
                                 <FormControlLabel
                                     control={<Checkbox value="remember" color="primary" />}
-                                    label="Zapametaj"
+                                    label="Zapamiętaj"
                                     disabled
                                 />
                                 <Button
@@ -160,9 +160,9 @@ class SignIn extends React.Component{
                                     </Link>
                                     </Grid>
                                     <Grid item>
-                                    <Link href="#" variant="body2">
-                                        {"Nie masz konta? zarejestruj się"}
-                                    </Link>
+                                    <Rlink to='/SignOn' variant="body2">
+                                        {"Nie masz konta? Zarejestruj się"}
+                                    </Rlink>
                                     </Grid>
                                 </Grid>
                             </Grid>
