@@ -9,6 +9,7 @@ import { CakeAddCookList } from './CakeAddCookList';
 import CookLabelFull from '../CookLabelFull';
 import { CAKEADDOBJ } from '../../constans/emptyObject'
 import { Link } from 'react-router-dom';
+import { getFullData } from '../../api/Api2';
 
 
 class CakeAddForm extends React.Component{
@@ -31,12 +32,7 @@ class CakeAddForm extends React.Component{
        
     componentDidMount(){
 
-        Promise.all([
-            //fetch('http://localhost:4000/cakes').then(res => res.json()),
-            fetch('../cakes.json').then(res => res.json()),
-            fetch('../cooks.json').then(res => res.json()),
-            fetch('../types.json').then(res => res.json()),
-            ])
+        getFullData()
             .then(data => {
                 const cakeAddData = this.cakeId === 'empty'
                     ? CAKEADDOBJ 

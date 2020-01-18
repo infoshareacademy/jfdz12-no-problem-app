@@ -15,6 +15,9 @@ const styles = {
     },
     icon:{
         color: 'red',
+    },
+    wrapper:{
+        width:'100%',
     }
     
 }
@@ -27,14 +30,17 @@ function UserLikeData(props){
         if(likes.length>0){
             return likes.map ((like,idx) => {
                 const backColor = idx % 2 === 0 ? '#fce4ec50' : '';
-                return (<div key={like.cake.id}>
+                return (<div key={like.cake.id} className={classes.wrapper}>
                     <Grid item xs={12}>
                        <Divider/>
                     </Grid>
                     
-                    <Grid  xs ={12} container item className={classes.grid} style ={{backgroundColor: backColor}}>
+                    <Grid xs container item 
+                        className={classes.grid} 
+                        style ={{backgroundColor: backColor}}
+                    >
                         
-                        <Grid item xs={3} sm={3} md={2} >
+                        <Grid item sm={3} md={2} >
                             <img src = {like.cake.imgURL} 
                                 alt="cake foto" 
                                 className={classes.img}>    
@@ -45,8 +51,8 @@ function UserLikeData(props){
                         <Grid item xs
                             container 
                             direction='column' 
-                            //justify='space-evenly' 
                             alignItems='flex-start'
+                            wrap='wrap'
                         > 
                             
                             <Grid item 
@@ -72,7 +78,7 @@ function UserLikeData(props){
                             </Grid>
                              
                         </Grid>  
-                        <Grid item >
+                        <Grid item xs={1}>
                             
                                 <IconButton aria-label="add to favorites">
                                     <FavoriteIcon  className={classes.icon}/>
