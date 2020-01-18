@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
     backgroundDiv: {
-        width: '100vw',    
+        width: '100%',    
         position: 'relative',
         fontSize: '2vw'
     },
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         bottom: '2vw'
     },
     img: {
-        width: "100vw"
+        width: "100%"
     },
     paragraph: {
         backgroundColor: 'rgba(255,255,255, 0.7)',
