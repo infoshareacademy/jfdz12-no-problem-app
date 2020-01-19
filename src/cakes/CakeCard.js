@@ -13,7 +13,7 @@ function CakeCard (props) {
     const likeColor = likedCake ? 'red' : 'grey';
 
     return(
-        <Paper className={classes.paper}>
+        <Paper className={classes.mainPaper} >
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <Card className = {classes.paper} >

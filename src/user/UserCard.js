@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Container, Grid, Paper, Typography, withStyles } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import UserBasicData from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
@@ -118,7 +117,7 @@ class UserCard extends React.Component{
                             className={classes.buttonStyle} 
                             variant='outlined'
                             color = 'secondary'
-                            component = {Link} to={'/'}
+                            onClick = {this.props.history.goBack}
                         >
                             zamknij
                         </Button>
