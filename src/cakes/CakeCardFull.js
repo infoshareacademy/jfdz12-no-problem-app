@@ -3,8 +3,6 @@ import { Container, Typography, Button, Grid, CardMedia, Paper, withStyles, Circ
 import {styles} from './CakeStyles';
 import CookLabelFull from './CookLabelFull';
 import {getFullCakeById, } from '../api/Api2';
-import {Link} from 'react-router-dom';
-
 
 class CakeCardFull extends React.Component{
     constructor(props){
@@ -29,7 +27,7 @@ class CakeCardFull extends React.Component{
         const { type, cook } = this.state.cake;
         const { classes }  = this.props;
         const { isLoading, cake} = this.state;
- 
+        
         if(isLoading){
             return (<div style={{paddingTop:'100px'}}>
                         <CircularProgress color="secondary" />
@@ -104,7 +102,8 @@ class CakeCardFull extends React.Component{
                     </Paper>
                     
                     
-                    <Button component={Link} to={`/cakes`} 
+                    <Button 
+                            onClick = {this.props.history.goBack}
                             variant="outlined" 
                             color="secondary"
                             style = {{margin: '20px auto'}}

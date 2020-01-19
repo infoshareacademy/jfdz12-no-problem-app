@@ -147,8 +147,9 @@ export class CakesList extends React.Component{
         const { filterVisibility } = this.state;
         
         if(loading){
-            return ( 
-               <CircularProgress/>
+            return ( <div style={{paddingTop:'100px'}} >
+                <CircularProgress/>
+            </div>
             )
         }
 
