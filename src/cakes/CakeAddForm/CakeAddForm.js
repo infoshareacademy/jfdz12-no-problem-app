@@ -8,7 +8,6 @@ import {YESNOSELECT} from '../../constans/selectConstans'
 import { CakeAddCookList } from './CakeAddCookList';
 import CookLabelFull from '../CookLabelFull';
 import { CAKEADDOBJ } from '../../constans/emptyObject'
-import { Link } from 'react-router-dom';
 import { getFullData } from '../../api/Api2';
 
 
@@ -140,7 +139,7 @@ class CakeAddForm extends React.Component{
 
     render(){
         
-        const { classes} = this.props;
+        const { classes } = this.props;
         const {cooks, types, isLoading} = this.state;
         const { name, 
                 price, 
@@ -285,11 +284,12 @@ class CakeAddForm extends React.Component{
                             onHandleSelectCook = {this.handleSelectCook}
                             cooks = {cooks}
                         />
-                        <Button onClick={this.handleCakeAddForm} 
+                        <Button //onClick={this.handleCakeAddForm} 
                                 variant="outlined" 
                                 color="secondary"
                                 style = {{margin: '20px auto'}}
-                                component = {Link} to={'/'}
+                                //component = {Link} to={'/'}
+                                onClick = {this.props.history.goBack}
                         > 
                             powrót 
                         </Button>
