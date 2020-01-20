@@ -11,6 +11,7 @@ import SignIn from './user/SignIn';
 import SignOn from './user/SignOn';
 import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 import CakeCardFull from './cakes/CakeCardFull';
+import { getCakes } from './api/Api2';
 
 
 
@@ -31,8 +32,7 @@ class App extends React.Component {
 
   componentDidMount(){
    
-    fetch('./cakes.json')
-        .then (res => res.json())
+    getCakes()
         .then (data => {this.setState({cakes: data})})
         .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
   }

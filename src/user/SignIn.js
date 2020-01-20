@@ -2,9 +2,11 @@ import React from 'react';
 import { withStyles, Grid, Link, Typography, Container, Avatar, Dialog, Button, TextField, FormControlLabel, Checkbox ,CircularProgress} from '@material-ui/core';
 import './SignIn.css';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { UserSelect } from './UserSelect';
 import {Link as Rlink} from 'react-router-dom';
 import {getUsers} from '../api/Api2';
+import PageWrapper from '../components/PageWrapper';
+import firebase from 'firebase';
+import {Redirect} from 'react-router-dom';
 
 const styles = {
     root :{
@@ -42,6 +44,9 @@ class SignIn extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            email:'',
+            password:'',
+            redirect: false,
             openSignIn: true,
             userId: '',
             users:[],
@@ -64,29 +69,47 @@ class SignIn extends React.Component{
         })
     }
 
-    handleClose = () =>{
-        const {userId} = this.state;
-        sessionStorage.setItem('userId', userId);
-        this.setState({
-            userId: '',
-            openSignIn: false,
+    signIn = () => {
+        const {email, password} = this.state;
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(() => {
+            const signInUser = this.state.users.find(user => user.uid === firebase.auth().currentUser.uid )
+            this.saveUserIdToLocalStorage(signInUser.id)
+            
+            this.setState({
+                redirect: true,
+            })
         })
+    };
+
+    handleOnClick = (event) => {
+        event.preventDefault();
+
+        this.signIn();
+    };
+
+    saveUserIdToLocalStorage = (userId) => {
+        sessionStorage.setItem('userId', userId);
     }
 
     render(){
-        const { openSignIn, userId, users, isLoading, error } = this.state;
+        const { openSignIn, redirect, isLoading, error } = this.state;
         const { classes } = this.props;
-        
+        if(redirect) {
+            return <Redirect to={'/'} />
+        }
+
         if(isLoading){
-            return (<div style={{paddingTop:'100px'}}>
+            return (<PageWrapper >
                         <CircularProgress color="secondary" />
-                </div>)
+                </PageWrapper>)
         }
 
         if(error !==""){
-            return (<div style={{paddingTop:'100px'}}>
+            return (<PageWrapper >
                        {error}
-                </div>)
+                </PageWrapper>)
         }
 
         return (
@@ -97,7 +120,7 @@ class SignIn extends React.Component{
                     className ={classes.root}
                 >
                     <Container component="main" width="xs" style={{padding:'0px', }}>
-                        <div className={classes.paper} >
+                        <form className={classes.paper} >
                             <Avatar className = {classes.avatar}>
                                 <LockOutlinedIcon />
                             </Avatar>
@@ -105,36 +128,29 @@ class SignIn extends React.Component{
                                 Logowanie
                             </Typography>
                             <Grid  >
-                                <UserSelect 
-                                    options = {users}
-                                    name = {'userId'}
-                                    value = {userId}
-                                    autoFocus
-                                    onHandleChange = {this.handleChange}
-                                />
+                                
                                 <TextField
+                                    onChange = {this.handleChange}
                                     variant="outlined"
                                     margin="normal"
                                     required
-                                    //fullWidth
-                                    style={{width:'100%'}}
+                                    fullWidth
                                     id="email"
                                     label="e-mail"
                                     name="email"
                                     autoComplete="email"
-                                    disabled
                                 />
                                 <TextField
+                                    onChange = {this.handleChange}
                                     variant="outlined"
                                     margin="normal"
-                                    // required
+                                    required
                                     fullWidth
                                     name="password"
                                     label="hasło"
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
-                                    disabled
                                 />
                                 <FormControlLabel
                                     control={<Checkbox value="remember" color="primary" />}
@@ -147,8 +163,8 @@ class SignIn extends React.Component{
                                     variant="contained"
                                     color="primary"
                                     className={classes.submit}
-                                    component = {Rlink} to={'/'}
-                                    onClick = {this.handleClose}
+                                    //component = {Rlink} to={'/'}
+                                    onClick = {this.handleOnClick}
                                 >
                                     Zaloguj
                                 </Button>
@@ -166,7 +182,7 @@ class SignIn extends React.Component{
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </div>
+                        </form>
                     </Container>
                 </Dialog>
             </div>

@@ -9,8 +9,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { withRouter } from 'react-router-dom';
 import {useEffect} from 'react'
 
-
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -19,7 +17,6 @@ const useStyles = makeStyles(theme => ({
   logo: {
     maxWidth: '170px',
     paddingLeft: '45px',
-   
   },
   label: {
     fontSize: 15, 
@@ -30,12 +27,9 @@ const useStyles = makeStyles(theme => ({
     left: "auto",
     right: 0,
     position: "fixed",
-    
     color: "#757575",
     zIndex: 100,
-    minWidth: '300px',
-   
-    
+    minWidth: '300px',    
   },
   flex: {
     display: "flex",
@@ -49,7 +43,7 @@ function MenuAppBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [myStyle, setMystyle] = React.useState('rgba(255,255,255, 0.3)'); //to jest do window.scroll
   const open = Boolean(anchorEl);
-
+  const [auth, setAuth] = React.useState(false);
   // let style = props.styleColor;
 // let style = {backgroundColor:'rgba(255,255,255, 0.3)'};
 
@@ -78,7 +72,7 @@ const handleScroll = () => {
 };
 
   const handleChange = () => {
-    props.setAuth();
+    setAuth(!auth);
     setAnchorEl(null);
     props.history.push('/')
   };
@@ -92,15 +86,15 @@ const handleScroll = () => {
   };
 
   const log = () => {
-    props.setAuth();
-    props.history.push('/')
+    setAuth(!auth);
+    //props.history.push('/')
   }
   
   let content;
   
-      if (props.auth&&matches) {
+      if (auth && matches) {
           content = <SmallLogIn 
-                      auth={props.auth} 
+                      auth={auth} 
                       log={log} 
                       handleChange={handleChange} 
                       handleClose={handleClose} 
@@ -109,19 +103,19 @@ const handleScroll = () => {
                       anchorEl={anchorEl}
                     />;
       };
-      if (!props.auth&&matches) {
+      if (!auth && matches) {
           content = <SmallLogOut 
-                      auth={props.auth} 
+                      auth={auth} 
                       log={log} 
                       handleChange={handleChange} 
                       handleClose={handleClose} 
                       handleMenu={handleMenu}
                     />
       };
-      if (props.auth&&!matches) {
+      if (auth&&!matches) {
           content = <BigLogIn log={log}/>
       };
-      if (!props.auth&&!matches) {
+      if (!auth&&!matches) {
           content = <BigLogOut log={log}/>
          
       }
