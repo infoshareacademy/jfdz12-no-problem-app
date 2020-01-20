@@ -67,13 +67,15 @@ export class RenderCakesList extends React.Component {
     render(){
         const { cooks, types, toogleView } = this.props.state;
         const filteredSortedCakes = this.getSorteredCakes();
-
         
         return(    
             <Grid container spacing={1} justify='center' >
                 
                 {filteredSortedCakes.map((cake)=>{
-                    const likedCake = cake.likesUsersId.includes(parseInt(this.userIdRef));
+                    
+                    const likedCake = cake.likesUsersId
+                                ? cake.likesUsersId.includes(parseInt(this.userIdRef))
+                                : [];
                     
                     return (
                         <Grid 

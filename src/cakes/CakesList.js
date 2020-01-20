@@ -5,7 +5,7 @@ import { RenderCakesList } from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
 import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
 import ToogleView from './ToogleView';
-import {getFullData} from '../api/Api2';
+import { getFullData } from '../api/Api2';
 
 export class CakesList extends React.Component{
    
@@ -39,7 +39,6 @@ export class CakesList extends React.Component{
     componentDidMount() {
         getFullData()
             .then(data => {
-                
                 const price = data[0].map(el => el.price); 
                 this.setState({
                     cakes: data[0],
@@ -129,7 +128,7 @@ export class CakesList extends React.Component{
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
     render(){    
- 
+        
         const { types, 
                 loading, 
                 filterAll,
@@ -146,6 +145,7 @@ export class CakesList extends React.Component{
         
         const { filterVisibility } = this.state;
         
+
         if(loading){
             return ( <div style={{paddingTop:'100px'}} >
                 <CircularProgress/>

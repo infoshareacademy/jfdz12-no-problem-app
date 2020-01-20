@@ -78,7 +78,7 @@ class UserCard extends React.Component{
     render(){
         const {user, likes, isLoading, selectedMenu} =  this.state;
         const { classes } = this.props;
-
+        
         return (
             <div>
         
