@@ -85,6 +85,7 @@ const handleScroll = () => {
     setAnchorEl(null)
   };
 
+  
   const log = () => {
     setAuth(!auth);
     //props.history.push('/')
