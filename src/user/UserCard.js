@@ -52,6 +52,7 @@ class UserCard extends React.Component{
             getLikesWithData(this.userIdRef),
         ])
         .then(data =>{
+            console.log('dat0',data[0])
             this.setState ({
                 user: data[0],
                 likes: data[1],

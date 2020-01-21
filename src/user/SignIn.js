@@ -5,7 +5,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Link as Rlink} from 'react-router-dom';
 import {getUsers} from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import {Redirect} from 'react-router-dom';
 
 const styles = {
