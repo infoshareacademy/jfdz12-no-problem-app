@@ -3,7 +3,8 @@ import { Button, Container, Grid, Paper, Typography, withStyles } from '@materia
 import UserBasicData from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
-import {getLikesWithData,getLikesWithData2, getUserById } from '../api/Api2';
+import { getLikesWithData, getUserById } from '../api/Api2';
+import PageWrapper from '../components/PageWrapper';
 
 const styles ={
     gridStyle: {
@@ -47,13 +48,14 @@ class UserCard extends React.Component{
 
         Promise.all([
             getUserById(this.userIdRef),
+            //getLikesWithData(this.userIdRef),
             getLikesWithData(this.userIdRef),
-            getLikesWithData2(this.userIdRef),
         ])
         .then(data =>{
+            console.log('dat0',data[0])
             this.setState ({
                 user: data[0],
-                likes: data[2],
+                likes: data[1],
             })}) 
         .catch(error => console.log('bład addformfetch', error.toString()))
         .finally(() => this.setState({
@@ -78,9 +80,9 @@ class UserCard extends React.Component{
     render(){
         const {user, likes, isLoading, selectedMenu} =  this.state;
         const { classes } = this.props;
-
+        
         return (
-            <div>
+            <PageWrapper>
         
                 { !isLoading && <Container maxWidth='lg'>
                     <Grid container className={classes.gridTop}>
@@ -123,7 +125,7 @@ class UserCard extends React.Component{
                         </Button>
                     </Grid>
                 </Container>}    
-            </div>
+            </PageWrapper>
         )   
     }
 }

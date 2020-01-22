@@ -9,6 +9,7 @@ import { CakeAddCookList } from './CakeAddCookList';
 import CookLabelFull from '../CookLabelFull';
 import { CAKEADDOBJ } from '../../constans/emptyObject'
 import { getFullData } from '../../api/Api2';
+import PageWrapper from '../../components/PageWrapper';
 
 
 class CakeAddForm extends React.Component{
@@ -156,8 +157,8 @@ class CakeAddForm extends React.Component{
         //const toSave = Object.entries(this.props.cakeAdd);  
         
         if(!isLoading){
-            return(<div>
-                <Container maxWidth = "lg" style={{paddingTop:'100px'}}>
+            return(<PageWrapper>
+                <Container maxWidth = "lg" >
                 
                     <Grid >
 
@@ -304,12 +305,13 @@ class CakeAddForm extends React.Component{
                     </Grid >
                 </Container>
                 
-            </div>)
+            </PageWrapper>)
         }
 
         if (isLoading) {
-            return(
+            return(<PageWrapper>
                 <CircularProgress/>
+            </PageWrapper>
             )
                 
         }

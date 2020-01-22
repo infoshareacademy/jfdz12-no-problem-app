@@ -1,26 +1,38 @@
 import React from 'react';
-import { withStyles, Grid, Link, Typography, Container, Avatar, Dialog, Button, TextField, FormControlLabel, Checkbox ,CircularProgress} from '@material-ui/core';
+import { withStyles, Grid, Typography, Avatar, Button, TextField, CircularProgress, } from '@material-ui/core';
+//import { IconButton, Snackbar } from '@material-ui/core';
 import './SignIn.css';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { UserSelect } from './UserSelect';
 import {Link as Rlink} from 'react-router-dom';
 import {getUsers} from '../api/Api2';
+import PageWrapper from '../components/PageWrapper';
+import firebase from 'firebase/app';
+import {Redirect} from 'react-router-dom';
+import MessageSnakebar from './signInComponent/MessageSnakebar';
+
 
 const styles = {
-    root :{
-        '& .MuiPaper-rounded' :{
-            borderRadius: '20px',
-            color: '#47817E',
-            border: '5px solid #47817E' 
-        }
+    root:{
+        '& .MuiButton-contained':{
+            backgroundColor: '#47817Ee0',
+            color: 'white',
+        },
+    },
+    gridWrapper :{
+        borderRadius: '20px',
+        color: '#47817E',
+        border: '5px solid #47817E' 
     },
     paper: {
         maxWidth: '400px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: '#ae6dab1a', /* #eeeeee, */
+        backgroundColor: '#DFE0DF50', /* #eeeeee, */
         padding: '30px',
+        borderRadius: '20px',
+        color: '#47817E',
+        border: '3px solid #DF9A63'
       },
     
     avatar: {
@@ -35,6 +47,7 @@ const styles = {
     
     submit: {
         margin: '24px 0px 16px',
+
      },
 }
 
@@ -42,11 +55,15 @@ class SignIn extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            email:'',
+            password:'',
+            redirect: false,
             openSignIn: true,
             userId: '',
             users:[],
             isLoading: true,
             error:"",
+            emailResetMessage:false,
         };
     }
  
@@ -64,112 +81,142 @@ class SignIn extends React.Component{
         })
     }
 
-    handleClose = () =>{
-        const {userId} = this.state;
-        sessionStorage.setItem('userId', userId);
-        this.setState({
-            userId: '',
-            openSignIn: false,
+    signIn = () => {
+        const {email, password} = this.state;
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(() => {
+            const signInUser = this.state.users.find(user => user.uid === firebase.auth().currentUser.uid )
+            console.log(signInUser, email, password)
+            this.saveUserIdToLocalStorage(signInUser.id)
+            
+            this.setState({
+                redirect: true,
+            })
         })
+        .catch(function(error) {
+            alert(`${error.code}: ${error.message}`)
+        });
+    };
+
+    handleOnClick = (event) => {
+        event.preventDefault();
+
+        this.signIn();
+    };
+
+    handleResetPassword = () =>{
+        // firebase.auth().sendPasswordResetEmail(this.state.email);
+        this.setState({
+            emailResetMessage: true,
+            //redirect: true,
+        });
+    }
+
+    saveUserIdToLocalStorage = (userId) => {
+        sessionStorage.setItem('userId', userId);
+    }
+
+    handleClose = () =>{
+        this.setState({emailResetMessage:false});
     }
 
     render(){
-        const { openSignIn, userId, users, isLoading, error } = this.state;
+        const { emailResetMessage, redirect, isLoading, error } = this.state;
         const { classes } = this.props;
-        
+
+        if(redirect) {
+            return <Redirect to={'/'} />
+        }
+
         if(isLoading){
-            return (<div style={{paddingTop:'100px'}}>
+            return (<PageWrapper >
                         <CircularProgress color="secondary" />
-                </div>)
+                </PageWrapper>)
         }
 
         if(error !==""){
-            return (<div style={{paddingTop:'100px'}}>
+            return (<PageWrapper >
                        {error}
-                </div>)
+                </PageWrapper>)
         }
 
         return (
-            <div>
-                
-                <Dialog
-                    open={openSignIn}
-                    className ={classes.root}
+            <PageWrapper>
+                <MessageSnakebar
+                    open={emailResetMessage}
+                    onHandleClose = {this.handleClose}
+                />
+                <Grid
+                    container
+                    justify='center'
+                    width="xs" 
+                    className = {classes.root}    
                 >
-                    <Container component="main" width="xs" style={{padding:'0px', }}>
-                        <div className={classes.paper} >
-                            <Avatar className = {classes.avatar}>
-                                <LockOutlinedIcon />
-                            </Avatar>
-                            <Typography component="h1" variant="h5">
-                                Logowanie
-                            </Typography>
-                            <Grid  >
-                                <UserSelect 
-                                    options = {users}
-                                    name = {'userId'}
-                                    value = {userId}
-                                    autoFocus
-                                    onHandleChange = {this.handleChange}
-                                />
-                                <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    //fullWidth
-                                    style={{width:'100%'}}
-                                    id="email"
-                                    label="e-mail"
-                                    name="email"
-                                    autoComplete="email"
-                                    disabled
-                                />
-                                <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    // required
-                                    fullWidth
-                                    name="password"
-                                    label="hasło"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="current-password"
-                                    disabled
-                                />
-                                <FormControlLabel
-                                    control={<Checkbox value="remember" color="primary" />}
-                                    label="Zapamiętaj"
-                                    disabled
-                                />
-                                <Button
-                                    fullWidth
-                                    name='userId'
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.submit}
-                                    component = {Rlink} to={'/'}
-                                    onClick = {this.handleClose}
-                                >
-                                    Zaloguj
-                                </Button>
-                                
-                                <Grid container >
-                                    <Grid item xs >
-                                    <Link href="#" variant="body2">
+                    <form className={classes.paper} >
+                        <Avatar className = {classes.avatar}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                            Logowanie
+                        </Typography>
+                        <Grid  >
+                            
+                            <TextField
+                                onChange = {this.handleChange}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="e-mail"
+                                name="email"
+                                autoComplete="email"
+                            />
+                            <TextField
+                                onChange = {this.handleChange}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="password"
+                                label="hasło"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                            />
+    
+                            <Button
+                                fullWidth
+                                name='userId'
+                                variant="contained"
+                                className={classes.submit}
+                                onClick = {this.handleOnClick}
+                            >
+                                Zaloguj
+                            </Button>
+                            
+                            <Grid container alignItems='center'>
+                                <Grid item xs >
+                                    <Button onClick={this.handleResetPassword} 
+                                        color='primary'
+                                    >
                                         Zapomniałeś hasła?
-                                    </Link>
-                                    </Grid>
-                                    <Grid item>
-                                    <Rlink to='/SignOn' variant="body2">
+                                    </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button component ={Rlink} 
+                                            to='/SignOn'
+                                            color='primary' 
+                                    >
                                         {"Nie masz konta? Zarejestruj się"}
-                                    </Rlink>
-                                    </Grid>
+                                    </Button>
                                 </Grid>
                             </Grid>
-                        </div>
-                    </Container>
-                </Dialog>
-            </div>
+                        </Grid>
+                    </form>
+                </Grid>
+                
+            </PageWrapper>
       );
     }
 }

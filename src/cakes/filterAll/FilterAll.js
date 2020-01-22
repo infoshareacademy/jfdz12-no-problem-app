@@ -63,7 +63,7 @@ class FilterAll extends React.Component{
                                 placeholder="ciasto, cukiernik, lokalizacja ..."
                                 name = "filterAll" 
                             />
-                            </Grid>
+                            </Grid> 
                         </Grid>
                         
                         <Hidden only='xs'>

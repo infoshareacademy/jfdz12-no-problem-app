@@ -5,7 +5,8 @@ import { RenderCakesList } from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
 import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
 import ToogleView from './ToogleView';
-import {getFullData} from '../api/Api2';
+import { getFullData } from '../api/Api2';
+import PageWrapper from '../components/PageWrapper';
 
 export class CakesList extends React.Component{
    
@@ -28,6 +29,7 @@ export class CakesList extends React.Component{
             cakesMaxId: 0,
             filterVisibility: false,
             toogleView: false,
+            error:'',
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
@@ -39,7 +41,6 @@ export class CakesList extends React.Component{
     componentDidMount() {
         getFullData()
             .then(data => {
-                
                 const price = data[0].map(el => el.price); 
                 this.setState({
                     cakes: data[0],
@@ -129,7 +130,7 @@ export class CakesList extends React.Component{
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
     render(){    
- 
+        
         const { types, 
                 loading, 
                 filterAll,
@@ -142,20 +143,25 @@ export class CakesList extends React.Component{
                 priceRange,
                 sortById,
                 toogleView,
+                error
             } = this.state;
         
         const { filterVisibility } = this.state;
         
+        if(error !== ''){
+        return <PageWrapper >{error}</PageWrapper>
+        }
+
         if(loading){
-            return ( <div style={{paddingTop:'100px'}} >
+            return ( <PageWrapper >
                 <CircularProgress/>
-            </div>
+            </PageWrapper>
             )
         }
 
         if (!loading) {
-            return <>
-                <Container maxWidth = "lg" style={{paddingTop:'100px'}}>       
+            return <PageWrapper>
+                <Container maxWidth = "lg" >       
                 
                     <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
                         {filterVisibility && filterAllToogle &&
@@ -211,7 +217,7 @@ export class CakesList extends React.Component{
                     <FilterVisibleToogle handleFilterVisibility={this.handleFilterVisibility}/>
                 
                 </Container>
-            </>
+            </PageWrapper>
         }
     }
 }

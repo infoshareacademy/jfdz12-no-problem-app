@@ -35,8 +35,8 @@ export default function BigLogIn(props) {
                     <Link to='/'>
                         <img src={Logo} className={classes.logo} alt="logo"/>
                     </Link>
-                    </div>
-                    <div>
+                </div>
+                <div>
                     <Tooltip title="Lista ciast">
                         <IconButton component={Link} to="/cakes" className={classes.menuIcon} >
                             <CakeIcon className={classes.menuIconInner}/><br />
