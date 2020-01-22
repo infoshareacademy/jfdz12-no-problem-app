@@ -5,7 +5,7 @@
 const FIREBASE_API = 'https://aleciachaapp.firebaseio.com';
 
 export function getUsers(){
-    const getUser = fetch(`${FIREBASE_API}/users.json`)
+    const getUser = fetch(`${FIREBASE_API}/users2.json`)
         .then (res => res.json())
         .then (data => data)
         .then (data => {
@@ -25,7 +25,7 @@ export function getUsers(){
 }
 
 export function getCakes(){
-    const getCakes = fetch(`${FIREBASE_API}/cakes.json`)
+    const getCakes = fetch(`${FIREBASE_API}/cakes2.json`)
         .then (res => res.json())
         .then (data => {
             const keys = Object.keys(data);
@@ -36,6 +36,7 @@ export function getCakes(){
                     }
                 });
             return formattedData;
+
         })
         .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
     
@@ -43,7 +44,7 @@ export function getCakes(){
 }
 
 export function getTypes(){
-    const getTypes = fetch(`${FIREBASE_API}/types.json`)
+    const getTypes = fetch(`${FIREBASE_API}/types2.json`)
         .then (res => res.json())
         .then (data => {
             const keys = Object.keys(data);
@@ -60,23 +61,23 @@ export function getTypes(){
     return Promise.resolve(getTypes);
 }
 
-export function getLikes(){
-    const getLikes = fetch(`${FIREBASE_API}/likes.json`)
-        .then (res => res.json())
-        .then (data => {
-            const keys = Object.keys(data);
-                const formattedData = keys.map(key => {
-                    return {
-                        id: key,
-                        ...data[key]
-                    }
-                });
-            return formattedData;
-        })
-        .catch(error => console.log(`Nie mogę pobrać danych likes ${error.toString()}`));  
+// export function getLikes(){
+//     const getLikes = fetch(`${FIREBASE_API}/likes.json`)
+//         .then (res => res.json())
+//         .then (data => {
+//             const keys = Object.keys(data);
+//                 const formattedData = keys.map(key => {
+//                     return {
+//                         id: key,
+//                         ...data[key]
+//                     }
+//                 });
+//             return formattedData;
+//         })
+//         .catch(error => console.log(`Nie mogę pobrać danych likes ${error.toString()}`));  
     
-    return Promise.resolve(getLikes);
-}
+//     return Promise.resolve(getLikes);
+// }
 
 export function getCooks(){
 
@@ -92,7 +93,7 @@ export function getCakesById(id){
     // const getCakesById = fetch(CAKES_API_ENDPOINT)
         // .then (res => res.json())
         const getCakesById = getCakes()
-        .then (data => data.find(el => el.id === parseInt(id)))
+        .then (data => data.find(el => el.id === id))
         .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
     
     return Promise.resolve(getCakesById);
@@ -102,7 +103,7 @@ export function getCookById(id){
     // const getData = fetch(USERS_API_ENDPOINT)
     //     .then (res => res.json())
     const getData = getUsers()
-        .then (data => data.find(el => (el.id === parseInt(id) && (el.userType === 'cook'))))
+        .then (data => data.find(el => (el.id === id && (el.userType === 'cook'))))
         .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
     
     return Promise.resolve(getData);
@@ -112,7 +113,7 @@ export function getTypeById(id){
     // const getData = fetch(TYPES_API_ENDPOINT)
     //     .then (res => res.json())
     const getData = getTypes()
-        .then (data => data.find(el => el.id === parseInt(id)))
+        .then (data => data.find(el => el.id === id))
         .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
     
     return Promise.resolve(getData);
@@ -122,7 +123,7 @@ export function getUserById(id){
     // const getData = fetch(USERS_API_ENDPOINT)
     //     .then (res => res.json())
     const getData = getUsers()
-        .then (data => data.find(el => el.id === parseInt(id)))
+        .then (data => data.find(el => el.id === id))
         .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
     
     return Promise.resolve(getData);
@@ -138,7 +139,7 @@ export function getFullCakeById(id){
             getTypes()
         ]) 
         .then(data => {
-            const cake = data[0].find(cake => cake.id === parseInt(id));
+            const cake = data[0].find(cake => cake.id === id);
             return {
                 ...cake,
                 type: data[2].find(type => type.id === cake.typeId),
@@ -218,7 +219,7 @@ export function getLikesWithData (logedUdserId) {
     ]) 
     .then(data => {
         const likedCakesId = data[0]
-            .find((user) => user.id === parseInt(logedUdserId))
+            .find((user) => user.id === logedUdserId)
             .likeCakesId || [];
         
         const newData = likedCakesId.map ((like)=>{

@@ -41,7 +41,7 @@ const {classes, types} = props;
                     value = {props.value}
                     onChange = {props.onHandleCakeChange}
                     >
-                        <MenuItem key={0} value={0}>
+                        <MenuItem key={-1} value={-1}>
                             <Typography variant="inherit" style={{display: 'flex', alignItems:'center'}}>
                                 <Crop32Icon style={{paddingRight:'10px'}}/> 
                                 brak

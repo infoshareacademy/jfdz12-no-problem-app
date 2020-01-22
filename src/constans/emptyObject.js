@@ -4,7 +4,7 @@ export const CAKEADDOBJ = {
     price: '',
     priceForPortion: '',
     portionDescription: '',
-    typeId: 0,
+    typeId: '-1',
     cookId: null,
     description: '',
     glutenFree: false,
