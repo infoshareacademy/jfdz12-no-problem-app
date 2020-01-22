@@ -1,11 +1,7 @@
-// const USERS_API_ENDPOINT = '/users.json';
-// const CAKES_API_ENDPOINT = '/cakes.json';
-// const TYPES_API_ENDPOINT = '/types.json';
-// const LIKES_API_ENDPOINT = '/likes.json';
 const FIREBASE_API = 'https://aleciachaapp.firebaseio.com';
 
 export function getUsers(){
-    const getUser = fetch(`${FIREBASE_API}/users2.json`)
+    const getUser = fetch(`${FIREBASE_API}/users.json`)
         .then (res => res.json())
         .then (data => data)
         .then (data => {
@@ -19,13 +15,13 @@ export function getUsers(){
             return formattedData;
         }) 
 
-        .catch(error => console.log(`Nie mogę pobrać danych users ${error.toString()}`)); 
+        .catch(error => console.log(`Nie mogę pobrać danych users ${error.toString()}`));
         
     return Promise.resolve(getUser);
 }
 
 export function getCakes(){
-    const getCakes = fetch(`${FIREBASE_API}/cakes2.json`)
+    const getCakes = fetch(`${FIREBASE_API}/cakes.json`)
         .then (res => res.json())
         .then (data => {
             const keys = Object.keys(data);
@@ -44,7 +40,7 @@ export function getCakes(){
 }
 
 export function getTypes(){
-    const getTypes = fetch(`${FIREBASE_API}/types2.json`)
+    const getTypes = fetch(`${FIREBASE_API}/types.json`)
         .then (res => res.json())
         .then (data => {
             const keys = Object.keys(data);
