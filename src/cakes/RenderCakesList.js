@@ -74,8 +74,8 @@ export class RenderCakesList extends React.Component {
                 {filteredSortedCakes.map((cake)=>{
                     
                     const likedCake = cake.likesUsersId
-                                ? cake.likesUsersId.includes(parseInt(this.userIdRef))
-                                : [];
+                                ? cake.likesUsersId.includes(this.userIdRef)
+                                : '';
                     
                     return (
                         <Grid 

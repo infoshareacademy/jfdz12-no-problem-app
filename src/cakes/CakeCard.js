@@ -19,7 +19,7 @@ function CakeCard (props) {
                     <Card className = {classes.paper} >
                         <Grid container justify='space-between' alignItems='center'>
                             <Typography style={{marginLeft:'20px'}} variant="h6">
-                                {name}
+                                {name}  
                             </Typography>
                                 
                         </Grid>

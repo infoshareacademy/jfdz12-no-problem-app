@@ -86,7 +86,7 @@ class SignIn extends React.Component{
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(() => {
             const signInUser = this.state.users.find(user => user.uid === firebase.auth().currentUser.uid )
-            console.log(signInUser, email, password)
+         
             this.saveUserIdToLocalStorage(signInUser.id)
             
             this.setState({

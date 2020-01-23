@@ -10,6 +10,7 @@ import CookLabelFull from '../CookLabelFull';
 import { CAKEADDOBJ } from '../../constans/emptyObject'
 import { getFullData } from '../../api/Api2';
 import PageWrapper from '../../components/PageWrapper';
+//import { Link } from 'react-router-dom';
 
 
 class CakeAddForm extends React.Component{
@@ -27,7 +28,6 @@ class CakeAddForm extends React.Component{
             saveCake: false,
         }
         this.addCakeFetch = this.addCakeFetch.bind(this);
-        this.saveCake = this.saveCake.bind(this);
     }
        
     componentDidMount(){
@@ -36,13 +36,14 @@ class CakeAddForm extends React.Component{
             .then(data => {
                 const cakeAddData = this.cakeId === 'empty'
                     ? CAKEADDOBJ 
-                    : data[0].find(cake => cake.id === parseInt(this.cakeId))
+                    : data[0].find(cake => cake.id === this.cakeId)
+                console.log('cakeAddData', cakeAddData)
                 this.setState({
                     cakes: data[0],
                     cooks: data[1],
                     types: data[2],
                     cakeAdd: cakeAddData,
-                    cakesMaxId: Math.max(...data[0].map(el => (el.id))), 
+                    //cakesMaxId: Math.max(...data[0].map(el => (el.id))), 
                 })
             })
             .catch(error => console.log('bład addformfetch', error.toString()))
@@ -54,6 +55,8 @@ class CakeAddForm extends React.Component{
     componentDidUpdate(){
         if (this.state.saveCake) {
             
+            
+
             // fetch('http://localhost:4000/cakes')
             //     .then(res => res.json())
             //     .then(data => {
@@ -67,12 +70,7 @@ class CakeAddForm extends React.Component{
             this.setState({saveCake: false})
         }
     }
-    saveCake(){
-        this.setState({
-            saveCake: true,
-        });
-    }
-
+    
     handleFileAdd = (event) => {
         const fileName = event.target.files[0].name;
        
@@ -112,27 +110,23 @@ class CakeAddForm extends React.Component{
     }
 
     addCakeFetch(){
-        const { cakesMaxId, cakeAdd } = this.state;
-        const cake = { ...cakeAdd, id: cakesMaxId+1 };
-
+        const { cakeAdd } = this.state;
+        const cake = { ...cakeAdd, };
+       
+        // fetch(`https://aleciachaapp.firebaseio.com/cakes2.json`, {
+        //     method: 'POST',
+        //     body: JSON.stringify(cake)
+        // })
+        //     .then((res) => {
+        //         this.setState({ saveCake: true, });
+        //         console.log('dodałem cake:' , res)
+        //     })
+        //     .catch((err) => {
+        //         alert(err.message)
+        //     });
        
         console.log('przed zapisem do API', cake);
-        // fetch("http://localhost:4000/cakespost", {
-        //         method: "post",
-        //         headers: {
-        //             "Content-type": "application/json"
-        //         },
-        //         body: JSON.stringify(cake)
-        //     })
-        //     .then(res => res.json())   
-        //     .then(res => {
-        //         console.log(res);
-                this.saveCake();
-        //     })
-        //     .catch(error => console.log("Błąd: ", error));
-            
-           // this.handleCakeAddForm();
-    
+        
         }
     
 
@@ -294,7 +288,8 @@ class CakeAddForm extends React.Component{
                         > 
                             powrót 
                         </Button>
-                        <Button onClick={this.addCakeFetch} 
+                        <Button onClick={this.addCakeFetch}
+                                //component = {Link} to={'/cakes'} 
                                 variant="outlined" 
                                 color="primary"
                                 style = {{margin: '20px'}}
