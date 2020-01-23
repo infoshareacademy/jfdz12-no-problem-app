@@ -5,6 +5,7 @@ import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
 import { getLikesWithData, getUserById } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
+import { Link } from 'react-router-dom';
 
 const styles ={
     gridStyle: {
@@ -40,27 +41,31 @@ class UserCard extends React.Component{
             selectedMenu: {
                 basic : true,
                 like: false,
-            }
+            },
+            loginUser:true,
         };
     }
 
     componentDidMount(){
-
-        Promise.all([
-            getUserById(this.userIdRef),
-            //getLikesWithData(this.userIdRef),
-            getLikesWithData(this.userIdRef),
-        ])
-        .then(data =>{
-            //console.log('dat0',data[0])
-            this.setState ({
-                user: data[0],
-                likes: data[1],
-            })}) 
-        .catch(error => console.log('bład addformfetch', error.toString()))
-        .finally(() => this.setState({
-                isLoading: false,
-            }))
+       
+        if (this.userIdRef){
+            Promise.all([
+                getUserById(this.userIdRef),
+                getLikesWithData(this.userIdRef),
+            ])
+            .then(data =>{
+                this.setState ({
+                    user: data[0],
+                    likes: data[1],
+                })}) 
+            .catch(error => console.log('bład addformfetch', error.toString()))
+            .finally(() => this.setState({
+                    isLoading: false,
+                    loginUser: true,
+                }))
+        }else{
+            this.setState({loginUser:false})
+        }
     }
 
     handleClick = (name) => {
@@ -78,9 +83,16 @@ class UserCard extends React.Component{
     }
 
     render(){
-        const {user, likes, isLoading, selectedMenu} =  this.state;
+        const {user, likes, isLoading, selectedMenu, loginUser} =  this.state;
         const { classes } = this.props;
         
+        if (!loginUser){
+            return (<PageWrapper>
+                <h1>Użytkownik nie zalogowany, zaloguj się </h1>
+                <Link to='/SignIn'>Sign in</Link>
+            </PageWrapper>)
+        }
+
         return (
             <PageWrapper>
         

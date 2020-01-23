@@ -1,4 +1,4 @@
-const FIREBASE_API = 'https://aleciachaapp.firebaseio.com';
+export const FIREBASE_API = 'https://aleciachaapp.firebaseio.com';
 
 export function getUsers(){
     const getUser = fetch(`${FIREBASE_API}/users.json`)

@@ -106,6 +106,7 @@ class SignIn extends React.Component{
                 <MessageSnakebar
                     open={emailResetMessage}
                     onHandleClose = {this.handleClose}
+                    message = 'wysłaliśmy ci link do zresetowania hasła'
                 />
                 <Grid
                     container

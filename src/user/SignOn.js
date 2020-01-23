@@ -1,58 +1,60 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
 import PageWrapper from '../components/PageWrapper';
-import { withStyles, Grid, Typography,  Button} from '@material-ui/core';
-//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import MySelect from './signComponent/MySelect';
-import { USERTYPE } from '../constans/selectConstans';
-import BasicData from './signComponent/BasicData';
-import ContactData from './signComponent/ContactData';
-import CookData from './signComponent/CookData';
-import {styles} from './styles/SignOnStyles';
+import {  CircularProgress } from '@material-ui/core';
+import firebase from 'firebase';
+import { FIREBASE_API } from '../api/Api2';
+import MessageSnakebar from './signComponent/MessageSnakebar';
+import SignOnRender from './SignOnRender';
+import { Link } from 'react-router-dom';
 
-class SignOn extends Component {
-    state={
+export default class SignOn extends Component {
+    state = {
         gender: '',
-        name:'',
-        surname:'',
-        email:'',
-        password:'',
-        nick:'',
-        mobile:'',
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        nick: '',
+        mobile: '',
         userType: 'user',
-        avatar:'',
-        city:'',
-        district:'',
+        avatar: '',
+        city: '',
+        district: '',
         street: '',
         description: '',
+        uid: '',
+        isLoading: false,
+        message: false,
+        redirect: false,
     }
 
-    handleChange = (event) =>{
-        const {name, value} = event.target;
+    handleChange = (event) => {
+        const { name, value } = event.target;
         this.setState({
             [name]: value,
         })
     }
 
     addData = () => {
-        const {gender, description, name, surname, mobile, email, nick, userType,city,street, district, avatar} = this.state;
+        const { uid, gender, description, name, surname, mobile, email, nick, userType, city, street, district, avatar } = this.state;
 
         const basicData = {
             nick: nick,
             name: name,
             surname: surname,
             gender: gender,
-            contact:{
-                email: email,
+            contact: {
+                mail: email,
                 mobile: mobile
             },
             userType: userType,
+            uid: uid
         }
 
-        const cookData ={
+        const cookData = {
             avatar: avatar,
             decription: description,
-            location :{
+            location: {
                 city: city,
                 district: district,
                 street: street
@@ -60,109 +62,96 @@ class SignOn extends Component {
 
         }
 
-        if (userType ==='cook'){
+        if (userType === 'cook') {
             return {
-            ...basicData,
-            ...cookData
+                ...basicData,
+                ...cookData
             }
-        }else {
+        } else {
             return basicData;
         }
     }
 
-    handleOnClick = (event) =>{
-        
-        event.preventDefault();
-        
 
-
-        console.log(this.addData())
+    createUserFetch = () => {
+        console.log('fetch', this.addData())
+        fetch(`${FIREBASE_API}/users.json`, {
+            method: 'POST',
+            body: JSON.stringify(this.addData())
+        })
+        .catch((err) => {
+            alert(err.message)
+        })
+        .finally(() => {
+            if (firebase.auth().currentUser) {
+                firebase.auth().signOut();
+            }
+            console.log(firebase.auth().currentUser)
+            this.setState({
+                isLoading: false,
+                message: true,
+                redirect: true,
+            })
+        })
     }
-    
+
+    signUp = () => {
+        const { email, password } = this.state;
+        console.log('signUp email', email )
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(data => this.setState({ uid: data.user.uid }))
+            .then(() => this.createUserFetch())
+            .catch((error) => console.log(error))
+    };
+
+    handleOnClick = (event) => {
+
+        event.preventDefault();
+        this.setState({ isLoading: true })
+
+        this.signUp();
+    }
+
+    handleClose = () => {
+        this.setState({ message: false });
+    }
+
+
     render() {
-        const {classes} = this.props;
-        const {gender, name, surname, mobile, password, email, nick, userType,city,street, district, avatar} = this.state;
+        const { message, email, isLoading, redirect } = this.state;
+
+        if(redirect) {
+            return <>
+            <PageWrapper>
+                <MessageSnakebar
+                        open={message}
+                        onHandleClose={this.handleClose}
+                        message={`użytkownik ${email} został dodany pomyślnie`}
+                />
+                <h1>Użytkownik został zarjestrowany, zaloguj się </h1>
+                <Link to='/SignIn'>Sign in</Link>
+            </PageWrapper>
+                
+            </>
+        }
+
+        if (isLoading) {
+            return <PageWrapper >
+                <CircularProgress color="secondary" />
+            </PageWrapper>
+        }
+
         return (
             <PageWrapper>
-               <Grid
-                    container
-                    justify='center'
-                    width="xs" 
-                    className = {classes.root}    
-                >
-                    <form className={classes.paper} >
-                        <Typography component="h1" variant="h5">
-                            Rejestracja
-                        </Typography>
-                        <MySelect 
-                            onHandleChange = {this.handleChange}
-                            name = 'userType'
-                            value = {userType}
-                            options = {USERTYPE}
-                            label='rodzaj użytkownika'
-                            align = 'left'
-                            width = '300px'
-                            labelWidth = {125}
-                        />
-                        <Grid container xs={12} item wrap='wrap'>
-                            <Grid item xs={12} sm={6} className={classes.subGrid}>
-                                <BasicData 
-                                    onHandleChange = {this.handleChange}
-                                    name = {name}
-                                    surname = {surname}
-                                    nick = {nick}
-                                    gender = {gender}
-                                />      
-                            {userType === 'cook'
-                                ? <ContactData 
-                                        onHandleChange = {this.handleChange}
-                                        email = {email}
-                                        password = {password}
-                                        mobile = {mobile}
-                                    />
-                                : ""
-                            }    
-                                
-                            </Grid>
-                            { userType === 'cook' 
-                                ? <Grid item xs={12} sm={6} className={classes.subGrid}>
-                                        <CookData 
-                                            onHandleChange = {this.handleChange}
-                                            avatar = {avatar}
-                                            city ={city}
-                                            street = {street}
-                                            district = {district}
-                                        />                                
-                                    </Grid> 
-                                :   <Grid item xs={12} sm={6} className={classes.subGrid}> 
-                                        <ContactData 
-                                            onHandleChange = {this.handleChange}
-                                            email = {email}
-                                            password = {password}
-                                            mobile = {mobile}
-                                        />
-                                    </Grid>
-                            }
-                            
-                        </Grid>
-                        <Grid xs={12} item>
-                            <Button
-                                type='submit'
-                                fullWidth
-                                name='userId'
-                                variant="contained"
-                                className={classes.submit}
-                                onClick = {this.handleOnClick}
-                            >
-                                Zapisz
-                            </Button>
-                        </Grid>
-                            
-                    </form>
-                </Grid>
+                
+                <SignOnRender 
+                    onHandleChange = {this.handleChange}
+                    onHandleOnClick = {this.handleOnClick}
+                    state = {this.state}
+                />
 
             </PageWrapper>
         )
     }
-}   
-export default withStyles(styles)(SignOn)
+}
+;

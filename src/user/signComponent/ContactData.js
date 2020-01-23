@@ -26,7 +26,7 @@ export default function ContactData(props) {
             name="email"
             value={email}
             margin='normal'
-            autoComplete="current-password"
+            autoComplete="off"
         />
         <TextField
             onChange={props.onHandleChange}
@@ -39,7 +39,7 @@ export default function ContactData(props) {
             type="password"
             value={password}
             margin='normal'
-            autoComplete="email"
+            autoComplete="new-password"
         />
 
     </>)
