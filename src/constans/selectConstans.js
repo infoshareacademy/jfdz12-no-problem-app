@@ -41,3 +41,35 @@ export const YESNOSELECT = [
         value: false,
     },
 ];
+
+export const GENDERSELECT = [
+    {
+        id:0,
+        name: "kobieta",
+        value: "female",
+    },
+    {
+        id:1,
+        name: "mężczyzna",
+        value: "male",
+    },
+    {
+        id:2,
+        name: "nie podaję",
+        value: "other",
+    },
+
+]
+
+export const USERTYPE =[
+    {
+        id:0,
+        name: "użytkownik",
+        value: "user", 
+    },
+    {
+        id: 1,
+        name: "cukiernik",
+        value: "cook",
+    }
+]

@@ -8,7 +8,7 @@ import {getUsers} from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 import firebase from 'firebase/app';
 import {Redirect} from 'react-router-dom';
-import MessageSnakebar from './signInComponent/MessageSnakebar';
+import MessageSnakebar from './signComponent/MessageSnakebar';
 
 
 const styles = {
