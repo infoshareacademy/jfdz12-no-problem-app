@@ -1,56 +1,14 @@
 import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
 import PageWrapper from '../components/PageWrapper';
-import { withStyles, TextField, Grid, Typography, Avatar, Button} from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { withStyles, Grid, Typography,  Button} from '@material-ui/core';
+//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import MySelect from './signComponent/MySelect';
-import { GENDERSELECT, USERTYPE } from '../constans/selectConstans';
-
-
-const styles = {
-    root:{
-        '& .MuiButton-contained':{
-            backgroundColor: '#47817Ee0',
-            color: 'white',
-        },
-    },
-    gridWrapper :{
-        borderRadius: '20px',
-        color: '#47817E',
-        border: '5px solid #47817E' 
-    },
-    paper: {
-        maxWidth: '800px',
-        width:'100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        backgroundColor: '#DFE0DF50', /* #eeeeee, */
-        padding: '20px',
-        borderRadius: '20px',
-        color: '#47817E',
-        border: '3px solid #DF9A63'
-      },
-    
-    avatar: {
-        margin: '8px',
-        backgroundColor: '#DF9A63',
-    },
-    
-    form: {
-        width: '100%', 
-        marginTop: '8px',
-    },
-    subGrid:{
-        padding: '20px'
-    },
-    
-    submit: {
-        margin: '24px 0px 16px',
-
-     },
-}
-
+import { USERTYPE } from '../constans/selectConstans';
+import BasicData from './signComponent/BasicData';
+import ContactData from './signComponent/ContactData';
+import CookData from './signComponent/CookData';
+import {styles} from './styles/SignOnStyles';
 
 class SignOn extends Component {
     state={
@@ -62,6 +20,11 @@ class SignOn extends Component {
         nick:'',
         mobile:'',
         userType: 'user',
+        avatar:'',
+        city:'',
+        district:'',
+        street: '',
+        description: '',
     }
 
     handleChange = (event) =>{
@@ -69,17 +32,56 @@ class SignOn extends Component {
         this.setState({
             [name]: value,
         })
-        console.log(name,value)
+    }
+
+    addData = () => {
+        const {gender, description, name, surname, mobile, email, nick, userType,city,street, district, avatar} = this.state;
+
+        const basicData = {
+            nick: nick,
+            name: name,
+            surname: surname,
+            gender: gender,
+            contact:{
+                email: email,
+                mobile: mobile
+            },
+            userType: userType,
+        }
+
+        const cookData ={
+            avatar: avatar,
+            decription: description,
+            location :{
+                city: city,
+                district: district,
+                street: street
+            }
+
+        }
+
+        if (userType ==='cook'){
+            return {
+            ...basicData,
+            ...cookData
+            }
+        }else {
+            return basicData;
+        }
     }
 
     handleOnClick = (event) =>{
+        
         event.preventDefault();
-        console.log(this.state)
+        
+
+
+        console.log(this.addData())
     }
     
     render() {
         const {classes} = this.props;
-        const {gender, name, surname, mobile, password, email, nick, userType} = this.state;
+        const {gender, name, surname, mobile, password, email, nick, userType,city,street, district, avatar} = this.state;
         return (
             <PageWrapper>
                <Grid
@@ -89,9 +91,6 @@ class SignOn extends Component {
                     className = {classes.root}    
                 >
                     <form className={classes.paper} >
-                        <Avatar className = {classes.avatar}>
-                            <LockOutlinedIcon />
-                        </Avatar>
                         <Typography component="h1" variant="h5">
                             Rejestracja
                         </Typography>
@@ -105,96 +104,47 @@ class SignOn extends Component {
                             width = '300px'
                             labelWidth = {125}
                         />
-                        <Grid container xs={12} item>
-                            <Grid item xs={6} className={classes.subGrid}>
-                                <TextField 
-                                    onChange = {this.handleChange}
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="nick"
-                                    label="nick"
-                                    placeholder="podaj nick"
-                                    type="TextField"
-                                    value={nick}
-                                />
-                                <TextField 
-                                    onChange = {this.handleChange}
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="name"
-                                    label="imię"
-                                    placeholder="podaj imię"
-                                    type="TextField"
-                                    value={name}
-                                />
-                                <TextField 
-                                    onChange = {this.handleChange}
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="surname"
-                                    placeholder="podaj nazwisko"
-                                    label="nazwisko"
-                                    type="TextField"
-                                    value={surname}
-                                />
-                                <MySelect
+                        <Grid container xs={12} item wrap='wrap'>
+                            <Grid item xs={12} sm={6} className={classes.subGrid}>
+                                <BasicData 
                                     onHandleChange = {this.handleChange}
-                                    name = 'gender'
-                                    value = {gender}
-                                    options = {GENDERSELECT}
-                                    label='płeć'
-                                    align = 'left'
-                                    width='100%'
-                                    labelWidth = {30}
-                                /> 
+                                    name = {name}
+                                    surname = {surname}
+                                    nick = {nick}
+                                    gender = {gender}
+                                />      
+                            {userType === 'cook'
+                                ? <ContactData 
+                                        onHandleChange = {this.handleChange}
+                                        email = {email}
+                                        password = {password}
+                                        mobile = {mobile}
+                                    />
+                                : ""
+                            }    
                                 
                             </Grid>
-                            <Grid item xs={6} className={classes.subGrid}>
-                                <TextField 
-                                    onChange = {this.handleChange}
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="mobile"
-                                    label="telefon komórkowy"
-                                    type="TextField"
-                                    value={mobile}
-                                
-                                />
-                                <TextField
-                                    onChange = {this.handleChange}
-                                    variant="outlined"
-                                    margin="normal"
-                                    placeholder="email"
-                                    required
-                                    fullWidth
-                                    label="e-mail"
-                                    name="email"
-                                    value={email}
-                                />
-                                <TextField
-                                    onChange = {this.handleChange}
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    placeholder="podaj hasło"
-                                    name="password"
-                                    label="hasło"
-                                    type="password"
-                                    value = {password}
-                                />
-
-                            </Grid>
+                            { userType === 'cook' 
+                                ? <Grid item xs={12} sm={6} className={classes.subGrid}>
+                                        <CookData 
+                                            onHandleChange = {this.handleChange}
+                                            avatar = {avatar}
+                                            city ={city}
+                                            street = {street}
+                                            district = {district}
+                                        />                                
+                                    </Grid> 
+                                :   <Grid item xs={12} sm={6} className={classes.subGrid}> 
+                                        <ContactData 
+                                            onHandleChange = {this.handleChange}
+                                            email = {email}
+                                            password = {password}
+                                            mobile = {mobile}
+                                        />
+                                    </Grid>
+                            }
+                            
                         </Grid>
-
                         <Grid xs={12} item>
                             <Button
                                 type='submit'
@@ -214,5 +164,5 @@ class SignOn extends Component {
             </PageWrapper>
         )
     }
-}
+}   
 export default withStyles(styles)(SignOn)

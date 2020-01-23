@@ -1,16 +1,15 @@
 import React from 'react';
 import { InputLabel, FormControl, MenuItem, Select, Typography,} from '@material-ui/core';
 
-
 export default function MySelect (props) {
     
-const {options, name, value, label, align, width, labelWidth} = props;
+const {options, name, value, label, align, width, labelWidth,} = props;
     
     return( 
       
         <FormControl 
             variant="outlined" 
-            style={{margin: '20px 0px', width: width}}        
+            style={{margin: '16px 0px 8px', maxWidth: width, width:'100%', minWidth:'200px'}}        
         >
             <InputLabel id="select-label">{label}</InputLabel>
             <Select
@@ -19,9 +18,9 @@ const {options, name, value, label, align, width, labelWidth} = props;
                 value = {value}
                 onChange = {props.onHandleChange}
                 labelWidth = {labelWidth}
-                style={{textAlign:align}}    
+                style={{textAlign:align}}   
             >
-                    <MenuItem >
+                    <MenuItem>
                         <em>Brak</em>
                     </MenuItem>
                     {options.map(option => (
@@ -38,4 +37,3 @@ const {options, name, value, label, align, width, labelWidth} = props;
         </FormControl>
     )
 }
-
