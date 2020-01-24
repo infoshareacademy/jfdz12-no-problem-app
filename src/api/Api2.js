@@ -86,13 +86,21 @@ export function getCooks(){
 
 
 export function getCakesById(id){
-    // const getCakesById = fetch(CAKES_API_ENDPOINT)
-        // .then (res => res.json())
-        const getCakesById = getCakes()
+  
+    const getCakesById = getCakes()
         .then (data => data.find(el => el.id === id))
         .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
     
     return Promise.resolve(getCakesById);
+}
+
+export function getCakesByCookId(id){
+  
+    const getCakesByCookId = getCakes()
+        .then (data => data.filter(el => el.cookId === id))
+        .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
+    
+    return Promise.resolve(getCakesByCookId);
 }
 
 export function getCookById(id){

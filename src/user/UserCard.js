@@ -3,9 +3,12 @@ import { Button, Container, Grid, Paper, Typography, withStyles } from '@materia
 import UserBasicData from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
-import { getLikesWithData, getUserById } from '../api/Api2';
+import { getLikesWithData, getUserById, getCakesByCookId } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 import { Link } from 'react-router-dom';
+import UserCookData from './userCardComponent/UserCookData';
+import UserCakeData from './userCardComponent/UserCakeData';
+
 
 const styles ={
     gridStyle: {
@@ -37,10 +40,13 @@ class UserCard extends React.Component{
         this.state ={
             user: {},
             likes:[],
+            cakes: [],
             isLoading: true,
             selectedMenu: {
                 basic : true,
                 like: false,
+                mCook: false,
+                mCake: false,
             },
             loginUser:true,
         };
@@ -52,11 +58,13 @@ class UserCard extends React.Component{
             Promise.all([
                 getUserById(this.userIdRef),
                 getLikesWithData(this.userIdRef),
+                getCakesByCookId(this.userIdRef)
             ])
             .then(data =>{
                 this.setState ({
                     user: data[0],
                     likes: data[1],
+                    cakes: data[2],
                 })}) 
             .catch(error => console.log('bład addformfetch', error.toString()))
             .finally(() => this.setState({
@@ -71,6 +79,7 @@ class UserCard extends React.Component{
     handleClick = (name) => {
         const {selectedMenu} = this.state;
         const keys = Object.keys(selectedMenu);
+        
         keys.forEach(key => {
             this.setState(prevState => ({
                 selectedMenu:{
@@ -83,7 +92,7 @@ class UserCard extends React.Component{
     }
 
     render(){
-        const {user, likes, isLoading, selectedMenu, loginUser} =  this.state;
+        const {user, likes, cakes, isLoading, selectedMenu, loginUser} =  this.state;
         const { classes } = this.props;
         
         if (!loginUser){
@@ -109,8 +118,8 @@ class UserCard extends React.Component{
                              <UserMenu 
                                 onHandleClick = {this.handleClick}
                                 selectedMenu = {selectedMenu}
-                             />
-                             
+                                userType={user.userType}
+                             />    
                         </Grid>
                         <Grid item xs className={classes.gridStyle}>
                             {selectedMenu.basic &&
@@ -120,6 +129,14 @@ class UserCard extends React.Component{
                             {selectedMenu.like && 
                                 <UserLikeData
                                     likes = {likes}
+                                /> }
+                            {selectedMenu.mCook && 
+                                <UserCookData
+                                    user = {user}
+                                /> }
+                            {selectedMenu.mCake &&
+                                <UserCakeData
+                                    cakes = {cakes}
                                 /> }
                                 
                         </Grid>
