@@ -8,17 +8,6 @@ export default function ContactData(props) {
         <TextField
             onChange={props.onHandleChange}
             variant="outlined"
-            required
-            fullWidth
-            name="mobile"
-            label="telefon komórkowy"
-            type="TextField"
-            value={mobile}
-            margin='normal'
-        />
-        <TextField
-            onChange={props.onHandleChange}
-            variant="outlined"
             placeholder="email"
             required
             fullWidth
@@ -40,6 +29,17 @@ export default function ContactData(props) {
             value={password}
             margin='normal'
             autoComplete="new-password"
+        />
+        <TextField
+            onChange={props.onHandleChange}
+            variant="outlined"
+            required
+            fullWidth
+            name="mobile"
+            label="telefon komórkowy"
+            type="TextField"
+            value={mobile}
+            margin='normal'
         />
 
     </>)

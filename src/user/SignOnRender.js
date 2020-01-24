@@ -35,19 +35,19 @@ function SignOnRender(props) {
                 />
                 <Grid container xs={12} item wrap='wrap'>
                     <Grid item xs={12} sm={6} className={classes.subGrid}>
-                        <BasicData
+                        <ContactData
                             onHandleChange={props.onHandleChange}
-                            name={name}
-                            surname={surname}
-                            nick={nick}
-                            gender={gender}
+                            email={email}
+                            password={password}
+                            mobile={mobile}
                         />
                         {userType === 'cook'
-                            ? <ContactData
+                            ?<BasicData
                                 onHandleChange={props.onHandleChange}
-                                email={email}
-                                password={password}
-                                mobile={mobile}
+                                name={name}
+                                surname={surname}
+                                nick={nick}
+                                gender={gender}
                             />
                             : ""
                         }
@@ -63,14 +63,16 @@ function SignOnRender(props) {
                                 street={street}
                                 district={district}
                                 name={name}
+                                surname={surname}
                             />
                         </Grid>
                         : <Grid item xs={12} sm={6} className={classes.subGrid}>
-                            <ContactData
+                            <BasicData
                                 onHandleChange={props.onHandleChange}
-                                email={email}
-                                password={password}
-                                mobile={mobile}
+                                name={name}
+                                surname={surname}
+                                nick={nick}
+                                gender={gender}
                             />
                         </Grid>
                     }

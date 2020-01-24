@@ -26,6 +26,7 @@ export default class SignOn extends Component {
         isLoading: false,
         message: false,
         redirect: false,
+        file: null,
     }
 
     handleChange = (event) => {
@@ -72,6 +73,19 @@ export default class SignOn extends Component {
         }
     }
 
+    addAvatarToFirebase = () => {
+        const userUid = firebase.auth().currentUser.uid;
+        const fileName = this.state.file.name;
+        //console.log(userUid, fileName, this.state.file )
+        firebase.storage().ref(`avatars/${userUid}/${fileName}`)
+        .put(this.state.file)
+        .then((res) => {
+            res.ref.getDownloadURL().then(url => {
+                this.setState({avatar: url})
+           //     console.log('urs', url);
+            });
+        })
+    }
 
     createUserFetch = () => {
         console.log('fetch', this.addData())
@@ -79,8 +93,25 @@ export default class SignOn extends Component {
             method: 'POST',
             body: JSON.stringify(this.addData())
         })
+        // .then((res) => {
+        //     console.log(res)
+        //     this.addAvatarToFirebase();
+        // })
+        // .then(() => {
+        //     const userid = firebase.auth().currentUser.uid;
+        //     const formatedData = {
+        //         avatar : this.state.avatar,
+        //     }
+        //     fetch(`${FIREBASE_API}/users/${userid}.json`, {
+        //         method: 'PUT',
+        //         body: JSON.stringify(formatedData)
+        //     }).then((res) => {
+        //         console.log('dodałem avatar', res);
+        //     })
+            
+        // })
         .catch((err) => {
-            alert(err.message)
+            console.log(err.message)
         })
         .finally(() => {
             if (firebase.auth().currentUser) {
@@ -117,17 +148,23 @@ export default class SignOn extends Component {
     }
 
     handleFileAdd = (event) => {
-        const fileName = event.target.files[0];
-        console.log(fileName.name, event.target.files);
-        firebase.storage().ref(`avatars/${fileName.name}`)
-            .put(fileName)
-            .then((res) => {
-                res.ref.getDownloadURL().then(url => {
-                    console.log('urs', url);
-                });
-                alert('Added successfully! Yay!');
-            })
-        // this.setState({
+        this.setState({
+            file:event.target.files[0],
+        })
+
+
+        // const fileName = event.target.files[0];
+        // console.log(fileName.name, event.target.files);
+        
+        // firebase.storage().ref(`avatars/${fileName.name}`)
+        //     .put(fileName)
+        //     .then((res) => {
+        //         res.ref.getDownloadURL().then(url => {
+        //             console.log('urs', url);
+        //         });
+        //         alert('Added successfully! Yay!');
+        //     })
+        // // this.setState({
         //     imgURL : `/img/ciacha/${fileName}`  
         // })
     }
