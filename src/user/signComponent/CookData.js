@@ -1,10 +1,29 @@
 import React from 'react';
-import { TextField, } from '@material-ui/core';
+import { TextField, Avatar,Button } from '@material-ui/core';
 
 export default function CookData(props) {
-    const { avatar, city, district, street, description } = props;
+    const { name, avatar, city, district, street, description } = props;
 
     return (<>
+        <div style ={{display:'flex', justifyContent:'center'}}>
+            <Avatar style={{backgroundColor: 'red'}} >
+                {name.slice(0,1)}
+            </Avatar>
+            <input
+                accept="image/*"
+                style={{display:'none'}}
+                id="outlined-button-file"
+                type="file"
+                onChange = {props.onHandleFileAdd}
+            />
+            <label htmlFor="outlined-button-file" >
+                <Button variant="outlined" component="span" style={{margin: '10px'}} >
+                    dodaj zdjęcie
+                </Button>
+            </label>
+            
+            
+        </div>
         <TextField
             onChange={props.onHandleChange}
             variant="outlined"

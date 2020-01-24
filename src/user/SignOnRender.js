@@ -57,10 +57,12 @@ function SignOnRender(props) {
                         ? <Grid item xs={12} sm={6} className={classes.subGrid}>
                             <CookData
                                 onHandleChange={props.onHandleChange}
+                                onHandleFileAdd = {props.onHandleFileAdd}
                                 avatar={avatar}
                                 city={city}
                                 street={street}
                                 district={district}
+                                name={name}
                             />
                         </Grid>
                         : <Grid item xs={12} sm={6} className={classes.subGrid}>

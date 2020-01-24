@@ -80,7 +80,7 @@ class App extends React.Component {
 						<Route path='/cooks' component={CooksList} />
 						<Route path='/SignIn' component={SignIn} />
 						<Route path='/SignOn' component={SignOn} />
-						<Redirect to="/"/>
+						{/* <Redirect to="/"/> */}
 					</BrowserRouter>
 				</div>
 			)

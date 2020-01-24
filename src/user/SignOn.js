@@ -116,6 +116,21 @@ export default class SignOn extends Component {
         this.setState({ message: false });
     }
 
+    handleFileAdd = (event) => {
+        const fileName = event.target.files[0];
+        console.log(fileName.name, event.target.files);
+        firebase.storage().ref(`avatars/${fileName.name}`)
+            .put(fileName)
+            .then((res) => {
+                res.ref.getDownloadURL().then(url => {
+                    console.log('urs', url);
+                });
+                alert('Added successfully! Yay!');
+            })
+        // this.setState({
+        //     imgURL : `/img/ciacha/${fileName}`  
+        // })
+    }
 
     render() {
         const { message, email, isLoading, redirect } = this.state;
@@ -147,6 +162,7 @@ export default class SignOn extends Component {
                 <SignOnRender 
                     onHandleChange = {this.handleChange}
                     onHandleOnClick = {this.handleOnClick}
+                    onHandleFileAdd = {this.handleFileAdd}
                     state = {this.state}
                 />
 
