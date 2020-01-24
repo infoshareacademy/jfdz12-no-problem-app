@@ -4,7 +4,7 @@ import { CakesList } from './cakes/CakesList';
 import './App.css';
 import Dashboard from './dashboard/Dashboard';
 import CooksList from './cooks/CooksList';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, } from 'react-router-dom';
 import MenuAppBar from './menu/resMenu/MenuAppBar';
 import UserCard from './user/UserCard';
 import SignIn from './user/SignIn';
