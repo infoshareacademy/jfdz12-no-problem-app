@@ -57,24 +57,6 @@ export function getTypes(){
     return Promise.resolve(getTypes);
 }
 
-// export function getLikes(){
-//     const getLikes = fetch(`${FIREBASE_API}/likes.json`)
-//         .then (res => res.json())
-//         .then (data => {
-//             const keys = Object.keys(data);
-//                 const formattedData = keys.map(key => {
-//                     return {
-//                         id: key,
-//                         ...data[key]
-//                     }
-//                 });
-//             return formattedData;
-//         })
-//         .catch(error => console.log(`Nie mogę pobrać danych likes ${error.toString()}`));  
-    
-//     return Promise.resolve(getLikes);
-// }
-
 export function getCooks(){
 
     const getData = getUsers()
@@ -132,6 +114,15 @@ export function getUserById(id){
     
     return Promise.resolve(getData);
 }
+
+export function getUserByUid(uid){
+    const getData = getUsers()
+        .then (data => data.find(el => el.uid === uid))
+        .catch(error => console.log(`Nie mogę pobrać danych cakes uid ${error.toString()}`));  
+    
+    return Promise.resolve(getData);
+}
+
 
 export function getCakeWithTypeByCookId(id){
     const fullCake = Promise.all([

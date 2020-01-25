@@ -1,22 +1,22 @@
 import React from 'react';
 import {styles} from '../CakeStyles';
-import { Button, CardMedia, withStyles, Paper, Grid, Container, Divider, CircularProgress, } from '@material-ui/core';
+import { Button, CardMedia, withStyles, Paper, Grid, Container, CircularProgress, } from '@material-ui/core';
 import CakeAddInput from './CakeAddInput';
 import CakeAddTypesSelect from './CakeAddTypesSelect';
 import CakeAddSelect from './CakeAddSelect';
 import {YESNOSELECT} from '../../constans/selectConstans'
-import { CakeAddCookList } from './CakeAddCookList';
 import CookLabelFull from '../CookLabelFull';
 import { CAKEADDOBJ } from '../../constans/emptyObject'
 import { getFullData } from '../../api/Api2';
 import PageWrapper from '../../components/PageWrapper';
-//import { Link } from 'react-router-dom';
-
+import firebase from 'firebase';
+import { Redirect } from 'react-router-dom';
 
 class CakeAddForm extends React.Component{
     constructor(props){
         super(props);
         this.cakeId = props.match.params.id;
+        this.userIdRef = sessionStorage.getItem('userId');
         this.state = {
             cookList: false,
             cakes: [],
@@ -26,6 +26,7 @@ class CakeAddForm extends React.Component{
             isLoading: true,
             cakeAdd: {},
             saveCake: false,
+            file: null,
         }
         this.addCakeFetch = this.addCakeFetch.bind(this);
     }
@@ -37,14 +38,16 @@ class CakeAddForm extends React.Component{
                 const cakeAddData = this.cakeId === 'empty'
                     ? CAKEADDOBJ 
                     : data[0].find(cake => cake.id === this.cakeId)
-                console.log('cakeAddData', cakeAddData)
+       
                 this.setState({
                     cakes: data[0],
                     cooks: data[1],
                     types: data[2],
-                    cakeAdd: cakeAddData,
-                    //cakesMaxId: Math.max(...data[0].map(el => (el.id))), 
-                })
+                    cakeAdd: {
+                        ...cakeAddData,
+                        cookId: this.userIdRef,
+                    }
+               })
             })
             .catch(error => console.log('bład addformfetch', error.toString()))
             .finally(() => this.setState({
@@ -52,50 +55,29 @@ class CakeAddForm extends React.Component{
             }))
     }
 
-    componentDidUpdate(){
-        if (this.state.saveCake) {
+    // componentDidUpdate(){
+    //     if (this.state.saveCake) {
             
-            
+    //         this.setState({saveCake: false})
+    //     }
+    // }
 
-            // fetch('http://localhost:4000/cakes')
-            //     .then(res => res.json())
-            //     .then(data => {
-            //         const price = data.map(el => el.price); 
-            //         this.setState({
-            //             cakes: data,
-            //             priceRange: [Math.min(...price),Math.max(...price)],
-            //             cakesMaxId: Math.max(...data.map(el => (el.id))),
-            //         })
-            //     })
-            this.setState({saveCake: false})
-        }
-    }
-    
     handleFileAdd = (event) => {
-        const fileName = event.target.files[0].name;
-       
-        this.setState(prevState => ({
-            cakeAdd:{
-                ...prevState.cakeAdd,
-                imgURL : `/img/ciacha/${fileName}` 
-            } 
-        }))
-    }
-
-    handleClickOpen = () => {
-        this.setState(prevState => ({
-            cookList: !prevState.cookList,
-        }))
-      };
-
-    handleSelectCook = (value) =>{
-        this.setState(prevState => ({
-            cakeAdd: {
-                ...prevState.cakeAdd,
-                cookId: value,
-                cookList: !prevState.cookList,
-            },
-        }));
+        const file =  event.target.files[0];
+        const fileName = file.name;
+        
+        firebase.storage().ref(`cakes/${fileName}`)
+            .put(file)
+            .then((res) => {
+                res.ref.getDownloadURL().then(url => {
+                    this.setState(prevState => ({
+                            cakeAdd:{
+                                ...prevState.cakeAdd,
+                                imgURL : url, 
+                            } ,
+                        }))
+                });
+            })
     }
 
     handleCakeChange =(event) => {
@@ -113,29 +95,25 @@ class CakeAddForm extends React.Component{
         const { cakeAdd } = this.state;
         const cake = { ...cakeAdd, };
        
-        // fetch(`https://aleciachaapp.firebaseio.com/cakes2.json`, {
-        //     method: 'POST',
-        //     body: JSON.stringify(cake)
-        // })
-        //     .then((res) => {
-        //         this.setState({ saveCake: true, });
-        //         console.log('dodałem cake:' , res)
-        //     })
-        //     .catch((err) => {
-        //         alert(err.message)
-        //     });
-       
-        console.log('przed zapisem do API', cake);
-        
+        fetch(`https://aleciachaapp.firebaseio.com/cakes.json`, {
+            method: 'POST',
+            body: JSON.stringify(cake)
+        })
+            .then((res) => {
+                this.setState({ saveCake: true, });
+                console.log('dodałem cake:' , res)
+            })
+            .catch((err) => {
+                alert(err.message)
+            });
         }
-    
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     render(){
-        
+      
         const { classes } = this.props;
-        const {cooks, types, isLoading} = this.state;
+        const {cooks, types, isLoading, saveCake} = this.state;
         const { name, 
                 price, 
                 priceForPortion, 
@@ -148,8 +126,19 @@ class CakeAddForm extends React.Component{
 
         const selectedCook = this.findDataById(cooks, cookId);
         const selectetType = this.findDataById(types,typeId);
-        //const toSave = Object.entries(this.props.cakeAdd);  
+       
+        if(saveCake) {
+            return <Redirect to={'/'}/>
+        }
         
+
+        if (isLoading) {
+            return(<PageWrapper>
+                <CircularProgress/>
+            </PageWrapper>
+            )       
+        }
+
         if(!isLoading){
             return(<PageWrapper>
                 <Container maxWidth = "lg" >
@@ -256,40 +245,21 @@ class CakeAddForm extends React.Component{
                         
                         <Paper className={classes.fCardPaper}>
                             <Grid>
-                                <Button onClick={this.handleClickOpen} 
-                                        variant='outlined'
-                                        style={{marginBottom: '10px'}}
-                                >
-                                    dodaj kucharza
-                                </Button>
-                                <Divider />
-                            </Grid>
-                            <Grid>
-                                {cookId !== null 
-                                ? <CookLabelFull 
-                                        cook = {selectedCook}
-                                    />
-                                : ''
-                                }
+                                <CookLabelFull 
+                                    cook = {selectedCook}
+                                />
                             </Grid>
                         </Paper>
-                        <CakeAddCookList 
-                            cookList = {this.state.cookList}
-                            onHandleClickOpen = {this.handleClickOpen}
-                            onHandleSelectCook = {this.handleSelectCook}
-                            cooks = {cooks}
-                        />
-                        <Button //onClick={this.handleCakeAddForm} 
-                                variant="outlined" 
-                                color="secondary"
-                                style = {{margin: '20px auto'}}
-                                //component = {Link} to={'/'}
-                                onClick = {this.props.history.goBack}
+                        
+                        <Button  
+                            variant="outlined" 
+                            color="secondary"
+                            style = {{margin: '20px auto'}}
+                            onClick = {this.props.history.goBack}
                         > 
                             powrót 
                         </Button>
                         <Button onClick={this.addCakeFetch}
-                                //component = {Link} to={'/cakes'} 
                                 variant="outlined" 
                                 color="primary"
                                 style = {{margin: '20px'}}
@@ -303,13 +273,7 @@ class CakeAddForm extends React.Component{
             </PageWrapper>)
         }
 
-        if (isLoading) {
-            return(<PageWrapper>
-                <CircularProgress/>
-            </PageWrapper>
-            )
-                
-        }
+        
     }
 }
 

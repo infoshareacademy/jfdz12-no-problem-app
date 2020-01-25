@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PageWrapper from '../components/PageWrapper';
-import {  CircularProgress } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import firebase from 'firebase';
 import { FIREBASE_API } from '../api/Api2';
 import MessageSnakebar from './signComponent/MessageSnakebar';

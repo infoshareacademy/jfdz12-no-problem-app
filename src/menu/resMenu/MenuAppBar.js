@@ -9,6 +9,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { withRouter } from 'react-router-dom';
 import { useEffect } from 'react'
 import firebase from 'firebase/app';
+import { getUserByUid } from '../../api/Api2';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -75,8 +76,16 @@ function MenuAppBar(props) {
 
 	useEffect(() => {
 		const authRef = firebase.auth().onAuthStateChanged(user => {
-			setUserRef(authRef);
-			setAuth(user ? true : false)
+			
+			if(user){
+				setUserRef(authRef);
+				setAuth(user ? true : false)
+				getUserByUid(user.uid).then((dataUser)=>{
+					sessionStorage.setItem('userId', dataUser.id);
+					console.log(dataUser.id, user.uid)
+				})
+
+			}
 		})
 		return () => {
 			if (userRef) {
