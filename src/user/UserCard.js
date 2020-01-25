@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button, Container, Grid, Paper, Typography, withStyles } from '@material-ui/core';
+import { Button, Container, Grid, Paper, Typography, withStyles,CircularProgress } from '@material-ui/core';
 import UserBasicData from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
-import { getLikesWithData, getUserById, getCakesByCookId } from '../api/Api2';
+import { getLikesWithData, getUserById, getCakeWithTypeByCookId } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 import { Link } from 'react-router-dom';
 import UserCookData from './userCardComponent/UserCookData';
@@ -58,7 +58,7 @@ class UserCard extends React.Component{
             Promise.all([
                 getUserById(this.userIdRef),
                 getLikesWithData(this.userIdRef),
-                getCakesByCookId(this.userIdRef)
+                getCakeWithTypeByCookId(this.userIdRef)
             ])
             .then(data =>{
                 this.setState ({
@@ -95,6 +95,12 @@ class UserCard extends React.Component{
         const {user, likes, cakes, isLoading, selectedMenu, loginUser} =  this.state;
         const { classes } = this.props;
         
+        if (isLoading) {
+            return <PageWrapper >
+                <CircularProgress color="secondary" />
+            </PageWrapper>
+        }
+
         if (!loginUser){
             return (<PageWrapper>
                 <h1>Użytkownik nie zalogowany, zaloguj się </h1>

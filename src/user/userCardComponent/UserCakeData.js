@@ -1,19 +1,30 @@
 import React from 'react';
-import { Grid, Paper, Typography, Divider, withStyles } from '@material-ui/core';
+import { Grid, Paper, Typography, Divider, withStyles, Avatar, Box } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const styles = {
     img : {
         width:'100%', 
-        height:'100px',
+        maxWidth:'100px',
+        height:'70px',
     },
     grid:{
         padding: '5px',
     },
     text:{
         paddingLeft:'10px',
+        textAlign: 'left',
     },
+    
     wrapper:{
         width:'100%',
+    },
+    avatar: {
+        fontSize: '10px',
+        fontWeight: 'bold',
+        width: 60,
+        height: 20,
+        marginLeft:'10px',
     }
     
 }
@@ -37,43 +48,108 @@ function UserCakeData(props){
                         style ={{backgroundColor: backColor}}
                     >
                         
-                        <Grid item sm={3} md={2} >
-                            <img src = {cake.imgURL} 
-                                alt="cake foto" 
-                                className={classes.img}>    
-                            </img>
+                        <Grid item sm={3} md={2} container justify='center' alignItems='center'>
+                            <Link to={`/cake/${cake.id}`}>
+                                <img src = {cake.imgURL} 
+                                    alt="cake foto" 
+                                    className={classes.img}>    
+                                </img>
+                            </Link>
                            
                         </Grid>
                             
                         <Grid item xs
                             container 
-                            direction='column' 
+                            direction='row' 
                             alignItems='flex-start'
                             wrap='wrap'
                         > 
-                            
                             <Grid item 
                                 container 
                                 justify='space-between' 
                                 alignContent='flex-start'
                                 direction='column'
+                                xs={12} md={6}
+                                wrap='wrap'
+                                style = {{minWidth: '200px'}}
                             >
                                 <Grid item container alignItems='flex-start' direction='column'>
-                                    <div className={classes.text}>
-                                        ciasto: 
-                                        <Typography className={classes.text} component='span' variant='h6'> 
-                                            {cake.name}
-                                        </Typography>
-                                    </div>
-                                    <div className={classes.text}>
-                                        cukiernik: <Typography className={classes.text} component='span' variant='h6'> {}</Typography>
-                                    </div>
-                                    <div className={classes.text}>
-                                        polubienia: <Typography className={classes.text} component='span' variant='h6'>{cake.likes}</Typography>
-                                    </div>
+                                    <Grid item container 
+                                        alignItems='center' 
+                                        justify='flex-start' 
+                                        className={classes.grid}
+                                    >
+                                        <div className={classes.text}>
+                                            <span>ciasto: </span> 
+                                            <Box component = 'span' fontWeight={500} >
+                                                {cake.name}
+                                            </Box>
+                                        </div>
+                                    </Grid>
+                                    <Grid item container 
+                                        alignItems='center' 
+                                        justify='flex-start' 
+                                        className={classes.grid}
+                                    >
+                                        <div className={classes.text}>
+                                            opis: {cake.description}
+                                        </div>
+                                        
+                                    </Grid>
+                                    <Grid container alignItems='center' className={classes.grid}>
+                                        <div className={classes.text}>typ ciasta: </div>
+                                        <Avatar 
+                                            conponent = 'span'
+                                            variant="rounded" 
+                                            className = {classes.avatar} 
+                                            style={{backgroundColor: cake.type.color}}
+                                        >
+                                            <div >{cake.type.name}</div> 
+                                        </Avatar>
+                                    </Grid>
                                 </Grid >
                             </Grid>
-                             
+                            <Grid item 
+                                container 
+                                justify='space-between' 
+                                alignContent='flex-start'
+                                direction='column'
+                                xs ={12} md={6}
+                                wrap='wrap'
+                            >
+                                <Grid item container 
+                                    alignItems='center' 
+                                    justify='flex-start' 
+                                    className={classes.grid}
+                                >
+                                    <div className={classes.text}>
+                                        <span>cena za kg: </span> 
+                                        <Box component = 'span' fontWeight={500} >
+                                            {cake.price}
+                                        </Box>
+                                    </div>
+                                </Grid>
+                                <Grid item container 
+                                    alignItems='center' 
+                                    justify='flex-start' 
+                                    className={classes.grid}
+                                >
+                                    <div className={classes.text}>
+                                        cena za porcję: {cake.priceForPortion}
+                                    </div>
+                                    
+                                </Grid>
+                                <Grid item container 
+                                    alignItems='center' 
+                                    justify='flex-start' 
+                                    className={classes.grid}
+                                >
+                                    <div className={classes.text}>
+                                        porcja: {cake.portionDescription}
+                                    </div>
+                                    
+                                </Grid>
+                            </Grid> 
                         </Grid>  
                     </Grid>
                     

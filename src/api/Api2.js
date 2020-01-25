@@ -133,11 +133,28 @@ export function getUserById(id){
     return Promise.resolve(getData);
 }
 
+export function getCakeWithTypeByCookId(id){
+    const fullCake = Promise.all([
+            getCakes(),
+            getTypes()
+        ]) 
+        .then(data => {
+            const cakes = data[0].filter(cake => cake.cookId === id);
+            return cakes.map ((cake) => {
+                    return {
+                        ...cake,
+                        type: data[1].find(type => type.id === cake.typeId),
+                    }
+                })
+            }  
+        )
+        .catch(error => console.log(`Nie mogę pobrać danych cakes with types ${error.toString()}`));  
+        
+    return Promise.resolve(fullCake);
+}
+
 export function getFullCakeById(id){
     const fullCake = Promise.all([
-            // fetch(CAKES_API_ENDPOINT).then(res => res.json()),
-            // fetch(USERS_API_ENDPOINT).then(res => res.json()),
-            // fetch(TYPES_API_ENDPOINT).then(res => res.json()),
             getCakes(),
             getUsers(),
             getTypes()
@@ -158,10 +175,7 @@ export function getFullCakeById(id){
 export function getFullData(){
     const fullData = Promise.all([
             getCakes(),
-            // fetch(CAKES_API_ENDPOINT).then(res => res.json()),
-            // fetch(USERS_API_ENDPOINT).then(res => res.json())
             getUsers().then(data => data.filter(el => el.userType === 'cook')),
-            // fetch(TYPES_API_ENDPOINT).then(res => res.json()),
             getTypes()
         ]) 
         .then(data => data)
@@ -170,45 +184,6 @@ export function getFullData(){
     return Promise.resolve(fullData);
 }
 
-// export function getLikesWithData (logedUdserId) {
-
-//     const fullData = Promise.all([
-//         getLikes(),
-//         getCooks(),
-//         getTypes(),
-//         getCakes()
-//         // fetch(LIKES_API_ENDPOINT).then(res => res.json()),
-//         // fetch(USERS_API_ENDPOINT).then(res => res.json()).then(data => data.filter(el => el.userType === 'cook')),
-//         // fetch(TYPES_API_ENDPOINT).then(res => res.json()),
-//         // fetch(CAKES_API_ENDPOINT).then(res => res.json()),
-//     ]) 
-//     .then(data => {
-//         const filteredData = data[0].filter((like) => like.userId === parseInt(logedUdserId));
-        
-//         const newData = filteredData.map ((like)=>{
-//             const likeCake = data[3].find((cake) => like.cakeId === cake.id);
-//             const cakeType = data[2].find((type) => type.id === likeCake.typeId);
-//             const cookCake = data[1].find((cook) => cook.id === likeCake.cookId);
-           
-//             const newData = {
-//                 ...like,
-//                 cake: {
-//                     ...likeCake,
-//                     typeName: cakeType.name,
-//                     typeColor: cakeType.color,
-//                     cookName: `${cookCake.name} ${cookCake.surname} `,
-//                 },
-//             }
-//             return newData;
-//         });    
-       
-//         return newData;
-//     })
-//     .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));
-
-//     return Promise.resolve(fullData);
-// }
-
 export function getLikesWithData (logedUdserId) {
 
     const fullData = Promise.all([
@@ -216,10 +191,6 @@ export function getLikesWithData (logedUdserId) {
         getCooks(),
         getTypes(),
         getCakes()
-        // fetch(USERS_API_ENDPOINT).then(res => res.json()),
-        // fetch(USERS_API_ENDPOINT).then(res => res.json()).then(data => data.filter(el => el.userType === 'cook')),
-        // fetch(TYPES_API_ENDPOINT).then(res => res.json()),
-        // fetch(CAKES_API_ENDPOINT).then(res => res.json()),
     ]) 
     .then(data => {
         const likedCakesId = data[0]

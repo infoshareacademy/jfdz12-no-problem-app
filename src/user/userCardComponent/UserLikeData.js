@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Paper, Typography, Divider, IconButton, withStyles } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { Link } from 'react-router-dom';
 
 const styles = {
     img : {
@@ -41,10 +42,12 @@ function UserLikeData(props){
                     >
                         
                         <Grid item sm={3} md={2} >
-                            <img src = {like.cake.imgURL} 
-                                alt="cake foto" 
-                                className={classes.img}>    
-                            </img>
+                            <Link to ={`/cake/${like.cake.id}`}>
+                                <img src = {like.cake.imgURL} 
+                                    alt="cake foto" 
+                                    className={classes.img}>    
+                                </img>
+                            </Link>
                            
                         </Grid>
                             
@@ -106,63 +109,3 @@ function UserLikeData(props){
 
 export default withStyles(styles)(UserLikeData);
 
-
-// return (<>
-//     <Grid item xs={12}>
-//        <Divider/>
-//     </Grid>
-    
-//     <Grid key={like.id} xs ={12} container item style={{margin: '5px',}}>
-        
-//         <Grid item xs={12} sm={4} container>
-//             <Grid item xs={6}>
-//                 <img src = {like.cake.imgURL} alt="cake foto" style={{width:'100%', maxHeight:'100px'}}></img>
-//             </Grid>
-            
-//             <Grid item  xs={6}
-//                 container 
-//                 direction='column' 
-//                 justify='space-evenly' 
-//                 alignItems='center'
-//             >
-//                 <Divider orientation="vertical"/>
-//                 <Box>
-//                     {like.date}
-//                 </Box> 
-//                 <Avatar 
-//                     variant="rounded" 
-//                     className = {classes.avatar} 
-//                     style={{backgroundColor: like.cake.typeColor}}
-//                 >
-//                     <div >{like.cake.typeName}</div> 
-//                 </Avatar>
-//             </Grid>
-//         </Grid>
-        
-//         <Grid item container xs={12} sm={8} >
-//             <Grid item xs={5} 
-//                 container 
-//                 justify='space-between' 
-//                 alignContent='flex-start'
-//                 direction='column'
-//             >
-//                 <Divider orientation='vertical'/>
-//                 <Box px="5px" align='left'>
-//                     <div style ={{padding: '3px'}}>ciasto: {like.cake.name}</div>
-//                     <div style ={{padding: '3px'}}>cukiernik: {like.cake.cookName}</div>
-//                 </Box >
-//             </Grid>
-            
-//             <Grid item xs={7}
-//                 container 
-//                 justify = 'flex-start'  
-//                 alignItems='flex-start'
-//             >
-//                 <Divider orientation='vertical' /> 
-//                 <Box align='left' style={{paddingLeft: '5px'}}>opis:</Box>
-//                 <Box align='left' style={{paddingLeft: '5px'}}>{like.content}</Box>
-//             </Grid> 
-//         </Grid>  
-//     </Grid>
-    
-//    </> )})
