@@ -290,7 +290,7 @@
         "description": "znany też jako tort Szwarcwaldzki",
         "glutenFree": false,
         "imgURL": "/img/ciacha/czarnylas.jpg",
-        "likesUsersId":[],
+        "likesUsersId":[0],
         "likes": 6
     },
     {

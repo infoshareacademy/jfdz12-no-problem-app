@@ -19,7 +19,7 @@ export const filterCondition = (cake,
 
     const cookName = `${cook.name} ${cook.surname}`;
     const locationCity = cook.location.city;
-    const priceMin = parseFloat (priceRange[0]);
+    const priceMin = parseFloat (priceRange[0] ==='' ? 0: priceRange[0]);
     const priceMax = parseFloat (priceRange[1]);
 
     if (filterCake !== '' && cake.name.toLowerCase().includes(filterCake.toLowerCase())){
