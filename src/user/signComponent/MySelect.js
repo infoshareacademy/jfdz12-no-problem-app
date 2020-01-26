@@ -20,9 +20,9 @@ const {options, name, value, label, align, width, labelWidth,} = props;
                 labelWidth = {labelWidth}
                 style={{textAlign:align}}   
             >
-                    <MenuItem>
+                    {/* <MenuItem>
                         <em>Brak</em>
-                    </MenuItem>
+                    </MenuItem> */}
                     {options.map(option => (
                         <MenuItem key={option.id} 
                                     value={option.value}

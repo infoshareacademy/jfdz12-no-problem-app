@@ -66,10 +66,10 @@ class SignIn extends React.Component{
     };
 
     handleResetPassword = () =>{
-        // firebase.auth().sendPasswordResetEmail(this.state.email);
+        firebase.auth().sendPasswordResetEmail(this.state.email);
         this.setState({
             emailResetMessage: true,
-            //redirect: true,
+            redirect: true,
         });
     }
 
