@@ -40,9 +40,9 @@ const {classes, options} = props;
                     value = {props.value}
                     onChange = {props.onHandleCakeChange}
                     >
-                        <MenuItem >
+                        {/* <MenuItem >
                             <em>Brak</em>
-                        </MenuItem>
+                        </MenuItem> */}
                         {options.map(option => (
                             <MenuItem key={option.id} 
                                         value={option.value}
