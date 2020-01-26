@@ -1,5 +1,4 @@
 export const CAKEADDOBJ = {
-    id: null,
     name : '',
     price: '',
     priceForPortion: '',

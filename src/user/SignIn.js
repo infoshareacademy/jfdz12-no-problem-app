@@ -1,55 +1,16 @@
 import React from 'react';
 import { withStyles, Grid, Typography, Avatar, Button, TextField, CircularProgress, } from '@material-ui/core';
 //import { IconButton, Snackbar } from '@material-ui/core';
-import './SignIn.css';
+//import './SignIn.css';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Link as Rlink} from 'react-router-dom';
 import {getUsers} from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 import firebase from 'firebase/app';
 import {Redirect} from 'react-router-dom';
-import MessageSnakebar from './signInComponent/MessageSnakebar';
+import MessageSnakebar from './signComponent/MessageSnakebar';
+import {styles} from './styles/SignInStyles'
 
-
-const styles = {
-    root:{
-        '& .MuiButton-contained':{
-            backgroundColor: '#47817Ee0',
-            color: 'white',
-        },
-    },
-    gridWrapper :{
-        borderRadius: '20px',
-        color: '#47817E',
-        border: '5px solid #47817E' 
-    },
-    paper: {
-        maxWidth: '400px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        backgroundColor: '#DFE0DF50', /* #eeeeee, */
-        padding: '30px',
-        borderRadius: '20px',
-        color: '#47817E',
-        border: '3px solid #DF9A63'
-      },
-    
-    avatar: {
-        margin: '8px',
-        backgroundColor: '#DF9A63',
-    },
-    
-    form: {
-        width: '100%', 
-        marginTop: '8px',
-    },
-    
-    submit: {
-        margin: '24px 0px 16px',
-
-     },
-}
 
 class SignIn extends React.Component{
     constructor(props){
@@ -105,10 +66,10 @@ class SignIn extends React.Component{
     };
 
     handleResetPassword = () =>{
-        // firebase.auth().sendPasswordResetEmail(this.state.email);
+        firebase.auth().sendPasswordResetEmail(this.state.email);
         this.setState({
             emailResetMessage: true,
-            //redirect: true,
+            redirect: true,
         });
     }
 
@@ -145,6 +106,7 @@ class SignIn extends React.Component{
                 <MessageSnakebar
                     open={emailResetMessage}
                     onHandleClose = {this.handleClose}
+                    message = 'wysłaliśmy ci link do zresetowania hasła'
                 />
                 <Grid
                     container

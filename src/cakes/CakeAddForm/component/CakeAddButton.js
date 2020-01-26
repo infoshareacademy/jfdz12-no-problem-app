@@ -1,5 +1,4 @@
 import React from 'react';
-import '../Cake.css';
 import { IconButton, withStyles, Tooltip } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import clsx from 'clsx';

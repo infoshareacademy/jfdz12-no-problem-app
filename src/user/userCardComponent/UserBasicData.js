@@ -1,20 +1,31 @@
 import React from 'react';
-import { Grid, Paper, Divider, withStyles,  } from '@material-ui/core';
+import { Grid, Paper, InputLabel, TextField, withStyles,  } from '@material-ui/core';
 
 const styles = {
+    root:{
+        '& .MuiInputBase-root':{
+            fontSize: '18px',
+
+        },
+        '& .MuiInputBase-root.Mui-disabled':{
+            color: 'rgba(0, 0, 0, 0.87)',
+        }
+    },
     textLeft: {
         padding: '10px',
-        textAlign: 'left',
-        fontWeight: 'bold',
-        fontSize: '16px',
+        textAlign: 'left',   
+        maxWidth: '300px',
+        width: '100%',
     },
     textRight:{
-        padding: '10px',
+        padding: '17px 10px',
+        maxWidth: '200px',
+        width: '100%', 
         textAlign: 'right',
         fontSize: '16px',
     },
     gridStyle:{
-        padding: '10px',
+        padding: '0px 10px',
         boxSizing: 'border-box',  
     },
     paper:{
@@ -30,27 +41,31 @@ function UserBasicData(props){
 
     return(
         <Paper className={classes.paper}>
-            <Grid container >
-                <Grid xs={5} item container  direction='column' className={classes.gridStyle}>
-                    <div className={classes.textRight}> Nick : </div> 
-                    <div className={classes.textRight}>Nazwisko : </div>
-                    <div className={classes.textRight}>Imię : </div>
-                    <div className={classes.textRight}>płeć : </div>
-                    <Divider variant = 'middle'/>
-                    <div className={classes.textRight}>email : </div>
-                    <div className={classes.textRight}>telefon komórkowy : </div>
-
+            <Grid container direction='column' className={classes.root}>
+                <Grid xs={12} item container className={classes.gridStyle}>
+                    <InputLabel id="nick" className={classes.textRight}> Nick : </InputLabel> 
+                    <TextField labelid="nick" disabled className={classes.textLeft} value= {user.nick}/>    
                 </Grid>
-                <Grid item xs={7} container direction='column' className={classes.gridStyle}>
-                    <div className={classes.textLeft}>{user.nick}</div>
-                    <div className={classes.textLeft}> {user.name}</div>
-                    <div className={classes.textLeft}>{user.surname}</div>
-                    <div className={classes.textLeft}>{gender}</div>
-                    <Divider variant = 'middle'/>
-                    <div className={classes.textLeft}>{user.contact.mail}</div>
-                    <div className={classes.textLeft}>{user.contact.mobile}</div>
+                <Grid xs={12} item container className={classes.gridStyle}>
+                    <InputLabel id="name" className={classes.textRight}> imię : </InputLabel> 
+                    <TextField labelid="name" disabled className={classes.textLeft} value= {user.name}/>    
                 </Grid>
-
+                <Grid xs={12} item container className={classes.gridStyle}>
+                    <InputLabel id="surname" className={classes.textRight}> Nazwisko : </InputLabel> 
+                    <TextField labelid="surname" disabled className={classes.textLeft} value= {user.surname}/>    
+                </Grid>
+                <Grid xs={12} item container className={classes.gridStyle}>
+                    <InputLabel id="gender" className={classes.textRight}> Płeć : </InputLabel> 
+                    <TextField labelid="gender" disabled className={classes.textLeft} value= {gender}/>    
+                </Grid>
+                <Grid xs={12} item container className={classes.gridStyle}>
+                    <InputLabel id="email" className={classes.textRight}> email : </InputLabel> 
+                    <TextField labelid="email" disabled className={classes.textLeft} value= {user.contact.mail}/>    
+                </Grid>
+                <Grid xs={12} item container className={classes.gridStyle}>
+                    <InputLabel id="mobile" className={classes.textRight}> telefon komórkowy : </InputLabel> 
+                    <TextField labelid="mobile" disabled className={classes.textLeft} value= {user.contact.mobile}/>    
+                </Grid>
             </Grid>
         </Paper>
         )
