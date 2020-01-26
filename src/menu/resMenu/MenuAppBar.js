@@ -76,13 +76,11 @@ function MenuAppBar(props) {
 
 	useEffect(() => {
 		const authRef = firebase.auth().onAuthStateChanged(user => {
-			
+			setAuth(user ? true : false)
 			if(user){
 				setUserRef(authRef);
-				setAuth(user ? true : false)
 				getUserByUid(user.uid).then((dataUser)=>{
 					sessionStorage.setItem('userId', dataUser.id);
-					console.log(dataUser.id, user.uid)
 				})
 
 			}
@@ -109,6 +107,7 @@ function MenuAppBar(props) {
 
 	const handleSignOut = () => {
 		firebase.auth().signOut();
+		setAuth(false);
 		sessionStorage.setItem('userId', null);
 		props.history.push('/')
 	}

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Grid, Paper, Typography, Divider, withStyles, Avatar, Box } from '@material-ui/core';
+import { Grid, Paper, Typography, Divider, withStyles, Avatar, Box, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import EditIcon from '@material-ui/icons/Edit';
 
 const styles = {
     img : {
@@ -114,7 +115,7 @@ function UserCakeData(props){
                                 justify='space-between' 
                                 alignContent='flex-start'
                                 direction='column'
-                                xs ={12} md={6}
+                                xs ={12} md={5}
                                 wrap='wrap'
                             >
                                 <Grid item container 
@@ -149,6 +150,21 @@ function UserCakeData(props){
                                     </div>
                                     
                                 </Grid>
+                            </Grid>
+                            <Grid xs={12} md={1} 
+                                item 
+                                container 
+                                justify='center' 
+                                alignContent='center'
+                                direction='column'
+                            >
+                                <IconButton 
+                                    aria-label="edit"
+                                    component ={Link} 
+                                    to= {`/cakeAdd/${cake.id}`} 
+                                >
+                                    <EditIcon/>
+                                </IconButton>
                             </Grid> 
                         </Grid>  
                     </Grid>

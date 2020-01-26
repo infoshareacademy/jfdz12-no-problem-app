@@ -36,16 +36,15 @@ class CakeAddForm extends React.Component{
         getFullData()
             .then(data => {
                 const cakeAddData = this.cakeId === 'empty'
-                    ? CAKEADDOBJ 
+                    ? { ...CAKEADDOBJ, cookId: this.userIdRef }  
                     : data[0].find(cake => cake.id === this.cakeId)
-       
+                console.log('cakeAdd:', cakeAddData)
                 this.setState({
                     cakes: data[0],
                     cooks: data[1],
                     types: data[2],
                     cakeAdd: {
                         ...cakeAddData,
-                        cookId: this.userIdRef,
                     }
                })
             })
@@ -70,6 +69,7 @@ class CakeAddForm extends React.Component{
             .put(file)
             .then((res) => {
                 res.ref.getDownloadURL().then(url => {
+                    
                     this.setState(prevState => ({
                             cakeAdd:{
                                 ...prevState.cakeAdd,
@@ -91,22 +91,38 @@ class CakeAddForm extends React.Component{
         }));
     }
 
-    addCakeFetch(){
+    fetchCake = () => {
         const { cakeAdd } = this.state;
-        const cake = { ...cakeAdd, };
-       
-        fetch(`https://aleciachaapp.firebaseio.com/cakes.json`, {
-            method: 'POST',
-            body: JSON.stringify(cake)
-        })
+
+
+        if(this.cakeId === 'empty'){
+            
+            return fetch(`https://aleciachaapp.firebaseio.com/cakes.json`, {
+                        method: 'POST',
+                        body: JSON.stringify(cakeAdd)
+                    })
+        }else{
+            delete cakeAdd.id;
+            
+            return fetch(`https://aleciachaapp.firebaseio.com/cakes/${this.cakeId}.json`, {
+                        method: 'PUT',
+                        body: JSON.stringify(cakeAdd)
+                    })
+        }
+
+    }
+
+    addCakeFetch(){
+
+        this.fetchCake()
             .then((res) => {
                 this.setState({ saveCake: true, });
                 console.log('dodałem cake:' , res)
             })
             .catch((err) => {
-                alert(err.message)
+                console.log(err.message)
             });
-        }
+    }
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
