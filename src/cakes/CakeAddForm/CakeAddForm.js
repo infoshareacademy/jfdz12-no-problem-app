@@ -10,7 +10,7 @@ import { CAKEADDOBJ } from '../../constans/emptyObject'
 import { getFullData } from '../../api/Api2';
 import PageWrapper from '../../components/PageWrapper';
 import firebase from 'firebase';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class CakeAddForm extends React.Component{
     constructor(props){
@@ -27,6 +27,8 @@ class CakeAddForm extends React.Component{
             cakeAdd: {},
             saveCake: false,
             file: null,
+            isError:false,
+            error:'',
         }
         this.addCakeFetch = this.addCakeFetch.bind(this);
     }
@@ -35,31 +37,51 @@ class CakeAddForm extends React.Component{
 
         getFullData()
             .then(data => {
-                const cakeAddData = this.cakeId === 'empty'
-                    ? { ...CAKEADDOBJ, cookId: this.userIdRef }  
-                    : data[0].find(cake => cake.id === this.cakeId)
-                console.log('cakeAdd:', cakeAddData)
-                this.setState({
-                    cakes: data[0],
-                    cooks: data[1],
-                    types: data[2],
-                    cakeAdd: {
-                        ...cakeAddData,
+                let checkData = false;
+                
+                if(this.cakeId === 'empty'){
+                    checkData = true;
+                }else{
+                    if(data[0].find(cake => (cake.id === this.cakeId && cake.cookId === this.userIdRef ))){
+                        checkData=true;
+                    }else{
+                        checkData=false;
                     }
-               })
+                }
+                
+                if(checkData){
+                    const cakeAddData = this.cakeId === 'empty'
+                        ? { ...CAKEADDOBJ, cookId: this.userIdRef }  
+                        : data[0].find(cake => (cake.id === this.cakeId && cake.cookId === this.userIdRef ));
+                    
+                    this.setState({
+                        cakes: data[0],
+                        cooks: data[1],
+                        types: data[2],
+                        cakeAdd: {
+                            ...cakeAddData,
+                            }
+                        })    
+                }else{
+                    this.setState({
+                        isError: true,
+                        error: ' nie ma takiego ciasta '
+                    })
+                }
+                
+                
             })
-            .catch(error => console.log('bład addformfetch', error.toString()))
+            .catch(error => {
+                console.log('bład addformfetch', error.toString())
+                this.setState({
+                    isError: true,
+                    error:error.toString(),
+                })
+            })
             .finally(() => this.setState({
                 isLoading: false,
             }))
     }
-
-    // componentDidUpdate(){
-    //     if (this.state.saveCake) {
-            
-    //         this.setState({saveCake: false})
-    //     }
-    // }
 
     handleFileAdd = (event) => {
         const file =  event.target.files[0];
@@ -93,7 +115,6 @@ class CakeAddForm extends React.Component{
 
     fetchCake = () => {
         const { cakeAdd } = this.state;
-
 
         if(this.cakeId === 'empty'){
             
@@ -129,7 +150,7 @@ class CakeAddForm extends React.Component{
     render(){
       
         const { classes } = this.props;
-        const {cooks, types, isLoading, saveCake} = this.state;
+        const {cooks, types, isLoading, saveCake, isError, error} = this.state;
         const { name, 
                 price, 
                 priceForPortion, 
@@ -152,6 +173,14 @@ class CakeAddForm extends React.Component{
             return(<PageWrapper>
                 <CircularProgress/>
             </PageWrapper>
+            )       
+        }
+
+        if (isError) {
+            return(<PageWrapper>
+                    <h3>wystąpił błąd: {error} </h3>
+                    <Link to={'/'}>wróć na stronę główną </Link>
+                </PageWrapper>
             )       
         }
 
