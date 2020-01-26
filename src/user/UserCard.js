@@ -1,10 +1,14 @@
 import React from 'react';
-import { Button, Container, Grid, Paper, Typography, withStyles } from '@material-ui/core';
+import { Button, Container, Grid, Paper, Typography, withStyles,CircularProgress } from '@material-ui/core';
 import UserBasicData from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
-import { getLikesWithData, getUserById } from '../api/Api2';
+import { getLikesWithData, getUserById, getCakeWithTypeByCookId } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
+import { Link } from 'react-router-dom';
+import UserCookData from './userCardComponent/UserCookData';
+import UserCakeData from './userCardComponent/UserCakeData';
+
 
 const styles ={
     gridStyle: {
@@ -36,36 +40,46 @@ class UserCard extends React.Component{
         this.state ={
             user: {},
             likes:[],
+            cakes: [],
             isLoading: true,
             selectedMenu: {
                 basic : true,
                 like: false,
-            }
+                mCook: false,
+                mCake: false,
+            },
+            loginUser:true,
         };
     }
 
     componentDidMount(){
-
-        Promise.all([
-            getUserById(this.userIdRef),
-            //getLikesWithData(this.userIdRef),
-            getLikesWithData(this.userIdRef),
-        ])
-        .then(data =>{
-            //console.log('dat0',data[0])
-            this.setState ({
-                user: data[0],
-                likes: data[1],
-            })}) 
-        .catch(error => console.log('bład addformfetch', error.toString()))
-        .finally(() => this.setState({
-                isLoading: false,
-            }))
+       
+        if (this.userIdRef){
+            Promise.all([
+                getUserById(this.userIdRef),
+                getLikesWithData(this.userIdRef),
+                getCakeWithTypeByCookId(this.userIdRef)
+            ])
+            .then(data =>{
+                this.setState ({
+                    user: data[0],
+                    likes: data[1],
+                    cakes: data[2],
+                })}) 
+            .catch(error => console.log('bład addformfetch', error.toString()))
+            .finally(() => this.setState({
+                    isLoading: false,
+                    loginUser: true,
+                }))
+        }else{
+            this.setState({loginUser:false})
+        }
     }
 
     handleClick = (name) => {
         const {selectedMenu} = this.state;
         const keys = Object.keys(selectedMenu);
+        
         keys.forEach(key => {
             this.setState(prevState => ({
                 selectedMenu:{
@@ -78,9 +92,22 @@ class UserCard extends React.Component{
     }
 
     render(){
-        const {user, likes, isLoading, selectedMenu} =  this.state;
+        const {user, likes, cakes, isLoading, selectedMenu, loginUser} =  this.state;
         const { classes } = this.props;
         
+        if (isLoading) {
+            return <PageWrapper >
+                <CircularProgress color="secondary" />
+            </PageWrapper>
+        }
+
+        if (!loginUser){
+            return (<PageWrapper>
+                <h1>Użytkownik nie zalogowany, zaloguj się </h1>
+                <Link to='/SignIn'>Sign in</Link>
+            </PageWrapper>)
+        }
+
         return (
             <PageWrapper>
         
@@ -97,8 +124,8 @@ class UserCard extends React.Component{
                              <UserMenu 
                                 onHandleClick = {this.handleClick}
                                 selectedMenu = {selectedMenu}
-                             />
-                             
+                                userType={user.userType}
+                             />    
                         </Grid>
                         <Grid item xs className={classes.gridStyle}>
                             {selectedMenu.basic &&
@@ -108,6 +135,14 @@ class UserCard extends React.Component{
                             {selectedMenu.like && 
                                 <UserLikeData
                                     likes = {likes}
+                                /> }
+                            {selectedMenu.mCook && 
+                                <UserCookData
+                                    user = {user}
+                                /> }
+                            {selectedMenu.mCake &&
+                                <UserCakeData
+                                    cakes = {cakes}
                                 /> }
                                 
                         </Grid>

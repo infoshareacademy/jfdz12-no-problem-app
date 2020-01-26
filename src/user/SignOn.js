@@ -1,18 +1,210 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
 import PageWrapper from '../components/PageWrapper';
+import { CircularProgress } from '@material-ui/core';
+import firebase from 'firebase';
+import { FIREBASE_API } from '../api/Api2';
+import MessageSnakebar from './signComponent/MessageSnakebar';
+import SignOnRender from './SignOnRender';
+import { Link } from 'react-router-dom';
 
 export default class SignOn extends Component {
+    state = {
+        gender: '',
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        nick: '',
+        mobile: '',
+        userType: 'user',
+        avatar: '',
+        city: '',
+        district: '',
+        street: '',
+        description: '',
+        uid: '',
+        isLoading: false,
+        message: false,
+        redirect: false,
+        file: null,
+    }
+
+    handleChange = (event) => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value,
+        })
+    }
+
+    addData = () => {
+        const { uid, gender, description, name, surname, mobile, email, nick, userType, city, street, district, avatar } = this.state;
+
+        const basicData = {
+            nick: nick,
+            name: name,
+            surname: surname,
+            gender: gender,
+            contact: {
+                mail: email,
+                mobile: mobile
+            },
+            userType: userType,
+            uid: uid
+        }
+
+        const cookData = {
+            avatar: avatar,
+            decription: description,
+            location: {
+                city: city,
+                district: district,
+                street: street
+            }
+
+        }
+
+        if (userType === 'cook') {
+            return {
+                ...basicData,
+                ...cookData
+            }
+        } else {
+            return basicData;
+        }
+    }
+
+    addAvatarToFirebase = () => {
+        const userUid = firebase.auth().currentUser.uid;
+        const fileName = this.state.file.name;
+        //console.log(userUid, fileName, this.state.file )
+        firebase.storage().ref(`avatars/${userUid}/${fileName}`)
+        .put(this.state.file)
+        .then((res) => {
+            res.ref.getDownloadURL().then(url => {
+                this.setState({avatar: url})
+           //     console.log('urs', url);
+            });
+        })
+    }
+
+    createUserFetch = () => {
+        console.log('fetch', this.addData())
+        fetch(`${FIREBASE_API}/users.json`, {
+            method: 'POST',
+            body: JSON.stringify(this.addData())
+        })
+        // .then((res) => {
+        //     console.log(res)
+        //     this.addAvatarToFirebase();
+        // })
+        // .then(() => {
+        //     const userid = firebase.auth().currentUser.uid;
+        //     const formatedData = {
+        //         avatar : this.state.avatar,
+        //     }
+        //     fetch(`${FIREBASE_API}/users/${userid}.json`, {
+        //         method: 'PUT',
+        //         body: JSON.stringify(formatedData)
+        //     }).then((res) => {
+        //         console.log('dodałem avatar', res);
+        //     })
+            
+        // })
+        .catch((err) => {
+            console.log(err.message)
+        })
+        .finally(() => {
+            if (firebase.auth().currentUser) {
+                firebase.auth().signOut();
+            }
+            console.log(firebase.auth().currentUser)
+            this.setState({
+                isLoading: false,
+                message: true,
+                redirect: true,
+            })
+        })
+    }
+
+    signUp = () => {
+        const { email, password } = this.state;
+        console.log('signUp email', email )
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(data => this.setState({ uid: data.user.uid }))
+            .then(() => this.createUserFetch())
+            .catch((error) => console.log(error))
+    };
+
+    handleOnClick = (event) => {
+
+        event.preventDefault();
+        this.setState({ isLoading: true })
+
+        this.signUp();
+    }
+
+    handleClose = () => {
+        this.setState({ message: false });
+    }
+
+    handleFileAdd = (event) => {
+        this.setState({
+            file:event.target.files[0],
+        })
+
+
+        // const fileName = event.target.files[0];
+        // console.log(fileName.name, event.target.files);
+        
+        // firebase.storage().ref(`avatars/${fileName.name}`)
+        //     .put(fileName)
+        //     .then((res) => {
+        //         res.ref.getDownloadURL().then(url => {
+        //             console.log('urs', url);
+        //         });
+        //         alert('Added successfully! Yay!');
+        //     })
+        // // this.setState({
+        //     imgURL : `/img/ciacha/${fileName}`  
+        // })
+    }
+
     render() {
+        const { message, email, isLoading, redirect } = this.state;
+
+        if(redirect) {
+            return <>
+            <PageWrapper>
+                <MessageSnakebar
+                        open={message}
+                        onHandleClose={this.handleClose}
+                        message={`użytkownik ${email} został dodany pomyślnie`}
+                />
+                <h1>Użytkownik został zarjestrowany, zaloguj się </h1>
+                <Link to='/SignIn'>Sign in</Link>
+            </PageWrapper>
+                
+            </>
+        }
+
+        if (isLoading) {
+            return <PageWrapper >
+                <CircularProgress color="secondary" />
+            </PageWrapper>
+        }
+
         return (
             <PageWrapper>
-               <h1> Możliwość rejestracji już wkrótce! </h1>
-               <Link to='/' style={{textDecoration: 'none'}}>
-               <Button color="secondary">Strona główna</Button>
-               </Link>
+                
+                <SignOnRender 
+                    onHandleChange = {this.handleChange}
+                    onHandleOnClick = {this.handleOnClick}
+                    onHandleFileAdd = {this.handleFileAdd}
+                    state = {this.state}
+                />
 
             </PageWrapper>
         )
     }
 }
+;

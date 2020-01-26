@@ -1,5 +1,6 @@
 import React from 'react';
-import { Paper, Divider, MenuList, MenuItem, withStyles } from '@material-ui/core';
+import { Paper, Divider, MenuList, withStyles } from '@material-ui/core';
+import UserMenuItem from './UserMenuItem'
 
 const styles = {
     root:{
@@ -10,31 +11,53 @@ const styles = {
             backgroundColor: '#ffcc9980',
         },
     },
-    leftTextMenu :{
-        padding: '10px 0px',
-    },
-    interText:{
-        display: 'flex', 
-        flexDirection:'column', 
-        justifyContent:'center',
-        fontSize: '16px',
-        fontWeight: '500',
-    },
+    
 }
 
 function UserMenu(props){
-    const {classes} = props;
+    const {classes, userType} = props;
 
     return (
         <Paper>
-            <MenuList className={classes.root}>
-                <MenuItem className={classes.interText} onClick={() => props.onHandleClick('basic')} selected={props.selectedMenu.basic}>
-                    <div className={classes.leftTextMenu}> Dane podstawowe</div>    
-                </MenuItem>
+            <MenuList className={classes.root}> 
+                <UserMenuItem 
+                    text="Dane podstawowe" 
+                    menu="basic" 
+                    onHandleClick={props.onHandleClick} 
+                    selectedMenu={props.selectedMenu.basic}
+                />
+
+                { userType === "cook" &&
+                    <div>
+                        <Divider/>
+                        <UserMenuItem 
+                            text="Dane cukiernika" 
+                            menu="mCook" 
+                            onHandleClick={props.onHandleClick} 
+                            selectedMenu={props.selectedMenu.mCook}
+                        />
+                    </div>
+                }
+                
                 <Divider/>
-                <MenuItem className={classes.interText} onClick={() => props.onHandleClick('like')} selected={props.selectedMenu.like}>
-                    <div className={classes.leftTextMenu}> Twoje polubienia</div>
-                </MenuItem>
+                <UserMenuItem 
+                    text="Twoje polubienia" 
+                    menu="like" 
+                    onHandleClick={props.onHandleClick} 
+                    selectedMenu={props.selectedMenu.like}
+                />
+                
+                { userType === "cook" &&
+                    <div>
+                        <Divider/>
+                        <UserMenuItem 
+                            text="Twoje ciasta" 
+                            menu="mCake" 
+                            onHandleClick={props.onHandleClick} 
+                            selectedMenu={props.selectedMenu.mCake}
+                        />
+                    </div>
+                }
             </MenuList>
             
         </Paper>

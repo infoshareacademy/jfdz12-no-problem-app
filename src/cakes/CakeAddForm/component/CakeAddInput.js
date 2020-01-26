@@ -14,7 +14,7 @@ const styles = {
     }
   };
 
-function FilterInput (props) {
+function CakeAddInput (props) {
     const { classes, styleProp } = props;
     const styleInput = styleProp ==="header" ? classes.header : classes.textField;
     const styleJustify = styleProp ==="header" ? 'center' : 'space-between'; 
@@ -43,7 +43,7 @@ function FilterInput (props) {
     )
 }
 
-export default withStyles(styles)(FilterInput); 
+export default withStyles(styles)(CakeAddInput); 
 
 
 

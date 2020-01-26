@@ -143,10 +143,9 @@ export class CakesList extends React.Component{
                 priceRange,
                 sortById,
                 toogleView,
-                error
+                error,
+                filterVisibility,
             } = this.state;
-        
-        const { filterVisibility } = this.state;
         
         if(error !== ''){
         return <PageWrapper >{error}</PageWrapper>
