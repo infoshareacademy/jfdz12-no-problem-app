@@ -12,7 +12,7 @@ const styles = {
 
 function MessageSnakebar (props) {
 
-    const {open,classes } = props;
+    const {open, classes, message } = props;
 
     return (
         <Snackbar
@@ -24,7 +24,7 @@ function MessageSnakebar (props) {
                 vertical: 'top',
                 horizontal: 'right',
             }}
-            message="wysłaliśmy ci link do zresetowania hasła"
+            message = {message}
             action={
                 <>
                     <IconButton size="small" aria-label="close" color="inherit" onClick={props.onHandleClose}>

@@ -11,7 +11,7 @@ function CakeCard (props) {
     const { type, likedCake } = props;
     const { classes } = props;
     const likeColor = likedCake ? 'red' : 'grey';
-
+  
     return(
         <Paper className={classes.mainPaper} >
             <Grid container spacing={1}>
