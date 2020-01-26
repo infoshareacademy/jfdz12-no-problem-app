@@ -1,5 +1,6 @@
 import React from 'react';
 import { MenuItem, withStyles } from '@material-ui/core';
+//import { Link } from 'react-router-dom';
 
 const styles = {
     leftTextMenu :{
@@ -26,6 +27,7 @@ function UserMenuItem(props){
             <MenuItem 
                 className={classes.interText} 
                 onClick={handleClick} 
+                //component = {Link} to ={`/userCard?${props.menu}`}
                 selected={props.selectedMenu}>
                 <div className={classes.leftTextMenu}>
                     {props.text} 
