@@ -106,8 +106,6 @@ export function getTypeById(id){
 }
 
 export function getUserById(id){
-    // const getData = fetch(USERS_API_ENDPOINT)
-    //     .then (res => res.json())
     const getData = getUsers()
         .then (data => data.find(el => el.id === id))
         .catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`));  
@@ -211,3 +209,23 @@ export function getLikesWithData (logedUdserId) {
     return Promise.resolve(fullData);
 }
 
+export function addNewCakeFetch(cakeAdd) {
+    
+    return fetch(`${FIREBASE_API}/cakes.json`, {
+                    method: 'POST',
+                    body: JSON.stringify(cakeAdd)
+                })
+} 
+
+export function updateCakeFetch(cakeAdd, cakeId){
+    return fetch(`${FIREBASE_API}/cakes/${cakeId}.json`, {
+        method: 'PUT',
+        body: JSON.stringify(cakeAdd)
+    })
+}
+
+export function deleteCakeFetch(cakeId){
+    return fetch(`${FIREBASE_API}/cakes/${cakeId}.json`, {
+        method: 'DELETE',
+    })
+}

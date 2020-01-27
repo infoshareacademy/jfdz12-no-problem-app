@@ -34,8 +34,9 @@ const styles ={
 
 
 class UserCard extends React.Component{ 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        this.backLink = props.location.search.substring(1,props.location.search.length);
         this.userIdRef = sessionStorage.getItem('userId');
         this.state ={
             user: {},
@@ -61,11 +62,23 @@ class UserCard extends React.Component{
                 getCakeWithTypeByCookId(this.userIdRef)
             ])
             .then(data =>{
+
                 this.setState ({
                     user: data[0],
                     likes: data[1],
-                    cakes: data[2],
-                })}) 
+                    cakes: data[2]    
+                })
+                if (this.backLink){
+          
+                    this.setState(prevState => ({
+                        selectedMenu:{
+                            ...prevState.selectedMenu,
+                            basic: false,
+                            [this.backLink]: true,
+                        }
+                    }))
+                }
+            }) 
             .catch(error => console.log('bład addformfetch', error.toString()))
             .finally(() => this.setState({
                     isLoading: false,
@@ -74,6 +87,7 @@ class UserCard extends React.Component{
         }else{
             this.setState({loginUser:false})
         }
+
     }
 
     handleClick = (name) => {
@@ -88,13 +102,12 @@ class UserCard extends React.Component{
                 }
             }))
         });
-        
     }
 
     render(){
         const {user, likes, cakes, isLoading, selectedMenu, loginUser} =  this.state;
         const { classes } = this.props;
-        
+ 
         if (isLoading) {
             return <PageWrapper >
                 <CircularProgress color="secondary" />
@@ -154,7 +167,8 @@ class UserCard extends React.Component{
                             className={classes.buttonStyle} 
                             variant='outlined'
                             color = 'secondary'
-                            onClick = {this.props.history.goBack}
+                            component ={Link} to = {'/'}
+                            // onClick = {this.props.history.goBack}
                         >
                             zamknij
                         </Button>

@@ -1,11 +1,12 @@
 import React from 'react';
 import { CircularProgress, } from '@material-ui/core';
 import { CAKEADDOBJ } from '../../constans/emptyObject'
-import { getFullData } from '../../api/Api2';
+import { getFullData, addNewCakeFetch, updateCakeFetch } from '../../api/Api2';
 import PageWrapper from '../../components/PageWrapper';
 import firebase from 'firebase';
 import { Redirect, Link } from 'react-router-dom';
 import RenderCakeAddForm from './RenderCakeAddform'; 
+import MessageSnakebar from '../../components/MessageSnakebar';
 
 
 class CakeAddForm extends React.Component{
@@ -25,7 +26,9 @@ class CakeAddForm extends React.Component{
             file: null,
             isError:false,
             error:'',
+            snakeOpen: false,
         }
+
         this.addCakeFetch = this.addCakeFetch.bind(this);
     }
        
@@ -74,6 +77,7 @@ class CakeAddForm extends React.Component{
             })
             .finally(() => this.setState({
                 isLoading: false,
+                snakeOpen:true,
             }))
     }
 
@@ -81,7 +85,7 @@ class CakeAddForm extends React.Component{
         const file =  event.target.files[0];
         const fileName = file.name;
         
-        firebase.storage().ref(`cakes/${fileName}`)
+        firebase.storage().ref(`cakes/${Date.now()}${fileName}`)
             .put(file)
             .then((res) => {
                 res.ref.getDownloadURL().then(url => {
@@ -90,7 +94,7 @@ class CakeAddForm extends React.Component{
                             cakeAdd:{
                                 ...prevState.cakeAdd,
                                 imgURL : url, 
-                            } ,
+                            },
                         }))
                 });
             })
@@ -111,26 +115,21 @@ class CakeAddForm extends React.Component{
         const { cakeAdd } = this.state;
 
         if(this.cakeId === 'empty'){
-            return fetch(`https://aleciachaapp.firebaseio.com/cakes.json`, {
-                        method: 'POST',
-                        body: JSON.stringify(cakeAdd)
-                    })
+            return addNewCakeFetch(cakeAdd);
         }else{
             delete cakeAdd.id;
-            
-            return fetch(`https://aleciachaapp.firebaseio.com/cakes/${this.cakeId}.json`, {
-                        method: 'PUT',
-                        body: JSON.stringify(cakeAdd)
-                    })
+            return updateCakeFetch(cakeAdd, this.cakeId);
         }
-
     }
 
     addCakeFetch(){
 
         this.fetchCake()
             .then((res) => {
-                this.setState({ saveCake: true, });
+                this.setState({ 
+                    saveCake: true, 
+                    snakeOpen: true,
+                });
                 console.log('dodałem cake:' , res)
             })
             .catch((err) => {
@@ -138,18 +137,38 @@ class CakeAddForm extends React.Component{
             });
     }
 
+    handleClose = () => {
+        this.setState({ snakeOpen: false });
+    }
+
+
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     render(){
     
-        const {cooks, types, isLoading, saveCake, isError, error, cakeAdd} = this.state;
+        const {cooks, types, isLoading, saveCake, isError, error, cakeAdd, snakeOpen, } = this.state;
         const { cookId, typeId, } = this.state.cakeAdd;
 
         const selectedCook = this.findDataById(cooks, cookId);
         const selectetType = this.findDataById(types,typeId);
        
-        if(saveCake) {
+        if(saveCake && !snakeOpen) {
             return <Redirect to={'/'}/>
+        }
+
+        if(saveCake && snakeOpen) {
+            return (<>
+                <PageWrapper>
+                    <MessageSnakebar
+                        onHandleClose={this.handleClose}
+                        open={this.state.snakeOpen}
+                        message={'ciasto zostało dodane'}
+                        backColor={'success'}
+                    />
+                    <CircularProgress/>
+                </PageWrapper>
+
+            </>)
         }
         
         if (isLoading) {
@@ -169,6 +188,7 @@ class CakeAddForm extends React.Component{
 
         if(!isLoading){
             return(<PageWrapper>
+            
                 <RenderCakeAddForm
                     selectedCook = {selectedCook}
                     selectetType = {selectetType}
