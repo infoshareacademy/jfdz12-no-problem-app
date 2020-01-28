@@ -21,9 +21,6 @@ function CakeCard (props) {
                             <Typography style={{marginLeft:'20px'}} variant="h6">
                                 {name}  
                             </Typography>
-                            <IconButton color = 'secondary' style={{padding: '5px'}}>
-                                <FavoriteIcon />
-                            </IconButton>
                         </Grid>
                     </Card> 
                 </Grid>
