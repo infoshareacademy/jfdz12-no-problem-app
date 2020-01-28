@@ -1,8 +1,8 @@
 import React from 'react';
 import { IconButton, CardMedia, withStyles, Grid, Typography, Paper, Card, CardActionArea, Chip } from '@material-ui/core';
 import CookLabel from './CookLabel';
-import {styles} from '../CakeStyles';
-import {Link} from 'react-router-dom';
+import { styles } from '../CakeStyles';
+import { Link } from 'react-router-dom';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 function CakeCard (props) {
@@ -17,11 +17,13 @@ function CakeCard (props) {
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <Card className = {classes.paper} >
-                        <Grid container justify='space-between' alignItems='center'>
+                        <Grid container justify='space-between' alignItems='center' wrap='nowrap'>
                             <Typography style={{marginLeft:'20px'}} variant="h6">
                                 {name}  
                             </Typography>
-                                
+                            <IconButton color = 'secondary' style={{padding: '5px'}}>
+                                <FavoriteIcon />
+                            </IconButton>
                         </Grid>
                     </Card> 
                 </Grid>

@@ -1,13 +1,16 @@
 import React from 'react';
 import { Container, Typography, Button, Grid, CardMedia, Paper, withStyles, CircularProgress } from '@material-ui/core';
-import {styles} from '../CakeStyles';
+import {styles} from './CakeCardFullStyle';
 import CookLabelFull from './CookLabelFull';
 import {getFullCakeById, } from '../../api/Api2';
 import PageWrapper from '../../components/PageWrapper';
+import { Link } from 'react-router-dom';
+import { LikeCake } from './LikeCake';
 
 class CakeCardFull extends React.Component{
     constructor(props){
         super(props);
+        this.userIdRef = sessionStorage.getItem('userId');
         this.state ={
             cake:{},
             isLoading: true,
@@ -16,6 +19,10 @@ class CakeCardFull extends React.Component{
     }
 
     componentDidMount(){
+        this.fetchCakeData();
+    }
+
+    fetchCakeData = () => {
         const cakeId = this.props.match.params.id;
         getFullCakeById(cakeId)
             .then(data => this.setState({cake: data}))
@@ -23,6 +30,9 @@ class CakeCardFull extends React.Component{
             .finally(() => this.setState({isLoading: false}))
     }
 
+    handleOnLike = () => {
+        this.fetchCakeData();
+    }
  
     render(){
         const { type, cook } = this.state.cake;
@@ -87,6 +97,11 @@ class CakeCardFull extends React.Component{
                                             {cake.glutenFree ? "tak" : "nie"} 
                                         </span> 
                                     </Typography>
+
+                                    <Typography>
+                                        <span className={classes.fCardSubText}>polubienia: </span>
+                                        <span className={classes.fCardText}>{cake.likes} </span>
+                                    </Typography>
                                     
                                 </Paper>
                                 <Paper className={classes.fCardPaper}>
@@ -104,16 +119,29 @@ class CakeCardFull extends React.Component{
                             <CookLabelFull cook = {cook}/>
                         </Paper>
                         
-                        
-                        <Button 
+                        <Grid container justify='center' alignItems='center'>
+
+                            <LikeCake 
+                                cake={cake}
+                                onHandleOnLike = {this.handleOnLike}
+                            />
+                            <Button 
+                                component={Link} to={`/cakeAdd/${cake.id}`}
+                                variant="outlined" 
+                                color="primary"
+                                className = {classes.fCardButton}
+                            > 
+                                edytuj 
+                            </Button>
+                            <Button 
                                 onClick = {this.props.history.goBack}
                                 variant="outlined" 
                                 color="secondary"
-                                style = {{margin: '20px auto'}}
-                        > 
-                            powrót 
-                        </Button>
-                        
+                                className = {classes.fCardButton}
+                            > 
+                                powrót 
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Container>
             </PageWrapper>

@@ -87,7 +87,6 @@ class UserCard extends React.Component{
         }else{
             this.setState({loginUser:false})
         }
-
     }
 
     handleClick = (name) => {
@@ -107,7 +106,7 @@ class UserCard extends React.Component{
     render(){
         const {user, likes, cakes, isLoading, selectedMenu, loginUser} =  this.state;
         const { classes } = this.props;
- 
+       
         if (isLoading) {
             return <PageWrapper >
                 <CircularProgress color="secondary" />

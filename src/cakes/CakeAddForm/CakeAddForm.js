@@ -64,7 +64,7 @@ class CakeAddForm extends React.Component{
                 }else{
                     this.setState({
                         isError: true,
-                        error: ' nie ma takiego ciasta '
+                        error: ' nie możesz edytować tego ciasta '
                     })
                 }  
             })

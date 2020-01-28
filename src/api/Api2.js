@@ -229,3 +229,10 @@ export function deleteCakeFetch(cakeId){
         method: 'DELETE',
     })
 }
+
+export function addlikeToCake (cakeId, userId) {
+    return fetch(`${FIREBASE_API}/cakes/${cakeId}/likes.json`, {
+        method: 'PATCH',
+        body: JSON.stringify(userId)
+    })
+}

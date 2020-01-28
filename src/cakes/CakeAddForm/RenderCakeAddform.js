@@ -52,7 +52,7 @@ function RenderCakeAddForm(props) {
                         <label htmlFor="outlined-button-file" >
                             <Button variant="outlined" component="span" style={{ margin: '10px' }} >
                                 dodaj zdjęcie
-                                    </Button>
+                            </Button>
                         </label>
                     </Grid>
 
@@ -137,7 +137,7 @@ function RenderCakeAddForm(props) {
                     powrót
                         </Button>
                 <Button onClick={props.addCakeFetch}
-                    variant="outlined"cakeCard
+                    variant="outlined"
                     color="primary"
                     style={{ margin: '20px' }}
                 >
