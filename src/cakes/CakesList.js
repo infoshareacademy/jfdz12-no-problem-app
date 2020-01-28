@@ -4,7 +4,7 @@ import { CircularProgress, Container, Grid } from '@material-ui/core';
 import { RenderCakesList } from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
 import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
-import ToogleView from './ToogleView';
+import ToogleView from './component/ToogleView';
 import { getFullData } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 

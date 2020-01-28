@@ -2,8 +2,8 @@ import React from 'react';
 import { Checkbox, Grid, FormControlLabel, Paper, } from '@material-ui/core';
 import FilterDropdown from './FilterDropdown';
 import FilterInput from './FilterInput';
-import {filterStyle} from './FilterStyle';
-import {FilterButton} from '../FilterButton';
+import { filterStyle } from './FilterStyle';
+import { FilterButton } from '../component/FilterButton';
 import FilterInputNumber from './FilterInputNumber';
 import FilterSelect from './FilterSelect';
 

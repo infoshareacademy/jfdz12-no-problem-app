@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, CardMedia, withStyles, Grid, Typography, Paper, Card, CardActionArea, Chip } from '@material-ui/core';
 import CookLabel from './CookLabel';
-import {styles} from './CakeStyles';
+import {styles} from '../CakeStyles';
 import {Link} from 'react-router-dom';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 

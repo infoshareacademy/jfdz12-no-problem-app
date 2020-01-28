@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, Grid, withStyles, IconButton, InputBase,Paper, Divider, Hidden } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import RenderFilterAllMenu from './RenderFilterAllMenu'
-import {styles} from './FilterAllStyle';
-import {FilterButton} from '../FilterButton';
+import { styles } from './FilterAllStyle';
+import { FilterButton } from '../component/FilterButton';
 
 class FilterAll extends React.Component{
     constructor(props){

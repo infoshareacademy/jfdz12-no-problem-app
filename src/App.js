@@ -10,7 +10,7 @@ import UserCard from './user/UserCard';
 import SignIn from './user/SignIn';
 import SignOn from './user/SignOn';
 import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
-import CakeCardFull from './cakes/CakeCardFull';
+import CakeCardFull from './cakes/cakeCard/CakeCardFull';
 import { getCakes } from './api/Api2';
 import firebase from "firebase";
 

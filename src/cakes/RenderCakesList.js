@@ -1,7 +1,7 @@
 import React from 'react';
 import {filterCondition} from './filter/FilterCondition'
-import CakeCard2 from './CakeCard2';
-import CakeCard from './CakeCard';
+import CakeCard2 from './cakeCard/CakeCard2';
+import CakeCard from './cakeCard/CakeCard';
 import { Grid,  } from '@material-ui/core';
 import {SORTOPTIONS} from '../constans/selectConstans'
 

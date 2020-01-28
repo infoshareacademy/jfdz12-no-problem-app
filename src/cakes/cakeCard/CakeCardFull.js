@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Typography, Button, Grid, CardMedia, Paper, withStyles, CircularProgress } from '@material-ui/core';
-import {styles} from './CakeStyles';
+import {styles} from '../CakeStyles';
 import CookLabelFull from './CookLabelFull';
-import {getFullCakeById, } from '../api/Api2';
-import PageWrapper from '../components/PageWrapper';
+import {getFullCakeById, } from '../../api/Api2';
+import PageWrapper from '../../components/PageWrapper';
 
 class CakeCardFull extends React.Component{
     constructor(props){
