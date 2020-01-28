@@ -15,6 +15,7 @@ class CakeCardFull extends React.Component{
             cake:{},
             isLoading: true,
             error: '',
+            userCanEdit: false,
         }
     }
 
@@ -25,7 +26,12 @@ class CakeCardFull extends React.Component{
     fetchCakeData = () => {
         const cakeId = this.props.match.params.id;
         getFullCakeById(cakeId)
-            .then(data => this.setState({cake: data}))
+            .then(data => {
+                this.setState({
+                    cake: data,
+                    userCanEdit: data.cookId === this.userIdRef ? true : false
+                })
+            })
             .catch(error => this.setState({error: error.toString()}))
             .finally(() => this.setState({isLoading: false}))
     }
@@ -37,7 +43,7 @@ class CakeCardFull extends React.Component{
     render(){
         const { type, cook } = this.state.cake;
         const { classes }  = this.props;
-        const { isLoading, cake} = this.state;
+        const { isLoading, cake, userCanEdit} = this.state;
         
         if(isLoading){
             return (<PageWrapper>
@@ -125,14 +131,16 @@ class CakeCardFull extends React.Component{
                                 cake={cake}
                                 onHandleOnLike = {this.handleOnLike}
                             />
-                            <Button 
-                                component={Link} to={`/cakeAdd/${cake.id}`}
-                                variant="outlined" 
-                                color="primary"
-                                className = {classes.fCardButton}
-                            > 
-                                edytuj 
-                            </Button>
+                            {userCanEdit && 
+                                <Button 
+                                    component={Link} to={`/cakeAdd/${cake.id}`}
+                                    variant="outlined" 
+                                    color="primary"
+                                    className = {classes.fCardButton}
+                                > 
+                                    edytuj 
+                                </Button>
+                            }
                             <Button 
                                 onClick = {this.props.history.goBack}
                                 variant="outlined" 
