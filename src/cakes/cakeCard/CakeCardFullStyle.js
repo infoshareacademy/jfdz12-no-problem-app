@@ -45,6 +45,10 @@ export const styles={
     },
     fCardButton:{
         margin: '20px 10px',
+    },
+    fCardLikeButton:{
+        padding: '5px',
+        marginLeft:'30px'
     }
 
 }
