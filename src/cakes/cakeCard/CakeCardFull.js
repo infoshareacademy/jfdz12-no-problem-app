@@ -5,7 +5,7 @@ import CookLabelFull from './CookLabelFull';
 import { getFullCakeById, } from '../../api/Api2';
 import PageWrapper from '../../components/PageWrapper';
 import { Link } from 'react-router-dom';
-import { LikeCake } from './LikeCake';
+import { LikeCakeButton } from './LikeCakeButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 class CakeCardFull extends React.Component {
@@ -139,7 +139,7 @@ class CakeCardFull extends React.Component {
 
                         <Grid container justify='center' alignItems='center'>
 
-                            <LikeCake
+                            <LikeCakeButton
                                 cake={cake}
                                 onHandleOnLike={this.handleOnLike}
                             />

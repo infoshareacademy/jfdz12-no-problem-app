@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Button } from '@material-ui/core';
-import { FIREBASE_API, getCookById, } from '../../api/Api2';
+import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../api/Api2';
 import { CircularProgress } from '@material-ui/core';
 
-export function LikeCake (props) {
+export function LikeCakeButton (props) {
     const { likesUsersId } = props.cake;
     const userId = sessionStorage.getItem('userId');
-    const checkUserLike = likesUsersId ? likesUsersId.includes(userId) : false; 
 
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState(null);
@@ -29,18 +28,9 @@ export function LikeCake (props) {
         const likeIdCakeTab = user ? [...user.likeCakesId, id] : [id];
 
         Promise.all([
-            fetch(`${FIREBASE_API}/cakes/${id}.json`, {
-                method: 'PATCH',
-                body: JSON.stringify({likes: newLikeCount})
-            }),
-            fetch(`${FIREBASE_API}/cakes/${id}/.json`, {
-                method: 'PATCH',
-                body: JSON.stringify({likesUsersId: likeIdUserTab})
-            }),
-            fetch(`${FIREBASE_API}/users/${userId}/.json`, {
-                method: 'PATCH',
-                body: JSON.stringify({likeCakesId: likeIdCakeTab})
-            }),
+            updateLikeCounterInCake(id,newLikeCount),
+            addLikedCakeIdToUser(id, likeIdUserTab),
+            addUserLikeIdToCake(userId,likeIdCakeTab)
         ]) 
             .then ((res) => console.log('dodałem', res))
             .catch(error => console.log('error', error.message))
@@ -51,13 +41,22 @@ export function LikeCake (props) {
             )
     }
 
+    const checkLikeButtonDisble = () => {
+        const checkUser = (userId === 'null' || userId === null) ? true : false;
+        const checkUserLike = likesUsersId ? likesUsersId.includes(userId) : false; 
+
+        return checkUser ? true : checkUserLike;
+    }
+
+    const checkLikeButton = checkLikeButtonDisble();
+
     const handleIsLoading = () => {
         return <CircularProgress size = '15px' color="secondary" />
     }
 
     return (<>
         <Button
-            disabled = {checkUserLike}
+            disabled = {checkLikeButton}
             onClick = {handleLikeClick}
             variant="outlined"
             color="secondary"

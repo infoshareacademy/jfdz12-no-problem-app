@@ -230,9 +230,25 @@ export function deleteCakeFetch(cakeId){
     })
 }
 
-export function addlikeToCake (cakeId, userId) {
-    return fetch(`${FIREBASE_API}/cakes/${cakeId}/likes.json`, {
+export function updateLikeCounterInCake(id, newLikeCount){
+
+    return fetch(`${FIREBASE_API}/cakes/${id}.json`, {
         method: 'PATCH',
-        body: JSON.stringify(userId)
+        body: JSON.stringify({likes: newLikeCount})
+    })
+}
+
+export function addUserLikeIdToCake (id, likeIdUserTab){
+    return fetch(`${FIREBASE_API}/cakes/${id}/.json`, {
+            method: 'PATCH',
+            body: JSON.stringify({likesUsersId: likeIdUserTab})
+        })
+}
+
+export function addLikedCakeIdToUser(userId, likeIdCakeTab){
+
+    return fetch(`${FIREBASE_API}/users/${userId}/.json`, {
+        method: 'PATCH',
+        body: JSON.stringify({likeCakesId: likeIdCakeTab})
     })
 }
