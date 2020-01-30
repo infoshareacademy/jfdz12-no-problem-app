@@ -7,6 +7,8 @@ import PageWrapper from '../../components/PageWrapper';
 import { Link } from 'react-router-dom';
 import { LikeCakeButton } from './LikeCakeButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { Consumer } from '../../components/SnackContext';
+import SnackContext from '../../components/SnackContext';
 
 class CakeCardFull extends React.Component {
     constructor(props) {
@@ -17,9 +19,10 @@ class CakeCardFull extends React.Component {
             isLoading: true,
             error: '',
             userCanEdit: false,
+            snakeOpen: false,
         }
     }
-
+    
     componentDidMount() {
         this.fetchCakeData();
     }
@@ -30,7 +33,8 @@ class CakeCardFull extends React.Component {
             .then(data => {
                 this.setState({
                     cake: data,
-                    userCanEdit: data.cookId === this.userIdRef ? true : false
+                    userCanEdit: data.cookId === this.userIdRef ? true : false,
+                    // snakeOpen:true,
                 })
             })
             .catch(error => this.setState({ error: error.toString() }))
@@ -41,10 +45,22 @@ class CakeCardFull extends React.Component {
         this.fetchCakeData();
     }
 
+    // handleClose = (setSnakeOn) => () => {
+    //     setSnakeOn();
+    //     this.props.history.goBack();
+    //     console.log(this.context)
+    // }
+
+    handleClose = () => {
+        this.context.setSnakeOn();
+        this.props.history.goBack();
+        
+    }
+
     render() {
         const { type, cook, likesUsersId } = this.state.cake;
         const { classes } = this.props;
-        const { isLoading, cake, userCanEdit } = this.state;
+        const { isLoading, cake, userCanEdit, } = this.state;
         const likedCake = likesUsersId ? likesUsersId.includes(this.userIdRef) : false;
         const likeColor = likedCake ? 'red' : 'grey';
 
@@ -54,9 +70,8 @@ class CakeCardFull extends React.Component {
             </PageWrapper>)
         }
 
-        return (
+        return (<>
             <PageWrapper>
-
                 <Container maxWidth="lg" >
                     <Grid>
 
@@ -115,10 +130,6 @@ class CakeCardFull extends React.Component {
                                     <Typography>
                                         <span className={classes.fCardSubText}>polubienia: </span>
                                         <span className={classes.fCardText}>{cake.likes} </span>
-                                        <span>
-                                            
-                                            
-                                        </span>
                                     </Typography>
 
                                 </Paper>
@@ -153,21 +164,27 @@ class CakeCardFull extends React.Component {
                                     edytuj
                                 </Button>
                             }
-                            <Button
-                                onClick={this.props.history.goBack}
-                                variant="outlined"
-                                color="secondary"
-                                className={classes.fCardButton}
-                            >
-                                powrót
-                            </Button>
+                            {/* <Consumer>
+                                {({setSnakeOn}) => */}
+                                    <Button
+                                        //onClick={this.props.history.goBack}
+                                        onClick={this.handleClose}
+                                        variant="outlined"
+                                        color="secondary"
+                                        className={classes.fCardButton}
+                                    >
+                                        powrót
+                                    </Button>
+                                 
+                            {/* </Consumer> */}
                         </Grid>
                     </Grid>
                 </Container>
             </PageWrapper>
-        )
+        </>)
     }
 
 }
 
+CakeCardFull.contextType = SnackContext;
 export default withStyles(styles)(CakeCardFull);

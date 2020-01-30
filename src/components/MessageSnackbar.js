@@ -46,7 +46,7 @@ function Transition(props) {
     return <Slide {...props} direction="up" />;
   }
 
-function MessageSnakebar (props) {
+function MessageSnackbar (props) {
     
     const {open, classes, message, backColor } = props;
 
@@ -76,4 +76,4 @@ function MessageSnakebar (props) {
     )
 }
 
-export default withStyles(styles)(MessageSnakebar);
+export default withStyles(styles)(MessageSnackbar);

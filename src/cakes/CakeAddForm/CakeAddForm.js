@@ -6,8 +6,7 @@ import PageWrapper from '../../components/PageWrapper';
 import firebase from 'firebase';
 import { Redirect, Link } from 'react-router-dom';
 import RenderCakeAddForm from './RenderCakeAddform'; 
-import MessageSnakebar from '../../components/MessageSnakebar';
-
+import MessageSnackbar from '../../components/MessageSnackbar';
 
 class CakeAddForm extends React.Component{
     constructor(props){
@@ -145,7 +144,7 @@ class CakeAddForm extends React.Component{
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     render(){
-    
+       
         const {cooks, types, isLoading, saveCake, isError, error, cakeAdd, snakeOpen, } = this.state;
         const { cookId, typeId, } = this.state.cakeAdd;
 
@@ -159,7 +158,7 @@ class CakeAddForm extends React.Component{
         if(saveCake && snakeOpen) {
             return (<>
                 <PageWrapper>
-                    <MessageSnakebar
+                    <MessageSnackbar 
                         onHandleClose={this.handleClose}
                         open={this.state.snakeOpen}
                         message={'ciasto zostało dodane'}

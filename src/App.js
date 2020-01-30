@@ -13,7 +13,8 @@ import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 import CakeCardFull from './cakes/cakeCard/CakeCardFull';
 import { getCakes } from './api/Api2';
 import firebase from "firebase";
-
+import MessageSnackbar from './components/MessageSnackbar';
+import {Provider} from './components/SnackContext'
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1hXtUkKyvnejEmMe9VQjb_sj67zZf-Ng",
@@ -27,7 +28,6 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-
 class App extends React.Component {
 	constructor() {
 		super();
@@ -38,8 +38,8 @@ class App extends React.Component {
 			error: '',
 			cakes: [],
 			cooks: [],
+			snakeOn: false,
 		};
-
 	}
 
 	componentDidMount() {
@@ -49,9 +49,13 @@ class App extends React.Component {
 			.finally(() => this.setState({ isLoading: false }));
 	}
 
+	handleClose = () => this.setState({snakeOn: false});
+	
+	handleSnakeOn = () => this.setState({snakeOn: true});	
+
 	render() {
 		const { isLoading, isError, error } = this.state;
-
+	
 		if (isLoading && !isError) {
 			return (
 				<div className="App">
@@ -67,8 +71,18 @@ class App extends React.Component {
 		}
 
 		if (!isLoading && !isError) {
-			return (
+			return (<Provider 
+						value = {{ setSnakeOn: this.handleSnakeOn}} 
+					>
 				<div className="App">
+						 <MessageSnackbar 
+							onHandleClose={this.handleClose}
+							open={this.state.snakeOn}
+							message={'ciasto zostało dodane'}
+							backColor={'success'}
+						/>
+						
+				
 					<BrowserRouter>
 						<MenuAppBar />
 						<Route exact path='/'>
@@ -84,6 +98,7 @@ class App extends React.Component {
 						{/* <Redirect to="/"/> */}
 					</BrowserRouter>
 				</div>
+				</Provider>
 			)
 		}
 
