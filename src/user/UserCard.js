@@ -7,7 +7,7 @@ import { getUserById, getCakeWithTypeByCookId } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 import { Link } from 'react-router-dom';
 import UserCookData from './userCardComponent/UserCookData';
-import UserCakeData from './userCardComponent/UserCakeData';
+import { UserCakeData } from './userCardComponent/UserCakeData';
 
 
 const styles ={
