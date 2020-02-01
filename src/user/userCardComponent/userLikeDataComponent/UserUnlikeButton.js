@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../api/Api2';
+import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../../api/Api2';
 import { CircularProgress, IconButton, Tooltip } from '@material-ui/core';
 import { UserUnLikeModal } from './UserUnLikeModal';
 
