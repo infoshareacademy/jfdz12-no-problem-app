@@ -48,7 +48,7 @@ export class CakesList extends React.Component{
                     types: data[2],
                     priceRange: [Math.min(...price),Math.max(...price)],
                     cakesMaxId: Math.max(...data[0].map(el => (el.id))), 
-                })
+                });
             })
             .catch(error => this.setState({error: error.toString()}))
             .finally(() => this.setState({loading: false}))

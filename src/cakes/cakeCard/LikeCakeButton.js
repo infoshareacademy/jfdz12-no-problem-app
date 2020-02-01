@@ -26,11 +26,11 @@ export function LikeCakeButton (props) {
         const newLikeCount = likesUsersId ? likesUsersId.length + 1 : 1;
         const likeIdUserTab = likesUsersId ? [...likesUsersId, userId] : [userId];
         const likeIdCakeTab = user ? [...user.likeCakesId, id] : [id];
-
+       
         Promise.all([
             updateLikeCounterInCake(id,newLikeCount),
-            addLikedCakeIdToUser(id, likeIdUserTab),
-            addUserLikeIdToCake(userId,likeIdCakeTab)
+            addLikedCakeIdToUser(userId, likeIdCakeTab),
+            addUserLikeIdToCake(id,likeIdUserTab)
         ]) 
             .then ((res) => console.log('dodałem', res))
             .catch(error => console.log('error', error.message))

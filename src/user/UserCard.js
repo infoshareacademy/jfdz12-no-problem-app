@@ -3,7 +3,7 @@ import { Button, Container, Grid, Paper, Typography, withStyles,CircularProgress
 import UserBasicData from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
-import { getLikesWithData, getUserById, getCakeWithTypeByCookId } from '../api/Api2';
+import { getUserById, getCakeWithTypeByCookId } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 import { Link } from 'react-router-dom';
 import UserCookData from './userCardComponent/UserCookData';
@@ -40,7 +40,6 @@ class UserCard extends React.Component{
         this.userIdRef = sessionStorage.getItem('userId');
         this.state ={
             user: {},
-            likes:[],
             cakes: [],
             isLoading: true,
             selectedMenu: {
@@ -58,15 +57,13 @@ class UserCard extends React.Component{
         if (this.userIdRef){
             Promise.all([
                 getUserById(this.userIdRef),
-                getLikesWithData(this.userIdRef),
                 getCakeWithTypeByCookId(this.userIdRef)
             ])
             .then(data =>{
 
                 this.setState ({
                     user: data[0],
-                    likes: data[1],
-                    cakes: data[2]    
+                    cakes: data[1]    
                 })
                 if (this.backLink){
           
@@ -104,7 +101,7 @@ class UserCard extends React.Component{
     }
 
     render(){
-        const {user, likes, cakes, isLoading, selectedMenu, loginUser} =  this.state;
+        const {user, cakes, isLoading, selectedMenu, loginUser} =  this.state;
         const { classes } = this.props;
        
         if (isLoading) {
@@ -145,9 +142,7 @@ class UserCard extends React.Component{
                                     user = {user}
                                 />}
                             {selectedMenu.like && 
-                                <UserLikeData
-                                    likes = {likes}
-                                /> }
+                                <UserLikeData/> }
                             {selectedMenu.mCook && 
                                 <UserCookData
                                     user = {user}
