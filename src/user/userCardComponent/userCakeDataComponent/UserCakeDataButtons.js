@@ -25,12 +25,11 @@ export function UserCakeDataButtons(props) {
                     <EditIcon />
                 </IconButton>
             </Tooltip>
-            <Tooltip title="usuwanie ciasta" placement="left">
-                <UserCakeDataDelButton
-                    cakeId={cake.id}
-                />
-            </Tooltip>
-
+            <UserCakeDataDelButton
+                handleOnDelete={props.handleOnDelete}
+                cakeId={cake.id}
+                cake={cake}
+            />
         </Grid>
     </>)
 }

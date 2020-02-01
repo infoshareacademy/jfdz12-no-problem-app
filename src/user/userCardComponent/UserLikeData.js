@@ -18,7 +18,6 @@ const styles = {
     wrapper:{
         width:'100%',
     }
-    
 }
 
 function UserLikeData(props){

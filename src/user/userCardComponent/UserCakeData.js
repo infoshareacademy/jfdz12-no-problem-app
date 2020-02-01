@@ -1,86 +1,96 @@
-import React from 'react';
-import { Grid, Paper, Typography, Divider, makeStyles } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Grid, Paper, Typography, Divider, makeStyles, CircularProgress } from '@material-ui/core';
 import { UserCakeDataImg } from './userCakeDataComponent/UserCakeDataImg';
 import { UserCakeDataBasic } from './userCakeDataComponent/UserCakeDataBasic';
 import { UserCakeDataExtend } from './userCakeDataComponent/UserCakeDataExtend';
 import { UserCakeDataButtons } from './userCakeDataComponent/UserCakeDataButtons';
+import { getCakeWithTypeByCookId } from '../../api/Api2';
 
 const useStyles = makeStyles({
-    img: {
-        width: '100%',
-        maxWidth: '100px',
-        height: '70px',
-    },
     grid: {
         padding: '5px',
     },
-    text: {
-        paddingLeft: '10px',
-        textAlign: 'left',
-    },
-
     wrapper: {
         width: '100%',
     },
-    avatar: {
-        fontSize: '10px',
-        fontWeight: 'bold',
-        width: 60,
-        height: 20,
-        marginLeft: '10px',
-    }
 });
 
 export function UserCakeData(props) {
-
-    const { cakes } = props;
+    
+    //const { cakes } = props;
     const classes = useStyles(); 
+    const [isCakes, setIsCakes] =  useState([]);
+    const userId = sessionStorage.getItem('userId');
+    const [cakes, setCakes] = useState();
+    const [isLoading, setIsLoading] = useState(true);
+    const [isUpdate, setIsUpdate] = useState(false);
+
+    useEffect (() => {
+        getCakeWithTypeByCookId(userId)
+            .then(cakes => {
+                setCakes(cakes);
+                setIsCakes(cakes.length > 0 ? true : false );
+            })
+            .catch(error => console.log('error', error.toString()))
+            .finally(() => {
+                setIsLoading(false);
+                setIsUpdate(false);
+            })            
+        },[isUpdate, userId])
+    
+    const handleOnDelete = () =>{
+        setIsUpdate(true);
+        console.log('update!!!')
+    }
+
+
+    if (isLoading) {
+        return  <CircularProgress color="secondary" />
+    }
 
     return (
         <Paper >
             <Typography variant='h6'>Twoje ciasta</Typography>
-
-            <Grid container >
-                {cakes.map((cake, idx) => {
-                    const backColor = idx % 2 === 0 ? '#fce4ec50' : '';
-                    
-                    return (<div key={cake.id} className={classes.wrapper}>
-                                <Grid item xs={12}>
-                                    <Divider />
-                                </Grid>
-                                <Grid xs container item
-                                    className={classes.grid}
-                                    style={{ backgroundColor: backColor }}
-                                >
-                                    <UserCakeDataImg
-                                        cake={cake}
-                                    />
-
-                                    <Grid item xs
-                                        container
-                                        direction='row'
-                                        alignItems='flex-start'
-                                        wrap='wrap'
-                                    >
-                                        <UserCakeDataBasic
-                                            cake={cake}
-                                        />
-                                        <UserCakeDataExtend
-                                            cake={cake}
-                                        />
-                                        
-                                        <UserCakeDataButtons 
-                                            cake={cake}
-                                        />
+            {isCakes && 
+                <Grid container >
+                    {cakes.map((cake, idx) => {
+                        const backColor = idx % 2 === 0 ? '#fce4ec50' : '';
+                        
+                        return (<div key={cake.id} className={classes.wrapper}>
+                                    <Grid item xs={12}>
+                                        <Divider />
                                     </Grid>
-                                </Grid>
+                                    <Grid xs container item
+                                        className={classes.grid}
+                                        style={{ backgroundColor: backColor }}
+                                    >
+                                        <UserCakeDataImg
+                                            cake={cake}
+                                        />
+                                        <Grid item xs
+                                            container
+                                            direction='row'
+                                            alignItems='flex-start'
+                                            wrap='wrap'
+                                        >
+                                            <UserCakeDataBasic
+                                                cake={cake}
+                                            />
+                                            <UserCakeDataExtend
+                                                cake={cake}
+                                            />
+                                            <UserCakeDataButtons 
+                                                cake={cake}
+                                                handleOnDelete={handleOnDelete}
+                                            />
+                                        </Grid>
+                                    </Grid>
 
-                            </div>)
-                        })}
-        
-            </Grid>
+                                </div>)
+                            })}
+                </Grid>
+            }
         </Paper>
-
     )
 }
 
