@@ -35,7 +35,6 @@ function UserLikeData(props){
             .catch(error => console.log('error', error.toString()))
             .finally(() => {
                 setIsLoading(false);
-                console.log('effect');
                 setIsUpdate(false);
             })            
         },[isUpdate, userId])
