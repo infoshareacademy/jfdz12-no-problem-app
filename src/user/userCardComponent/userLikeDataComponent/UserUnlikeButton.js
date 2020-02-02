@@ -12,7 +12,6 @@ export function UserUnlikeButton(props) {
     const [counter, setCounter] = useState(0);
 
     useEffect(() => {
-
         getCookById(userId)
             .then(user => setUser(user))
             .catch(error => console.log('error', error.toString()))
@@ -46,11 +45,13 @@ export function UserUnlikeButton(props) {
     const handleClose = () => {
         setOpen(false);
         setCounter(0);
+        // props.onHandleOnUnLike();
     }
+
     const handleOpen = () => {
-        setOpen(false)
-        setOpen(true)
-        setCounter(counter + 1 )
+        setOpen(false);
+        setTimeout(()=> setOpen(true),500) ;
+        setCounter(counter + 1 );
     }
 
     if (isLoading) {
