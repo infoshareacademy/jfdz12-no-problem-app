@@ -1,5 +1,7 @@
 import React from 'react';
 import { Grid, InputLabel, TextField, withStyles,  } from '@material-ui/core';
+import { UserSelect } from './UserSelect';
+import { GENDERSELECT } from '../../../constans/selectConstans';
 
 const styles = {
     root:{
@@ -35,34 +37,50 @@ const styles = {
 
 function UserBasicData(props){
 
-    const { user, classes } = props;
-    const gender = user.gender === 'male' ? 'mężczyzna' : 'kobieta'; 
- 
+    const { classes, noEdit } = props;
+    const {nick, name, surname, gender, contact } = props.user;
+   
     return(
         <Grid container direction='column' className={classes.root}>
             <Grid xs={12} item container className={classes.gridStyle}>
+                <InputLabel id="email" className={classes.textRight}> email : </InputLabel> 
+                <TextField labelid="email" name="mail" className={classes.textLeft} 
+                            disabled value={contact.mail}/>    
+            </Grid>
+            <Grid xs={12} item container className={classes.gridStyle}>
                 <InputLabel id="nick" className={classes.textRight}> Nick : </InputLabel> 
-                <TextField labelid="nick" disabled className={classes.textLeft} value= {user.nick}/>    
+                <TextField labelid="nick" name="nick"  className={classes.textLeft} 
+                           onChange={props.handleChange} disabled={noEdit} value= {nick}
+                />    
             </Grid>
             <Grid xs={12} item container className={classes.gridStyle}>
                 <InputLabel id="name" className={classes.textRight}> imię : </InputLabel> 
-                <TextField labelid="name" disabled className={classes.textLeft} value= {user.name}/>    
+                <TextField labelid="name" name="name" className={classes.textLeft} 
+                            onChange={props.handleChange} disabled={noEdit} value= {name}/>    
             </Grid>
             <Grid xs={12} item container className={classes.gridStyle}>
                 <InputLabel id="surname" className={classes.textRight}> Nazwisko : </InputLabel> 
-                <TextField labelid="surname" disabled className={classes.textLeft} value= {user.surname}/>    
+                <TextField labelid="surname" name="surname" className={classes.textLeft} 
+                            onChange={props.handleChange} disabled={noEdit} value= {surname}/>    
             </Grid>
             <Grid xs={12} item container className={classes.gridStyle}>
                 <InputLabel id="gender" className={classes.textRight}> Płeć : </InputLabel> 
-                <TextField labelid="gender" disabled className={classes.textLeft} value= {gender}/>    
+                <UserSelect
+                    
+                    onHandleChange={props.handleChange}
+                    name='gender'
+                    value={gender}
+                    options={GENDERSELECT }
+                    align='left'
+                    width='300px'
+                    noEdit={noEdit}
+                    
+                />
             </Grid>
             <Grid xs={12} item container className={classes.gridStyle}>
-                <InputLabel id="email" className={classes.textRight}> email : </InputLabel> 
-                <TextField labelid="email" disabled className={classes.textLeft} value= {user.contact.mail}/>    
-            </Grid>
-            <Grid xs={12} item container className={classes.gridStyle}>
-                <InputLabel id="mobile" className={classes.textRight}> telefon komórkowy : </InputLabel> 
-                <TextField labelid="mobile" disabled className={classes.textLeft} value= {user.contact.mobile}/>    
+                <InputLabel id="mobile"  className={classes.textRight}> telefon komórkowy : </InputLabel> 
+                <TextField labelid="mobile" name="mobile"  className={classes.textLeft} 
+                            onChange={props.handleChange} disabled={noEdit} value= {contact.mobile}/>    
             </Grid>
         </Grid>
         )

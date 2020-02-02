@@ -73,43 +73,12 @@ export default class SignOn extends Component {
         }
     }
 
-    addAvatarToFirebase = () => {
-        const userUid = firebase.auth().currentUser.uid;
-        const fileName = this.state.file.name;
-        //console.log(userUid, fileName, this.state.file )
-        firebase.storage().ref(`avatars/${userUid}/${fileName}`)
-        .put(this.state.file)
-        .then((res) => {
-            res.ref.getDownloadURL().then(url => {
-                this.setState({avatar: url})
-           //     console.log('urs', url);
-            });
-        })
-    }
-
     createUserFetch = () => {
         console.log('fetch', this.addData())
         fetch(`${FIREBASE_API}/users.json`, {
             method: 'POST',
             body: JSON.stringify(this.addData())
         })
-        // .then((res) => {
-        //     console.log(res)
-        //     this.addAvatarToFirebase();
-        // })
-        // .then(() => {
-        //     const userid = firebase.auth().currentUser.uid;
-        //     const formatedData = {
-        //         avatar : this.state.avatar,
-        //     }
-        //     fetch(`${FIREBASE_API}/users/${userid}.json`, {
-        //         method: 'PUT',
-        //         body: JSON.stringify(formatedData)
-        //     }).then((res) => {
-        //         console.log('dodałem avatar', res);
-        //     })
-            
-        // })
         .catch((err) => {
             console.log(err.message)
         })

@@ -35,7 +35,7 @@ function UserLikeData(props){
                 setIsLoading(false);
                 setIsUpdate(false);
             })            
-        },[isUpdate, userId])
+        },[userId,isUpdate])
     
     const handleOnUnLike = () =>{
         setIsUpdate(true);

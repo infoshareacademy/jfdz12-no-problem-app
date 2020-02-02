@@ -1,10 +1,14 @@
 import React from 'react';
-import { withStyles, Paper, CircularProgress } from '@material-ui/core';
+import { withStyles, Paper, CircularProgress, Grid, Button, InputLabel } from '@material-ui/core';
 import UserBasicData from './userDataComponent/UserBasicData';
 import UserCookData from './userDataComponent/UserCookData';
 import UserAvatarData from './userDataComponent/UserAvatarData';
 import { Link } from 'react-router-dom';
-import { getUserById } from '../../api/Api2';
+import { getUserById, updateUserFetch } from '../../api/Api2';
+import MessageSnakebar from '../../components/MessageSnakebar';
+import { USERTYPE } from '../../constans/selectConstans';
+import { UserSelect } from './userDataComponent/UserSelect';
+import firebase from 'firebase';
 
 const styles = {
     paper:{
@@ -13,7 +17,31 @@ const styles = {
     login: {
         padding: '20px',
     },
-}
+    button:{
+        margin:'0px 20px',
+        width: '100px',
+    },
+    gridStyle:{
+        padding: '20px 10px',
+        boxSizing: 'border-box',  
+    },
+    textRight:{
+        padding: '17px 10px',
+        maxWidth: '200px',
+        width: '100%', 
+        textAlign: 'right',
+        fontSize: '16px',
+    },
+    root:{
+        '& .MuiInputBase-root':{
+            fontSize: '18px',
+
+        },
+        '& .MuiInputBase-root.Mui-disabled':{
+            color: 'rgba(0, 0, 0, 0.87)',
+        }
+    },
+};
 
 class UserAllData extends React.Component{
     constructor(props){
@@ -23,7 +51,29 @@ class UserAllData extends React.Component{
             user: {},
             isLoading: true,
             loginUser: false,
+            noEdit: true,
+            isUpdate: false,
+            file: null,
         }
+    }
+
+    handleFileAdd = (event) => {
+        const file =  event.target.files[0];
+        const fileName = file.name;
+        
+        firebase.storage().ref(`avatars/${Date.now()}${fileName}`)
+            .put(file)
+            .then((res) => {
+                res.ref.getDownloadURL().then(url => {
+                    
+                    this.setState(prevState => ({
+                            user:{
+                                ...prevState.user,
+                                avatar : url, 
+                            },
+                        }))
+                });
+            })
     }
 
     componentDidMount () {
@@ -43,10 +93,69 @@ class UserAllData extends React.Component{
         }
     }
 
+    handleOnEdit = () =>{
+        this.setState({noEdit: false });
+    }
+
+    handleOnSave = () => {
+        this.setState({isLoading: true});
+
+        updateUserFetch(this.userId, this.state.user)
+            .then(res => console.log('update user:', res))
+            .catch(error => console.log('error', error.message))
+            .finally(() => {
+                    this.setState({
+                        isLoading: false,
+                        isUpdate: true,
+                        noEdit: true,
+                    }) 
+                })
+    }
+
+    handleChange = (event) => {
+        const { name, value } = event.target;
+        
+        if(name === 'mobile'){
+            this.setState(prevState =>({ 
+                user: { 
+                    ...prevState.user,
+                    contact: {...prevState.user.contact, [name]: value }
+                }}));
+            }else if(name === 'city' || name === 'street' || name==='district' ){
+                this.setState(prevState =>({ 
+                    user: { 
+                        ...prevState.user,
+                        location: {...prevState.user.location, [name]: value }
+                    }}));
+            }else{
+                this.setState(prevState =>({user: {...prevState.user, [name]: value },}))
+        }
+    }
+
+    handleChangeUserType = (event) =>{
+        this.setState(prevState =>({
+            user: {
+                ...prevState.user, 
+                location: prevState.location ? prevState.location : { city: "", district: "", street: ""},
+                userType: event.target.value, 
+            }
+        }))
+    };
+
+
+    handleSnakebarClose = () =>{
+        this.setState({isUpdate: false})
+    }
+
+    handleDeleteAvatar = () =>{
+        this.setState(prevState => ({user: {...prevState.user, avatar:null }}));
+    }
+
+
     render(){
         const { classes } = this.props;
-        const { user, isLoading, loginUser } = this.state;
-        console.log(user)
+        const { user, isLoading, loginUser, noEdit, isUpdate } = this.state;
+    
         if (isLoading) {
             return(
                 <Paper className={classes.paper}> 
@@ -65,14 +174,43 @@ class UserAllData extends React.Component{
                 </Paper>)
         }
 
-        return (
+        return (<>
+             <MessageSnakebar
+                open={isUpdate}
+                onHandleClose={this.handleSnakebarClose}
+                backColor={'success'}
+                message={`dane zostały zakutualizowane`}
+            />
             <Paper className={classes.paper}>
-                <UserAvatarData user={user}/>
-                <UserBasicData user={user}/>
-                <UserCookData user={user}/>
+                <Grid container justify="center" alignItems="center" className={classes.gridStyle}>
+                    <Button onClick={this.handleOnEdit}  variant='outlined' color="secondary" className={classes.button}>
+                        Edycja
+                    </Button>
+                    <Button onClick={this.handleOnSave} className={classes.button} variant='outlined' color="primary">
+                        Zapis
+                    </Button>
+                </Grid>
+                <Grid container  alignItems="center" className={classes.root}>
+                    <InputLabel className={classes.textRight}> Typ użytkownika : </InputLabel>
+                    <UserSelect
+                        onHandleChange={this.handleChangeUserType}
+                        name='userType'
+                        value={user.userType}
+                        options={USERTYPE}
+                        align='left'
+                        width='300px'
+                        noEdit={noEdit}
+                    />
+                </Grid>
+                <UserAvatarData user={user} noEdit={noEdit} handleDeleteAvatar={this.handleDeleteAvatar} handleFileAdd={this.handleFileAdd}/>
+                <UserBasicData user={user} noEdit={noEdit} handleChange={this.handleChange}/>
+                {user.userType === 'cook' &&
+                        <UserCookData user={user} noEdit={noEdit} 
+                            handleChange={this.handleChange}
+                        />
+                }
             </Paper>
-            )
-
+        </> )
     }
 }
 
