@@ -46,9 +46,8 @@ export function UserCakeDeleteModal(props) {
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
             fullWidth
-            //classes = {{paper: modalProps[idxModal].backColor}}
         >
-            <DialogContent className={classes.dialogContent}>
+            <DialogContent >
                 <DialogContentText className={classes.dialogContentText} id="alert-dialog-slide-description">
                     Czy na pewno chcesz usunąć ciasto? 
                 </DialogContentText>

@@ -54,7 +54,9 @@ export function UserUnlikeButton(props) {
     }
 
     if (isLoading) {
-        return <CircularProgress size='15px' color="secondary" />
+        return <div>
+                <CircularProgress size='15px' color="secondary" />
+            </div>
     }
 
     return (<>

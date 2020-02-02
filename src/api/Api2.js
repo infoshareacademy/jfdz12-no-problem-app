@@ -252,3 +252,9 @@ export function addLikedCakeIdToUser(userId, likeIdCakeTab){
         body: JSON.stringify({likeCakesId: likeIdCakeTab})
     })
 }
+
+export function deleteCakeById(cakeId){
+    return fetch(`${FIREBASE_API}/cakes/${cakeId}.json`, {
+        method: 'DELETE'
+    })
+}

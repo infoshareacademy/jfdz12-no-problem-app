@@ -29,6 +29,7 @@ export function UserCakeDataButtons(props) {
                 handleOnDelete={props.handleOnDelete}
                 cakeId={cake.id}
                 cake={cake}
+                users={props.users}
             />
         </Grid>
     </>)

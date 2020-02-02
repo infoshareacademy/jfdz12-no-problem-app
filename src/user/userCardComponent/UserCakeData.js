@@ -4,7 +4,7 @@ import { UserCakeDataImg } from './userCakeDataComponent/UserCakeDataImg';
 import { UserCakeDataBasic } from './userCakeDataComponent/UserCakeDataBasic';
 import { UserCakeDataExtend } from './userCakeDataComponent/UserCakeDataExtend';
 import { UserCakeDataButtons } from './userCakeDataComponent/UserCakeDataButtons';
-import { getCakeWithTypeByCookId } from '../../api/Api2';
+import { getCakeWithTypeByCookId, getUsers } from '../../api/Api2';
 
 const useStyles = makeStyles({
     grid: {
@@ -17,19 +17,23 @@ const useStyles = makeStyles({
 
 export function UserCakeData(props) {
     
-    //const { cakes } = props;
     const classes = useStyles(); 
-    const [isCakes, setIsCakes] =  useState([]);
+    const [isCakes, setIsCakes] =  useState();
     const userId = sessionStorage.getItem('userId');
-    const [cakes, setCakes] = useState();
+    const [cakes, setCakes] = useState([]);
+    const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdate, setIsUpdate] = useState(false);
 
     useEffect (() => {
-        getCakeWithTypeByCookId(userId)
-            .then(cakes => {
-                setCakes(cakes);
-                setIsCakes(cakes.length > 0 ? true : false );
+        Promise.all([
+            getCakeWithTypeByCookId(userId),
+            getUsers(),
+        ])
+            .then(data => {
+                setCakes(data[0]);
+                setUsers(data[1]);
+                setIsCakes(data[0].length > 0 ? true : false );
             })
             .catch(error => console.log('error', error.toString()))
             .finally(() => {
@@ -40,9 +44,7 @@ export function UserCakeData(props) {
     
     const handleOnDelete = () =>{
         setIsUpdate(true);
-        console.log('update!!!')
     }
-
 
     if (isLoading) {
         return  <CircularProgress color="secondary" />
@@ -81,6 +83,7 @@ export function UserCakeData(props) {
                                             />
                                             <UserCakeDataButtons 
                                                 cake={cake}
+                                                users={users}
                                                 handleOnDelete={handleOnDelete}
                                             />
                                         </Grid>
