@@ -1,12 +1,11 @@
 import React from 'react';
 import { Button, Container, Grid, Paper, Typography, withStyles,CircularProgress } from '@material-ui/core';
-import UserBasicData from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
 import { getUserById, } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 import { Link } from 'react-router-dom';
-import UserCookData from './userCardComponent/UserCookData';
+import UserAllData from './userCardComponent/UserAllData';
 import { UserCakeData } from './userCardComponent/UserCakeData';
 
 
@@ -29,7 +28,10 @@ const styles ={
     },
     buttonStyle:{
         margin:'20px'
-    }
+    },
+    paper:{
+        backgroundColor: '#fce4ec50',
+    },
 }
 
 
@@ -96,7 +98,7 @@ class UserCard extends React.Component{
     }
 
     render(){
-        const {user, isLoading, selectedMenu, loginUser} =  this.state;
+        const {user, isLoading, selectedMenu, loginUser, } =  this.state;
         const { classes } = this.props;
        
         if (isLoading) {
@@ -132,17 +134,12 @@ class UserCard extends React.Component{
                         </Grid>
                         <Grid item xs className={classes.gridStyle}>
                             {selectedMenu.basic &&
-                                <UserBasicData  
+                                <UserAllData  
                                     user = {user}
                                 />
                             }
                             {selectedMenu.like && 
                                 <UserLikeData/> 
-                            }
-                            {selectedMenu.mCook && 
-                                <UserCookData
-                                    user = {user}
-                                /> 
                             }
                             {selectedMenu.mCake &&
                                 <UserCakeData/> 
@@ -156,7 +153,7 @@ class UserCard extends React.Component{
                             color = 'secondary'
                             component ={Link} to = {'/'}
                         >
-                            zamknij
+                            Zamknij
                         </Button>
                     </Grid>
                 </Container>}    
