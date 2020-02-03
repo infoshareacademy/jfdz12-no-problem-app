@@ -108,7 +108,8 @@ class UserAllData extends React.Component{
                         isLoading: false,
                         isUpdate: true,
                         noEdit: true,
-                    }) 
+                    });
+                    this.props.fetchUserFromApi()
                 })
     }
 
@@ -136,12 +137,11 @@ class UserAllData extends React.Component{
         this.setState(prevState =>({
             user: {
                 ...prevState.user, 
-                location: prevState.location ? prevState.location : { city: "", district: "", street: ""},
+                location: prevState.user.location ? prevState.user.location : { city: "", district: "", street: ""},
                 userType: event.target.value, 
             }
         }))
     };
-
 
     handleSnakebarClose = () =>{
         this.setState({isUpdate: false})
@@ -190,7 +190,7 @@ class UserAllData extends React.Component{
                         Zapis
                     </Button>
                 </Grid>
-                <Grid container  alignItems="center" className={classes.root}>
+                <Grid container justify="center" alignItems="center" className={classes.root}>
                     <InputLabel className={classes.textRight}> Typ użytkownika : </InputLabel>
                     <UserSelect
                         onHandleChange={this.handleChangeUserType}

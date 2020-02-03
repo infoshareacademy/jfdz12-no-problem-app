@@ -38,23 +38,23 @@ function UserCookData(props){
     const { user, classes, noEdit } = props;
    
     return(
-        <Grid container direction='column' className={classes.root}>
-            <Grid xs={12} item container className={classes.gridStyle}>
+        <Grid container justify="center" direction='column' className={classes.root}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
                 <InputLabel id="city" className={classes.textRight}> Miasto : </InputLabel> 
                 <TextField labelid="city" name="city" disabled={noEdit} className={classes.textLeft} 
                             onChange={props.handleChange} value = {user.location.city || ""}/>    
             </Grid>
-            <Grid xs={12} item container className={classes.gridStyle}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
                 <InputLabel id="district" className={classes.textRight}>Dzielnica : </InputLabel>
                 <TextField labelid="district" name="district" disabled={noEdit} className={classes.textLeft} 
                             onChange={props.handleChange} value = {user.location.district || ""}/>
             </Grid>
-            <Grid xs={12} item container className={classes.gridStyle}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
                 <InputLabel id="street" className={classes.textRight}>Ulica : </InputLabel>
                 <TextField labelid="street" name="street" disabled={noEdit} className={classes.textLeft} 
                             onChange={props.handleChange} value = {user.location.street || ""}/>
             </Grid>
-            <Grid xs={12} item container className={classes.gridStyle}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
                 <InputLabel id="description" className={classes.textRight}>Opis : </InputLabel>
                 <TextField 
                     labelid="description"

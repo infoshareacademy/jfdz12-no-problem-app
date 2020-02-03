@@ -42,31 +42,30 @@ function UserBasicData(props){
    
     return(
         <Grid container direction='column' className={classes.root}>
-            <Grid xs={12} item container className={classes.gridStyle}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
                 <InputLabel id="email" className={classes.textRight}> email : </InputLabel> 
                 <TextField labelid="email" name="mail" className={classes.textLeft} 
                             disabled value={contact.mail}/>    
             </Grid>
-            <Grid xs={12} item container className={classes.gridStyle}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
                 <InputLabel id="nick" className={classes.textRight}> Nick : </InputLabel> 
                 <TextField labelid="nick" name="nick"  className={classes.textLeft} 
                            onChange={props.handleChange} disabled={noEdit} value= {nick}
                 />    
             </Grid>
-            <Grid xs={12} item container className={classes.gridStyle}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
                 <InputLabel id="name" className={classes.textRight}> imię : </InputLabel> 
                 <TextField labelid="name" name="name" className={classes.textLeft} 
                             onChange={props.handleChange} disabled={noEdit} value= {name}/>    
             </Grid>
-            <Grid xs={12} item container className={classes.gridStyle}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
                 <InputLabel id="surname" className={classes.textRight}> Nazwisko : </InputLabel> 
                 <TextField labelid="surname" name="surname" className={classes.textLeft} 
                             onChange={props.handleChange} disabled={noEdit} value= {surname}/>    
             </Grid>
-            <Grid xs={12} item container className={classes.gridStyle}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
                 <InputLabel id="gender" className={classes.textRight}> Płeć : </InputLabel> 
                 <UserSelect
-                    
                     onHandleChange={props.handleChange}
                     name='gender'
                     value={gender}
@@ -74,10 +73,9 @@ function UserBasicData(props){
                     align='left'
                     width='300px'
                     noEdit={noEdit}
-                    
                 />
             </Grid>
-            <Grid xs={12} item container className={classes.gridStyle}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
                 <InputLabel id="mobile"  className={classes.textRight}> telefon komórkowy : </InputLabel> 
                 <TextField labelid="mobile" name="mobile"  className={classes.textLeft} 
                             onChange={props.handleChange} disabled={noEdit} value= {contact.mobile}/>    
