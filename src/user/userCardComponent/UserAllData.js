@@ -202,7 +202,11 @@ class UserAllData extends React.Component{
                         noEdit={noEdit}
                     />
                 </Grid>
-                <UserAvatarData user={user} noEdit={noEdit} handleDeleteAvatar={this.handleDeleteAvatar} handleFileAdd={this.handleFileAdd}/>
+                <UserAvatarData avatar={user.avatar} name={user.name} surname={user.surname} 
+                                noEdit={noEdit} 
+                                handleDeleteAvatar={this.handleDeleteAvatar} 
+                                handleFileAdd={this.handleFileAdd}
+                />
                 <UserBasicData user={user} noEdit={noEdit} handleChange={this.handleChange}/>
                 {user.userType === 'cook' &&
                         <UserCookData user={user} noEdit={noEdit} 

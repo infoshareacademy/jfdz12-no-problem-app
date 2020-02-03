@@ -1,16 +1,10 @@
 import React from 'react';
-import { TextField, Avatar, } from '@material-ui/core';
+import { TextField,  } from '@material-ui/core';
 
 export default function CookData(props) {
-    const { name, surname, city, district, street, description } = props;
+    const { city, district, street, description } = props;
 
     return (<>
-        <div style ={{display:'flex', justifyContent:'center', margin:'12px 0'}}>
-            <Avatar style={{padding:'7px'}} >
-                {name.slice(0,1).toUpperCase() }{surname.slice(0,1).toUpperCase()}
-            </Avatar>
-            
-        </div>
         <TextField
             onChange={props.onHandleChange}
             variant="outlined"

@@ -11,7 +11,7 @@ const styles = {
 
 function UserAvatarData(props){
 
-    const { user, classes, noEdit } = props;
+    const { avatar, name, surname, classes, noEdit } = props;
     
     return(
             <Grid xs={12} item container justify='center' alignItems='center' className={classes.gridStyleAvatar}>
@@ -29,29 +29,29 @@ function UserAvatarData(props){
                                     style={{ margin: '10px 40px' }} 
                                     color="primary"
                             >
-                                {user.avatar ? "zmień" : "dodaj"}
+                                {avatar ? "zmień" : "dodaj"}
                             </Button>
                         </label>
                     </>
                 }
-                { user.avatar 
-                    ? <Avatar src={user.avatar} 
+                { avatar 
+                    ? <Avatar src={avatar} 
                                 variant="circle" 
                                 style={{height:'50px', width:'50px'}} 
                         />
                     :<Avatar style={{padding:'7px'}} >
-                        {user.name.slice(0,1).toUpperCase() }{user.surname.slice(0,1).toUpperCase()}
+                        {name.slice(0,1).toUpperCase() }{surname.slice(0,1).toUpperCase()}
                     </Avatar>
                 }
                 {!noEdit && <>
                         <IconButton 
                             style={{marginLeft: '40px'}}
                             onClick = {props.handleDeleteAvatar}
-                            disabled={user.avatar ? false: true }
+                            disabled={avatar ? false: true }
                         >
                             <DeleteIcon 
                                 fontSize="large" 
-                                color={user.avatar ? "secondary": "disabled"}
+                                color={avatar ? "secondary": "disabled"}
                             />
                         </IconButton>
                     </>
