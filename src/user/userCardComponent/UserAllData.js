@@ -186,7 +186,12 @@ class UserAllData extends React.Component{
                     <Button onClick={this.handleOnEdit}  variant='outlined' color="secondary" className={classes.button}>
                         Edycja
                     </Button>
-                    <Button onClick={this.handleOnSave} className={classes.button} variant='outlined' color="primary">
+                    <Button onClick={this.handleOnSave} 
+                            className={classes.button}
+                            variant='outlined' 
+                            color="primary"
+                            disabled={noEdit}
+                    >
                         Zapis
                     </Button>
                 </Grid>
