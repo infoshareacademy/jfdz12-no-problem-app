@@ -54,7 +54,7 @@ export default class SignOn extends Component {
 
         const cookData = {
             avatar: avatar,
-            decription: description,
+            description: description,
             location: {
                 city: city,
                 district: district,

@@ -4,7 +4,7 @@ import { CircularProgress, Container, Grid } from '@material-ui/core';
 import { RenderCakesList } from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
 import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
-import ToogleView from './ToogleView';
+import ToogleView from './component/ToogleView';
 import { getFullData } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 
@@ -48,7 +48,7 @@ export class CakesList extends React.Component{
                     types: data[2],
                     priceRange: [Math.min(...price),Math.max(...price)],
                     cakesMaxId: Math.max(...data[0].map(el => (el.id))), 
-                })
+                });
             })
             .catch(error => this.setState({error: error.toString()}))
             .finally(() => this.setState({loading: false}))

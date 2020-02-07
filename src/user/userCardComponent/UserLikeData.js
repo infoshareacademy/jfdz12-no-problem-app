@@ -1,7 +1,9 @@
-import React from 'react';
-import { Grid, Paper, Typography, Divider, IconButton, withStyles } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import React, { useEffect, useState } from 'react';
+import { Grid, Paper, Typography, Divider, CircularProgress, withStyles } from '@material-ui/core';
+//import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Link } from 'react-router-dom';
+import { UserUnlikeButton } from './UserUnlikeButton';
+import { getLikesWithData } from '../../api/Api2'; 
 
 const styles = {
     img : {
@@ -14,9 +16,6 @@ const styles = {
     text:{
         paddingLeft:'10px',
     },
-    icon:{
-        color: 'red',
-    },
     wrapper:{
         width:'100%',
     }
@@ -25,7 +24,28 @@ const styles = {
 
 function UserLikeData(props){
 
-    const {likes, classes} = props;
+    const userId = sessionStorage.getItem('userId');
+    const [likes, setLikes] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [isUpdate, setIsUpdate] = useState(false);
+
+    useEffect (() => {
+        getLikesWithData(userId)
+            .then(likes => setLikes(likes))
+            .catch(error => console.log('error', error.toString()))
+            .finally(() => {
+                setIsLoading(false);
+                setIsUpdate(false);
+            })            
+        },[isUpdate, userId])
+    
+    const handleOnUnLike = () =>{
+        setIsUpdate(true);
+        
+        console.log('handleUlike')
+    }
+
+    const { classes } = props;
 
     const likesToRender = () => {
         if(likes.length>0){
@@ -82,11 +102,13 @@ function UserLikeData(props){
                              
                         </Grid>  
                         <Grid item xs={1}>
-                            
-                                <IconButton aria-label="add to favorites">
-                                    <FavoriteIcon  className={classes.icon}/>
-                                </IconButton>
-                            
+                            <UserUnlikeButton
+                                cake={like.cake}
+                                onHandleOnUnLike={handleOnUnLike}
+                            />
+                            {/* <IconButton aria-label="add to favorites">
+                                <FavoriteIcon  className={classes.icon}/>
+                            </IconButton> */}
                         </Grid>
                     </Grid>
                     
@@ -94,7 +116,11 @@ function UserLikeData(props){
         }else{ return "" }
     }
 
-    return (
+    if (isLoading) {
+        return  <CircularProgress color="secondary" />
+    }
+
+    return (<>
         <Paper >
             <Typography variant='h6'>Twoje polubione ciasta</Typography>
  
@@ -104,7 +130,7 @@ function UserLikeData(props){
             </Grid>
         </Paper>
     
-        )
+        </>)
 }
 
 export default withStyles(styles)(UserLikeData);
