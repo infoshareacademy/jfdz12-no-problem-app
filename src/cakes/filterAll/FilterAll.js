@@ -4,6 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import RenderFilterAllMenu from './RenderFilterAllMenu'
 import { styles } from './FilterAllStyle';
 import { FilterButton } from '../component/FilterButton';
+import ToogleView from '../component/ToogleView';
 
 class FilterAll extends React.Component{
     constructor(props){
@@ -39,7 +40,7 @@ class FilterAll extends React.Component{
     }
 
     render(){
-        const { classes, filterChecked, types, filterTypesId } = this.props;
+        const { classes, filterChecked, types, filterTypesId, toogleView } = this.props;
         const { anchorEl } = this.state;
         
         return (<>
@@ -72,7 +73,7 @@ class FilterAll extends React.Component{
                         
                         <Hidden smUp ><Divider variant= 'middle' width='90%' /> </Hidden>
 
-                        <Grid item xs={12} sm={3} container justify='space-evenly' wrap='nowrap'>  
+                        <Grid item xs={12} sm={4} container justify='space-evenly' wrap='nowrap'>  
                             <Grid item >
                                 <Button color="primary" 
                                         className={classes.iconButton}
@@ -95,11 +96,17 @@ class FilterAll extends React.Component{
                                            
                             </Grid>
                             <Divider className={classes.divider} orientation="vertical" />       
-                            <Grid item >
-                                
+                            <Grid item>
                                 <FilterButton 
                                     filterAllToogle = {this.props.filterAllToogle}
                                     onHandleToogleChange = {this.handleToogleChange}
+                                />
+                            </Grid>
+                            <Divider className={classes.divider} orientation="vertical" />
+                            <Grid item>
+                                <ToogleView 
+                                    onHandleToogleView = {this.props.onHandleToogleView} 
+                                    toogleView = {toogleView}
                                 />   
                             </Grid>
                         </Grid>
