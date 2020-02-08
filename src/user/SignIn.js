@@ -1,7 +1,5 @@
 import React from 'react';
 import { withStyles, Grid, Typography, Avatar, Button, TextField, CircularProgress, } from '@material-ui/core';
-//import { IconButton, Snackbar } from '@material-ui/core';
-//import './SignIn.css';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Link as Rlink} from 'react-router-dom';
 import {getUsers} from '../api/Api2';
@@ -10,6 +8,23 @@ import firebase from 'firebase/app';
 import {Redirect} from 'react-router-dom';
 import MessageSnakebar from './signComponent/MessageSnakebar';
 import {styles} from './styles/SignInStyles'
+
+const loginError = ( error ) => {
+
+    switch (error){
+        case 'auth/invalid-email' :  {
+            return "błędny email";
+        }
+        case 'auth/wrong-password' : {
+            return "błędne hasło lub uzytkownik nie posiada hasła"
+        }
+        case 'auth/user-not-found' : {
+            return 'Nie ma takiego użytkownika albo użytkownik został skasowany'
+        }
+        default:
+            return "błąd logowania, spróbuj ponownie "
+    }
+}
 
 
 class SignIn extends React.Component{
@@ -54,8 +69,10 @@ class SignIn extends React.Component{
                 redirect: true,
             })
         })
-        .catch(function(error) {
-            alert(`${error.code}: ${error.message}`)
+        .catch((error) => {
+            this.setState({
+                error: loginError(error.code)
+            })
         });
     };
 
@@ -97,7 +114,15 @@ class SignIn extends React.Component{
 
         if(error !==""){
             return (<PageWrapper >
-                       {error}
+                        <Typography variant='h6'>
+                            {error}
+                        </Typography>
+                        <Typography variant='h6'>
+                            <Rlink to={'/SignIn'}>Zaloguj się ponownie</Rlink>
+                        </Typography >
+                        <Typography variant='h6'>
+                            <Rlink to={'/'}>Wróć na stronę główną</Rlink>
+                        </Typography>
                 </PageWrapper>)
         }
 

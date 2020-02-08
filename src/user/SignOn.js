@@ -105,7 +105,7 @@ export default class SignOn extends Component {
                     this.createUserFetch();
                 })
             .catch((error) => {
-                    console.log(error.message);
+                    console.log(error.code);
                     this.setState({ error: error.message, isError: true });
                 })
             .finally(()=> this.setState({ isLoading: false }));
