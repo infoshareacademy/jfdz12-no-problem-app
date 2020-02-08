@@ -147,8 +147,7 @@ export class CakesList extends React.Component{
 
         if (!loading) {
             return <PageWrapper>
-                <Container maxWidth = "lg" >       
-                
+                <Container maxWidth = 'ld' >       
                     <Grid container direction={filterAllToogle ? 'row' : 'column'}>
                         {filterAllToogle &&
                             <Grid item xs={12} sm={3} md={2}> 

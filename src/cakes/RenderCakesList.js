@@ -65,9 +65,15 @@ export class RenderCakesList extends React.Component {
         };
 
     render(){
-        const { cooks, types, toogleView } = this.props.state;
+        const { cooks, types, toogleView, priceRange } = this.props.state;
         const filteredSortedCakes = this.getSorteredCakes();
         
+        if(priceRange[0]>priceRange[1]) {
+            return <Typography variant="h6">
+                        Cena od jest wyższa od ceny do, zmień parametry aby wyświeliśc wyniki !
+                    </Typography>
+        }
+
         if(!filteredSortedCakes.length || filteredSortedCakes.length<1){
             return <Typography variant="h6">
                         Żadne ciasto nie pasuje do wyników wyszukiwania
