@@ -6,10 +6,9 @@ import clsx from 'clsx';
 
 const styles = {
     root :{
-       // transform: 'rotate(90deg)',
         padding: 5,
         '&:hover': {
-            transform: 'scale(1.5)',  
+            transform: 'scale(1.2)',  
         },
     },
     WrapIconButtonStyle:{

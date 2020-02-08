@@ -15,8 +15,6 @@ class FilterAll extends React.Component{
         this.handleFilterChange = this.handleFilterChange.bind(this);
         this.handleTypeClick = this.handleTypeClick.bind(this);
         this.handleTypeClose = this.handleTypeClose.bind(this);
-        this.handleTypeToggle = this.handleTypeToggle.bind(this);
-        this.handleToogleChange = this.handleToogleChange.bind(this);
     }
 
     handleFilterChange (event) {
@@ -31,14 +29,6 @@ class FilterAll extends React.Component{
         this.setState({anchorEl: null});
     };
 
-    handleTypeToggle (value){
-        this.props.onHandleTypeToggle(value);
-    }
-
-    handleToogleChange (){
-        this.props.onHandleToogleChange();
-    }
-
     render(){
         const { classes, filterChecked, types, filterTypesId, toogleView } = this.props;
         const { anchorEl } = this.state;
@@ -48,7 +38,6 @@ class FilterAll extends React.Component{
                     justify='center' 
                     alignContent='center' 
                     className = {classes.grid}
-                    style={{padding: '0px 5px'}}
             >
                 <Paper component="form" className={classes.PaperStyle}>
                     <Grid container wrap='wrap' direction='row' justify='space-between' alignContent='center' >
@@ -91,7 +80,7 @@ class FilterAll extends React.Component{
                                     filterTypesId = {filterTypesId}
                                     onHandleTypeClose = {this.handleTypeClose}
                                     onHandleFilterChange = {this.handleFilterChange}
-                                    onHandleTypeToggle = {this.handleTypeToggle}
+                                    onHandleTypeToggle = {this.props.onHandleTypeToggle}
                                 />
                                            
                             </Grid>
@@ -99,7 +88,7 @@ class FilterAll extends React.Component{
                             <Grid item>
                                 <FilterButton 
                                     filterAllToogle = {this.props.filterAllToogle}
-                                    onHandleToogleChange = {this.handleToogleChange}
+                                    onHandleToogleChange = {this.props.onHandleToogleChange}
                                 />
                             </Grid>
                             <Divider className={classes.divider} orientation="vertical" />
