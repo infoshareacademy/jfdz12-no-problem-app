@@ -7,7 +7,7 @@ import firebase from 'firebase';
 import { Redirect, Link } from 'react-router-dom';
 import RenderCakeAddForm from './RenderCakeAddform'; 
 import MessageSnakebar from '../../components/MessageSnakebar';
-
+import { validateCakeAdd } from './component/cakeAddFunction'
 
 class CakeAddForm extends React.Component{
     constructor(props){
@@ -27,6 +27,7 @@ class CakeAddForm extends React.Component{
             isError:false,
             error:'',
             snakeOpen: false,
+            isRequired: false,
         }
 
         this.addCakeFetch = this.addCakeFetch.bind(this);
@@ -69,7 +70,6 @@ class CakeAddForm extends React.Component{
                 }  
             })
             .catch(error => {
-                console.log('bład addformfetch', error.toString())
                 this.setState({
                     isError: true,
                     error:error.toString(),
@@ -123,18 +123,27 @@ class CakeAddForm extends React.Component{
     }
 
     addCakeFetch(){
-
-        this.fetchCake()
+        const validate = validateCakeAdd(this.state.cakeAdd);
+        console.log('onClick', validateCakeAdd(this.state.cakeAdd))
+        if (validate) {
+            this.setState({ isRequired: validate, });
+            console.log('onClick- isReq', )
+        }else{
+            this.fetchCake()
             .then((res) => {
                 this.setState({ 
                     saveCake: true, 
                     snakeOpen: true,
+                    isRequired: false,
                 });
-                console.log('dodałem cake:' , res)
             })
             .catch((err) => {
-                console.log(err.message)
+                this.setState({
+                    error: err.message,
+                    isError: true,
+                }) 
             });
+        }
     }
 
     handleClose = () => {
@@ -146,7 +155,7 @@ class CakeAddForm extends React.Component{
 
     render(){
     
-        const {cooks, types, isLoading, saveCake, isError, error, cakeAdd, snakeOpen, } = this.state;
+        const {cooks, types, isLoading, saveCake, isError, error, cakeAdd, snakeOpen, isRequired, } = this.state;
         const { cookId, typeId, } = this.state.cakeAdd;
 
         const selectedCook = this.findDataById(cooks, cookId);
@@ -173,15 +182,17 @@ class CakeAddForm extends React.Component{
         
         if (isLoading) {
             return(<PageWrapper>
-                <CircularProgress/>
-            </PageWrapper>
+                       <CircularProgress/>
+                    </PageWrapper>
             )       
         }
 
         if (isError) {
             return(<PageWrapper>
                     <h3>wystąpił błąd: {error} </h3>
-                    <Link to={'/'}>wróć na stronę główną </Link>
+                    <div>
+                        <Link to={'/'}>wróć na stronę główną </Link>
+                    </div>
                 </PageWrapper>
             )       
         }
@@ -194,6 +205,7 @@ class CakeAddForm extends React.Component{
                     selectetType = {selectetType}
                     types = {types}
                     cakeAdd = {cakeAdd}
+                    isRequired={isRequired}
                     onHandleCakeChange = {this.handleCakeChange}
                     handleFileAdd = {this.handleFileAdd}
                     addCakeFetch= {this.addCakeFetch}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { styles } from './CakeAddStyles';
-import { Button, CardMedia, withStyles, Paper, Grid, Container, } from '@material-ui/core';
+import { Button, CardMedia, withStyles, Paper, Grid, Container, Typography, } from '@material-ui/core';
 import CakeAddInput from './component/CakeAddInput';
 import CakeAddTypesSelect from './component/CakeAddTypesSelect';
 import CakeAddSelect from './component/CakeAddSelect';
@@ -9,7 +9,7 @@ import CookLabelFull from '../cakeCard/CookLabelFull';
 
 function RenderCakeAddForm(props) {
 
-    const { types, selectedCook, selectetType, classes } = props;
+    const { types, selectedCook, selectetType, classes, isRequired } = props;
     const { name,
             price,
             priceForPortion,
@@ -18,7 +18,7 @@ function RenderCakeAddForm(props) {
             description,
             glutenFree,
             imgURL } = props.cakeAdd;
-
+   
     return (<Container maxWidth="lg" >
             <Grid >
 
@@ -29,6 +29,8 @@ function RenderCakeAddForm(props) {
                         name="name"
                         label="Nazwa ciasta: "
                         styleProp="header"
+                        type="text"
+                        error={isRequired && !name}
                     />
                 </Paper>
 
@@ -63,12 +65,16 @@ function RenderCakeAddForm(props) {
                                 value={price}
                                 name="price"
                                 label="Cena zł/kg: "
+                                type="number" 
+                                error={isRequired && !price}
                             />
                             <CakeAddInput
                                 onHandleCakeChange={props.onHandleCakeChange}
                                 value={priceForPortion}
                                 name="priceForPortion"
                                 label="cena za porcję/sztukę: "
+                                type="number"
+                                error={isRequired && !priceForPortion}
                             />
                             <CakeAddInput
                                 onHandleCakeChange={props.onHandleCakeChange}
@@ -76,6 +82,8 @@ function RenderCakeAddForm(props) {
                                 name="portionDescription"
                                 label="porcja: "
                                 styleDirect={{ width: "95%" }}
+                                type="text"
+                                error={isRequired && !portionDescription}
                             />
 
                         </Paper>
@@ -86,6 +94,7 @@ function RenderCakeAddForm(props) {
                                 value={typeId}
                                 name="typeId"
                                 label="Typ ciasta: "
+                                error={isRequired && typeId === '-1'}
                             />
                             <CakeAddInput
                                 value={selectetType.description || ""}
@@ -113,6 +122,7 @@ function RenderCakeAddForm(props) {
                                 rows="4"
                                 multiline={true}
                                 styleDirect={{ width: "95%" }}
+                                type="text"
                             />
                         </Paper>
 
@@ -127,7 +137,9 @@ function RenderCakeAddForm(props) {
                         />
                     </Grid>
                 </Paper>
-
+                <Typography color='secondary'>
+                    {isRequired && "wyełnij wymagane pola aby zapisać"}
+                </Typography>
                 <Button
                     variant="outlined"
                     color="secondary"
@@ -142,7 +154,7 @@ function RenderCakeAddForm(props) {
                     style={{ margin: '20px' }}
                 >
                     zapisz
-                        </Button>
+                </Button>
 
             </Grid >
         </Container>

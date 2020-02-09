@@ -7,6 +7,6 @@ export const CAKEADDOBJ = {
     cookId: null,
     description: '',
     glutenFree: false,
-    imgURL:'',
+    imgURL:'/img/ciacha/small.png',
 }
 

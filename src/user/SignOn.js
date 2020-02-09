@@ -148,8 +148,8 @@ export default class SignOn extends Component {
 
         if (isLoading) {
             return <PageWrapper >
-                <CircularProgress color="secondary" />
-            </PageWrapper>
+                        <CircularProgress color="secondary" />
+                    </PageWrapper>
         }
 
         return (
