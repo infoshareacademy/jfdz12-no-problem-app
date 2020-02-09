@@ -1,13 +1,12 @@
 import React from 'react';
 import { Button, Container, Grid, Paper, Typography, withStyles,CircularProgress } from '@material-ui/core';
-import UserBasicData from './userCardComponent/UserBasicData';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
-import { getUserById, getCakeWithTypeByCookId } from '../api/Api2';
+import { getUserById, } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 import { Link } from 'react-router-dom';
-import UserCookData from './userCardComponent/UserCookData';
-import UserCakeData from './userCardComponent/UserCakeData';
+import UserAllData from './userCardComponent/UserAllData';
+import { UserCakeData } from './userCardComponent/UserCakeData';
 
 
 const styles ={
@@ -29,7 +28,10 @@ const styles ={
     },
     buttonStyle:{
         margin:'20px'
-    }
+    },
+    paper:{
+        backgroundColor: '#fce4ec50',
+    },
 }
 
 
@@ -40,7 +42,6 @@ class UserCard extends React.Component{
         this.userIdRef = sessionStorage.getItem('userId');
         this.state ={
             user: {},
-            cakes: [],
             isLoading: true,
             selectedMenu: {
                 basic : true,
@@ -52,21 +53,13 @@ class UserCard extends React.Component{
         };
     }
 
-    componentDidMount(){
-       
-        if (this.userIdRef){
-            Promise.all([
-                getUserById(this.userIdRef),
-                getCakeWithTypeByCookId(this.userIdRef)
-            ])
+    fetchUserFromApi = () => {
+        return getUserById(this.userIdRef)
             .then(data =>{
-
                 this.setState ({
-                    user: data[0],
-                    cakes: data[1]    
+                    user: data,
                 })
                 if (this.backLink){
-          
                     this.setState(prevState => ({
                         selectedMenu:{
                             ...prevState.selectedMenu,
@@ -75,7 +68,12 @@ class UserCard extends React.Component{
                         }
                     }))
                 }
-            }) 
+            })
+    }
+
+    componentDidMount(){
+        if (this.userIdRef){
+            this.fetchUserFromApi() 
             .catch(error => console.log('bład addformfetch', error.toString()))
             .finally(() => this.setState({
                     isLoading: false,
@@ -101,7 +99,7 @@ class UserCard extends React.Component{
     }
 
     render(){
-        const {user, cakes, isLoading, selectedMenu, loginUser} =  this.state;
+        const {user, isLoading, selectedMenu, loginUser, } =  this.state;
         const { classes } = this.props;
        
         if (isLoading) {
@@ -119,7 +117,6 @@ class UserCard extends React.Component{
 
         return (
             <PageWrapper>
-        
                 { !isLoading && <Container maxWidth='lg'>
                     <Grid container className={classes.gridTop}>
                         <Grid item xs={12} className={classes.gridStyle}>
@@ -129,7 +126,7 @@ class UserCard extends React.Component{
                                 </Typography>
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} sm ={3} className={classes.gridStyle2} style={{}}>
+                        <Grid item xs={12} sm ={3} className={classes.gridStyle2} >
                              <UserMenu 
                                 onHandleClick = {this.handleClick}
                                 selectedMenu = {selectedMenu}
@@ -138,23 +135,18 @@ class UserCard extends React.Component{
                         </Grid>
                         <Grid item xs className={classes.gridStyle}>
                             {selectedMenu.basic &&
-                                <UserBasicData  
+                                <UserAllData  
                                     user = {user}
-                                />}
+                                    fetchUserFromApi={this.fetchUserFromApi}
+                                />
+                            }
                             {selectedMenu.like && 
-                                <UserLikeData/> }
-                            {selectedMenu.mCook && 
-                                <UserCookData
-                                    user = {user}
-                                /> }
+                                <UserLikeData/> 
+                            }
                             {selectedMenu.mCake &&
-                                <UserCakeData
-                                    cakes = {cakes}
-                                /> }
-                                
+                                <UserCakeData/> 
+                            }
                         </Grid>
-    
-    
                     </Grid>
                     <Grid>
                         < Button
@@ -162,9 +154,8 @@ class UserCard extends React.Component{
                             variant='outlined'
                             color = 'secondary'
                             component ={Link} to = {'/'}
-                            // onClick = {this.props.history.goBack}
                         >
-                            zamknij
+                            Zamknij
                         </Button>
                     </Grid>
                 </Container>}    

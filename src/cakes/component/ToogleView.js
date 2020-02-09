@@ -8,19 +8,14 @@ const styles = {
     root :{
         padding: 5,
         '&:hover': {
-            backgroundColor: '#564147',
-            transform: 'scale(1.1)',  
+            transform: 'scale(1.2)',  
         },
     },
     WrapIconButtonStyle:{
-        position: 'fixed',
-        right: '15px',
-        bottom: '135px',
-        backgroundColor: '#564147a0',
-        color: 'white',
+        color: '#564147a0',
     }, 
     IconButtonStyle:{
-        fontSize: '2.5rem',
+        fontSize: '2rem',
     }
 }
 
@@ -30,7 +25,7 @@ function ToogleView (props){
     
     return <>
     
-        <Tooltip arrow title="zmień widok" placement="left">
+        <Tooltip arrow title="zmień widok" placement="right">
             <IconButton
                 onClick={props.onHandleToogleView}
                 className={clsx(classes.root, classes.WrapIconButtonStyle)}

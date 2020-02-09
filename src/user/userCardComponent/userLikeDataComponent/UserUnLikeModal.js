@@ -1,8 +1,8 @@
 import React from 'react';
 import { Slide, Dialog, DialogActions, DialogContent, DialogContentText, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, } from '@material-ui/core/styles'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
     dialogRoot: {
         '& .MuiDialog-paper': {
             border: '3px solid #47817E',
@@ -12,9 +12,9 @@ const useStyles = makeStyles(theme => ({
         }
     },
     dialogColor1: { backgroundColor: '#fce4ec' },
-    dialogColor2: { backgroundColor: '#E1E2E1' },
+    dialogColor2: { backgroundColor: '#E1E2E1', left: '100px', top: '-100px' },
     dialogColor3: { backgroundColor: '#e8eaf6' },
-    dialogColor4: { backgroundColor: '#e0f7fa' },
+    dialogColor4: { backgroundColor: '#e0f7fa', left: '-150px', top: '120px' },
     dialogColor5: { backgroundColor: '#ffebee' },
 
     dialogContentText: {
@@ -31,22 +31,10 @@ const useStyles = makeStyles(theme => ({
         width: '100px',
         margin: '10px'
     }
-}));
-
-const TransitionUp = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const TransitionDown = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
-});
-
-const TransitionRight = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="right" ref={ref} {...props} />;
-});
-
-const TransitionLeft = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="left" ref={ref} {...props} />;
 });
 
 export function UserUnLikeModal(props) {
@@ -55,45 +43,31 @@ export function UserUnLikeModal(props) {
 
     const modalProps = [
         {
-            backgroundColor: '#fce4ec50',
             labelText: "Czy na pewno już nie lubisz tego ciasta !!!",
-            transition: TransitionUp,
             backColor: classes.dialogColor1,
         }, {
-            backgroundColor: '#fce4ec50',
             labelText: "Czy na pewno już nie lubisz tego ciasta !!!",
-            transition: TransitionUp,
             backColor: classes.dialogColor1,
         }, {
-            backgroundColor: '#47817Ee0',
             labelText: "Ej, no weź nie rób tego !!! Robisz ?",
-            transition: TransitionRight,
             backColor: classes.dialogColor2,
         }, {
-            backgroundColor: '#fce4ec50',
             labelText: "A jednak dalej zdecyowany ?",
-            transition: TransitionLeft,
             backColor: classes.dialogColor3,
         }, {
-            backgroundColor: '#47817Ee0',
             labelText: "Czynisz złooooo - nie rób tego. Robisz ?",
-            transition: TransitionDown,
             backColor: classes.dialogColor4,
         }, {
-            backgroundColor: '#fce4ec50',
             labelText: "No dobra poddaje się giń. Na pewno?",
-            transition: TransitionUp,
             backColor: classes.dialogColor5, 
         },
-    ]
-
+    ];
 
     return (<>
         <Dialog
             className={classes.dialogRoot}
             open={props.open}
-            TransitionComponent={modalProps[idxModal].transition}
-            keepMounted
+            TransitionComponent={TransitionDown}
             onClose={props.handleClose}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"

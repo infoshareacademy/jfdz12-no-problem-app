@@ -3,8 +3,6 @@ import CakeFilters from './filter/CakeFilters';
 import { CircularProgress, Container, Grid } from '@material-ui/core';
 import { RenderCakesList } from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
-import { FilterVisibleToogle } from '../menu/FilterVisibleToogle';
-import ToogleView from './component/ToogleView';
 import { getFullData } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 
@@ -27,15 +25,13 @@ export class CakesList extends React.Component{
             priceRange: [],
             sortById: 0,
             cakesMaxId: 0,
-            filterVisibility: false,
-            toogleView: false,
+            toogleView: true,
             error:'',
         };
         this.filterChange = this.filterChange.bind(this);
         this.handleToogleChange = this.handleToogleChange.bind(this);
         this.handleChangePrice = this.handleChangePrice.bind(this);
         this.handleSortBy = this.handleSortBy.bind(this);
-        this.handleFilterVisibility = this.handleFilterVisibility.bind(this);
     }
 
     componentDidMount() {
@@ -54,21 +50,13 @@ export class CakesList extends React.Component{
             .finally(() => this.setState({loading: false}))
     }
     
-    handleFilterVisibility(){
-    
-        this.setState( prevState => ({
-            filterVisibility: !prevState.filterVisibility,
-            })
-        );
-      }
-
     filterChange (event){
         let value = null;
 
         if(event.target.type === 'checkbox'){
             value = event.target.checked;
         }else{
-            value = (/^[a-zA-Z0-9]+$/.test(event.target.value) || event.target.value==="")
+            value = (/^[a-zA-Z0-9żźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/.test(event.target.value) || event.target.value==="")
                 ? event.target.value
                 : this.state[event.target.name]
         }
@@ -144,7 +132,6 @@ export class CakesList extends React.Component{
                 sortById,
                 toogleView,
                 error,
-                filterVisibility,
             } = this.state;
         
         if(error !== ''){
@@ -153,17 +140,16 @@ export class CakesList extends React.Component{
 
         if(loading){
             return ( <PageWrapper >
-                <CircularProgress/>
-            </PageWrapper>
-            )
+                        <CircularProgress/>
+                    </PageWrapper>
+                )
         }
 
         if (!loading) {
             return <PageWrapper>
-                <Container maxWidth = "lg" >       
-                
-                    <Grid container direction={filterVisibility && filterAllToogle ? 'row' : 'column'}>
-                        {filterVisibility && filterAllToogle &&
+                <Container maxWidth = 'lg' >       
+                    <Grid container direction={filterAllToogle ? 'row' : 'column'}>
+                        {filterAllToogle &&
                             <Grid item xs={12} sm={3} md={2}> 
                                 <CakeFilters 
                                     types = {types}
@@ -183,7 +169,7 @@ export class CakesList extends React.Component{
                                 />
                             </Grid>
                         }
-                        {filterVisibility && !filterAllToogle &&
+                        {!filterAllToogle &&
                             <Grid item xs={12} >
                                 <FilterAll
                                     filterTypesId ={filterTypesId} 
@@ -193,13 +179,15 @@ export class CakesList extends React.Component{
                                     onHandleToogleChange= {this.handleToogleChange}
                                     onFilterChange = {this.filterChange}
                                     onHandleTypeToggle = {this.handleTypeToggle}
+                                    onHandleToogleView = {this.handleToogleView}
+                                    toogleView = {toogleView}
                                 />
                             </Grid>
                         }
                         <Grid item 
                             xs={12} 
-                            sm={filterVisibility && filterAllToogle ? 9 : 12}
-                            md={filterVisibility && filterAllToogle ? 10 : 12}
+                            sm={filterAllToogle ? 9 : 12}
+                            md={filterAllToogle ? 10 : 12}
                         >
                             <RenderCakesList
                                 state = {this.state}
@@ -208,13 +196,8 @@ export class CakesList extends React.Component{
                         </Grid>   
                     </Grid> 
                     
-                    <ToogleView 
-                        onHandleToogleView = {this.handleToogleView} 
-                        toogleView = {toogleView}
-                    />
+                    
 
-                    <FilterVisibleToogle handleFilterVisibility={this.handleFilterVisibility}/>
-                
                 </Container>
             </PageWrapper>
         }

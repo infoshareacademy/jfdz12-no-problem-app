@@ -3,7 +3,6 @@ import { withStyles, Grid, Typography, IconButton, Avatar, Divider,} from '@mate
 import { CardMedia, Card, CardActions, CardContent, CardHeader, CardActionArea } from '@material-ui/core';
 import CookLabel from './CookLabel';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {Link} from 'react-router-dom';
 
 const styles ={
@@ -35,7 +34,7 @@ const styles ={
 
 function CakeCard2 (props) {
     
-    const { name, imgURL, price, glutenFree, id,} = props.cake;
+    const { name, imgURL, price, glutenFree, id, likes,} = props.cake;
     const { type, likedCake } = props;
     const { classes } = props;
     const typeBackGrColor = `${type.color}08`;
@@ -47,50 +46,49 @@ function CakeCard2 (props) {
                 style={{backgroundColor:typeBackGrColor}}
             >
                 <CardHeader
-                    action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
-                    }
                     titleTypographyProps={{align: "left", variant:"h6"}}
                     title={name}
                     subheaderTypographyProps={{align: "left"}}
                     subheader={`Cena: ${price} zł/kg` }
                 />
                 <CardActionArea component={Link} to={`/cake/${id}`} >
-                <CardMedia
-                    className={classes.media}
-                    image={imgURL}
-                    title="cake"
-                />
-                <CardContent>
-                    <Grid container justify="space-between" className={classes.grid}>
-                        <Avatar 
-                            variant="rounded" 
-                            className = {classes.avatar} 
-                            style={{backgroundColor: type.color}}
-                        >
-                            <div style={{display:'block'}}>{type.name}</div> 
-                        </Avatar>
-                        <Typography>
-                            bezglutenowe:  {glutenFree ? ' tak': ' nie'}
+                    <CardMedia
+                        className={classes.media}
+                        image={imgURL}
+                        title="cake"
+                    />
+                    <CardContent>
+                        <Grid container justify="space-between" alignItems='center' className={classes.grid}>
+                            <Avatar 
+                                variant="rounded" 
+                                className = {classes.avatar} 
+                                style={{backgroundColor: type.color}}
+                            >
+                                <div style={{display:'block'}}>{type.name}</div> 
+                            </Avatar>
+                            <Typography>
+                                bezglutenowe:  {glutenFree ? ' tak': ' nie'}
+                            </Typography>
+                        </Grid>
+                        
+                        <Divider />
+                        
+                        <Typography variant="body2" color="textSecondary" component="div">
+                            <CookLabel cook = {props.cook} />
                         </Typography>
-                    </Grid>
-                    
-                    <Divider />
-                    
-                    <Typography variant="body2" color="textSecondary" component="div">
-                        <CookLabel cook = {props.cook} />
-                    </Typography>
-    
-                </CardContent>
+        
+                    </CardContent>
                 </CardActionArea>
                 <Divider />
-    
-                <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon style={{color: likeColor}}/>
-                    </IconButton>
+                <CardActions  >
+                    <Grid container justify='space-between' alignItems='center' className={classes.grid}>
+                        <Typography component='div'>
+                            polubiło to:  {likes}
+                        </Typography>
+                        <IconButton aria-label="add to favorites">
+                            <FavoriteIcon style={{color: likeColor}}/>
+                        </IconButton>
+                    </Grid>
 
                 </CardActions>
                 

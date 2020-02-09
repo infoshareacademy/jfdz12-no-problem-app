@@ -30,6 +30,7 @@ export const styles={
     },
     grid:{
         margin: '10px 0px',
+        padding: '0px 5px',
     },
     input: {
         width: '100%',

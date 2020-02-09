@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Paper, Typography, Divider, CircularProgress, withStyles } from '@material-ui/core';
-//import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Link } from 'react-router-dom';
-import { UserUnlikeButton } from './UserUnlikeButton';
+import { UserUnlikeButton } from './userLikeDataComponent/UserUnlikeButton';
 import { getLikesWithData } from '../../api/Api2'; 
 
 const styles = {
@@ -19,7 +18,6 @@ const styles = {
     wrapper:{
         width:'100%',
     }
-    
 }
 
 function UserLikeData(props){
@@ -37,12 +35,10 @@ function UserLikeData(props){
                 setIsLoading(false);
                 setIsUpdate(false);
             })            
-        },[isUpdate, userId])
+        },[userId,isUpdate])
     
     const handleOnUnLike = () =>{
         setIsUpdate(true);
-        
-        console.log('handleUlike')
     }
 
     const { classes } = props;
@@ -106,9 +102,6 @@ function UserLikeData(props){
                                 cake={like.cake}
                                 onHandleOnUnLike={handleOnUnLike}
                             />
-                            {/* <IconButton aria-label="add to favorites">
-                                <FavoriteIcon  className={classes.icon}/>
-                            </IconButton> */}
                         </Grid>
                     </Grid>
                     

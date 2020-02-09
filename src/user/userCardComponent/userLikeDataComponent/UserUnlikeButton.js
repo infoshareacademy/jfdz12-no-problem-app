@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../api/Api2';
+import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../../api/Api2';
 import { CircularProgress, IconButton, Tooltip } from '@material-ui/core';
 import { UserUnLikeModal } from './UserUnLikeModal';
 
@@ -12,7 +12,6 @@ export function UserUnlikeButton(props) {
     const [counter, setCounter] = useState(0);
 
     useEffect(() => {
-
         getCookById(userId)
             .then(user => setUser(user))
             .catch(error => console.log('error', error.toString()))
@@ -46,15 +45,19 @@ export function UserUnlikeButton(props) {
     const handleClose = () => {
         setOpen(false);
         setCounter(0);
+        // props.onHandleOnUnLike();
     }
+
     const handleOpen = () => {
-        setOpen(false)
-        setOpen(true)
-        setCounter(counter + 1 )
+        setOpen(false);
+        setTimeout(()=> setOpen(true),500) ;
+        setCounter(counter + 1 );
     }
 
     if (isLoading) {
-        return <CircularProgress size='15px' color="secondary" />
+        return <div>
+                <CircularProgress size='15px' color="secondary" />
+            </div>
     }
 
     return (<>
