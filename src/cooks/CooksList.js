@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import PageWrapper from '../components/PageWrapper';
 import { getCooks, getCakes } from '../api/Api2';
 import { Container, Grid } from '@material-ui/core';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CookPanel from './CookPanel'
 
 export default class CooksList extends Component {
 
@@ -29,8 +25,6 @@ export default class CooksList extends Component {
             }))
     }
 
-    cookCakes = [];
-
     render() {
       
         return (
@@ -38,28 +32,11 @@ export default class CooksList extends Component {
                 <Container>
                     <Grid>
                         <h1>Pieczemy za Ciebie!</h1>
-                        
                         {this.state.cooks.map(cook=>{
-                            let cooksCakes = this.state.cakes.filter(cake=> cake.cookID===cook.id);
-                            console.log(cooksCakes);
+                            let cooksCakes = this.state.cakes.filter(cake=> cake.cookId===cook.id);
                             return (
-                         <ExpansionPanel>
-                         <ExpansionPanelSummary
-                           expandIcon={<ExpandMoreIcon />}
-                           aria-controls="panel1a-content"
-                           id="panel1a-header"
-                         >
-                           <Typography>{cook.name} {cook.surname}</Typography>
-                         </ExpansionPanelSummary>
-                         <ExpansionPanelDetails>
-                           <Typography>
-                             {cook.description}
-                             {/* {cooksCakes} */}
-                           
-                           </Typography>
-                         </ExpansionPanelDetails>
-                        </ExpansionPanel>)})}
-                        
+                                <CookPanel key={cook.id} cook={cook} cooksCakes={cooksCakes}/>
+                        )})}
                     </Grid>
                 </Container>
             </PageWrapper>
