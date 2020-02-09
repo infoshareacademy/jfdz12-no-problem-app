@@ -1,12 +1,11 @@
 import React from 'react';
-import { Grid, Typography, Button, withStyles } from '@material-ui/core';
+import { Grid, Typography, Button, withStyles, Avatar } from '@material-ui/core';
 import MySelect from './signComponent/MySelect';
 import { USERTYPE } from '../constans/selectConstans';
 import BasicData from './signComponent/BasicData';
 import ContactData from './signComponent/ContactData';
 import CookData from './signComponent/CookData';
 import { styles } from './styles/SignOnStyles'
-
 
 function SignOnRender(props) {
     const { classes } = props;
@@ -22,7 +21,12 @@ function SignOnRender(props) {
             <form className={classes.paper} >
                 <Typography component="h1" variant="h5">
                     Rejestracja
-                        </Typography>
+                </Typography>
+                <div style ={{display:'flex', justifyContent:'center', margin:'12px 0'}}>
+                    <Avatar style={{padding:'7px'}} >
+                        {name.slice(0,1).toUpperCase() }{surname.slice(0,1).toUpperCase()}
+                    </Avatar>
+                </div>
                 <MySelect
                     onHandleChange={props.onHandleChange}
                     name='userType'
@@ -88,7 +92,7 @@ function SignOnRender(props) {
                         onClick={props.onHandleOnClick}
                     >
                         Zapisz
-                            </Button>
+                    </Button>
                 </Grid>
 
             </form>

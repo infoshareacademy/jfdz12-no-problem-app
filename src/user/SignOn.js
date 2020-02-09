@@ -27,6 +27,8 @@ export default class SignOn extends Component {
         message: false,
         redirect: false,
         file: null,
+        isError: false,
+        error:'',
     }
 
     handleChange = (event) => {
@@ -54,13 +56,12 @@ export default class SignOn extends Component {
 
         const cookData = {
             avatar: avatar,
-            decription: description,
+            description: description,
             location: {
                 city: city,
                 district: district,
                 street: street
             }
-
         }
 
         if (userType === 'cook') {
@@ -73,51 +74,20 @@ export default class SignOn extends Component {
         }
     }
 
-    addAvatarToFirebase = () => {
-        const userUid = firebase.auth().currentUser.uid;
-        const fileName = this.state.file.name;
-        //console.log(userUid, fileName, this.state.file )
-        firebase.storage().ref(`avatars/${userUid}/${fileName}`)
-        .put(this.state.file)
-        .then((res) => {
-            res.ref.getDownloadURL().then(url => {
-                this.setState({avatar: url})
-           //     console.log('urs', url);
-            });
-        })
-    }
-
     createUserFetch = () => {
-        console.log('fetch', this.addData())
+       
         fetch(`${FIREBASE_API}/users.json`, {
             method: 'POST',
             body: JSON.stringify(this.addData())
         })
-        // .then((res) => {
-        //     console.log(res)
-        //     this.addAvatarToFirebase();
-        // })
-        // .then(() => {
-        //     const userid = firebase.auth().currentUser.uid;
-        //     const formatedData = {
-        //         avatar : this.state.avatar,
-        //     }
-        //     fetch(`${FIREBASE_API}/users/${userid}.json`, {
-        //         method: 'PUT',
-        //         body: JSON.stringify(formatedData)
-        //     }).then((res) => {
-        //         console.log('dodałem avatar', res);
-        //     })
-            
-        // })
-        .catch((err) => {
-            console.log(err.message)
+        .catch((error) => {
+            this.setState({ error: error.message, isError: true });
+            console.log(error.message);
         })
         .finally(() => {
             if (firebase.auth().currentUser) {
                 firebase.auth().signOut();
             }
-            console.log(firebase.auth().currentUser)
             this.setState({
                 isLoading: false,
                 message: true,
@@ -128,15 +98,19 @@ export default class SignOn extends Component {
 
     signUp = () => {
         const { email, password } = this.state;
-        console.log('signUp email', email )
+        
         firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(data => this.setState({ uid: data.user.uid }))
-            .then(() => this.createUserFetch())
-            .catch((error) => console.log(error))
+            .then(data => {
+                    this.setState({ uid: data.user.uid });
+                    this.createUserFetch();
+                })
+            .catch((error) => {
+                    this.setState({ error: error.message, isError: true });
+                })
+            .finally(()=> this.setState({ isLoading: false }));
     };
 
     handleOnClick = (event) => {
-
         event.preventDefault();
         this.setState({ isLoading: true })
 
@@ -147,44 +121,29 @@ export default class SignOn extends Component {
         this.setState({ message: false });
     }
 
-    handleFileAdd = (event) => {
-        this.setState({
-            file:event.target.files[0],
-        })
-
-
-        // const fileName = event.target.files[0];
-        // console.log(fileName.name, event.target.files);
-        
-        // firebase.storage().ref(`avatars/${fileName.name}`)
-        //     .put(fileName)
-        //     .then((res) => {
-        //         res.ref.getDownloadURL().then(url => {
-        //             console.log('urs', url);
-        //         });
-        //         alert('Added successfully! Yay!');
-        //     })
-        // // this.setState({
-        //     imgURL : `/img/ciacha/${fileName}`  
-        // })
-    }
 
     render() {
-        const { message, email, isLoading, redirect } = this.state;
+        const { message, email, isLoading, isError, redirect } = this.state;
 
         if(redirect) {
             return <>
-            <PageWrapper>
-                <MessageSnakebar
-                        open={message}
-                        onHandleClose={this.handleClose}
-                        message={`użytkownik ${email} został dodany pomyślnie`}
-                />
-                <h1>Użytkownik został zarjestrowany, zaloguj się </h1>
-                <Link to='/SignIn'>Sign in</Link>
-            </PageWrapper>
-                
+                <PageWrapper>
+                    <MessageSnakebar
+                            open={message}
+                            onHandleClose={this.handleClose}
+                            message={`użytkownik ${email} został dodany pomyślnie`}
+                    />
+                    <h1>Użytkownik został zarjestrowany, zaloguj się </h1>
+                    <Link to='/SignIn'>Sign in</Link>
+                </PageWrapper> 
             </>
+        }
+
+        if(isError) {
+            return  <PageWrapper >
+                        <h3>wystąpił błąd: {this.state.error}</h3>
+                        <Link to='/'>Powrót do strony głównej</Link>
+                    </PageWrapper>
         }
 
         if (isLoading) {
