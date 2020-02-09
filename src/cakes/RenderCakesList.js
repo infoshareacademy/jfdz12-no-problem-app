@@ -1,9 +1,9 @@
 import React from 'react';
-import {filterCondition} from './filter/FilterCondition'
-import CakeCard2 from './CakeCard2';
-import CakeCard from './CakeCard';
-import { Grid,  } from '@material-ui/core';
-import {SORTOPTIONS} from '../constans/selectConstans'
+import { filterCondition } from './filter/FilterCondition'
+import CakeCard2 from './cakeCard/CakeCard2';
+import CakeCard from './cakeCard/CakeCard';
+import { Grid, Typography, } from '@material-ui/core';
+import { SORTOPTIONS } from '../constans/selectConstans'
 
 
 export class RenderCakesList extends React.Component {
@@ -65,9 +65,22 @@ export class RenderCakesList extends React.Component {
         };
 
     render(){
-        const { cooks, types, toogleView } = this.props.state;
+        const { cooks, types, toogleView, priceRange } = this.props.state;
         const filteredSortedCakes = this.getSorteredCakes();
         
+        if(priceRange[0]>priceRange[1]) {
+            return <Typography variant="h6">
+                        Cena od jest wyższa od ceny do, zmień parametry aby wyświeliśc wyniki !
+                    </Typography>
+        }
+
+        if(!filteredSortedCakes.length || filteredSortedCakes.length<1){
+            return <Typography variant="h6">
+                        Żadne ciasto nie pasuje do wyników wyszukiwania
+                    </Typography>
+        }
+
+
         return(    
             <Grid container spacing={1} justify='center' >
                 

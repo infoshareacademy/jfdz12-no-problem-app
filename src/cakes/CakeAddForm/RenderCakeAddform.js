@@ -5,7 +5,7 @@ import CakeAddInput from './component/CakeAddInput';
 import CakeAddTypesSelect from './component/CakeAddTypesSelect';
 import CakeAddSelect from './component/CakeAddSelect';
 import { YESNOSELECT } from '../../constans/selectConstans'
-import CookLabelFull from '../CookLabelFull';
+import CookLabelFull from '../cakeCard/CookLabelFull';
 
 function RenderCakeAddForm(props) {
 
@@ -52,7 +52,7 @@ function RenderCakeAddForm(props) {
                         <label htmlFor="outlined-button-file" >
                             <Button variant="outlined" component="span" style={{ margin: '10px' }} >
                                 dodaj zdjęcie
-                                    </Button>
+                            </Button>
                         </label>
                     </Grid>
 

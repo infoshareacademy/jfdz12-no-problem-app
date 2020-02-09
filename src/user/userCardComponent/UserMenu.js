@@ -21,23 +21,11 @@ function UserMenu(props){
         <Paper>
             <MenuList className={classes.root}> 
                 <UserMenuItem 
-                    text="Dane podstawowe" 
+                    text="Dane użytkownika" 
                     menu="basic" 
                     onHandleClick={props.onHandleClick} 
                     selectedMenu={props.selectedMenu.basic}
                 />
-
-                { userType === "cook" &&
-                    <div>
-                        <Divider/>
-                        <UserMenuItem 
-                            text="Dane cukiernika" 
-                            menu="mCook" 
-                            onHandleClick={props.onHandleClick} 
-                            selectedMenu={props.selectedMenu.mCook}
-                        />
-                    </div>
-                }
                 
                 <Divider/>
                 <UserMenuItem 
