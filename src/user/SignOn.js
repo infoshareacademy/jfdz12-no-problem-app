@@ -6,6 +6,7 @@ import { FIREBASE_API } from '../api/Api2';
 import MessageSnakebar from './signComponent/MessageSnakebar';
 import SignOnRender from './SignOnRender';
 import { Link } from 'react-router-dom';
+import { validateForm } from './signComponent/signOnFuctions'
 
 export default class SignOn extends Component {
     state = {
@@ -29,6 +30,7 @@ export default class SignOn extends Component {
         file: null,
         isError: false,
         error:'',
+        isRequired: false,
     }
 
     handleChange = (event) => {
@@ -112,9 +114,16 @@ export default class SignOn extends Component {
 
     handleOnClick = (event) => {
         event.preventDefault();
-        this.setState({ isLoading: true })
-
-        this.signUp();
+        const validate = validateForm(this.state);
+       
+        if (validate) {
+            this.setState({ isRequired: true })
+        }else {
+            this.setState({ isRequired: false })
+            this.setState({ isLoading: true })
+            this.signUp();
+        }
+        
     }
 
     handleClose = () => {
@@ -123,7 +132,7 @@ export default class SignOn extends Component {
 
 
     render() {
-        const { message, email, isLoading, isError, redirect } = this.state;
+        const { message, email, isLoading, isError, redirect, isRequired } = this.state;
 
         if(redirect) {
             return <>
@@ -160,6 +169,7 @@ export default class SignOn extends Component {
                     onHandleOnClick = {this.handleOnClick}
                     onHandleFileAdd = {this.handleFileAdd}
                     state = {this.state}
+                    isRequired = { isRequired }
                 />
 
             </PageWrapper>

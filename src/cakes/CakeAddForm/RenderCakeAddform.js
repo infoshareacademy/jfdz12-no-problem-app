@@ -27,7 +27,7 @@ function RenderCakeAddForm(props) {
                         onHandleCakeChange={props.onHandleCakeChange}
                         value={name}
                         name="name"
-                        label="Nazwa ciasta: "
+                        label="Nazwa ciasta: * "
                         styleProp="header"
                         type="text"
                         error={isRequired && !name}
@@ -64,7 +64,7 @@ function RenderCakeAddForm(props) {
                                 onHandleCakeChange={props.onHandleCakeChange}
                                 value={price}
                                 name="price"
-                                label="Cena zł/kg: "
+                                label="Cena zł/kg: * "
                                 type="number" 
                                 error={isRequired && !price}
                             />
@@ -72,7 +72,7 @@ function RenderCakeAddForm(props) {
                                 onHandleCakeChange={props.onHandleCakeChange}
                                 value={priceForPortion}
                                 name="priceForPortion"
-                                label="cena za porcję/sztukę: "
+                                label="cena za porcję/sztukę: * "
                                 type="number"
                                 error={isRequired && !priceForPortion}
                             />
@@ -80,7 +80,7 @@ function RenderCakeAddForm(props) {
                                 onHandleCakeChange={props.onHandleCakeChange}
                                 value={portionDescription}
                                 name="portionDescription"
-                                label="porcja: "
+                                label="porcja: * "
                                 styleDirect={{ width: "95%" }}
                                 type="text"
                                 error={isRequired && !portionDescription}
@@ -93,7 +93,7 @@ function RenderCakeAddForm(props) {
                                 types={types}
                                 value={typeId}
                                 name="typeId"
-                                label="Typ ciasta: "
+                                label="Typ ciasta: * "
                                 error={isRequired && typeId === '-1'}
                             />
                             <CakeAddInput
