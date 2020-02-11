@@ -10,6 +10,8 @@ import { withRouter } from 'react-router-dom';
 import { useEffect } from 'react'
 import firebase from 'firebase/app';
 import { getUserByUid } from '../../api/Api2';
+import { connect } from 'react-redux';
+import { setUserToStore, clearUserInStore } from '../../state/user'
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -46,18 +48,8 @@ function MenuAppBar(props) {
 	const [myStyle, setMystyle] = React.useState('rgba(255,255,255, 0.3)'); //to jest do window.scroll
 	const open = Boolean(anchorEl);
 	const [auth, setAuth] = React.useState(false);
-	const [userRef, setUserRef] = React.useState(null);
-	// let style = props.styleColor;
-	// let style = {backgroundColor:'rgba(255,255,255, 0.3)'};
-
-	// to chyba niepotrzbene ale nie wiem   
-	// const changeCol = () => {
-	//    if (window.pageYOffset <10) {
-	//      style={backgroundColor:'white'};
-	//    } else {
-	//     style={backgroundColor:'red'}; 
-	//    }
-	// }
+	//const [userRef, setUserRef] = React.useState(null);
+	const {setUserToStore} = props; 
 
 	//ta funckja jest do window.scroll
 	useEffect(() => {
@@ -75,22 +67,24 @@ function MenuAppBar(props) {
 	};
 
 	useEffect(() => {
-		const authRef = firebase.auth().onAuthStateChanged(user => {
-			setAuth(user ? true : false)
+		firebase.auth().onAuthStateChanged(user => {
+			setAuth(user ? true : false);
+			
 			if(user){
-				setUserRef(authRef);
-				getUserByUid(user.uid).then((dataUser)=>{
-					sessionStorage.setItem('userId', dataUser.id);
-				})
-
+				//setUserRef(authRef);
+				getUserByUid(user.uid)
+					.then((dataUser)=>{
+						sessionStorage.setItem('userId', dataUser.id);
+						setUserToStore(dataUser);
+					})
 			}
 		})
-		return () => {
-			if (userRef) {
-				userRef();
-			}
-		};
-	});
+		// return () => {
+		// 	if (userRef) {
+		// 		userRef();
+		// 	}
+		// };
+	},[auth, setUserToStore]);
 
 	const handleChange = () => {
 		setAnchorEl(null);
@@ -150,11 +144,20 @@ function MenuAppBar(props) {
 			<AppBar className={classes.navStyle} style={{ backgroundColor: myStyle }} >
 
 				{content()}
-
+				
 			</AppBar>
 
 		</div>
 	);
 }
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId, 
+});
 
-export default withRouter(MenuAppBar);
+const mapDispatchToProps = {
+    setUserToStore,
+    clearUserInStore,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(MenuAppBar));

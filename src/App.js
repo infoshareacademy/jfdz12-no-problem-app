@@ -1,6 +1,6 @@
 import React from 'react';
 import { CircularProgress, } from '@material-ui/core';
-import { CakesList } from './cakes/CakesList';
+import CakesList from './cakes/CakesList';
 import './App.css';
 import Dashboard from './dashboard/Dashboard';
 import CooksList from './cooks/CooksList';

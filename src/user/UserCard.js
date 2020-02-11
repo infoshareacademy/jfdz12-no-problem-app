@@ -7,7 +7,7 @@ import PageWrapper from '../components/PageWrapper';
 import { Link } from 'react-router-dom';
 import UserAllData from './userCardComponent/UserAllData';
 import { UserCakeData } from './userCardComponent/UserCakeData';
-
+import { connect } from 'react-redux';
 
 const styles ={
     gridStyle: {
@@ -40,6 +40,7 @@ class UserCard extends React.Component{
         super(props);
         this.backLink = props.location.search.substring(1,props.location.search.length);
         this.userIdRef = sessionStorage.getItem('userId');
+        this.userIdRef2 = props.userIdInStore;
         this.state ={
             user: {},
             isLoading: true,
@@ -101,11 +102,11 @@ class UserCard extends React.Component{
     render(){
         const {user, isLoading, selectedMenu, loginUser, } =  this.state;
         const { classes } = this.props;
-       
+        
         if (isLoading) {
             return <PageWrapper >
-                <CircularProgress color="secondary" />
-            </PageWrapper>
+                        <CircularProgress color="secondary" />
+                    </PageWrapper>
         }
 
         if (!loginUser){
@@ -117,6 +118,7 @@ class UserCard extends React.Component{
 
         return (
             <PageWrapper>
+                <div>aaa:{this.props.userIdInStore} aaa:{this.userIdRef2}</div>
                 { !isLoading && <Container maxWidth='lg'>
                     <Grid container className={classes.gridTop}>
                         <Grid item xs={12} className={classes.gridStyle}>
@@ -164,4 +166,12 @@ class UserCard extends React.Component{
     }
 }
 
-export default withStyles(styles)(UserCard);
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId, 
+});
+// const mapDispatchToProps = {
+//     setUserToStore,
+//     clearUserInStore,
+// };
+export default connect( mapStateToProps, null)(withStyles(styles)(UserCard));

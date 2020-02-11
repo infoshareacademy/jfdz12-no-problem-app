@@ -8,6 +8,8 @@ import firebase from 'firebase/app';
 import {Redirect} from 'react-router-dom';
 import MessageSnakebar from './signComponent/MessageSnakebar';
 import {styles} from './styles/SignInStyles'
+import { connect } from 'react-redux';
+import { setUserToStore, clearUserInStore} from '../state/user'
 
 const loginError = ( error ) => {
 
@@ -62,9 +64,8 @@ class SignIn extends React.Component{
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(() => {
             const signInUser = this.state.users.find(user => user.uid === firebase.auth().currentUser.uid )
-         
-            this.saveUserIdToLocalStorage(signInUser.id)
-            
+            this.saveUserIdToLocalStorage(signInUser.id);
+            //this.props.setUserToStore(signInUser);
             this.setState({
                 redirect: true,
             })
@@ -78,7 +79,6 @@ class SignIn extends React.Component{
 
     handleOnClick = (event) => {
         event.preventDefault();
-
         this.signIn();
     };
 
@@ -100,7 +100,7 @@ class SignIn extends React.Component{
 
     render(){
         const { emailResetMessage, redirect, isLoading, error } = this.state;
-        const { classes } = this.props;
+        const { classes, } = this.props;
 
         if(redirect) {
             return <Redirect to={'/'} />
@@ -117,9 +117,6 @@ class SignIn extends React.Component{
                         <Typography variant='h6'>
                             {error}
                         </Typography>
-                        <Typography variant='h6'>
-                            <Rlink to={'/SignIn'}>Zaloguj się ponownie</Rlink>
-                        </Typography >
                         <Typography variant='h6'>
                             <Rlink to={'/'}>Wróć na stronę główną</Rlink>
                         </Typography>
@@ -208,4 +205,14 @@ class SignIn extends React.Component{
     }
 }
 
-export default withStyles(styles)(SignIn);
+// const mapStateToProps = (state) => ({
+//     userInStore: state.userReducer.user,
+//     userIdInStore: state.userReducer.userId, 
+// });
+
+const mapDispatchToProps = {
+    setUserToStore,
+    clearUserInStore,
+};
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(SignIn));
