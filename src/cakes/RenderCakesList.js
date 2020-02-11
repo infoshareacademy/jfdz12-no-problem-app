@@ -4,10 +4,10 @@ import CakeCard2 from './cakeCard/CakeCard2';
 import CakeCard from './cakeCard/CakeCard';
 import { Grid, Typography, } from '@material-ui/core';
 import { SORTOPTIONS } from '../constans/selectConstans'
+import {connect} from 'react-redux';
 
-
-export class RenderCakesList extends React.Component {
-    userIdRef = sessionStorage.getItem('userId') || '';
+class RenderCakesList extends React.Component {
+    userIdRef = this.props.userIdInStore || "";  //sessionStorage.getItem('userId') || '';
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
@@ -119,3 +119,10 @@ export class RenderCakesList extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId, 
+});
+
+export default connect( mapStateToProps, null)(RenderCakesList);

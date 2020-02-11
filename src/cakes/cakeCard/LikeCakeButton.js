@@ -3,16 +3,15 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Button } from '@material-ui/core';
 import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../api/Api2';
 import { CircularProgress } from '@material-ui/core';
+import { connect } from 'react-redux';
 
-export function LikeCakeButton (props) {
+function LikeCakeButton (props) {
     const { likesUsersId } = props.cake;
-    const userId = sessionStorage.getItem('userId');
-
+    const userId = props.userIdInStore; //sessionStorage.getItem('userId');
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState(null);
 
     useEffect (() => {
-       
         getCookById(userId)
             .then(user => setUser(user))
             .catch(error => console.log('error', error.toString()))
@@ -68,6 +67,11 @@ export function LikeCakeButton (props) {
         </Button>
 
     </>)
-
-
 }
+
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId, 
+});
+
+export default connect( mapStateToProps, null)(LikeCakeButton);

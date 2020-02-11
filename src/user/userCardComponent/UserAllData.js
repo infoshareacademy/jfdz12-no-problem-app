@@ -3,8 +3,7 @@ import { withStyles, Paper, CircularProgress, Grid, Button, InputLabel } from '@
 import UserBasicData from './userDataComponent/UserBasicData';
 import UserCookData from './userDataComponent/UserCookData';
 import UserAvatarData from './userDataComponent/UserAvatarData';
-import { Link } from 'react-router-dom';
-import { getUserById, updateUserFetch } from '../../api/Api2';
+import { updateUserFetch } from '../../api/Api2';
 import MessageSnakebar from '../../components/MessageSnakebar';
 import { USERTYPE } from '../../constans/selectConstans';
 import { UserSelect } from './userDataComponent/UserSelect';
@@ -46,10 +45,10 @@ const styles = {
 class UserAllData extends React.Component{
     constructor(props){
         super(props);
-        this.userId = sessionStorage.getItem('userId');
+        this.userId = props.user.id;  //sessionStorage.getItem('userId');
         this.state = {
-            user: {},
-            isLoading: true,
+            user: props.user,
+            isLoading: false,
             loginUser: false,
             noEdit: true,
             isUpdate: false,
@@ -76,23 +75,6 @@ class UserAllData extends React.Component{
             })
     }
 
-    componentDidMount () {
-        if (this.userId){
-            getUserById(this.userId)
-            .then(data => this.setState ({ user: data }))
-            .catch(error => console.log('bład pobierania danych User', error.toString()))
-            .finally(() => this.setState({
-                    isLoading: false,
-                    loginUser: true,
-                }))
-        } else {
-            this.setState({
-                loginUser:false,
-                isLoading:false,
-            })
-        }
-    }
-
     handleOnEdit = () =>{
         this.setState({noEdit: false });
     }
@@ -109,7 +91,7 @@ class UserAllData extends React.Component{
                         isUpdate: true,
                         noEdit: true,
                     });
-                    this.props.fetchUserFromApi()
+                    //this.props.fetchUserFromApi()
                 })
     }
 
@@ -154,7 +136,7 @@ class UserAllData extends React.Component{
 
     render(){
         const { classes } = this.props;
-        const { user, isLoading, loginUser, noEdit, isUpdate } = this.state;
+        const { user, isLoading, noEdit, isUpdate } = this.state;
     
         if (isLoading) {
             return(
@@ -162,16 +144,6 @@ class UserAllData extends React.Component{
                     <CircularProgress className={classes.login} color="secondary" />
                 </Paper>
             )  
-        }
-
-        if (!loginUser){
-            return (
-                <Paper className={classes.paper}>
-                    <div className={classes.login}>
-                        <h1>Użytkownik nie zalogowany, zaloguj się </h1>
-                        <Link to='/SignIn'>Zaloguj się </Link>
-                    </div>
-                </Paper>)
         }
 
         return (<>

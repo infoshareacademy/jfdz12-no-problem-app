@@ -3,9 +3,10 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../../api/Api2';
 import { CircularProgress, IconButton, Tooltip } from '@material-ui/core';
 import { UserUnLikeModal } from './UserUnLikeModal';
+import { connect } from 'react-redux';
 
-export function UserUnlikeButton(props) {
-    const userId = sessionStorage.getItem('userId');
+function UserUnlikeButton(props) {
+    const userId = props.userIdInStore; //sessionStorage.getItem('userId');
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState(null);
     const [open, setOpen] = useState(false);
@@ -34,10 +35,10 @@ export function UserUnlikeButton(props) {
             .then((res) => console.log('dodałem', res))
             .catch(error => console.log('error', error.message))
             .finally(() => {
-                setIsLoading(false);
-                setOpen(false);
-                setCounter(0);
-                props.onHandleOnUnLike();
+                    setIsLoading(false);
+                    setOpen(false);
+                    setCounter(0);
+                    props.onHandleOnUnLike();
                 }
             )
     }
@@ -77,6 +78,11 @@ export function UserUnlikeButton(props) {
         </Tooltip>
 
     </>)
-
-
 }
+
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId, 
+});
+
+export default connect( mapStateToProps, null)(UserUnlikeButton);

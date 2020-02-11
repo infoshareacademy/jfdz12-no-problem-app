@@ -1,11 +1,10 @@
 import React from 'react';
 import CakeFilters from './filter/CakeFilters';
 import { CircularProgress, Container, Grid } from '@material-ui/core';
-import { RenderCakesList } from './RenderCakesList';
+import RenderCakesList from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
 import { getFullData } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
-import { connect } from 'react-redux';
 
 class CakesList extends React.Component{
    
@@ -148,8 +147,7 @@ class CakesList extends React.Component{
 
         if (!loading) {
             return <PageWrapper>
-<div>app: {this.props.userIdInStore}</div>
-                <Container maxWidth = 'lg' >       
+                 <Container maxWidth = 'lg' >       
                     <Grid container direction={filterAllToogle ? 'row' : 'column'}>
                         {filterAllToogle &&
                             <Grid item xs={12} sm={3} md={2}> 
@@ -197,18 +195,10 @@ class CakesList extends React.Component{
                             />
                         </Grid>   
                     </Grid> 
-                    
-                    
-
                 </Container>
             </PageWrapper>
         }
     }
 }
 
-const mapStateToProps = (state) => ({
-    userInStore: state.userReducer.user,
-    userIdInStore: state.userReducer.userId, 
-});
-
-export default connect( mapStateToProps, null)(CakesList);
+export default CakesList;

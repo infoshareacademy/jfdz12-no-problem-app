@@ -48,7 +48,6 @@ function MenuAppBar(props) {
 	const [myStyle, setMystyle] = React.useState('rgba(255,255,255, 0.3)'); //to jest do window.scroll
 	const open = Boolean(anchorEl);
 	const [auth, setAuth] = React.useState(false);
-	//const [userRef, setUserRef] = React.useState(null);
 	const {setUserToStore} = props; 
 
 	//ta funckja jest do window.scroll
@@ -71,19 +70,13 @@ function MenuAppBar(props) {
 			setAuth(user ? true : false);
 			
 			if(user){
-				//setUserRef(authRef);
 				getUserByUid(user.uid)
 					.then((dataUser)=>{
-						sessionStorage.setItem('userId', dataUser.id);
+						//sessionStorage.setItem('userId', dataUser.id);
 						setUserToStore(dataUser);
 					})
 			}
 		})
-		// return () => {
-		// 	if (userRef) {
-		// 		userRef();
-		// 	}
-		// };
 	},[auth, setUserToStore]);
 
 	const handleChange = () => {
@@ -102,8 +95,9 @@ function MenuAppBar(props) {
 	const handleSignOut = () => {
 		firebase.auth().signOut();
 		setAuth(false);
-		sessionStorage.setItem('userId', null);
-		props.history.push('/')
+		//sessionStorage.setItem('userId', null);
+		props.history.push('/');
+		props.clearUserInStore();
 	}
 
 	const content = () =>{

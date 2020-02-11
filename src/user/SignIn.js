@@ -64,8 +64,8 @@ class SignIn extends React.Component{
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(() => {
             const signInUser = this.state.users.find(user => user.uid === firebase.auth().currentUser.uid )
-            this.saveUserIdToLocalStorage(signInUser.id);
-            //this.props.setUserToStore(signInUser);
+            //this.saveUserIdToLocalStorage(signInUser.id);
+            this.props.setUserToStore(signInUser);
             this.setState({
                 redirect: true,
             })
@@ -90,9 +90,9 @@ class SignIn extends React.Component{
         });
     }
 
-    saveUserIdToLocalStorage = (userId) => {
-        sessionStorage.setItem('userId', userId);
-    }
+    // saveUserIdToLocalStorage = (userId) => {
+    //     sessionStorage.setItem('userId', userId);
+    // }
 
     handleClose = () =>{
         this.setState({emailResetMessage:false});

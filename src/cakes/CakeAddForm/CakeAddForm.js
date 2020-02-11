@@ -8,12 +8,13 @@ import { Redirect, Link } from 'react-router-dom';
 import RenderCakeAddForm from './RenderCakeAddform'; 
 import MessageSnakebar from '../../components/MessageSnakebar';
 import { validateCakeAdd } from './component/cakeAddFunction'
+import { connect } from 'react-redux';
 
 class CakeAddForm extends React.Component{
     constructor(props){
         super(props);
         this.cakeId = props.match.params.id;
-        this.userIdRef = sessionStorage.getItem('userId');
+        this.userIdRef = props.userIdInStore;//sessionStorage.getItem('userId');
         this.state = {
             cookList: false,
             cakes: [],
@@ -124,13 +125,12 @@ class CakeAddForm extends React.Component{
 
     addCakeFetch(){
         const validate = validateCakeAdd(this.state.cakeAdd);
-        console.log('onClick', validateCakeAdd(this.state.cakeAdd))
+       
         if (validate) {
             this.setState({ isRequired: validate, });
-            console.log('onClick- isReq', )
         }else{
             this.fetchCake()
-            .then((res) => {
+            .then(() => {
                 this.setState({ 
                     saveCake: true, 
                     snakeOpen: true,
@@ -160,9 +160,10 @@ class CakeAddForm extends React.Component{
 
         const selectedCook = this.findDataById(cooks, cookId);
         const selectetType = this.findDataById(types,typeId);
-       
+        const backLink = this.props.location.search.slice(1)
+        
         if(saveCake && !snakeOpen) {
-            return <Redirect to={'/'}/>
+            return  <Redirect to={`/${backLink}`}/>
         }
 
         if(saveCake && snakeOpen) {
@@ -218,4 +219,9 @@ class CakeAddForm extends React.Component{
     }
 }
 
-export default CakeAddForm;
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId, 
+});
+
+export default connect( mapStateToProps, null)(CakeAddForm);

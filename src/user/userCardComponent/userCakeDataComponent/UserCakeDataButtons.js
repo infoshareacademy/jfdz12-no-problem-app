@@ -20,7 +20,7 @@ export function UserCakeDataButtons(props) {
                 <IconButton
                     aria-label="edit"
                     component={Link}
-                    to={`/cakeAdd/${cake.id}`}
+                    to={`/cakeAdd/${cake.id}?userCard?mCake`}
                 >
                     <EditIcon />
                 </IconButton>

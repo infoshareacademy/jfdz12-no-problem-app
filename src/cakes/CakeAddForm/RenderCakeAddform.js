@@ -147,8 +147,9 @@ function RenderCakeAddForm(props) {
                     onClick={props.history.goBack}
                 >
                     powrót
-                        </Button>
-                <Button onClick={props.addCakeFetch}
+                </Button>
+                <Button 
+                    onClick={props.addCakeFetch}
                     variant="outlined"
                     color="primary"
                     style={{ margin: '20px' }}

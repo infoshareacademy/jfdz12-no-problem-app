@@ -2,12 +2,12 @@ import React from 'react';
 import { Button, Container, Grid, Paper, Typography, withStyles,CircularProgress } from '@material-ui/core';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
-import { getUserById, } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 import { Link } from 'react-router-dom';
 import UserAllData from './userCardComponent/UserAllData';
 import { UserCakeData } from './userCardComponent/UserCakeData';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const styles ={
     gridStyle: {
@@ -34,16 +34,14 @@ const styles ={
     },
 }
 
-
 class UserCard extends React.Component{ 
     constructor(props){
         super(props);
-        this.backLink = props.location.search.substring(1,props.location.search.length);
-        this.userIdRef = sessionStorage.getItem('userId');
-        this.userIdRef2 = props.userIdInStore;
+        this.backLink = props.location.search.substring(1);
+        //this.userIdRef = sessionStorage.getItem('userId');
         this.state ={
             user: {},
-            isLoading: true,
+            isLoading: false,
             selectedMenu: {
                 basic : true,
                 like: false,
@@ -54,35 +52,45 @@ class UserCard extends React.Component{
         };
     }
 
-    fetchUserFromApi = () => {
-        return getUserById(this.userIdRef)
-            .then(data =>{
-                this.setState ({
-                    user: data,
-                })
-                if (this.backLink){
-                    this.setState(prevState => ({
-                        selectedMenu:{
-                            ...prevState.selectedMenu,
-                            basic: false,
-                            [this.backLink]: true,
-                        }
-                    }))
-                }
-            })
-    }
-
     componentDidMount(){
-        if (this.userIdRef){
-            this.fetchUserFromApi() 
-            .catch(error => console.log('bład addformfetch', error.toString()))
-            .finally(() => this.setState({
+        this.setState({ isLoading: true});
+
+        if (this.backLink){
+            this.setState(prevState => ({
+                selectedMenu:{
+                    ...prevState.selectedMenu,
+                    basic: false,
+                    [this.backLink]: true,
+                }
+            }))
+        }
+
+        if (this.props.userIdInStore){
+                this.setState({
                     isLoading: false,
                     loginUser: true,
-                }))
+                })
         }else{
-            this.setState({loginUser:false})
+            this.setState({
+                loginUser:false,
+                isLoading: false,
+            });
         }
+
+        // console.log('componendm', this.props.userIdInStore)
+        // if (this.props.userIdInStore){
+        //     console.log('componentdm true', this.props.userIdInStore)
+        //     this.fetchUserFromApi() 
+        //     .catch(error => console.log('bład addformfetch', error.toString()))
+        //     .finally(() => {
+        //         this.setState({
+        //             isLoading: false,
+        //             loginUser: true,
+        //         })})
+        // }else{
+        //     console.log('componentdm else', this.props.userIdInStore)
+        //     this.setState({loginUser:false});
+        // }
     }
 
     handleClick = (name) => {
@@ -100,9 +108,13 @@ class UserCard extends React.Component{
     }
 
     render(){
-        const {user, isLoading, selectedMenu, loginUser, } =  this.state;
-        const { classes } = this.props;
-        
+        const { isLoading, selectedMenu, loginUser, } =  this.state;
+        const { classes, userInStore, userIdInStore } = this.props;
+        console.log(userInStore, this.props.userIdInStore)
+        if(!userIdInStore){
+            return <Redirect to={'/userCard'}/>
+        }
+
         if (isLoading) {
             return <PageWrapper >
                         <CircularProgress color="secondary" />
@@ -118,8 +130,8 @@ class UserCard extends React.Component{
 
         return (
             <PageWrapper>
-                <div>aaa:{this.props.userIdInStore} aaa:{this.userIdRef2}</div>
-                { !isLoading && <Container maxWidth='lg'>
+                
+                {!isLoading && <Container maxWidth='lg'>
                     <Grid container className={classes.gridTop}>
                         <Grid item xs={12} className={classes.gridStyle}>
                             <Paper>
@@ -132,21 +144,25 @@ class UserCard extends React.Component{
                              <UserMenu 
                                 onHandleClick = {this.handleClick}
                                 selectedMenu = {selectedMenu}
-                                userType={user.userType}
+                                userType={userInStore.userType}
                              />    
                         </Grid>
                         <Grid item xs className={classes.gridStyle}>
                             {selectedMenu.basic &&
                                 <UserAllData  
-                                    user = {user}
-                                    fetchUserFromApi={this.fetchUserFromApi}
+                                    user = {userInStore}
+                                    //fetchUserFromApi={this.fetchUserFromApi}
                                 />
                             }
                             {selectedMenu.like && 
-                                <UserLikeData/> 
+                                <UserLikeData
+                                    userId = {userInStore.id}
+                                /> 
                             }
                             {selectedMenu.mCake &&
-                                <UserCakeData/> 
+                                <UserCakeData
+                                    userId = {userInStore.id}
+                                /> 
                             }
                         </Grid>
                     </Grid>
@@ -170,8 +186,5 @@ const mapStateToProps = (state) => ({
     userInStore: state.userReducer.user,
     userIdInStore: state.userReducer.userId, 
 });
-// const mapDispatchToProps = {
-//     setUserToStore,
-//     clearUserInStore,
-// };
+
 export default connect( mapStateToProps, null)(withStyles(styles)(UserCard));
