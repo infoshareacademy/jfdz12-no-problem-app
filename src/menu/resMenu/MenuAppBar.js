@@ -66,18 +66,22 @@ function MenuAppBar(props) {
 	};
 
 	useEffect(() => {
-		firebase.auth().onAuthStateChanged(user => {
-			setAuth(user ? true : false);
+		
+
+		setAuth(props.userIdInStore ? true : false);
+		
+		// firebase.auth().onAuthStateChanged(user => {
+		// 	setAuth(user ? true : false);
 			
-			if(user){
-				getUserByUid(user.uid)
-					.then((dataUser)=>{
-						//sessionStorage.setItem('userId', dataUser.id);
-						setUserToStore(dataUser);
-					})
-			}
-		})
-	},[auth, setUserToStore]);
+		// 	if(user){
+		// 		getUserByUid(user.uid)
+		// 			.then((dataUser)=>{
+		// 				//sessionStorage.setItem('userId', dataUser.id);
+		// 				setUserToStore(dataUser);
+		// 			})
+		// 	}
+		// })
+	},[props.userIdInStore]);
 
 	const handleChange = () => {
 		setAnchorEl(null);

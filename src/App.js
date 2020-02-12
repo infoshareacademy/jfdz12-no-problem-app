@@ -11,9 +11,10 @@ import SignIn from './user/SignIn';
 import SignOn from './user/SignOn';
 import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 import CakeCardFull from './cakes/cakeCard/CakeCardFull';
-import { getCakes } from './api/Api2';
+import { getCakes, getUserByUid } from './api/Api2';
 import firebase from "firebase";
-
+import { connect } from 'react-redux';
+import { setUserToStore, checkUserAuthInFirebase } from './state/user'
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1hXtUkKyvnejEmMe9VQjb_sj67zZf-Ng",
@@ -43,16 +44,20 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
+
+		this.props.checkUserAuthInFirebase()
+		
 		getCakes()
 			.then(data => this.setState({ cakes: data }))
 			.catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`))
-			.finally(() => this.setState({ isLoading: false }));
+			.finally(() => this.setState({ isLoading: false }))
+		
 	}
 
 	render() {
 		const { isLoading, isError, error } = this.state;
 
-		if (isLoading && !isError) {
+		if (this.props.storeIsLoading && isLoading && !isError) {
 			return (
 				<div className="App">
 					<CircularProgress color="secondary" />
@@ -66,30 +71,38 @@ class App extends React.Component {
 			)
 		}
 
-		if (!isLoading && !isError) {
-			return (
-				<div className="App">
-					<BrowserRouter>
-						<MenuAppBar />
-						<Route exact path='/'>
-							<Dashboard cakes={this.state.cakes} cooks={this.state.cooks} />
-						</Route>
-						<Route path='/userCard' component={UserCard} />
-						<Route path='/cakes' component={CakesList} />
-						<Route path='/cakeAdd/:id' component={CakeAddForm} />
-						<Route path='/cake/:id' component={CakeCardFull} />
-						<Route path='/cooks' component={CooksList} />
-						<Route path='/SignIn' component={SignIn} />
-						<Route path='/SignOn' component={SignOn} />
-						{/* <Redirect to="/"/> */}
-					</BrowserRouter>
-				</div>
-			)
-		}
-
-
+		return (
+			<div className="App">
+				<BrowserRouter>
+					<MenuAppBar />
+					<Route exact path='/'>
+						<Dashboard cakes={this.state.cakes} cooks={this.state.cooks} />
+					</Route>
+					<Route path='/userCard' component={UserCard} />
+					<Route path='/cakes' component={CakesList} />
+					<Route path='/cakeAdd/:id' component={CakeAddForm} />
+					<Route path='/cake/:id' component={CakeCardFull} />
+					<Route path='/cooks' component={CooksList} />
+					<Route path='/SignIn' component={SignIn} />
+					<Route path='/SignOn' component={SignOn} />
+					{/* <Redirect to="/"/> */}
+				</BrowserRouter>
+			</div>
+		)
 	}
 
 }
 
-export default App;
+
+const mapDispatchToProps = {
+	setUserToStore,
+	checkUserAuthInFirebase,
+};
+
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+	userIdInStore: state.userReducer.userId,
+	storeIsLoading: state.userReducer.isLoading, 
+});
+
+export default connect( mapStateToProps, mapDispatchToProps )(App) ;

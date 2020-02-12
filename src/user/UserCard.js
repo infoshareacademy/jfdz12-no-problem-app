@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Grid, Paper, Typography, withStyles,CircularProgress } from '@material-ui/core';
+import { Button, Container, Grid, Paper, Typography, withStyles, } from '@material-ui/core';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
 import PageWrapper from '../components/PageWrapper';
@@ -38,23 +38,18 @@ class UserCard extends React.Component{
     constructor(props){
         super(props);
         this.backLink = props.location.search.substring(1);
-        //this.userIdRef = sessionStorage.getItem('userId');
         this.state ={
             user: {},
-            isLoading: false,
             selectedMenu: {
                 basic : true,
                 like: false,
                 mCook: false,
                 mCake: false,
             },
-            loginUser:true,
         };
     }
 
     componentDidMount(){
-        this.setState({ isLoading: true});
-
         if (this.backLink){
             this.setState(prevState => ({
                 selectedMenu:{
@@ -64,34 +59,7 @@ class UserCard extends React.Component{
                 }
             }))
         }
-
-        if (this.props.userIdInStore){
-                this.setState({
-                    isLoading: false,
-                    loginUser: true,
-                })
-        }else{
-            this.setState({
-                loginUser:false,
-                isLoading: false,
-            });
-        }
-
-        // console.log('componendm', this.props.userIdInStore)
-        // if (this.props.userIdInStore){
-        //     console.log('componentdm true', this.props.userIdInStore)
-        //     this.fetchUserFromApi() 
-        //     .catch(error => console.log('bład addformfetch', error.toString()))
-        //     .finally(() => {
-        //         this.setState({
-        //             isLoading: false,
-        //             loginUser: true,
-        //         })})
-        // }else{
-        //     console.log('componentdm else', this.props.userIdInStore)
-        //     this.setState({loginUser:false});
-        // }
-    }
+     }
 
     handleClick = (name) => {
         const {selectedMenu} = this.state;
@@ -108,30 +76,25 @@ class UserCard extends React.Component{
     }
 
     render(){
-        const { isLoading, selectedMenu, loginUser, } =  this.state;
+        const { selectedMenu, } =  this.state;
         const { classes, userInStore, userIdInStore } = this.props;
-        console.log(userInStore, this.props.userIdInStore)
-        if(!userIdInStore){
-            return <Redirect to={'/userCard'}/>
-        }
-
-        if (isLoading) {
-            return <PageWrapper >
-                        <CircularProgress color="secondary" />
-                    </PageWrapper>
-        }
-
-        if (!loginUser){
+       
+        if (!userIdInStore){
             return (<PageWrapper>
                 <h1>Użytkownik nie zalogowany, zaloguj się </h1>
                 <Link to='/SignIn'>Sign in</Link>
             </PageWrapper>)
         }
 
+        if(!userIdInStore){
+            return <Redirect to={'/userCard'}/>
+        }
+
+
         return (
             <PageWrapper>
                 
-                {!isLoading && <Container maxWidth='lg'>
+                {<Container maxWidth='lg'>
                     <Grid container className={classes.gridTop}>
                         <Grid item xs={12} className={classes.gridStyle}>
                             <Paper>

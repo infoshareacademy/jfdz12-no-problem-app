@@ -9,6 +9,7 @@ import RenderCakeAddForm from './RenderCakeAddform';
 import MessageSnakebar from '../../components/MessageSnakebar';
 import { validateCakeAdd } from './component/cakeAddFunction'
 import { connect } from 'react-redux';
+import { checkUserAuthInFirebase } from '../../state/user'
 
 class CakeAddForm extends React.Component{
     constructor(props){
@@ -35,51 +36,52 @@ class CakeAddForm extends React.Component{
     }
        
     componentDidMount(){
-
-        getFullData()
-            .then(data => {
-                let checkData = false;
-                
-                if(this.cakeId === 'empty'){
-                    checkData = true;
-                }else{
-                    if(data[0].find(cake => (cake.id === this.cakeId && cake.cookId === this.userIdRef ))){
-                        checkData=true;
-                    }else{
-                        checkData=false;
-                    }
-                }
-                
-                if(checkData){
-                    const cakeAddData = this.cakeId === 'empty'
-                        ? { ...CAKEADDOBJ, cookId: this.userIdRef }  
-                        : data[0].find(cake => (cake.id === this.cakeId && cake.cookId === this.userIdRef ));
+        console.log('componen', this.userIdRef, this.props.userIdInStore)
+            
+            getFullData()
+                .then(data => {
+                    let checkData = false;
                     
-                    this.setState({
-                        cakes: data[0],
-                        cooks: data[1],
-                        types: data[2],
-                        cakeAdd: {
-                            ...cakeAddData,
-                            }
-                        })    
-                }else{
+                    if(this.cakeId === 'empty'){
+                        checkData = true;
+                    }else{
+                        if(data[0].find(cake => (cake.id === this.cakeId && cake.cookId === this.userIdRef ))){
+                            checkData=true;
+                        }else{
+                            checkData=false;
+                        }
+                    }
+                    
+                    if(checkData){
+                        const cakeAddData = this.cakeId === 'empty'
+                            ? { ...CAKEADDOBJ, cookId: this.userIdRef }  
+                            : data[0].find(cake => (cake.id === this.cakeId && cake.cookId === this.userIdRef ));
+                        
+                        this.setState({
+                            cakes: data[0],
+                            cooks: data[1],
+                            types: data[2],
+                            cakeAdd: {
+                                ...cakeAddData,
+                                }
+                            })    
+                    }else{
+                        this.setState({
+                            isError: true,
+                            error: ' nie możesz edytować tego ciasta '
+                        })
+                    }  
+                })
+                .catch(error => {
                     this.setState({
                         isError: true,
-                        error: ' nie możesz edytować tego ciasta '
+                        error:error.toString(),
                     })
-                }  
-            })
-            .catch(error => {
-                this.setState({
-                    isError: true,
-                    error:error.toString(),
                 })
-            })
-            .finally(() => this.setState({
-                isLoading: false,
-                snakeOpen:true,
-            }))
+                .finally(() => this.setState({
+                    isLoading: false,
+                    snakeOpen:true,
+                }))
     }
 
     handleFileAdd = (event) => {
@@ -154,14 +156,20 @@ class CakeAddForm extends React.Component{
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     render(){
-    
+        console.log('render', this.userIdRef, this.props.userIdInStore)
         const {cooks, types, isLoading, saveCake, isError, error, cakeAdd, snakeOpen, isRequired, } = this.state;
         const { cookId, typeId, } = this.state.cakeAdd;
 
         const selectedCook = this.findDataById(cooks, cookId);
         const selectetType = this.findDataById(types,typeId);
         const backLink = this.props.location.search.slice(1)
-        
+ 
+        if(isLoading){
+            return <PageWrapper> 
+                    <CircularProgress color="secondary" />
+                </PageWrapper>
+        }
+
         if(saveCake && !snakeOpen) {
             return  <Redirect to={`/${backLink}`}/>
         }
@@ -198,7 +206,7 @@ class CakeAddForm extends React.Component{
             )       
         }
 
-        if(!isLoading){
+        if(!isLoading && this.props.userIdInStore){
             return(<PageWrapper>
             
                 <RenderCakeAddForm
@@ -224,4 +232,8 @@ const mapStateToProps = (state) => ({
     userIdInStore: state.userReducer.userId, 
 });
 
-export default connect( mapStateToProps, null)(CakeAddForm);
+const mapDispatchToProps = {
+    checkUserAuthInFirebase,
+  };
+
+export default connect( mapStateToProps, mapDispatchToProps )(CakeAddForm);
