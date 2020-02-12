@@ -9,11 +9,10 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { withRouter } from 'react-router-dom';
 import { useEffect } from 'react'
 import firebase from 'firebase/app';
-import { getUserByUid } from '../../api/Api2';
 import { connect } from 'react-redux';
-import { setUserToStore, clearUserInStore } from '../../state/user'
+import { clearUserInStore } from '../../state/user'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
 	root: {
 		flexGrow: 1,
 
@@ -39,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 		display: "flex",
 		justifyContent: "space-between"
 	}
-}));
+});
 
 function MenuAppBar(props) {
 	const classes = useStyles();
@@ -48,7 +47,6 @@ function MenuAppBar(props) {
 	const [myStyle, setMystyle] = React.useState('rgba(255,255,255, 0.3)'); //to jest do window.scroll
 	const open = Boolean(anchorEl);
 	const [auth, setAuth] = React.useState(false);
-	const {setUserToStore} = props; 
 
 	//ta funckja jest do window.scroll
 	useEffect(() => {
@@ -66,21 +64,7 @@ function MenuAppBar(props) {
 	};
 
 	useEffect(() => {
-		
-
 		setAuth(props.userIdInStore ? true : false);
-		
-		// firebase.auth().onAuthStateChanged(user => {
-		// 	setAuth(user ? true : false);
-			
-		// 	if(user){
-		// 		getUserByUid(user.uid)
-		// 			.then((dataUser)=>{
-		// 				//sessionStorage.setItem('userId', dataUser.id);
-		// 				setUserToStore(dataUser);
-		// 			})
-		// 	}
-		// })
 	},[props.userIdInStore]);
 
 	const handleChange = () => {
@@ -99,7 +83,6 @@ function MenuAppBar(props) {
 	const handleSignOut = () => {
 		firebase.auth().signOut();
 		setAuth(false);
-		//sessionStorage.setItem('userId', null);
 		props.history.push('/');
 		props.clearUserInStore();
 	}
@@ -133,18 +116,11 @@ function MenuAppBar(props) {
 		}
 	}
 
-
-
 	return (
-
 		<div className={classes.root} position="static">
-
 			<AppBar className={classes.navStyle} style={{ backgroundColor: myStyle }} >
-
 				{content()}
-				
 			</AppBar>
-
 		</div>
 	);
 }
@@ -154,7 +130,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    setUserToStore,
     clearUserInStore,
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { CircularProgress, } from '@material-ui/core';
 import { CAKEADDOBJ } from '../../constans/emptyObject'
 import { getFullData, addNewCakeFetch, updateCakeFetch } from '../../api/Api2';
@@ -9,43 +9,32 @@ import RenderCakeAddForm from './RenderCakeAddform';
 import MessageSnakebar from '../../components/MessageSnakebar';
 import { validateCakeAdd } from './component/cakeAddFunction'
 import { connect } from 'react-redux';
-import { checkUserAuthInFirebase } from '../../state/user'
 
-class CakeAddForm extends React.Component{
-    constructor(props){
-        super(props);
-        this.cakeId = props.match.params.id;
-        this.userIdRef = props.userIdInStore;//sessionStorage.getItem('userId');
-        this.state = {
-            cookList: false,
-            cakes: [],
-            cooks:[],
-            types:[],
-            cakesMaxId: null,
-            isLoading: true,
-            cakeAdd: {},
-            saveCake: false,
-            file: null,
-            isError:false,
-            error:'',
-            snakeOpen: false,
-            isRequired: false,
-        }
+const CakeAddForm = (props) => {
+    
+    const cakeId = props.match.params.id;
+    const userIdRef = props.userIdInStore;
+    const [cooks, setCooks] = useState([]);
+    const [types, setTypes] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); 
+    const [cakeAdd, setCakeAdd] = useState({});
+    const [saveCake, setSaveCake] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState('');
+    const [snakeOpen, setSnakeOpen] = useState(false);
+    const [isRequired, setIsRequired]= useState(false);
+    const { storeIsLoading} = props;
 
-        this.addCakeFetch = this.addCakeFetch.bind(this);
-    }
-       
-    componentDidMount(){
-        console.log('componen', this.userIdRef, this.props.userIdInStore)
-            
+    useEffect (() => {
+        if(!storeIsLoading){
             getFullData()
                 .then(data => {
                     let checkData = false;
                     
-                    if(this.cakeId === 'empty'){
+                    if(cakeId === 'empty'){
                         checkData = true;
                     }else{
-                        if(data[0].find(cake => (cake.id === this.cakeId && cake.cookId === this.userIdRef ))){
+                        if(data[0].find(cake => (cake.id === cakeId && cake.cookId === userIdRef ))){
                             checkData=true;
                         }else{
                             checkData=false;
@@ -53,38 +42,31 @@ class CakeAddForm extends React.Component{
                     }
                     
                     if(checkData){
-                        const cakeAddData = this.cakeId === 'empty'
-                            ? { ...CAKEADDOBJ, cookId: this.userIdRef }  
-                            : data[0].find(cake => (cake.id === this.cakeId && cake.cookId === this.userIdRef ));
+                        const cakeAddData = cakeId === 'empty'
+                            ? { ...CAKEADDOBJ, cookId: userIdRef }  
+                            : data[0].find(cake => (cake.id === cakeId && cake.cookId === userIdRef ));
                         
-                        this.setState({
-                            cakes: data[0],
-                            cooks: data[1],
-                            types: data[2],
-                            cakeAdd: {
-                                ...cakeAddData,
-                                }
-                            })    
+                        setCooks(data[1]);
+                        setTypes(data[2]);
+                        setCakeAdd ({...cakeAddData })    
                     }else{
-                        this.setState({
-                            isError: true,
-                            error: ' nie możesz edytować tego ciasta '
-                        })
+                        setIsError(true);
+                        setError(' nie możesz edytować tego ciasta ');
                     }  
                 })
                 .catch(error => {
-                    this.setState({
-                        isError: true,
-                        error:error.toString(),
-                    })
+                    setIsError(true);
+                    setError(error.toString());
                 })
-                .finally(() => this.setState({
-                    isLoading: false,
-                    snakeOpen:true,
-                }))
-    }
+                .finally(() => {
+                        setIsLoading(false);
+                        setSnakeOpen(true);
+                    }   
+                )
+        }
+    },[userIdRef, storeIsLoading, cakeId]);
 
-    handleFileAdd = (event) => {
+    const handleFileAdd = (event) => {
         const file =  event.target.files[0];
         const fileName = file.name;
         
@@ -92,148 +74,131 @@ class CakeAddForm extends React.Component{
             .put(file)
             .then((res) => {
                 res.ref.getDownloadURL().then(url => {
-                    
-                    this.setState(prevState => ({
-                            cakeAdd:{
-                                ...prevState.cakeAdd,
+                    setCakeAdd(prevState => (
+                            {
+                                ...prevState,
                                 imgURL : url, 
-                            },
-                        }))
+                            }
+                        ))
                 });
             })
     }
 
-    handleCakeChange = (event) => {
+    const handleCakeChange = (event) => {
         const {name, value} = event.target; 
         
-        this.setState(prevState => ({
-            cakeAdd:{
-                ...prevState.cakeAdd,
+        setCakeAdd(prevCakeAdd => (
+            {
+                ...prevCakeAdd,
                 [name]: value,
-            },
-        }));
+            }
+        ));
     }
 
-    fetchCake = () => {
-        const { cakeAdd } = this.state;
+    const fetchCake = () => {
 
-        if(this.cakeId === 'empty'){
+        if(cakeId === 'empty'){
             return addNewCakeFetch(cakeAdd);
         }else{
             delete cakeAdd.id;
-            return updateCakeFetch(cakeAdd, this.cakeId);
+            return updateCakeFetch(cakeAdd, cakeId);
         }
     }
 
-    addCakeFetch(){
-        const validate = validateCakeAdd(this.state.cakeAdd);
+    const addCakeFetch = () => {
+        const validate = validateCakeAdd(cakeAdd);
        
         if (validate) {
-            this.setState({ isRequired: validate, });
+            setIsRequired(validate);
         }else{
-            this.fetchCake()
+            fetchCake()
             .then(() => {
-                this.setState({ 
-                    saveCake: true, 
-                    snakeOpen: true,
-                    isRequired: false,
-                });
+                setSnakeOpen(true);
+                setSaveCake(true);
+                setIsRequired(false);
             })
             .catch((err) => {
-                this.setState({
-                    error: err.message,
-                    isError: true,
+                    setError(err.message);
+                    setIsError(true);
                 }) 
-            });
-        }
+        };
     }
 
-    handleClose = () => {
-        this.setState({ snakeOpen: false });
+    const handleClose = () => {
+        setSnakeOpen(false);
     }
 
 
-    findDataById = (data, id) => data.find((data) => data.id === id) || {};
+    const findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
-    render(){
-        console.log('render', this.userIdRef, this.props.userIdInStore)
-        const {cooks, types, isLoading, saveCake, isError, error, cakeAdd, snakeOpen, isRequired, } = this.state;
-        const { cookId, typeId, } = this.state.cakeAdd;
+    const { cookId, typeId, } = cakeAdd;
 
-        const selectedCook = this.findDataById(cooks, cookId);
-        const selectetType = this.findDataById(types,typeId);
-        const backLink = this.props.location.search.slice(1)
- 
-        if(isLoading){
-            return <PageWrapper> 
-                    <CircularProgress color="secondary" />
-                </PageWrapper>
-        }
+    const selectedCook = findDataById(cooks, cookId);
+    const selectetType = findDataById(types,typeId);
+    const backLink = props.location.search.slice(1)
 
-        if(saveCake && !snakeOpen) {
-            return  <Redirect to={`/${backLink}`}/>
-        }
+    if(saveCake && !snakeOpen) {
+        return  <Redirect to={`/${backLink}`}/>
+    }
 
-        if(saveCake && snakeOpen) {
-            return (<>
-                <PageWrapper>
-                    <MessageSnakebar
-                        onHandleClose={this.handleClose}
-                        open={this.state.snakeOpen}
-                        message={'ciasto zostało dodane'}
-                        backColor={'success'}
-                    />
+    if(saveCake && snakeOpen) {
+        return (<>
+            <PageWrapper>
+                <MessageSnakebar
+                    onHandleClose={handleClose}
+                    open={snakeOpen}
+                    message={'ciasto zostało dodane'}
+                    backColor={'success'}
+                />
+                <CircularProgress/>
+            </PageWrapper>
+
+        </>)
+    }
+    
+    if (isLoading) {
+        return(<PageWrapper>
                     <CircularProgress/>
                 </PageWrapper>
-
-            </>)
-        }
-        
-        if (isLoading) {
-            return(<PageWrapper>
-                       <CircularProgress/>
-                    </PageWrapper>
-            )       
-        }
-
-        if (isError) {
-            return(<PageWrapper>
-                    <h3>wystąpił błąd: {error} </h3>
-                    <div>
-                        <Link to={'/'}>wróć na stronę główną </Link>
-                    </div>
-                </PageWrapper>
-            )       
-        }
-
-        if(!isLoading && this.props.userIdInStore){
-            return(<PageWrapper>
-            
-                <RenderCakeAddForm
-                    selectedCook = {selectedCook}
-                    selectetType = {selectetType}
-                    types = {types}
-                    cakeAdd = {cakeAdd}
-                    isRequired={isRequired}
-                    onHandleCakeChange = {this.handleCakeChange}
-                    handleFileAdd = {this.handleFileAdd}
-                    addCakeFetch= {this.addCakeFetch}
-                    {...this.props}
-                />
-                
-            </PageWrapper>)
-        }
-
+        )       
     }
+
+    if (isError) {
+        return(<PageWrapper>
+                <h3>wystąpił błąd: {error} </h3>
+                <div>
+                    <Link to={'/'}>wróć na stronę główną </Link>
+                </div>
+            </PageWrapper>
+        )       
+    }
+
+    if(!isLoading){
+        return(<PageWrapper>
+        
+            <RenderCakeAddForm
+                selectedCook = {selectedCook}
+                selectetType = {selectetType}
+                types = {types}
+                cakeAdd = {cakeAdd}
+                isRequired={isRequired}
+                onHandleCakeChange = {handleCakeChange}
+                handleFileAdd = {handleFileAdd}
+                addCakeFetch= {addCakeFetch}
+                {...props}
+            />
+            
+        </PageWrapper>)
+    }
+
 }
+
 
 const mapStateToProps = (state) => ({
     userInStore: state.userReducer.user,
-    userIdInStore: state.userReducer.userId, 
+    userIdInStore: state.userReducer.userId,
+    storeIsLoading: state.userReducer.isLoading, 
 });
 
-const mapDispatchToProps = {
-    checkUserAuthInFirebase,
-  };
 
-export default connect( mapStateToProps, mapDispatchToProps )(CakeAddForm);
+export default connect( mapStateToProps, null )(CakeAddForm);

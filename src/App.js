@@ -4,17 +4,17 @@ import CakesList from './cakes/CakesList';
 import './App.css';
 import Dashboard from './dashboard/Dashboard';
 import CooksList from './cooks/CooksList';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, } from 'react-router-dom';
 import MenuAppBar from './menu/resMenu/MenuAppBar';
 import UserCard from './user/UserCard';
 import SignIn from './user/SignIn';
 import SignOn from './user/SignOn';
 import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 import CakeCardFull from './cakes/cakeCard/CakeCardFull';
-import { getCakes, getUserByUid } from './api/Api2';
+import { getCakes, } from './api/Api2';
 import firebase from "firebase";
 import { connect } from 'react-redux';
-import { setUserToStore, checkUserAuthInFirebase } from './state/user'
+import { checkUserAuthInFirebase } from './state/user'
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1hXtUkKyvnejEmMe9VQjb_sj67zZf-Ng",
@@ -40,18 +40,14 @@ class App extends React.Component {
 			cakes: [],
 			cooks: [],
 		};
-
 	}
 
 	componentDidMount() {
-
-		this.props.checkUserAuthInFirebase()
-		
+		this.props.checkUserAuthInFirebase();
 		getCakes()
 			.then(data => this.setState({ cakes: data }))
 			.catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`))
 			.finally(() => this.setState({ isLoading: false }))
-		
 	}
 
 	render() {
@@ -95,14 +91,11 @@ class App extends React.Component {
 
 
 const mapDispatchToProps = {
-	setUserToStore,
 	checkUserAuthInFirebase,
 };
 
 const mapStateToProps = (state) => ({
-    userInStore: state.userReducer.user,
-	userIdInStore: state.userReducer.userId,
-	storeIsLoading: state.userReducer.isLoading, 
+    storeIsLoading: state.userReducer.isLoading, 
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )(App) ;
