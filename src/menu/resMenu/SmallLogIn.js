@@ -65,7 +65,7 @@ export default function SmallLogIn(props) {
                         onClose={props.handleClose}
                     >
                         <MenuItem onClick={props.handleClose} component={Link} to='/userCard'>Moje konto</MenuItem>
-                        <MenuItem onClick={props.handleClose} component={Link} to='/cakesAdd/empty'>Dodaj ciasto</MenuItem>
+                        {props.userType === 'cook' && <MenuItem onClick={props.handleClose} component={Link} to='/cakesAdd/empty'>Dodaj ciasto</MenuItem>}
                         <MenuItem onClick={props.handleChange} component={Link} to='/'>Wyloguj się</MenuItem>
                     </Menu>
                 </div>

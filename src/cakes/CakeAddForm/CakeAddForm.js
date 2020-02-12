@@ -23,7 +23,7 @@ const CakeAddForm = (props) => {
     const [error, setError] = useState('');
     const [snakeOpen, setSnakeOpen] = useState(false);
     const [isRequired, setIsRequired]= useState(false);
-    const { storeIsLoading} = props;
+    const { storeIsLoading } = props;
 
     useEffect (() => {
         if(!storeIsLoading){
@@ -193,12 +193,10 @@ const CakeAddForm = (props) => {
 
 }
 
-
 const mapStateToProps = (state) => ({
     userInStore: state.userReducer.user,
     userIdInStore: state.userReducer.userId,
     storeIsLoading: state.userReducer.isLoading, 
 });
-
 
 export default connect( mapStateToProps, null )(CakeAddForm);

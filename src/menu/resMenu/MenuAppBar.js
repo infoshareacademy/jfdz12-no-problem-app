@@ -97,6 +97,7 @@ function MenuAppBar(props) {
 				handleMenu={handleMenu}
 				open={open}
 				anchorEl={anchorEl}
+				userType={props.userInStore.userType}
 			/>;
 		};
 		if (!auth && matches) {
@@ -106,10 +107,11 @@ function MenuAppBar(props) {
 				handleChange={handleChange}
 				handleClose={handleClose}
 				handleMenu={handleMenu}
+				userType={props.userInStore.userType}
 			/>
 		};
 		if (auth && !matches) {
-			return <BigLogIn log={handleSignOut} />
+			return <BigLogIn log={handleSignOut} userType={props.userInStore.userType} />
 		};
 		if (!auth && !matches) {
 			return <BigLogOut log={handleSignOut} />

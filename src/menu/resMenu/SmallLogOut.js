@@ -27,12 +27,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function SmallLogOut(props) {
     const classes = useStyles();
-  
+    console.log(props.userType)
     return (
         <div>
              <Toolbar className={classes.flex}>
 
-             <SwipeableTemporaryDrawer auth={props.auth} log={props.log}/>
+             <SwipeableTemporaryDrawer 
+                auth={props.auth} 
+                log={props.log}
+                userType={props.userType}
+            />
 
             <Link to='/'>
                 <img src={Logo} className={classes.logo} alt='logo' />
