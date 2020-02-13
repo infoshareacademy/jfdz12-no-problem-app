@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SmallLogOut(props) {
     const classes = useStyles();
-    console.log(props.userType)
+    
     return (
         <div>
              <Toolbar className={classes.flex}>

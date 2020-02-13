@@ -64,7 +64,6 @@ class SignIn extends React.Component{
         auth().signInWithEmailAndPassword(email, password)
         .then(() => {
             const signInUser = this.state.users.find(user => user.uid === auth().currentUser.uid )
-            //this.saveUserIdToLocalStorage(signInUser.id);
             this.props.setUserToStore(signInUser);
             this.setState({
                 redirect: true,
@@ -89,10 +88,6 @@ class SignIn extends React.Component{
             redirect: true,
         });
     }
-
-    // saveUserIdToLocalStorage = (userId) => {
-    //     sessionStorage.setItem('userId', userId);
-    // }
 
     handleClose = () =>{
         this.setState({emailResetMessage:false});
@@ -204,11 +199,6 @@ class SignIn extends React.Component{
       );
     }
 }
-
-// const mapStateToProps = (state) => ({
-//     userInStore: state.userReducer.user,
-//     userIdInStore: state.userReducer.userId, 
-// });
 
 const mapDispatchToProps = {
     setUserToStore,

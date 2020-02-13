@@ -24,7 +24,7 @@ const CakeAddForm = (props) => {
     const [snakeOpen, setSnakeOpen] = useState(false);
     const [isRequired, setIsRequired]= useState(false);
     const { storeIsLoading } = props;
-
+    
     useEffect (() => {
         if(!storeIsLoading){
             getFullData()
@@ -69,7 +69,6 @@ const CakeAddForm = (props) => {
     const handleFileAdd = (event) => {
         const file =  event.target.files[0];
         const fileName = file.name;
-        
         storage().ref(`cakes/${Date.now()}${fileName}`)
             .put(file)
             .then((res) => {
@@ -86,7 +85,6 @@ const CakeAddForm = (props) => {
 
     const handleCakeChange = (event) => {
         const {name, value} = event.target; 
-        
         setCakeAdd(prevCakeAdd => (
             {
                 ...prevCakeAdd,
@@ -132,10 +130,11 @@ const CakeAddForm = (props) => {
     const findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     const { cookId, typeId, } = cakeAdd;
-
+    
     const selectedCook = findDataById(cooks, cookId);
     const selectetType = findDataById(types,typeId);
     const backLink = props.location.search.slice(1)
+
 
     if(saveCake && !snakeOpen) {
         return  <Redirect to={`/${backLink}`}/>
@@ -196,7 +195,8 @@ const CakeAddForm = (props) => {
 const mapStateToProps = (state) => ({
     userInStore: state.userReducer.user,
     userIdInStore: state.userReducer.userId,
-    storeIsLoading: state.userReducer.isLoading, 
+    storeIsLoading: state.userReducer.isLoading,
 });
+
 
 export default connect( mapStateToProps, null )(CakeAddForm);

@@ -15,6 +15,7 @@ import { getCakes, } from './api/Api2';
 import {initializeApp } from "firebase";
 import { connect } from 'react-redux';
 import { checkUserAuthInFirebase } from './state/user'
+import { Redirect } from 'react-router-dom';
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1hXtUkKyvnejEmMe9VQjb_sj67zZf-Ng",
@@ -33,17 +34,16 @@ class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			userId: '',
 			isLoading: true,
 			isError: false,
 			error: '',
 			cakes: [],
-			cooks: [],
 		};
 	}
 
 	componentDidMount() {
 		this.props.checkUserAuthInFirebase();
+	
 		getCakes()
 			.then(data => this.setState({ cakes: data }))
 			.catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`))
@@ -66,7 +66,7 @@ class App extends React.Component {
 				<div className="App"> {error} </div>
 			)
 		}
-
+		
 		return (
 			<div className="App">
 				<BrowserRouter>
@@ -81,7 +81,7 @@ class App extends React.Component {
 					<Route path='/cooks' component={CooksList} />
 					<Route path='/SignIn' component={SignIn} />
 					<Route path='/SignOn' component={SignOn} />
-					{/* <Redirect to="/"/> */}
+					<Redirect to="/"/>
 				</BrowserRouter>
 			</div>
 		)

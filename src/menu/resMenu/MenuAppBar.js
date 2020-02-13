@@ -69,7 +69,7 @@ function MenuAppBar(props) {
 
 	const handleChange = () => {
 		setAnchorEl(null);
-		props.history.push('/')
+		handleSignOut();
 	};
 
 	const handleMenu = event => {
@@ -84,7 +84,7 @@ function MenuAppBar(props) {
 		fbauth().signOut();
 		setAuth(false);
 		props.history.push('/');
-		props.clearUserInStore();
+		props.clearUserInStore(); 
 	}
 
 	const content = () =>{
