@@ -14,8 +14,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import FaceIcon from '@material-ui/icons/Face';
 import CakeIcon from '@material-ui/icons/Cake';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-
-
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
@@ -27,12 +26,12 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function SwipeableTemporaryDrawer(props) {
+function SwipeableTemporaryDrawer(props) {
 	const classes = useStyles();
 	const [state, setState] = React.useState({
 		left: false,
 	});
-	console.log(props.userType)
+	
 	const toggleDrawer = (side, open) => event => {
 		if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
 			return;
@@ -73,7 +72,7 @@ export default function SwipeableTemporaryDrawer(props) {
 							<ListItemText primary={'Moje konto'} />
 						</ListItem>
 					
-						{props.userType === 'cook' && 
+						{props.userInStore.userType === 'cook' && 
 							<ListItem button key={'Dodaj ciasto'} component={Link} to='/cakeAdd/empty'>
 								<ListItemIcon><ControlPointIcon /></ListItemIcon>
 								<ListItemText primary={'Dodaj ciasto'} />
@@ -107,3 +106,10 @@ export default function SwipeableTemporaryDrawer(props) {
 		</div>
 	);
 }
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId,
+    storeIsLoading: state.userReducer.isLoading, 
+});
+
+export default connect( mapStateToProps, null )(SwipeableTemporaryDrawer)

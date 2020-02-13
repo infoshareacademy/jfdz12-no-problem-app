@@ -7,7 +7,7 @@ import { updateUserFetch } from '../../api/Api2';
 import MessageSnakebar from '../../components/MessageSnakebar';
 import { USERTYPE } from '../../constans/selectConstans';
 import { UserSelect } from './userDataComponent/UserSelect';
-import firebase from 'firebase';
+import { storage } from 'firebase';
 
 const styles = {
     paper:{
@@ -60,7 +60,7 @@ class UserAllData extends React.Component{
         const file =  event.target.files[0];
         const fileName = file.name;
         
-        firebase.storage().ref(`avatars/${Date.now()}${fileName}`)
+        storage().ref(`avatars/${Date.now()}${fileName}`)
             .put(file)
             .then((res) => {
                 res.ref.getDownloadURL().then(url => {

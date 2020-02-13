@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PageWrapper from '../components/PageWrapper';
 import { CircularProgress } from '@material-ui/core';
-import firebase from 'firebase';
+import { auth } from 'firebase';
 import { FIREBASE_API } from '../api/Api2';
 import MessageSnakebar from './signComponent/MessageSnakebar';
 import SignOnRender from './SignOnRender';
@@ -87,8 +87,8 @@ export default class SignOn extends Component {
             console.log(error.message);
         })
         .finally(() => {
-            if (firebase.auth().currentUser) {
-                firebase.auth().signOut();
+            if (auth().currentUser) {
+                auth().signOut();
             }
             this.setState({
                 isLoading: false,
@@ -101,7 +101,7 @@ export default class SignOn extends Component {
     signUp = () => {
         const { email, password } = this.state;
         
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        auth().createUserWithEmailAndPassword(email, password)
             .then(data => {
                     this.setState({ uid: data.user.uid });
                     this.createUserFetch();

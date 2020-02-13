@@ -4,7 +4,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Link as Rlink} from 'react-router-dom';
 import {getUsers} from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
-import firebase from 'firebase/app';
+import { auth,  } from 'firebase/app';
 import {Redirect} from 'react-router-dom';
 import MessageSnakebar from './signComponent/MessageSnakebar';
 import {styles} from './styles/SignInStyles'
@@ -61,9 +61,9 @@ class SignIn extends React.Component{
 
     signIn = () => {
         const {email, password} = this.state;
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        auth().signInWithEmailAndPassword(email, password)
         .then(() => {
-            const signInUser = this.state.users.find(user => user.uid === firebase.auth().currentUser.uid )
+            const signInUser = this.state.users.find(user => user.uid === auth().currentUser.uid )
             //this.saveUserIdToLocalStorage(signInUser.id);
             this.props.setUserToStore(signInUser);
             this.setState({
@@ -83,7 +83,7 @@ class SignIn extends React.Component{
     };
 
     handleResetPassword = () =>{
-        firebase.auth().sendPasswordResetEmail(this.state.email);
+        auth().sendPasswordResetEmail(this.state.email);
         this.setState({
             emailResetMessage: true,
             redirect: true,

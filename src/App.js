@@ -12,7 +12,7 @@ import SignOn from './user/SignOn';
 import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 import CakeCardFull from './cakes/cakeCard/CakeCardFull';
 import { getCakes, } from './api/Api2';
-import firebase from "firebase";
+import {initializeApp } from "firebase";
 import { connect } from 'react-redux';
 import { checkUserAuthInFirebase } from './state/user'
 
@@ -26,7 +26,7 @@ const firebaseConfig = {
     appId: "1:946106450467:web:e4b62a740d70364f02a796"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 
 class App extends React.Component {

@@ -35,7 +35,6 @@ export default function SmallLogOut(props) {
              <SwipeableTemporaryDrawer 
                 auth={props.auth} 
                 log={props.log}
-                userType={props.userType}
             />
 
             <Link to='/'>

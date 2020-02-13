@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import { auth } from 'firebase';
 import { getUserByUid, } from '../api/Api2'
 
 // ACTION NAMES
@@ -47,7 +47,7 @@ export default function(state = initialState, action){
 export const checkUserAuthInFirebase = () => (dispatch) =>{
     dispatch({type: CHECKSTART});
 
-    firebase.auth().onAuthStateChanged(user => {
+    auth().onAuthStateChanged(user => {
         if(user){
             getUserByUid(user.uid)
                 .then((dataUser)=>{

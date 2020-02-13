@@ -8,7 +8,7 @@ import SmallLogOut from './SmallLogOut';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { withRouter } from 'react-router-dom';
 import { useEffect } from 'react'
-import firebase from 'firebase/app';
+import {auth as fbauth } from 'firebase/app';
 import { connect } from 'react-redux';
 import { clearUserInStore } from '../../state/user'
 
@@ -81,7 +81,7 @@ function MenuAppBar(props) {
 	};
 
 	const handleSignOut = () => {
-		firebase.auth().signOut();
+		fbauth().signOut();
 		setAuth(false);
 		props.history.push('/');
 		props.clearUserInStore();
@@ -107,7 +107,6 @@ function MenuAppBar(props) {
 				handleChange={handleChange}
 				handleClose={handleClose}
 				handleMenu={handleMenu}
-				userType={props.userInStore.userType}
 			/>
 		};
 		if (auth && !matches) {

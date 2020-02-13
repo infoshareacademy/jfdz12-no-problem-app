@@ -3,7 +3,7 @@ import { CircularProgress, } from '@material-ui/core';
 import { CAKEADDOBJ } from '../../constans/emptyObject'
 import { getFullData, addNewCakeFetch, updateCakeFetch } from '../../api/Api2';
 import PageWrapper from '../../components/PageWrapper';
-import firebase from 'firebase';
+import { storage } from 'firebase';
 import { Redirect, Link } from 'react-router-dom';
 import RenderCakeAddForm from './RenderCakeAddform'; 
 import MessageSnakebar from '../../components/MessageSnakebar';
@@ -70,7 +70,7 @@ const CakeAddForm = (props) => {
         const file =  event.target.files[0];
         const fileName = file.name;
         
-        firebase.storage().ref(`cakes/${Date.now()}${fileName}`)
+        storage().ref(`cakes/${Date.now()}${fileName}`)
             .put(file)
             .then((res) => {
                 res.ref.getDownloadURL().then(url => {
