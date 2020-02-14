@@ -155,7 +155,7 @@ const CakeAddForm = (props) => {
         </>)
     }
     
-    if (isLoading) {
+    if (isLoading ) {
         return(<PageWrapper>
                     <CircularProgress/>
                 </PageWrapper>

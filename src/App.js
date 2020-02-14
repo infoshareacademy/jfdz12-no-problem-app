@@ -1,5 +1,4 @@
 import React from 'react';
-import { CircularProgress, } from '@material-ui/core';
 import CakesList from './cakes/CakesList';
 import './App.css';
 import Dashboard from './dashboard/Dashboard';
@@ -11,11 +10,9 @@ import SignIn from './user/SignIn';
 import SignOn from './user/SignOn';
 import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 import CakeCardFull from './cakes/cakeCard/CakeCardFull';
-import { getCakes, } from './api/Api2';
 import {initializeApp } from "firebase";
 import { connect } from 'react-redux';
 import { checkUserAuthInFirebase } from './state/user'
-import { Redirect } from 'react-router-dom';
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1hXtUkKyvnejEmMe9VQjb_sj67zZf-Ng",
@@ -31,49 +28,17 @@ initializeApp(firebaseConfig);
 
 
 class App extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			isLoading: true,
-			isError: false,
-			error: '',
-			cakes: [],
-		};
-	}
 
 	componentDidMount() {
 		this.props.checkUserAuthInFirebase();
-	
-		getCakes()
-			.then(data => this.setState({ cakes: data }))
-			.catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`))
-			.finally(() => this.setState({ isLoading: false }))
 	}
 
 	render() {
-		const { isLoading, isError, error } = this.state;
-
-		if (this.props.storeIsLoading && isLoading && !isError) {
-			return (
-				<div className="App">
-					<CircularProgress color="secondary" />
-				</div>
-			)
-		}
-
-		if (isError) {
-			return (
-				<div className="App"> {error} </div>
-			)
-		}
-		
 		return (
 			<div className="App">
+	
 				<BrowserRouter>
 					<MenuAppBar />
-					<Route exact path='/'>
-						<Dashboard cakes={this.state.cakes} cooks={this.state.cooks} />
-					</Route>
 					<Route path='/userCard' component={UserCard} />
 					<Route path='/cakes' component={CakesList} />
 					<Route path='/cakeAdd/:id' component={CakeAddForm} />
@@ -81,7 +46,8 @@ class App extends React.Component {
 					<Route path='/cooks' component={CooksList} />
 					<Route path='/SignIn' component={SignIn} />
 					<Route path='/SignOn' component={SignOn} />
-					<Redirect to="/"/>
+					<Route exact path='/' component ={Dashboard} />
+					{/* <Redirect to="/"/> */}
 				</BrowserRouter>
 			</div>
 		)
@@ -94,8 +60,4 @@ const mapDispatchToProps = {
 	checkUserAuthInFirebase,
 };
 
-const mapStateToProps = (state) => ({
-    storeIsLoading: state.userReducer.isLoading, 
-});
-
-export default connect( mapStateToProps, mapDispatchToProps )(App) ;
+export default connect( null, mapDispatchToProps )(App) ;

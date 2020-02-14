@@ -1,29 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TopHero from './TopHero'
 import BestCakes from './BestCakes';
 import NumberStats from './NumberStats';
-
 import ChartsGrid from './charts/ChartsGrid';
 
-
-
-
-
-export default class Dashboard extends Component {
-
-
-    render() {
-       
-        return (
-            <div>
-
-                <TopHero />
-                <BestCakes cakes={this.props.cakes} />
-              
-                <NumberStats />
-                <ChartsGrid /> 
-            </div>
-        )
-    }
+export default function Dashboard() {
+   
+    return (
+        <div>
+            <TopHero />
+            <BestCakes />
+            <NumberStats />
+            <ChartsGrid /> 
+        </div>
+    )
 }
 

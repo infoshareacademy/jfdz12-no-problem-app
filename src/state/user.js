@@ -13,7 +13,7 @@ const CHECKERROR = "USER/CHECKERROR";
 const initialState = {
     userId:null,
     user:{},
-    isLoading: false,
+    isLoading: true,
     error:null,
 }
 
@@ -45,7 +45,6 @@ export default function(state = initialState, action){
 
 //action creators
 export const checkUserAuthInFirebase = () => (dispatch) =>{
-    dispatch({type: CHECKSTART});
 
     auth().onAuthStateChanged(user => {
         if(user){
