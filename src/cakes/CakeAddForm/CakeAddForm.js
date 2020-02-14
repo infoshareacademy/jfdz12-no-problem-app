@@ -6,9 +6,9 @@ import PageWrapper from '../../components/PageWrapper';
 import { storage } from 'firebase';
 import { Redirect, Link } from 'react-router-dom';
 import RenderCakeAddForm from './RenderCakeAddform'; 
-import MessageSnakebar from '../../components/MessageSnakebar';
 import { validateCakeAdd } from './component/cakeAddFunction'
 import { connect } from 'react-redux';
+import { startSnack } from '../../state/snackbar'; 
 
 const CakeAddForm = (props) => {
     
@@ -21,7 +21,6 @@ const CakeAddForm = (props) => {
     const [saveCake, setSaveCake] = useState(false);
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState('');
-    const [snakeOpen, setSnakeOpen] = useState(false);
     const [isRequired, setIsRequired]= useState(false);
     const { storeIsLoading } = props;
     
@@ -60,7 +59,6 @@ const CakeAddForm = (props) => {
                 })
                 .finally(() => {
                         setIsLoading(false);
-                        setSnakeOpen(true);
                     }   
                 )
         }
@@ -94,38 +92,32 @@ const CakeAddForm = (props) => {
     }
 
     const fetchCake = () => {
-
         if(cakeId === 'empty'){
-            return addNewCakeFetch(cakeAdd);
+            return addNewCakeFetch(cakeAdd); 
         }else{
             delete cakeAdd.id;
-            return updateCakeFetch(cakeAdd, cakeId);
+            return updateCakeFetch(cakeAdd, cakeId); 
         }
     }
 
     const addCakeFetch = () => {
         const validate = validateCakeAdd(cakeAdd);
-       
         if (validate) {
             setIsRequired(validate);
         }else{
             fetchCake()
             .then(() => {
-                setSnakeOpen(true);
                 setSaveCake(true);
-                setIsRequired(false);
+                cakeId === 'empty' 
+                ? props.startSnack('zostało dodane nowe ciasto', 'success')
+                : props.startSnack('dane ciasta zostały zaktualizowane', 'success')
             })
             .catch((err) => {
                     setError(err.message);
                     setIsError(true);
-                }) 
+                })
         };
-    }
-
-    const handleClose = () => {
-        setSnakeOpen(false);
-    }
-
+    };
 
     const findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
@@ -136,19 +128,13 @@ const CakeAddForm = (props) => {
     const backLink = props.location.search.slice(1)
 
 
-    if(saveCake && !snakeOpen) {
+    if(saveCake) {
         return  <Redirect to={`/${backLink}`}/>
     }
 
-    if(saveCake && snakeOpen) {
+    if(saveCake) {
         return (<>
             <PageWrapper>
-                <MessageSnakebar
-                    onHandleClose={handleClose}
-                    open={snakeOpen}
-                    message={'ciasto zostało dodane'}
-                    backColor={'success'}
-                />
                 <CircularProgress/>
             </PageWrapper>
 
@@ -198,5 +184,8 @@ const mapStateToProps = (state) => ({
     storeIsLoading: state.userReducer.isLoading,
 });
 
+const mapDispatchToProps = {
+	startSnack,
+};
 
-export default connect( mapStateToProps, null )(CakeAddForm);
+export default connect( mapStateToProps, mapDispatchToProps )(CakeAddForm);

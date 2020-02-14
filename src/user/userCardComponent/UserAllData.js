@@ -4,10 +4,11 @@ import UserBasicData from './userDataComponent/UserBasicData';
 import UserCookData from './userDataComponent/UserCookData';
 import UserAvatarData from './userDataComponent/UserAvatarData';
 import { updateUserFetch } from '../../api/Api2';
-import MessageSnakebar from '../../components/MessageSnakebar';
 import { USERTYPE } from '../../constans/selectConstans';
 import { UserSelect } from './userDataComponent/UserSelect';
 import { storage } from 'firebase';
+import { startSnack } from '../../state/snackbar'; 
+import { connect } from 'react-redux';
 
 const styles = {
     paper:{
@@ -83,7 +84,10 @@ class UserAllData extends React.Component{
         this.setState({isLoading: true});
 
         updateUserFetch(this.userId, this.state.user)
-            .then(res => console.log('update user:', res))
+            .then(res => {
+                console.log('update user:', res);
+                this.props.startSnack('dane zostały zaktualizowane', 'success');
+            })
             .catch(error => console.log('error', error.message))
             .finally(() => {
                     this.setState({
@@ -91,7 +95,6 @@ class UserAllData extends React.Component{
                         isUpdate: true,
                         noEdit: true,
                     });
-                    //this.props.fetchUserFromApi()
                 })
     }
 
@@ -136,7 +139,7 @@ class UserAllData extends React.Component{
 
     render(){
         const { classes } = this.props;
-        const { user, isLoading, noEdit, isUpdate } = this.state;
+        const { user, isLoading, noEdit } = this.state;
     
         if (isLoading) {
             return(
@@ -147,12 +150,6 @@ class UserAllData extends React.Component{
         }
 
         return (<>
-             <MessageSnakebar
-                open={isUpdate}
-                onHandleClose={this.handleSnakebarClose}
-                backColor={'success'}
-                message={`dane zostały zakutualizowane`}
-            />
             <Paper className={classes.paper}>
                 <Grid container justify="center" alignItems="center" className={classes.gridStyle}>
                     <Button onClick={this.handleOnEdit}  variant='outlined' color="secondary" className={classes.button}>
@@ -195,4 +192,8 @@ class UserAllData extends React.Component{
     }
 }
 
-export default withStyles(styles)(UserAllData);
+const mapDispatchToProps = {
+	startSnack,
+};
+
+export default connect( null, mapDispatchToProps)(withStyles(styles)(UserAllData));

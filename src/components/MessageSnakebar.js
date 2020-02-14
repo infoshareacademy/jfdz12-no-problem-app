@@ -49,7 +49,7 @@ function Transition(props) {
 function MessageSnakebar (props) {
     
     const {open, classes, message, backColor } = props;
-
+   
     return (
         <Snackbar
             className={classes[backColor]}
@@ -64,7 +64,12 @@ function MessageSnakebar (props) {
             TransitionComponent={Transition}
             action={
                 <>
-                    <IconButton size="small" aria-label="close" color="inherit" onClick={props.onHandleClose}>
+                    <IconButton 
+                        size="small" 
+                        aria-label="close" 
+                        color="inherit" 
+                        onClick={props.onHandleClose}
+                    >
                         <CloseIcon fontSize="small" />
                     </IconButton>
                 </>

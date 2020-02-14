@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 	const [isLoading, setIsLoading ] = useState(true);
 
     useEffect(()=>{
-		
+			
       getCakes()
 			.then(data => setCakes(data))
 			.catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`))

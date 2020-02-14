@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../api/Api2';
 import { CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { startSnack } from '../../state/snackbar'; 
 
 function LikeCakeButton (props) {
     const { likesUsersId } = props.cake;
@@ -19,7 +20,7 @@ function LikeCakeButton (props) {
         },[userId])
 
     const handleLikeClick = () => {
-        const { likesUsersId, id} = props.cake;  
+        const { likesUsersId, id, name} = props.cake;  
         setIsLoading(true);
        
         const newLikeCount = likesUsersId ? likesUsersId.length + 1 : 1;
@@ -31,7 +32,10 @@ function LikeCakeButton (props) {
             addLikedCakeIdToUser(userId, likeIdCakeTab),
             addUserLikeIdToCake(id,likeIdUserTab)
         ]) 
-            .then ((res) => console.log('dodałem', res))
+            .then ((res) => {
+                console.log('dodałem', res)
+                props.startSnack(`właśnie polubiłeś ciasto: ${name} `, 'information');
+            })
             .catch(error => console.log('error', error.message))
             .finally(() => {
                 setIsLoading(false);
@@ -74,4 +78,8 @@ const mapStateToProps = (state) => ({
     userIdInStore: state.userReducer.userId, 
 });
 
-export default connect( mapStateToProps, null)(LikeCakeButton);
+const mapDispatchToProps = {
+	startSnack,
+};
+
+export default connect( mapStateToProps, mapDispatchToProps)(LikeCakeButton);

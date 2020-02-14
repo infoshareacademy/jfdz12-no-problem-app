@@ -4,6 +4,7 @@ import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLike
 import { CircularProgress, IconButton, Tooltip } from '@material-ui/core';
 import { UserUnLikeModal } from './UserUnLikeModal';
 import { connect } from 'react-redux';
+import { startSnack } from '../../../state/snackbar'; 
 
 function UserUnlikeButton(props) {
     const userId = props.userIdInStore; //sessionStorage.getItem('userId');
@@ -32,7 +33,10 @@ function UserUnlikeButton(props) {
             addLikedCakeIdToUser(userId, likeIdCakeTab),
             addUserLikeIdToCake(id, likeIdUserTab)
         ])
-            .then((res) => console.log('dodałem', res))
+            .then((res) => {
+                console.log('dodałem', res);
+                props.startSnack('już nie lubisz ciasta', 'information');
+            })
             .catch(error => console.log('error', error.message))
             .finally(() => {
                     setIsLoading(false);
@@ -85,4 +89,8 @@ const mapStateToProps = (state) => ({
     userIdInStore: state.userReducer.userId, 
 });
 
-export default connect( mapStateToProps, null)(UserUnlikeButton);
+const mapDispatchToProps = {
+	startSnack,
+};
+
+export default connect( mapStateToProps, mapDispatchToProps)(UserUnlikeButton);

@@ -12,7 +12,9 @@ import CakeAddForm from './cakes/CakeAddForm/CakeAddForm';
 import CakeCardFull from './cakes/cakeCard/CakeCardFull';
 import {initializeApp } from "firebase";
 import { connect } from 'react-redux';
-import { checkUserAuthInFirebase } from './state/user'
+import { checkUserAuthInFirebase } from './state/user';
+import MessageSnackbar from './components/MessageSnakebar';
+import { stopSnack } from './state/snackbar'; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1hXtUkKyvnejEmMe9VQjb_sj67zZf-Ng",
@@ -28,13 +30,24 @@ initializeApp(firebaseConfig);
 
 
 class App extends React.Component {
-
+	
 	componentDidMount() {
 		this.props.checkUserAuthInFirebase();
 	}
 
+	handleClose = () =>{
+		this.props.stopSnack();
+	}
+
 	render() {
-		return (
+		const {message, backColor, open } = this.props;
+		return (<>
+			{open && <MessageSnackbar
+				onHandleClose={this.handleClose}
+				open={open}
+				message={message}
+				backColor={backColor}
+			/>}
 			<div className="App">
 	
 				<BrowserRouter>
@@ -50,7 +63,7 @@ class App extends React.Component {
 					{/* <Redirect to="/"/> */}
 				</BrowserRouter>
 			</div>
-		)
+		</>)
 	}
 
 }
@@ -58,6 +71,15 @@ class App extends React.Component {
 
 const mapDispatchToProps = {
 	checkUserAuthInFirebase,
+	stopSnack,
 };
 
-export default connect( null, mapDispatchToProps )(App) ;
+const mapStateToProps = state => ({
+	backColor: state.snackbarReducer.snackOptions.backColor,
+	message: state.snackbarReducer.snackOptions.message,
+	open: state.snackbarReducer.open,
+});
+  
+
+
+export default connect( mapStateToProps, mapDispatchToProps )(App) ;

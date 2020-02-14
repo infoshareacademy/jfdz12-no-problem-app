@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Tooltip, IconButton, } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
-import { UserCakeDataDelButton } from './UserCakeDataDelButton'
+import UserCakeDataDelButton from './UserCakeDataDelButton';
 
 
 export function UserCakeDataButtons(props) {

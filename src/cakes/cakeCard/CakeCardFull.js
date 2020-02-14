@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import LikeCakeButton from './LikeCakeButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { connect } from 'react-redux';
+import { startSnack } from '../../state/snackbar'; 
 
 class CakeCardFull extends React.Component {
     constructor(props) {
@@ -31,7 +32,8 @@ class CakeCardFull extends React.Component {
                 this.setState({
                     cake: data,
                     userCanEdit: data.cookId === this.props.userIdInStore ? true : false
-                })
+                });
+
             })
             .catch(error => this.setState({ error: error.toString() }))
             .finally(() => this.setState({ isLoading: false }))
@@ -172,5 +174,8 @@ const mapStateToProps = (state) => ({
     userInStore: state.userReducer.user,
     userIdInStore: state.userReducer.userId, 
 });
+const mapDispatchToProps = {
+	startSnack,
+};
 
-export default connect( mapStateToProps, null)(withStyles(styles)(CakeCardFull));
+export default connect( mapStateToProps, mapDispatchToProps)(withStyles(styles)(CakeCardFull));
