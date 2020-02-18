@@ -4,7 +4,7 @@ import { getUserByUid, } from '../api/Api2'
 // ACTION NAMES
 const ADD ="USER/ADD";
 const REMOVE = "USER/REMOVE";
-const CHECKAUTCH = "USER/CHECKAUTH";
+const CHECKAUTH = "USER/CHECKAUTH";
 const CHECKSTART = "USER/CHECKSTART";
 const CHECKERROR = "USER/CHECKERROR"; 
 
@@ -25,7 +25,7 @@ export default function(state = initialState, action){
             return {...state, user: action.payload, userId: action.payload.id}
         case REMOVE:
             return initialState
-        case CHECKAUTCH:
+        case CHECKAUTH:
             return {
                 ...state,
                 user: action.payload, 
@@ -50,7 +50,7 @@ export const checkUserAuthInFirebase = () => (dispatch) =>{
         if(user){
             getUserByUid(user.uid)
                 .then((dataUser)=>{
-                    dispatch({ type: CHECKAUTCH, payload: dataUser});
+                    dispatch({ type: CHECKAUTH, payload: dataUser});
                 }).catch((error)=> dispatch({type: CHECKERROR, payload: error }))
         }
     })

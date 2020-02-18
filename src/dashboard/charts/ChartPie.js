@@ -2,22 +2,20 @@ import React, { Component } from 'react'
 import { Pie } from 'react-chartjs-2';
 
 
-
-
 export default class ChartPie extends Component {
 constructor(props){
     super(props);
     this.state = {
         
         chartData: {
-        labels: ["Gdańsk", "Gdynia", 'Sopot', 'inne'],
+        labels: [props.first3City[0][0],props.first3City[1][0] , props.first3City[2][0], 'inne'],
         datasets: [{
             label: "liczba cukierników",
             data: [
-                62, 
-                52,
-                31,
-                11
+                props.first3City[0][1], 
+                props.first3City[1][1] , 
+                props.first3City[2][1],
+                props.otherSum
             ],
             backgroundColor: [
                 "hotpink",
@@ -34,6 +32,7 @@ constructor(props){
 }
 
     render() {
+    
         return (
             <div  style={{paddingTop: '5vh', paddingBottom: '5vh' }}>
                 <Pie

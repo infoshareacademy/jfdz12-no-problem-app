@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Grid, Paper, Typography, withStyles, } from '@material-ui/core';
+import { Button, Container, Grid, Paper, Typography, withStyles, CircularProgress } from '@material-ui/core';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
 import PageWrapper from '../components/PageWrapper';
@@ -77,8 +77,14 @@ class UserCard extends React.Component{
 
     render(){
         const { selectedMenu, } =  this.state;
-        const { classes, userInStore, userIdInStore } = this.props;
+        const { classes, userInStore, userIdInStore, isLoading } = this.props;
        
+        if(isLoading){
+            return <PageWrapper >
+                        <CircularProgress color="secondary" />
+                    </PageWrapper>
+        }
+
         if (!userIdInStore){
             return (<PageWrapper>
                 <h1>Użytkownik nie zalogowany, zaloguj się </h1>
@@ -147,7 +153,8 @@ class UserCard extends React.Component{
 
 const mapStateToProps = (state) => ({
     userInStore: state.userReducer.user,
-    userIdInStore: state.userReducer.userId, 
+    userIdInStore: state.userReducer.userId,
+    isLoading: state.userReducer.isLoading, 
 });
 
 export default connect( mapStateToProps, null)(withStyles(styles)(UserCard));
