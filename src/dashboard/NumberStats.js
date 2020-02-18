@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 
 export default function NumberStats(props) {
     const classes = useStyles();
-    const {dataAmount } = props;
+    const { dataAmount } = props;
 
     const usersStat = (
         <div className={classes.divGridItem}>
@@ -58,7 +58,7 @@ export default function NumberStats(props) {
                 <CakeIcon className={classes.icon}/>
             </div>
             <div>
-                {dataAmount.amountCooks} ciast w ofercie
+                {dataAmount.amountCakes} ciast w ofercie
             </div>
         </div>
     );

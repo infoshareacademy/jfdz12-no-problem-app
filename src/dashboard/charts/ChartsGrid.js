@@ -25,7 +25,9 @@ export default function ChartsGrid(props) {
                     md={7}
                     lg={8}
                 >
-                    <ChartLine />
+                    <ChartLine 
+                        countTypes={props.countTypes}
+                    />
                 </Grid>
             </Grid>
         </div>
