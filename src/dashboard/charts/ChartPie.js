@@ -34,15 +34,13 @@ export default function ChartPie ({first3City, otherSum}) {
 
     const optionsGraphics = { 
         layout: {
-                padding: {
-                    left: 50,
-                }},
+                padding: '10px'},
         maintainAspectRatio: false,
         
         title: {
             text: "Cukiernicy według miast",
             display: true,
-            fontSize: 30,
+            fontSize: 24,
             fontColor: 'black'
         },
         legend: {

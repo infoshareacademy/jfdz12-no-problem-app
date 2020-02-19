@@ -12,16 +12,17 @@ export default function ChartLine (props){
             borderWidth: 1,
             backgroundColor: countTypes.map(type =>`${type.typeColor}33`),
             borderColor: countTypes.map(type =>type.typeColor),
+            barThickness: 'flex',
         }]
     }
 
     const optionsGraphics = {
-        responsive: true,
+        //responsive: true,
         maintainAspectRatio: false,
         title: {
             text: "Liczba ciast w kategoriach",
             display: true,
-            fontSize: 30,
+            fontSize: 24,
             fontColor: 'black'
         },
         legend: {

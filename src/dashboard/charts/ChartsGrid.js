@@ -8,11 +8,10 @@ export default function ChartsGrid(props) {
         <div>
             <Grid container>
                 <Grid item 
-                    xs={12} 
-                    s={12}
-                    md={5}
-                    lg={4}>
-                
+                    sm={12} md={5} lg={4}
+                    container justify="center"
+                >
+                        
                     <ChartPie 
                         first3City = {props.first3City}
                         otherSum = {props.otherSum}
@@ -20,10 +19,8 @@ export default function ChartsGrid(props) {
                 </Grid>
 
                 <Grid item
-                    xs={12} 
-                    s={12}
-                    md={7}
-                    lg={8}
+                    xs={12} sm={12} md={7} lg={8}
+                    //container justify="center"
                 >
                     <ChartLine 
                         countTypes={props.countTypes}
