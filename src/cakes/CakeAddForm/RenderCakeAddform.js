@@ -37,13 +37,6 @@ function RenderCakeAddForm(props) {
                 <Grid container wrap='wrap'>
 
                     <Grid item xs={12} sm={6} className={classes.fCardWrapMedia}>
-                        <Grid>
-                            {imgURL !== '' &&
-                                <CardMedia
-                                    image={imgURL}
-                                    className={classes.fCardMedia}
-                                />}
-                        </Grid>
 
                         <Grid>
                             <input
@@ -59,6 +52,13 @@ function RenderCakeAddForm(props) {
                                 </Button>
                             </label>
 
+                        </Grid>
+                        <Grid >
+                            {imgURL !== '' &&
+                                <CardMedia
+                                    image={imgURL}
+                                    className={classes.fCardMedia}
+                                />}
                         </Grid>
                     </Grid>
 
