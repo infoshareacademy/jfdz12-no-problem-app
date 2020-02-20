@@ -116,7 +116,7 @@ const CakeAddForm = (props) => {
                     setError(err.message);
                     setIsError(true);
                 })
-        };
+        }; 
     };
 
     const findDataById = (data, id) => data.find((data) => data.id === id) || {};

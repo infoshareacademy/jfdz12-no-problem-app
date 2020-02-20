@@ -37,25 +37,29 @@ function RenderCakeAddForm(props) {
                 <Grid container wrap='wrap'>
 
                     <Grid item xs={12} sm={6} className={classes.fCardWrapMedia}>
-                        {imgURL !== '' &&
-                            <CardMedia
-                                image={imgURL}
-                                className={classes.fCardMedia}
-                                style={{ height: '90%' }}
-                            />}
+                        <Grid>
+                            {imgURL !== '' &&
+                                <CardMedia
+                                    image={imgURL}
+                                    className={classes.fCardMedia}
+                                />}
+                        </Grid>
 
-                        <input
-                            accept="image/*"
-                            style={{ display: 'none' }}
-                            id="outlined-button-file"
-                            type="file"
-                            onChange={props.handleFileAdd}
-                        />
-                        <label htmlFor="outlined-button-file" >
-                            <Button variant="outlined" component="span" style={{ margin: '10px' }} >
-                                dodaj zdjęcie
-                            </Button>
-                        </label>
+                        <Grid>
+                            <input
+                                accept="image/*"
+                                style={{ display: 'none' }}
+                                id="outlined-button-file"
+                                type="file"
+                                onChange={props.handleFileAdd}
+                            />
+                            <label htmlFor="outlined-button-file" >
+                                <Button variant="outlined" component="span" className={classes.fCardButton} >
+                                    dodaj zdjęcie
+                                </Button>
+                            </label>
+
+                        </Grid>
                     </Grid>
 
                     <Grid container item xs={12} sm={6} direction='column' wrap="wrap">
