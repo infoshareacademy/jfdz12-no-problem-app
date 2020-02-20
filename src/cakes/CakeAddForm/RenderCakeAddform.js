@@ -1,6 +1,6 @@
 import React from 'react';
 import { styles } from './CakeAddStyles';
-import { Button, CardMedia, withStyles, Paper, Grid, Container, Typography, } from '@material-ui/core';
+import { Box, Button, CardMedia, withStyles, Paper, Grid, Container, Typography, } from '@material-ui/core';
 import CakeAddInput from './component/CakeAddInput';
 import CakeAddTypesSelect from './component/CakeAddTypesSelect';
 import CakeAddSelect from './component/CakeAddSelect';
@@ -37,8 +37,7 @@ function RenderCakeAddForm(props) {
                 <Grid container wrap='wrap'>
 
                     <Grid item xs={12} sm={6} className={classes.fCardWrapMedia}>
-
-                        <Grid>
+                        <Box>
                             <input
                                 accept="image/*"
                                 style={{ display: 'none' }}
@@ -51,15 +50,12 @@ function RenderCakeAddForm(props) {
                                     dodaj zdjęcie
                                 </Button>
                             </label>
-
-                        </Grid>
-                        <Grid >
-                            {imgURL !== '' &&
-                                <CardMedia
-                                    image={imgURL}
-                                    className={classes.fCardMedia}
-                                />}
-                        </Grid>
+                        </Box>
+                        {imgURL !== '' &&
+                            <CardMedia
+                                image={imgURL}
+                                className={classes.fCardMedia}
+                            />}
                     </Grid>
 
                     <Grid container item xs={12} sm={6} direction='column' wrap="wrap">

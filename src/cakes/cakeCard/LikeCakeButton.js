@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { Button } from '@material-ui/core';
+import { Button, IconButton } from '@material-ui/core';
 import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../api/Api2';
 import { CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { startSnack } from '../../state/snackbar'; 
+import { Redirect } from 'react-router-dom';
 
 function LikeCakeButton (props) {
     const { likesUsersId } = props.cake;
+    const { lbutton, likeColor, } = props;
     const userId = props.userIdInStore; //sessionStorage.getItem('userId');
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState(null);
+    const [redirect, setRedirect] = useState(false);
 
     useEffect (() => {
         getCookById(userId)
@@ -39,7 +42,8 @@ function LikeCakeButton (props) {
             .catch(error => console.log('error', error.message))
             .finally(() => {
                 setIsLoading(false);
-                props.onHandleOnLike();
+                lbutton === 'button' && props.onHandleOnLike();
+                lbutton === 'iconButton' && setRedirect(true);
                 }
             )
     }
@@ -57,8 +61,13 @@ function LikeCakeButton (props) {
         return <CircularProgress size = '15px' color="secondary" />
     }
 
+    console.log(userId)
+    if(redirect){
+        return <Redirect to={'/cakes'}/>
+    }
+
     return (<>
-        <Button
+        {lbutton === 'button' && <Button
             disabled = {checkLikeButton}
             onClick = {handleLikeClick}
             variant="outlined"
@@ -68,18 +77,28 @@ function LikeCakeButton (props) {
             endIcon= {isLoading && handleIsLoading()}
         > 
             Polub
-        </Button>
+        </Button>}
+
+        {lbutton === 'iconButton' 
+                && <IconButton 
+                        aria-label="add to favorites"
+                        disabled = {checkLikeButton}
+                        onClick = {handleLikeClick}
+                    >
+                        <FavoriteIcon style={{color: likeColor}}/>
+                    </IconButton>}
 
     </>)
 }
 
-const mapStateToProps = (state) => ({
-    userInStore: state.userReducer.user,
-    userIdInStore: state.userReducer.userId, 
-});
+// const mapStateToProps = (state) => ({
+//     userInStore: state.userReducer.user,
+//     userIdInStore: state.userReducer.userId, 
+//     userIsLoading: state.userReducer.isLoading,
+// });
 
 const mapDispatchToProps = {
 	startSnack,
 };
 
-export default connect( mapStateToProps, mapDispatchToProps)(LikeCakeButton);
+export default connect( null, mapDispatchToProps)(LikeCakeButton);

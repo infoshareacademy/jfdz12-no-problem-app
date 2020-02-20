@@ -11,7 +11,7 @@ export const styles= {
     fCardMedia:{
         width: '100%', 
         minHeight: '40vh',
-        height:'43vw', 
+        height:'90%', 
         borderRadius: '10px',
     },
     fCardPaper:{

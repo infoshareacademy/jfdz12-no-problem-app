@@ -2,11 +2,13 @@ import React from 'react';
 import { filterCondition } from './filter/FilterCondition'
 import CakeCard2 from './cakeCard/CakeCard2';
 import CakeCard from './cakeCard/CakeCard';
-import { Grid, Typography, } from '@material-ui/core';
+import { Grid, Typography, CircularProgress } from '@material-ui/core';
 import { SORTOPTIONS } from '../constans/selectConstans'
 import {connect} from 'react-redux';
 
+
 class RenderCakesList extends React.Component {
+
     userIdRef = this.props.userIdInStore || "";  //sessionStorage.getItem('userId') || '';
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
@@ -67,7 +69,11 @@ class RenderCakesList extends React.Component {
     render(){
         const { cooks, types, toogleView, priceRange } = this.props.state;
         const filteredSortedCakes = this.getSorteredCakes();
-        
+        console.log(this.props.isLoadingUser)
+        if(this.props.isLoadingUser ){
+            return <CircularProgress color="secondary" />
+        }
+
         if(priceRange[0]>priceRange[1]) {
             return <Typography variant="h6">
                         Cena od jest wyższa od ceny do, zmień parametry aby wyświeliśc wyniki !
@@ -103,6 +109,7 @@ class RenderCakesList extends React.Component {
                                     type = {this.findDataById(types, cake.typeId)}
                                     cook = {this.findDataById(cooks, cake.cookId)}
                                     likedCake = {likedCake}
+                                    userIdInStore= {this.props.userIdInStore}
                                 /> 
                                 : <CakeCard 
                                     cake = {cake}
@@ -122,7 +129,8 @@ class RenderCakesList extends React.Component {
 
 const mapStateToProps = (state) => ({
     userInStore: state.userReducer.user,
-    userIdInStore: state.userReducer.userId, 
+    userIdInStore: state.userReducer.userId,
+    isLoadingUser: state.userReducer.isLoading,  
 });
 
 export default connect( mapStateToProps, null)(RenderCakesList);

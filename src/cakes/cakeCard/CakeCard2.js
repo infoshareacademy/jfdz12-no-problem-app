@@ -1,9 +1,9 @@
 import React from 'react';
-import { withStyles, Grid, Typography, IconButton, Avatar, Divider,} from '@material-ui/core';
+import { withStyles, Grid, Typography, Avatar, Divider,} from '@material-ui/core';
 import { CardMedia, Card, CardActions, CardContent, CardHeader, CardActionArea } from '@material-ui/core';
 import CookLabel from './CookLabel';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import {Link} from 'react-router-dom';
+import LikeCakeButton from './LikeCakeButton'
 
 const styles ={
     avatar:{
@@ -85,9 +85,16 @@ function CakeCard2 (props) {
                         <Typography component='div'>
                             polubiło to:  {likes}
                         </Typography>
-                        <IconButton aria-label="add to favorites">
+                        <LikeCakeButton
+                            cake={props.cake}
+                            likeColor={likeColor}
+                            userIdInStore= {props.userIdInStore}
+                            //onHandleOnLike={this.handleOnLike}
+                            lbutton={'iconButton'}
+                        />
+                        {/* <IconButton aria-label="add to favorites">
                             <FavoriteIcon style={{color: likeColor}}/>
-                        </IconButton>
+                        </IconButton> */}
                     </Grid>
 
                 </CardActions>

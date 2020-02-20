@@ -142,6 +142,8 @@ class CakeCardFull extends React.Component {
                             <LikeCakeButton
                                 cake={cake}
                                 onHandleOnLike={this.handleOnLike}
+                                lbutton={'button'}
+                                userIdInStore= {userIdInStore}
                             />
                             {userCanEdit &&
                                 <Button
