@@ -45,7 +45,7 @@ class CakeCardFull extends React.Component {
 
     render() {
         const { type, cook, likesUsersId } = this.state.cake;
-        const { classes, userIdInStore } = this.props;
+        const { classes, userIdInStore, userInStore } = this.props;
         const { isLoading, cake, userCanEdit } = this.state;
         const likedCake = likesUsersId ? likesUsersId.includes(userIdInStore) : false;
         const likeColor = likedCake ? 'red' : 'grey';
@@ -144,6 +144,7 @@ class CakeCardFull extends React.Component {
                                 onHandleOnLike={this.handleOnLike}
                                 lbutton={'button'}
                                 userIdInStore= {userIdInStore}
+                                userInStore={userInStore}
                             />
                             {userCanEdit &&
                                 <Button

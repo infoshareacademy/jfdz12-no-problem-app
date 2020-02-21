@@ -9,8 +9,6 @@ import {connect} from 'react-redux';
 
 class RenderCakesList extends React.Component {
 
-    userIdRef = this.props.userIdInStore || "";  //sessionStorage.getItem('userId') || '';
-
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
     getFilteredCakes(){
@@ -68,9 +66,10 @@ class RenderCakesList extends React.Component {
 
     render(){
         const { cooks, types, toogleView, priceRange } = this.props.state;
+        const { userIdInStore, isLoadingUser }  = this.props;
         const filteredSortedCakes = this.getSorteredCakes();
-        console.log(this.props.isLoadingUser)
-        if(this.props.isLoadingUser ){
+
+        if(isLoadingUser ){
             return <CircularProgress color="secondary" />
         }
 
@@ -86,16 +85,15 @@ class RenderCakesList extends React.Component {
                     </Typography>
         }
 
-
         return(    
             <Grid container spacing={1} justify='center' >
                 
                 {filteredSortedCakes.map((cake)=>{
                     
                     const likedCake = cake.likesUsersId
-                                ? cake.likesUsersId.includes(this.userIdRef)
+                                ? cake.likesUsersId.includes(userIdInStore)
                                 : '';
-                    
+                               
                     return (
                         <Grid 
                             container wrap='wrap' 
@@ -110,6 +108,8 @@ class RenderCakesList extends React.Component {
                                     cook = {this.findDataById(cooks, cake.cookId)}
                                     likedCake = {likedCake}
                                     userIdInStore= {this.props.userIdInStore}
+                                    userInStore={this.props.userInStore}
+                                    onHandleOnLike={this.props.onHandleOnLike}
                                 /> 
                                 : <CakeCard 
                                     cake = {cake}

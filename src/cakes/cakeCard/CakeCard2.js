@@ -89,12 +89,10 @@ function CakeCard2 (props) {
                             cake={props.cake}
                             likeColor={likeColor}
                             userIdInStore= {props.userIdInStore}
-                            //onHandleOnLike={this.handleOnLike}
+                            userInStore={props.userInStore}
+                            onHandleOnLike={props.onHandleOnLike}
                             lbutton={'iconButton'}
                         />
-                        {/* <IconButton aria-label="add to favorites">
-                            <FavoriteIcon style={{color: likeColor}}/>
-                        </IconButton> */}
                     </Grid>
 
                 </CardActions>

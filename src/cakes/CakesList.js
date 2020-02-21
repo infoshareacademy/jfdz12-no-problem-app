@@ -1,6 +1,6 @@
 import React from 'react';
 import CakeFilters from './filter/CakeFilters';
-import { CircularProgress, Container, Grid } from '@material-ui/core';
+import { CircularProgress, Container, Grid, } from '@material-ui/core';
 import RenderCakesList from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
 import { getFullData } from '../api/Api2';
@@ -34,7 +34,7 @@ class CakesList extends React.Component{
         this.handleSortBy = this.handleSortBy.bind(this);
     }
 
-    componentDidMount() {
+    getData = () => {
         getFullData()
             .then(data => {
                 const price = data[0].map(el => el.price); 
@@ -47,7 +47,11 @@ class CakesList extends React.Component{
                 });
             })
             .catch(error => this.setState({error: error.toString()}))
-            .finally(() => this.setState({loading: false}))
+            .finally(() => this.setState({loading: false }))
+    }
+
+    componentDidMount() {
+        this.getData()
     }
     
     filterChange (event){
@@ -115,10 +119,11 @@ class CakesList extends React.Component{
         }))
     }
 
+    handleUpdate = () => { this.getData() }
+
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
     render(){    
-        
         const { types, 
                 loading, 
                 filterAll,
@@ -192,6 +197,7 @@ class CakesList extends React.Component{
                             <RenderCakesList
                                 state = {this.state}
                                 toogleView = {toogleView}
+                                onHandleOnLike={this.handleUpdate}
                             />
                         </Grid>   
                     </Grid> 
