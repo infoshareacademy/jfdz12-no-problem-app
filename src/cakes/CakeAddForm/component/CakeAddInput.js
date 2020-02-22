@@ -35,7 +35,9 @@ function CakeAddInput (props) {
                 style = {props.styleDirect}
                 multiline = {props.multiline}
                 rows={props.rows}
-                
+                type={props.type}
+                error={props.error}
+                helperText={props.error && "Pole jest wymagane"}
             />
 
         </Grid>

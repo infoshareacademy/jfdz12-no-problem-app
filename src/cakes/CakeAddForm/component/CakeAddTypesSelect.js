@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, FormControl, MenuItem, Select, withStyles, Typography, } from '@material-ui/core';
+import { Grid, FormControl, MenuItem, Select, withStyles, Typography, InputLabel, } from '@material-ui/core';
 import clsx from 'clsx';
 import Crop32Icon from '@material-ui/icons/Crop32';
 
@@ -35,30 +35,34 @@ const {classes, types} = props;
             <FormControl variant="outlined" 
                         className={clsx(classes.root, classes.formControl)}
                         margin='dense'
+                        error={props.error}
             >
+                {props.error &&<InputLabel htmlFor="labelid">Pole jest wymagane</InputLabel>}
                 <Select
                     name = {props.name}
                     value = {props.value}
                     onChange = {props.onHandleCakeChange}
-                    >
-                        <MenuItem key={-1} value={-1}>
-                            <Typography variant="inherit" style={{display: 'flex', alignItems:'center'}}>
-                                <Crop32Icon style={{paddingRight:'10px'}}/> 
-                                brak
+                    labelid='labelid'
+                    labelWidth={props.error ? 130 : 0}
+                >
+                    <MenuItem key={-1} value={-1}>
+                        <Typography variant="inherit" style={{display: 'flex', alignItems:'center'}}>
+                            <Crop32Icon style={{paddingRight:'10px'}}/> 
+                            brak
+                        </Typography>
+                        
+                    </MenuItem>
+                    {types.map(type => (
+                        <MenuItem key={type.id} 
+                                    value={type.id}
+                        >                              
+                            <Typography variant="inherit" style={{display: 'flex', alignItems:'center', fontSize: '14px'}}>
+                                <Crop32Icon style ={{color:type.color, paddingRight:'10px' }} /> 
+                                {type.name}
                             </Typography>
-                            
                         </MenuItem>
-                        {types.map(type => (
-                            <MenuItem key={type.id} 
-                                        value={type.id}
-                            >                              
-                                <Typography variant="inherit" style={{display: 'flex', alignItems:'center', fontSize: '14px'}}>
-                                    <Crop32Icon style ={{color:type.color, paddingRight:'10px' }} /> 
-                                    {type.name}
-                                </Typography>
-                            </MenuItem>
-                            ))    
-                        }
+                        ))    
+                    }
                 </Select>
             </FormControl>
         </Grid>
@@ -67,8 +71,3 @@ const {classes, types} = props;
 }
 
 export default withStyles (styles)(CakeAddTypesSelect);
-
-
-// <ListItemIcon style={{color:type.color}}>
-//                                     <FiberManualRecordIcon />
-//                                 </ListItemIcon>

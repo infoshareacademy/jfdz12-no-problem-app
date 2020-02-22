@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField, } from '@material-ui/core';
 
 export default function ContactData(props) {
-    const { mobile, email, password, } = props;
+    const { mobile, email, password, isRequired } = props;
 
     return (<>
         <TextField
@@ -16,6 +16,8 @@ export default function ContactData(props) {
             value={email}
             margin='normal'
             autoComplete="off"
+            error={isRequired && email===''}
+            helperText={isRequired && email==='' && "Pole jest wymagane"}
         />
         <TextField
             onChange={props.onHandleChange}
@@ -29,6 +31,8 @@ export default function ContactData(props) {
             value={password}
             margin='normal'
             autoComplete="new-password"
+            error={isRequired && password===''}
+            helperText={isRequired && password==='' && "Pole jest wymagane"}
         />
         <TextField
             onChange={props.onHandleChange}
@@ -40,6 +44,8 @@ export default function ContactData(props) {
             type="TextField"
             value={mobile}
             margin='normal'
+            error={isRequired && mobile===''}
+            helperText={isRequired && mobile==='' && "Pole jest wymagane"}
         />
 
     </>)

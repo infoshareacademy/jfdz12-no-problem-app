@@ -4,10 +4,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Link as Rlink} from 'react-router-dom';
 import {getUsers} from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
-import firebase from 'firebase/app';
+import { auth,  } from 'firebase/app';
 import {Redirect} from 'react-router-dom';
 import MessageSnakebar from './signComponent/MessageSnakebar';
 import {styles} from './styles/SignInStyles'
+import { connect } from 'react-redux';
+import { setUserToStore, clearUserInStore} from '../state/user'
 
 const loginError = ( error ) => {
 
@@ -59,12 +61,10 @@ class SignIn extends React.Component{
 
     signIn = () => {
         const {email, password} = this.state;
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        auth().signInWithEmailAndPassword(email, password)
         .then(() => {
-            const signInUser = this.state.users.find(user => user.uid === firebase.auth().currentUser.uid )
-         
-            this.saveUserIdToLocalStorage(signInUser.id)
-            
+            const signInUser = this.state.users.find(user => user.uid === auth().currentUser.uid )
+            this.props.setUserToStore(signInUser);
             this.setState({
                 redirect: true,
             })
@@ -78,20 +78,15 @@ class SignIn extends React.Component{
 
     handleOnClick = (event) => {
         event.preventDefault();
-
         this.signIn();
     };
 
     handleResetPassword = () =>{
-        firebase.auth().sendPasswordResetEmail(this.state.email);
+        auth().sendPasswordResetEmail(this.state.email);
         this.setState({
             emailResetMessage: true,
             redirect: true,
         });
-    }
-
-    saveUserIdToLocalStorage = (userId) => {
-        sessionStorage.setItem('userId', userId);
     }
 
     handleClose = () =>{
@@ -100,7 +95,7 @@ class SignIn extends React.Component{
 
     render(){
         const { emailResetMessage, redirect, isLoading, error } = this.state;
-        const { classes } = this.props;
+        const { classes, } = this.props;
 
         if(redirect) {
             return <Redirect to={'/'} />
@@ -117,9 +112,6 @@ class SignIn extends React.Component{
                         <Typography variant='h6'>
                             {error}
                         </Typography>
-                        <Typography variant='h6'>
-                            <Rlink to={'/SignIn'}>Zaloguj się ponownie</Rlink>
-                        </Typography >
                         <Typography variant='h6'>
                             <Rlink to={'/'}>Wróć na stronę główną</Rlink>
                         </Typography>
@@ -208,4 +200,9 @@ class SignIn extends React.Component{
     }
 }
 
-export default withStyles(styles)(SignIn);
+const mapDispatchToProps = {
+    setUserToStore,
+    clearUserInStore,
+};
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(SignIn));

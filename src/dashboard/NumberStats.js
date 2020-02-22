@@ -26,8 +26,9 @@ const useStyles = makeStyles({
    
   });
 
-export default function NumberStats() {
+export default function NumberStats(props) {
     const classes = useStyles();
+    const { dataAmount } = props;
 
     const usersStat = (
         <div className={classes.divGridItem}>
@@ -35,7 +36,7 @@ export default function NumberStats() {
                 <FaceIcon className={classes.icon}/>
             </div>
             <div>
-                1230 użytkowników
+                {dataAmount.amountUsers} użytkowników
             </div>
         </div>
     );
@@ -46,7 +47,7 @@ export default function NumberStats() {
                 <EmojiPeopleIcon className={classes.icon}/>
             </div>
             <div>
-                156 cukierników
+                {dataAmount.amountCooks} cukierników
             </div>
         </div>
     );
@@ -57,7 +58,7 @@ export default function NumberStats() {
                 <CakeIcon className={classes.icon}/>
             </div>
             <div>
-                695 ciast w ofercie
+                {dataAmount.amountCakes} ciast w ofercie
             </div>
         </div>
     );
@@ -68,7 +69,7 @@ export default function NumberStats() {
             <RoomIcon className={classes.icon}/>
         </div>
         <div>
-        7 różnych miast
+            {dataAmount.amoutOfCity} różnych miast
         </div>
     </div>
     )
@@ -78,7 +79,7 @@ export default function NumberStats() {
             className={classes.backgroundDiv}
             >
            <Grid item lg={12} sm={12} xs={12}>
-            <h3 style={{paddingBottom: '0.5vw'}}>Nasza aplikacja to:</h3>
+                <h3 style={{paddingBottom: '0.5vw'}}>Nasza aplikacja to:</h3>
             </Grid>
             <Grid item lg={3} md={3} sm={6} xs={12}>
                     {usersStat}

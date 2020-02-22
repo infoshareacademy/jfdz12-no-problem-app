@@ -14,8 +14,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import FaceIcon from '@material-ui/icons/Face';
 import CakeIcon from '@material-ui/icons/Cake';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-
-
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
@@ -27,12 +26,12 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function SwipeableTemporaryDrawer(props) {
+function SwipeableTemporaryDrawer(props) {
 	const classes = useStyles();
 	const [state, setState] = React.useState({
 		left: false,
 	});
-
+	
 	const toggleDrawer = (side, open) => event => {
 		if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
 			return;
@@ -40,89 +39,55 @@ export default function SwipeableTemporaryDrawer(props) {
 		setState({ ...state, [side]: open });
 	};
 
-	let sideList;
-	if (!props.auth) {
-		sideList = (side) => (
+	const sideList = (side) => {
+
+		return (<>
 			<div
 				className={classes.list}
 				role="presentation"
 				onClick={toggleDrawer(side, false)}
 				onKeyDown={toggleDrawer(side, false)}
 			>
-
 				<List>
-					<>
-						<ListItem button key={"Lista ciast"} component={Link} to='/cakes'>
-							<ListItemIcon><CakeIcon /></ListItemIcon>
-							<ListItemText primary={'Lista ciast'} />
-						</ListItem>
-					</>
-					<>
-						<ListItem button key={"Lista cukierników"} component={Link} to='/cooks'>
-							<ListItemIcon><EmojiPeopleIcon /></ListItemIcon>
-							<ListItemText primary={'Lista cukierników'} />
-						</ListItem>
-					</>
+					<ListItem button key={"Lista ciast"} component={Link} to='/cakes'>
+						<ListItemIcon><CakeIcon /></ListItemIcon>
+						<ListItemText primary={'Lista ciast'} />
+					</ListItem>
+					<ListItem button key={"Lista cukierników"} component={Link} to='/cooks'>
+						<ListItemIcon><EmojiPeopleIcon /></ListItemIcon>
+						<ListItemText primary={'Lista cukierników'} />
+					</ListItem>
 				</List>
 				<Divider />
-				<List>
-					<>
-						<ListItem button key={'Zaloguj'} onClick={props.log} component={Link} to='/SignIn'>
-							<ListItemIcon><LockOpenIcon /></ListItemIcon>
-							<ListItemText primary={'Zaloguj'} />
-						</ListItem>
-					</>
-				</List>
-
-			</div>
-		)
-	} else {
-		sideList = (side) => (
-			<div
-				className={classes.list}
-				role="presentation"
-				onClick={toggleDrawer(side, false)}
-				onKeyDown={toggleDrawer(side, false)}
-			>
-
-				<List>
-					<>
-						<ListItem button key={"Lista ciast"} component={Link} to='/cakes'>
-							<ListItemIcon><CakeIcon /></ListItemIcon>
-							<ListItemText primary={'Lista ciast'} />
-						</ListItem>
-					</>
-					<>
-						<ListItem button key={"Lista cukierników"} component={Link} to='/cooks'>
-							<ListItemIcon><EmojiPeopleIcon /></ListItemIcon>
-							<ListItemText primary={'Lista cukierników'} />
-						</ListItem>
-					</>
-				</List>
-				<Divider />
-				<List>
-					<>
+				{!props.auth && <List>
+					<ListItem button key={'Zaloguj'} onClick={props.log} component={Link} to='/SignIn'>
+						<ListItemIcon><LockOpenIcon /></ListItemIcon>
+						<ListItemText primary={'Zaloguj'} />
+					</ListItem>
+				</List>}
+				{props.auth &&
+					<List>
 						<ListItem button key={'Moje konto'} component={Link} to='/userCard'>
 							<ListItemIcon><FaceIcon /></ListItemIcon>
 							<ListItemText primary={'Moje konto'} />
 						</ListItem>
-					</>
-					<>
-						<ListItem button key={'Dodaj ciasto'} component={Link} to='/cakeAdd/empty'>
-							<ListItemIcon><ControlPointIcon /></ListItemIcon>
-							<ListItemText primary={'Dodaj ciasto'} />
-						</ListItem>
-					</>
-					<>
+					
+						{props.userInStore.userType === 'cook' && 
+							<ListItem button key={'Dodaj ciasto'} component={Link} to='/cakeAdd/empty'>
+								<ListItemIcon><ControlPointIcon /></ListItemIcon>
+								<ListItemText primary={'Dodaj ciasto'} />
+							</ListItem>
+						}
 						<ListItem button key={'Wyloguj'} onClick={props.log} component={Link} to='/'>
 							<ListItemIcon><ExitToAppIcon /></ListItemIcon>
 							<ListItemText primary={'Wyloguj'} />
 						</ListItem>
-					</>
-				</List>
+					</List>
+				}
 			</div>
-		)
-	};
+		</>)
+	}
+			
 
 	return (
 		<div>
@@ -141,3 +106,10 @@ export default function SwipeableTemporaryDrawer(props) {
 		</div>
 	);
 }
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId,
+    storeIsLoading: state.userReducer.isLoading, 
+});
+
+export default connect( mapStateToProps, null )(SwipeableTemporaryDrawer)

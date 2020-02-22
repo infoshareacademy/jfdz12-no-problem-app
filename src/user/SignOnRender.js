@@ -9,7 +9,8 @@ import { styles } from './styles/SignOnStyles'
 
 function SignOnRender(props) {
     const { classes } = props;
-    const { gender, name, surname, mobile, password, email, nick, userType, city, street, district, avatar } = props.state;
+    const { gender, name, surname, mobile, password, email, description,
+            nick, userType, city, street, district, avatar, isRequired } = props.state;
     
     return (
         <Grid
@@ -44,6 +45,7 @@ function SignOnRender(props) {
                             email={email}
                             password={password}
                             mobile={mobile}
+                            isRequired={isRequired}
                         />
                         {userType === 'cook'
                             ?<BasicData
@@ -52,6 +54,7 @@ function SignOnRender(props) {
                                 surname={surname}
                                 nick={nick}
                                 gender={gender}
+                                isRequired={isRequired}
                             />
                             : ""
                         }
@@ -68,6 +71,9 @@ function SignOnRender(props) {
                                 district={district}
                                 name={name}
                                 surname={surname}
+                                description={description}
+                                userType={userType}
+                                isRequired={isRequired}
                             />
                         </Grid>
                         : <Grid item xs={12} sm={6} className={classes.subGrid}>
@@ -77,6 +83,7 @@ function SignOnRender(props) {
                                 surname={surname}
                                 nick={nick}
                                 gender={gender}
+                                isRequired={isRequired}
                             />
                         </Grid>
                     }

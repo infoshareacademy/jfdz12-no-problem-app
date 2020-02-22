@@ -6,11 +6,12 @@ export const styles= {
     },
     fCardWrapMedia:{
         padding: '10px',
+        
     },
     fCardMedia:{
         width: '100%', 
-        minHeight: '100px',
-        height:'100%', 
+        minHeight: '40vh',
+        height:'90%', 
         borderRadius: '10px',
     },
     fCardPaper:{
@@ -21,25 +22,8 @@ export const styles= {
         borderColor: '#e0e0e0', 
         border: "0.5px solid",
     },
-    // fCardPrice:{
-    //     padding:'0px 0px 10px', 
-    // },
-    // fCardText:{
-    //     fontSize: '14px',
-    //     fontWeight: 'bold',
-    // },
-    // fCardSubText:{
-    //     fontWeight: 'normal',
-    //     fontSize: '14px',
-    // },
-    // fCardType:{
-    //     marginLeft: '10px',
-    //     color: 'white',
-    //     padding: '6px 12px',
-    //     borderRadius: '20px',
-    // },
-    // fCardWrapType:{
-    //     padding: '10px 0px',
-    // },
+    fCardButton:{
+        margin: '10px',
+    }
 
 }

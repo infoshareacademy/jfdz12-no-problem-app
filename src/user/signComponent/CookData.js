@@ -2,8 +2,8 @@ import React from 'react';
 import { TextField,  } from '@material-ui/core';
 
 export default function CookData(props) {
-    const { city, district, street, description } = props;
-
+    const { city, district, street, description, isRequired, userType } = props;
+    
     return (<>
         <TextField
             onChange={props.onHandleChange}
@@ -16,6 +16,8 @@ export default function CookData(props) {
             type="TextField"
             value={city}
             margin='normal'
+            error={isRequired && city==='' && userType==='cook'}
+            helperText={isRequired && city===''  && userType==='cook' && "Pole jest wymagane"}
         />
         <TextField
             onChange={props.onHandleChange}
@@ -50,6 +52,8 @@ export default function CookData(props) {
             margin='normal'
             multiline
             rows={3}
+            error= {isRequired && userType==='cook' && description===''}
+            helperText= {isRequired && description==='' && userType==='cook' && "Pole jest wymagane"}
         />
 
     </>)

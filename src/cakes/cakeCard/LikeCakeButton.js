@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { Button } from '@material-ui/core';
-import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../api/Api2';
+import { Button, IconButton } from '@material-ui/core';
+import { updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../api/Api2';
 import { CircularProgress } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { startSnack } from '../../state/snackbar'; 
 
-export function LikeCakeButton (props) {
+function LikeCakeButton (props) {
     const { likesUsersId } = props.cake;
-    const userId = sessionStorage.getItem('userId');
-
+    const { lbutton, likeColor, } = props;
+    const userId = props.userIdInStore; 
+    const user = props.userInStore;
     const [isLoading, setIsLoading] = useState(false);
-    const [user, setUser] = useState(null);
-
-    useEffect (() => {
-       
-        getCookById(userId)
-            .then(user => setUser(user))
-            .catch(error => console.log('error', error.toString()))
-            .finally(() => setIsLoading(false));
-        },[userId])
 
     const handleLikeClick = () => {
-        const { likesUsersId, id} = props.cake;  
+        const { likesUsersId, id, name} = props.cake;  
         setIsLoading(true);
        
         const newLikeCount = likesUsersId ? likesUsersId.length + 1 : 1;
@@ -32,13 +26,15 @@ export function LikeCakeButton (props) {
             addLikedCakeIdToUser(userId, likeIdCakeTab),
             addUserLikeIdToCake(id,likeIdUserTab)
         ]) 
-            .then ((res) => console.log('dodałem', res))
+            .then ((res) => {
+                console.log('dodałem', res)
+                props.startSnack(`właśnie polubiłeś ciasto: ${name} `, 'information');
+            })
             .catch(error => console.log('error', error.message))
             .finally(() => {
                 setIsLoading(false);
                 props.onHandleOnLike();
-                }
-            )
+            })
     }
 
     const checkLikeButtonDisble = () => {
@@ -55,7 +51,7 @@ export function LikeCakeButton (props) {
     }
 
     return (<>
-        <Button
+        {lbutton === 'button' && <Button
             disabled = {checkLikeButton}
             onClick = {handleLikeClick}
             variant="outlined"
@@ -65,9 +61,22 @@ export function LikeCakeButton (props) {
             endIcon= {isLoading && handleIsLoading()}
         > 
             Polub
-        </Button>
+        </Button>}
+
+        {lbutton === 'iconButton' 
+                && <IconButton 
+                        aria-label="add to favorites"
+                        disabled = {checkLikeButton}
+                        onClick = {handleLikeClick}
+                    >
+                        <FavoriteIcon style={{color: likeColor}}/>
+                    </IconButton>}
 
     </>)
-
-
 }
+
+const mapDispatchToProps = {
+	startSnack,
+};
+
+export default connect( null, mapDispatchToProps)(LikeCakeButton);
