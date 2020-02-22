@@ -5,6 +5,7 @@ import NumberStats from './NumberStats';
 import ChartsGrid from './charts/ChartsGrid';
 import { getAmountDataAll, getCountOfCookInCity, getTypesFromCake } from '../api/ApiChart';
 import { CircularProgress } from '@material-ui/core';
+import PageWrapper from '../components/PageWrapper';
 
 
 export default function Dashboard() {
@@ -30,8 +31,10 @@ export default function Dashboard() {
         .finally(() => setIsLoading(false))
     },[]);
 
-    if(isLoading) {
-        return <CircularProgress color="secondary" />
+    if(isLoading){ 
+        return  <PageWrapper>
+                    <CircularProgress color="secondary" />
+                </PageWrapper> 
     }
 
     return (

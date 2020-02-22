@@ -10,6 +10,7 @@ import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { getCakes, } from '../api/Api2';
 import { CircularProgress } from '@material-ui/core';
+import PageWrapper from '../components/PageWrapper';
 
 
 const useStyles = makeStyles({
@@ -78,7 +79,9 @@ const useStyles = makeStyles({
 if (isLoading) {
 	return (
 		<div className="App">
-			<CircularProgress color="secondary" />
+      <PageWrapper>
+			  <CircularProgress color="secondary" />
+      </PageWrapper>
 		</div>
 	)
 }
