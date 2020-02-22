@@ -10,7 +10,7 @@ export default class CooksList extends Component {
         cooks: [],
         cakes: []
     }
-
+//Promise.all!!!!
     componentDidMount() {
         getCooks()
         .then(data=>
@@ -33,7 +33,7 @@ export default class CooksList extends Component {
                     <Grid>
                         <h1>Pieczemy za Ciebie!</h1>
                         {this.state.cooks.map(cook=>{
-                            let cooksCakes = this.state.cakes.filter(cake=> cake.cookId===cook.id);
+                            const cooksCakes = this.state.cakes.filter(cake=> cake.cookId===cook.id);
                             return (
                                 <CookPanel key={cook.id} cook={cook} cooksCakes={cooksCakes}/>
                         )})}
