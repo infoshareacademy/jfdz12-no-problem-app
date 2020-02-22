@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, withStyles, TextField, InputLabel, } from '@material-ui/core';
+import { Grid, TextField, InputLabel, makeStyles } from '@material-ui/core';
 
-const styles = {
+const useStyles = makeStyles(theme => ({
     root:{
         '& .MuiInputBase-root':{
             fontSize: '18px',
@@ -9,13 +9,19 @@ const styles = {
         },
         '& .MuiInputBase-root.Mui-disabled':{
             color: 'rgba(0, 0, 0, 0.87)',
-        }
+        },
+        '& .MuiInputBase-input' :{
+            [theme.breakpoints.down('sm')]: {
+                textAlign: 'center',
+            },
+        },
     },
     textLeft: {
         padding: '10px',
         textAlign: 'left',   
         maxWidth: '300px',
         width: '100%',
+        minWidth: '200px',
     },
     textRight:{
         padding: '17px 10px',
@@ -23,19 +29,27 @@ const styles = {
         width: '100%', 
         textAlign: 'right',
         fontSize: '16px',
+        minWidth: '200px',
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'center',
+        },
     },
     gridStyle:{
         padding: '0px 10px',
-        boxSizing: 'border-box',  
+        boxSizing: 'border-box',
+        flexWrap: 'nowrap',
+        [theme.breakpoints.down('sm')]: {
+            flexWrap: 'wrap',
+        },  
     },
     paper:{
         backgroundColor: '#fce4ec50',
     }
-}
+}))
 
 function UserCookData(props){
-
-    const { user, classes, noEdit } = props;
+    const classes = useStyles();
+    const { user, noEdit } = props;
    
     return(
         <Grid container justify="center" direction='column' className={classes.root}>
@@ -70,4 +84,4 @@ function UserCookData(props){
         )
 }
 
-export default withStyles(styles)(UserCookData);
+export default UserCookData;
