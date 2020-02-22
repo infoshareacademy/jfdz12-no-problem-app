@@ -3,14 +3,13 @@ export const styles={
         padding: '10px 26px 10px', 
         margin: '10px',
         borderColor: '#e0e0e0',
-        //border: "0.5px solid",
-    },
+   },
     fCardWrapMedia:{
         padding: '10px',
     },
     fCardMedia:{
         width: '100%', 
-        minHeight: '100px',
+        minHeight: '40vh',
         height:'100%', 
         borderRadius: '10px',
     },

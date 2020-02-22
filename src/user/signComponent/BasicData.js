@@ -5,7 +5,7 @@ import { GENDERSELECT, } from '../../constans/selectConstans';
 
 
 export default function BasicData(props) {
-    const {nick, name, surname, gender} = props;
+    const {nick, name, surname, gender, isRequired} = props;
 
     return (<>
         <TextField
@@ -19,6 +19,8 @@ export default function BasicData(props) {
             type="TextField"
             value={nick}
             margin='normal'
+            error={isRequired && nick===''}
+            helperText={isRequired && nick==='' && "Pole jest wymagane"}
         />
         <TextField
             onChange={props.onHandleChange}
@@ -31,6 +33,8 @@ export default function BasicData(props) {
             type="TextField"
             value={name}
             margin='normal'
+            error={isRequired && name===''}
+            helperText={isRequired && name==='' && "Pole jest wymagane"}
         />
         <TextField
             onChange={props.onHandleChange}
@@ -43,6 +47,8 @@ export default function BasicData(props) {
             type="TextField"
             value={surname}
             margin='normal'
+            error={isRequired && surname===''}
+            helperText={isRequired && surname==='' && "Pole jest wymagane"}
         />
         <MySelect
             onHandleChange={props.onHandleChange}

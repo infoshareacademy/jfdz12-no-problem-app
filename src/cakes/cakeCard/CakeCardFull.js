@@ -5,13 +5,14 @@ import CookLabelFull from './CookLabelFull';
 import { getFullCakeById, } from '../../api/Api2';
 import PageWrapper from '../../components/PageWrapper';
 import { Link } from 'react-router-dom';
-import { LikeCakeButton } from './LikeCakeButton';
+import LikeCakeButton from './LikeCakeButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { connect } from 'react-redux';
+import { startSnack } from '../../state/snackbar'; 
 
 class CakeCardFull extends React.Component {
     constructor(props) {
         super(props);
-        this.userIdRef = sessionStorage.getItem('userId');
         this.state = {
             cake: {},
             isLoading: true,
@@ -30,8 +31,9 @@ class CakeCardFull extends React.Component {
             .then(data => {
                 this.setState({
                     cake: data,
-                    userCanEdit: data.cookId === this.userIdRef ? true : false
-                })
+                    userCanEdit: data.cookId === this.props.userIdInStore ? true : false
+                });
+
             })
             .catch(error => this.setState({ error: error.toString() }))
             .finally(() => this.setState({ isLoading: false }))
@@ -43,11 +45,11 @@ class CakeCardFull extends React.Component {
 
     render() {
         const { type, cook, likesUsersId } = this.state.cake;
-        const { classes } = this.props;
+        const { classes, userIdInStore, userInStore } = this.props;
         const { isLoading, cake, userCanEdit } = this.state;
-        const likedCake = likesUsersId ? likesUsersId.includes(this.userIdRef) : false;
+        const likedCake = likesUsersId ? likesUsersId.includes(userIdInStore) : false;
         const likeColor = likedCake ? 'red' : 'grey';
-
+        
         if (isLoading) {
             return (<PageWrapper>
                 <CircularProgress color="secondary" />
@@ -56,10 +58,8 @@ class CakeCardFull extends React.Component {
 
         return (
             <PageWrapper>
-
                 <Container maxWidth="lg" >
                     <Grid>
-
                         <Paper className={classes.fCardHeader} >
                             <Grid container justify='center' alignItems='center'>
                                 <Typography variant="h4">{cake.name}</Typography>
@@ -142,10 +142,13 @@ class CakeCardFull extends React.Component {
                             <LikeCakeButton
                                 cake={cake}
                                 onHandleOnLike={this.handleOnLike}
+                                lbutton={'button'}
+                                userIdInStore= {userIdInStore}
+                                userInStore={userInStore}
                             />
                             {userCanEdit &&
                                 <Button
-                                    component={Link} to={`/cakeAdd/${cake.id}`}
+                                    component={Link} to={`/cakeAdd/${cake.id}?cakes`}
                                     variant="outlined"
                                     color="primary"
                                     className={classes.fCardButton}
@@ -170,4 +173,12 @@ class CakeCardFull extends React.Component {
 
 }
 
-export default withStyles(styles)(CakeCardFull);
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId, 
+});
+const mapDispatchToProps = {
+	startSnack,
+};
+
+export default connect( mapStateToProps, mapDispatchToProps)(withStyles(styles)(CakeCardFull));

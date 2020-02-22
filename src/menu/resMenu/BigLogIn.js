@@ -57,11 +57,13 @@ export default function BigLogIn(props) {
                             <FaceIcon className={classes.menuIconInner}/>
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="Dodaj ciasto">
-                        <IconButton component={Link} to="/cakeAdd/empty" className={classes.menuIcon}>
-                            <ControlPointIcon className={classes.menuIconInner}/>
-                        </IconButton>
-                    </Tooltip>
+                    {props.userType === 'cook' && 
+                        <Tooltip title="Dodaj ciasto">
+                            <IconButton component={Link} to="/cakeAdd/empty" className={classes.menuIcon}>
+                                <ControlPointIcon className={classes.menuIconInner}/>
+                            </IconButton>
+                        </Tooltip>
+                    }
                     <Tooltip title="Wylogowanie">
                         <IconButton onClick={props.log} className={classes.menuIcon}>
                             <ExitToAppIcon className={classes.menuIconInner}/>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PageWrapper from '../components/PageWrapper';
 import { CircularProgress } from '@material-ui/core';
-import firebase from 'firebase';
+import { auth } from 'firebase';
 import { FIREBASE_API } from '../api/Api2';
 import MessageSnakebar from './signComponent/MessageSnakebar';
 import SignOnRender from './SignOnRender';
 import { Link } from 'react-router-dom';
+import { validateForm } from './signComponent/signOnFuctions'
 
 export default class SignOn extends Component {
     state = {
@@ -29,6 +30,7 @@ export default class SignOn extends Component {
         file: null,
         isError: false,
         error:'',
+        isRequired: false,
     }
 
     handleChange = (event) => {
@@ -85,8 +87,8 @@ export default class SignOn extends Component {
             console.log(error.message);
         })
         .finally(() => {
-            if (firebase.auth().currentUser) {
-                firebase.auth().signOut();
+            if (auth().currentUser) {
+                auth().signOut();
             }
             this.setState({
                 isLoading: false,
@@ -99,7 +101,7 @@ export default class SignOn extends Component {
     signUp = () => {
         const { email, password } = this.state;
         
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        auth().createUserWithEmailAndPassword(email, password)
             .then(data => {
                     this.setState({ uid: data.user.uid });
                     this.createUserFetch();
@@ -112,9 +114,16 @@ export default class SignOn extends Component {
 
     handleOnClick = (event) => {
         event.preventDefault();
-        this.setState({ isLoading: true })
-
-        this.signUp();
+        const validate = validateForm(this.state);
+       
+        if (validate) {
+            this.setState({ isRequired: true })
+        }else {
+            this.setState({ isRequired: false })
+            this.setState({ isLoading: true })
+            this.signUp();
+        }
+        
     }
 
     handleClose = () => {
@@ -123,7 +132,7 @@ export default class SignOn extends Component {
 
 
     render() {
-        const { message, email, isLoading, isError, redirect } = this.state;
+        const { message, email, isLoading, isError, redirect, isRequired } = this.state;
 
         if(redirect) {
             return <>
@@ -148,8 +157,8 @@ export default class SignOn extends Component {
 
         if (isLoading) {
             return <PageWrapper >
-                <CircularProgress color="secondary" />
-            </PageWrapper>
+                        <CircularProgress color="secondary" />
+                    </PageWrapper>
         }
 
         return (
@@ -160,6 +169,7 @@ export default class SignOn extends Component {
                     onHandleOnClick = {this.handleOnClick}
                     onHandleFileAdd = {this.handleFileAdd}
                     state = {this.state}
+                    isRequired = { isRequired }
                 />
 
             </PageWrapper>

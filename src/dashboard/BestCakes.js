@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useEffect, useState }  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,6 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
 import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import { getCakes, } from '../api/Api2';
+import { CircularProgress } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
@@ -30,12 +32,23 @@ const useStyles = makeStyles({
     }
   });
 
- const BestCakes = (props) => {
-   
+ const BestCakes = () => {
+
+	const [cakes, setCakes] = useState([]);
+	const [isLoading, setIsLoading ] = useState(true);
+
+    useEffect(()=>{
+      getCakes()
+			.then(data => setCakes(data))
+			.catch(error => console.log(`Nie mogę pobrać danych cakes ${error.toString()}`))
+			.finally(() => setIsLoading(false))
+		},[]
+    )
+    
     const classes = useStyles();
-    const sortedCakes = props.cakes.sort((a,b)=>b.likes-a.likes);
+    const sortedCakes = cakes.sort((a,b)=>b.likes-a.likes);
     const slicedSortCakes = sortedCakes.slice(0,3);
-    const cakes =  slicedSortCakes.map(cake=> 
+    const listOfCakes = slicedSortCakes.map(cake=> 
       <Grid key={cake.id} item   
               xs={12} 
               md={4}
@@ -62,32 +75,26 @@ const useStyles = makeStyles({
     
        </Grid>);
 
+if (isLoading) {
+	return (
+		<div className="App">
+			<CircularProgress color="secondary" />
+		</div>
+	)
+}
+
 return(
     <Container>
       <h1>Nasze najbardziej lubiane ciasta</h1>
          <Grid container>
-          
-         
-            {cakes}
-
-            </Grid>
-       
-    
+            {listOfCakes}
+        </Grid>
        <Link to='/cakes' style={{textDecoration: 'none'}}>
        <p className={classes.more}>Zobacz więcej</p>
        </Link>
-    </Container>
-   
-)
+    </Container>   
+  )
  }
-    
-   
-        
-          
-            
-        
-        
-    
-// )}
+
 
 export default BestCakes;

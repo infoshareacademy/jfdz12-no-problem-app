@@ -6,8 +6,9 @@ import Slide from '@material-ui/core/Slide';
 const styles = {
     information:{
         '& .MuiSnackbarContent-root': {
-            backgroundColor: '#2196f3',
-            opacity: 0.99,
+            backgroundColor:'#bbdefb',
+            color: '#0d47a1',
+            //opacity: 0.99,
         },
         '& .MuiSnackbarContent-message':{
             fontSize:'14px'
@@ -15,8 +16,9 @@ const styles = {
     },
     success:{
         '& .MuiSnackbarContent-root': {
-            backgroundColor: '#4caf50',
-            opacity: 0.99,
+            backgroundColor: '#c8e6c9',
+            color:'#1b5e20',
+            //opacity: 0.99,
         },
         '& .MuiSnackbarContent-message':{
             fontSize:'14px'
@@ -24,8 +26,8 @@ const styles = {
     },
     warning:{
         '& .MuiSnackbarContent-root': {
-            backgroundColor: '#ff9800',
-            opacity: 0.99,
+            backgroundColor: '#ffcc80',
+            color: '#e65100',
         },
         '& .MuiSnackbarContent-message':{
             fontSize:'14px'
@@ -33,8 +35,8 @@ const styles = {
     },
     error:{
         '& .MuiSnackbarContent-root': {
-            backgroundColor: '#f44336',
-            opacity: 0.99,
+            backgroundColor: '#ffcdd2',
+            color: '#b71c1c',
         },
         '& .MuiSnackbarContent-message':{
             fontSize:'14px'
@@ -49,7 +51,7 @@ function Transition(props) {
 function MessageSnakebar (props) {
     
     const {open, classes, message, backColor } = props;
-
+   
     return (
         <Snackbar
             className={classes[backColor]}
@@ -64,7 +66,12 @@ function MessageSnakebar (props) {
             TransitionComponent={Transition}
             action={
                 <>
-                    <IconButton size="small" aria-label="close" color="inherit" onClick={props.onHandleClose}>
+                    <IconButton 
+                        size="small" 
+                        aria-label="close" 
+                        color="inherit" 
+                        onClick={props.onHandleClose}
+                    >
                         <CloseIcon fontSize="small" />
                     </IconButton>
                 </>

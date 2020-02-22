@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Paper, Typography, Divider, CircularProgress, withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { UserUnlikeButton } from './userLikeDataComponent/UserUnlikeButton';
+import UserUnlikeButton from './userLikeDataComponent/UserUnlikeButton';
 import { getLikesWithData } from '../../api/Api2'; 
 
 const styles = {
@@ -22,7 +22,7 @@ const styles = {
 
 function UserLikeData(props){
 
-    const userId = sessionStorage.getItem('userId');
+    const userId = props.userId; //sessionStorage.getItem('userId');
     const [likes, setLikes] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdate, setIsUpdate] = useState(false);

@@ -3,8 +3,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton, Tooltip, CircularProgress, } from '@material-ui/core';
 import { UserCakeDeleteModal } from './UserCakeDeleteModal';
 import { addLikedCakeIdToUser, deleteCakeById } from '../../../api/Api2'
+import { startSnack } from '../../../state/snackbar'; 
+import { connect } from 'react-redux';
 
-export function UserCakeDataDelButton(props) {
+function UserCakeDataDelButton(props) {
 
     const [isLoading, setIsLoading] = useState(false);
     const [open, setOpen] = useState(false);
@@ -44,7 +46,10 @@ export function UserCakeDataDelButton(props) {
             })),
             deleteCakeById(cake.id)
         ])
-            .then((res) => console.log('dodałem', res))
+            .then((res) => {
+                console.log('dodałem', res);
+                props.startSnack('ciasto zostało usunięte !', 'error');
+            })
             .catch(error => console.log('error', error.message))
             .finally(() => {
                     setIsLoading(false);
@@ -84,3 +89,9 @@ export function UserCakeDataDelButton(props) {
 
     </>
 }
+
+const mapDispatchToProps = {
+	startSnack,
+};
+
+export default connect( null, mapDispatchToProps)(UserCakeDataDelButton);

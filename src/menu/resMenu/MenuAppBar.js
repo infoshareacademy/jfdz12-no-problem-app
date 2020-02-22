@@ -8,10 +8,11 @@ import SmallLogOut from './SmallLogOut';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { withRouter } from 'react-router-dom';
 import { useEffect } from 'react'
-import firebase from 'firebase/app';
-import { getUserByUid } from '../../api/Api2';
+import {auth as fbauth } from 'firebase/app';
+import { connect } from 'react-redux';
+import { clearUserInStore } from '../../state/user'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
 	root: {
 		flexGrow: 1,
 
@@ -37,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 		display: "flex",
 		justifyContent: "space-between"
 	}
-}));
+});
 
 function MenuAppBar(props) {
 	const classes = useStyles();
@@ -46,18 +47,6 @@ function MenuAppBar(props) {
 	const [myStyle, setMystyle] = React.useState('rgba(255,255,255, 0.3)'); //to jest do window.scroll
 	const open = Boolean(anchorEl);
 	const [auth, setAuth] = React.useState(false);
-	const [userRef, setUserRef] = React.useState(null);
-	// let style = props.styleColor;
-	// let style = {backgroundColor:'rgba(255,255,255, 0.3)'};
-
-	// to chyba niepotrzbene ale nie wiem   
-	// const changeCol = () => {
-	//    if (window.pageYOffset <10) {
-	//      style={backgroundColor:'white'};
-	//    } else {
-	//     style={backgroundColor:'red'}; 
-	//    }
-	// }
 
 	//ta funckja jest do window.scroll
 	useEffect(() => {
@@ -75,26 +64,12 @@ function MenuAppBar(props) {
 	};
 
 	useEffect(() => {
-		const authRef = firebase.auth().onAuthStateChanged(user => {
-			setAuth(user ? true : false)
-			if(user){
-				setUserRef(authRef);
-				getUserByUid(user.uid).then((dataUser)=>{
-					sessionStorage.setItem('userId', dataUser.id);
-				})
-
-			}
-		})
-		return () => {
-			if (userRef) {
-				userRef();
-			}
-		};
-	});
+		setAuth(props.userIdInStore ? true : false);
+	},[props.userIdInStore]);
 
 	const handleChange = () => {
 		setAnchorEl(null);
-		props.history.push('/')
+		handleSignOut();
 	};
 
 	const handleMenu = event => {
@@ -106,10 +81,10 @@ function MenuAppBar(props) {
 	};
 
 	const handleSignOut = () => {
-		firebase.auth().signOut();
+		fbauth().signOut();
 		setAuth(false);
-		sessionStorage.setItem('userId', null);
-		props.history.push('/')
+		props.history.push('/');
+		props.clearUserInStore(); 
 	}
 
 	const content = () =>{
@@ -122,6 +97,7 @@ function MenuAppBar(props) {
 				handleMenu={handleMenu}
 				open={open}
 				anchorEl={anchorEl}
+				userType={props.userInStore.userType}
 			/>;
 		};
 		if (!auth && matches) {
@@ -134,27 +110,28 @@ function MenuAppBar(props) {
 			/>
 		};
 		if (auth && !matches) {
-			return <BigLogIn log={handleSignOut} />
+			return <BigLogIn log={handleSignOut} userType={props.userInStore.userType} />
 		};
 		if (!auth && !matches) {
 			return <BigLogOut log={handleSignOut} />
 		}
 	}
 
-
-
 	return (
-
 		<div className={classes.root} position="static">
-
 			<AppBar className={classes.navStyle} style={{ backgroundColor: myStyle }} >
-
 				{content()}
-
 			</AppBar>
-
 		</div>
 	);
 }
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId, 
+});
 
-export default withRouter(MenuAppBar);
+const mapDispatchToProps = {
+    clearUserInStore,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(MenuAppBar));

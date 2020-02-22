@@ -1,13 +1,13 @@
 import React from 'react';
-import { Button, Container, Grid, Paper, Typography, withStyles,CircularProgress } from '@material-ui/core';
+import { Button, Container, Grid, Paper, Typography, withStyles, CircularProgress } from '@material-ui/core';
 import UserMenu from './userCardComponent/UserMenu';
 import UserLikeData from './userCardComponent/UserLikeData';
-import { getUserById, } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 import { Link } from 'react-router-dom';
 import UserAllData from './userCardComponent/UserAllData';
 import { UserCakeData } from './userCardComponent/UserCakeData';
-
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const styles ={
     gridStyle: {
@@ -34,55 +34,32 @@ const styles ={
     },
 }
 
-
 class UserCard extends React.Component{ 
     constructor(props){
         super(props);
-        this.backLink = props.location.search.substring(1,props.location.search.length);
-        this.userIdRef = sessionStorage.getItem('userId');
+        this.backLink = props.location.search.substring(1);
         this.state ={
             user: {},
-            isLoading: true,
             selectedMenu: {
                 basic : true,
                 like: false,
                 mCook: false,
                 mCake: false,
             },
-            loginUser:true,
         };
     }
 
-    fetchUserFromApi = () => {
-        return getUserById(this.userIdRef)
-            .then(data =>{
-                this.setState ({
-                    user: data,
-                })
-                if (this.backLink){
-                    this.setState(prevState => ({
-                        selectedMenu:{
-                            ...prevState.selectedMenu,
-                            basic: false,
-                            [this.backLink]: true,
-                        }
-                    }))
-                }
-            })
-    }
-
     componentDidMount(){
-        if (this.userIdRef){
-            this.fetchUserFromApi() 
-            .catch(error => console.log('bład addformfetch', error.toString()))
-            .finally(() => this.setState({
-                    isLoading: false,
-                    loginUser: true,
-                }))
-        }else{
-            this.setState({loginUser:false})
+        if (this.backLink){
+            this.setState(prevState => ({
+                selectedMenu:{
+                    ...prevState.selectedMenu,
+                    basic: false,
+                    [this.backLink]: true,
+                }
+            }))
         }
-    }
+     }
 
     handleClick = (name) => {
         const {selectedMenu} = this.state;
@@ -99,25 +76,31 @@ class UserCard extends React.Component{
     }
 
     render(){
-        const {user, isLoading, selectedMenu, loginUser, } =  this.state;
-        const { classes } = this.props;
+        const { selectedMenu, } =  this.state;
+        const { classes, userInStore, userIdInStore, isLoading } = this.props;
        
-        if (isLoading) {
+        if(isLoading){
             return <PageWrapper >
-                <CircularProgress color="secondary" />
-            </PageWrapper>
+                        <CircularProgress color="secondary" />
+                    </PageWrapper>
         }
 
-        if (!loginUser){
+        if (!userIdInStore){
             return (<PageWrapper>
                 <h1>Użytkownik nie zalogowany, zaloguj się </h1>
                 <Link to='/SignIn'>Sign in</Link>
             </PageWrapper>)
         }
 
+        if(!userIdInStore){
+            return <Redirect to={'/userCard'}/>
+        }
+
+
         return (
             <PageWrapper>
-                { !isLoading && <Container maxWidth='lg'>
+                
+                {<Container maxWidth='lg'>
                     <Grid container className={classes.gridTop}>
                         <Grid item xs={12} className={classes.gridStyle}>
                             <Paper>
@@ -130,21 +113,25 @@ class UserCard extends React.Component{
                              <UserMenu 
                                 onHandleClick = {this.handleClick}
                                 selectedMenu = {selectedMenu}
-                                userType={user.userType}
+                                userType={userInStore.userType}
                              />    
                         </Grid>
                         <Grid item xs className={classes.gridStyle}>
                             {selectedMenu.basic &&
                                 <UserAllData  
-                                    user = {user}
-                                    fetchUserFromApi={this.fetchUserFromApi}
+                                    user = {userInStore}
+                                    //fetchUserFromApi={this.fetchUserFromApi}
                                 />
                             }
                             {selectedMenu.like && 
-                                <UserLikeData/> 
+                                <UserLikeData
+                                    userId = {userInStore.id}
+                                /> 
                             }
                             {selectedMenu.mCake &&
-                                <UserCakeData/> 
+                                <UserCakeData
+                                    userId = {userInStore.id}
+                                /> 
                             }
                         </Grid>
                     </Grid>
@@ -164,4 +151,10 @@ class UserCard extends React.Component{
     }
 }
 
-export default withStyles(styles)(UserCard);
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId,
+    isLoading: state.userReducer.isLoading, 
+});
+
+export default connect( mapStateToProps, null)(withStyles(styles)(UserCard));

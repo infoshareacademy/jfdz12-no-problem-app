@@ -19,7 +19,7 @@ export function UserCakeData(props) {
     
     const classes = useStyles(); 
     const [isCakes, setIsCakes] =  useState();
-    const userId = sessionStorage.getItem('userId');
+    const userId = props.userId;//sessionStorage.getItem('userId');
     const [cakes, setCakes] = useState([]);
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);

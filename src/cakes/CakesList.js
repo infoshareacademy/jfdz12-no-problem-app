@@ -1,12 +1,12 @@
 import React from 'react';
 import CakeFilters from './filter/CakeFilters';
-import { CircularProgress, Container, Grid } from '@material-ui/core';
-import { RenderCakesList } from './RenderCakesList';
+import { CircularProgress, Container, Grid, } from '@material-ui/core';
+import RenderCakesList from './RenderCakesList';
 import FilterAll from './filterAll/FilterAll';
 import { getFullData } from '../api/Api2';
 import PageWrapper from '../components/PageWrapper';
 
-export class CakesList extends React.Component{
+class CakesList extends React.Component{
    
     constructor(props){
         super(props);
@@ -34,7 +34,7 @@ export class CakesList extends React.Component{
         this.handleSortBy = this.handleSortBy.bind(this);
     }
 
-    componentDidMount() {
+    getData = () => {
         getFullData()
             .then(data => {
                 const price = data[0].map(el => el.price); 
@@ -47,7 +47,11 @@ export class CakesList extends React.Component{
                 });
             })
             .catch(error => this.setState({error: error.toString()}))
-            .finally(() => this.setState({loading: false}))
+            .finally(() => this.setState({loading: false }))
+    }
+
+    componentDidMount() {
+        this.getData()
     }
     
     filterChange (event){
@@ -115,10 +119,11 @@ export class CakesList extends React.Component{
         }))
     }
 
+    handleUpdate = () => { this.getData() }
+
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
       
     render(){    
-        
         const { types, 
                 loading, 
                 filterAll,
@@ -147,7 +152,7 @@ export class CakesList extends React.Component{
 
         if (!loading) {
             return <PageWrapper>
-                <Container maxWidth = 'lg' >       
+                 <Container maxWidth = 'lg' >       
                     <Grid container direction={filterAllToogle ? 'row' : 'column'}>
                         {filterAllToogle &&
                             <Grid item xs={12} sm={3} md={2}> 
@@ -192,14 +197,14 @@ export class CakesList extends React.Component{
                             <RenderCakesList
                                 state = {this.state}
                                 toogleView = {toogleView}
+                                onHandleOnLike={this.handleUpdate}
                             />
                         </Grid>   
                     </Grid> 
-                    
-                    
-
                 </Container>
             </PageWrapper>
         }
     }
 }
+
+export default CakesList;

@@ -2,12 +2,12 @@ import React from 'react';
 import { filterCondition } from './filter/FilterCondition'
 import CakeCard2 from './cakeCard/CakeCard2';
 import CakeCard from './cakeCard/CakeCard';
-import { Grid, Typography, } from '@material-ui/core';
+import { Grid, Typography, CircularProgress } from '@material-ui/core';
 import { SORTOPTIONS } from '../constans/selectConstans'
+import {connect} from 'react-redux';
 
 
-export class RenderCakesList extends React.Component {
-    userIdRef = sessionStorage.getItem('userId') || '';
+class RenderCakesList extends React.Component {
 
     findDataById = (data, id) => data.find((data) => data.id === id) || {};
 
@@ -66,8 +66,13 @@ export class RenderCakesList extends React.Component {
 
     render(){
         const { cooks, types, toogleView, priceRange } = this.props.state;
+        const { userIdInStore, isLoadingUser }  = this.props;
         const filteredSortedCakes = this.getSorteredCakes();
-        
+
+        if(isLoadingUser ){
+            return <CircularProgress color="secondary" />
+        }
+
         if(priceRange[0]>priceRange[1]) {
             return <Typography variant="h6">
                         Cena od jest wyższa od ceny do, zmień parametry aby wyświeliśc wyniki !
@@ -80,16 +85,15 @@ export class RenderCakesList extends React.Component {
                     </Typography>
         }
 
-
         return(    
             <Grid container spacing={1} justify='center' >
                 
                 {filteredSortedCakes.map((cake)=>{
                     
                     const likedCake = cake.likesUsersId
-                                ? cake.likesUsersId.includes(this.userIdRef)
+                                ? cake.likesUsersId.includes(userIdInStore)
                                 : '';
-                    
+                               
                     return (
                         <Grid 
                             container wrap='wrap' 
@@ -103,6 +107,9 @@ export class RenderCakesList extends React.Component {
                                     type = {this.findDataById(types, cake.typeId)}
                                     cook = {this.findDataById(cooks, cake.cookId)}
                                     likedCake = {likedCake}
+                                    userIdInStore= {this.props.userIdInStore}
+                                    userInStore={this.props.userInStore}
+                                    onHandleOnLike={this.props.onHandleOnLike}
                                 /> 
                                 : <CakeCard 
                                     cake = {cake}
@@ -119,3 +126,11 @@ export class RenderCakesList extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    userInStore: state.userReducer.user,
+    userIdInStore: state.userReducer.userId,
+    isLoadingUser: state.userReducer.isLoading,  
+});
+
+export default connect( mapStateToProps, null)(RenderCakesList);
