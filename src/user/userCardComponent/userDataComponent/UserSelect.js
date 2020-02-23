@@ -10,8 +10,7 @@ const {options, name, value, label, align, width, labelWidth, noEdit, } = props;
     return( 
       
         <FormControl 
-            //variant="outlined" 
-            style={{margin: '0px 0px 0px 10px', 
+            style={{margin: '0px 10px 0px 10px', 
                     maxWidth: width, 
                     width:'100%', 
                     minWidth:'200px', 
@@ -30,11 +29,7 @@ const {options, name, value, label, align, width, labelWidth, noEdit, } = props;
                 onChange = {props.onHandleChange}
                 labelWidth = {labelWidth}
                 style={{textAlign:align, marginTop:'0px'}}   
-                //variant="outlined"
             >
-                    {/* <MenuItem>
-                        <em>Brak</em>
-                    </MenuItem> */}
                     {options.map(option => (
                         <MenuItem key={option.id} 
                                     value={option.value}

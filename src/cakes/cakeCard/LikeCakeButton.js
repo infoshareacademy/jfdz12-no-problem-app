@@ -16,11 +16,10 @@ function LikeCakeButton (props) {
     const handleLikeClick = () => {
         const { likesUsersId, id, name} = props.cake;  
         setIsLoading(true);
-       
         const newLikeCount = likesUsersId ? likesUsersId.length + 1 : 1;
         const likeIdUserTab = likesUsersId ? [...likesUsersId, userId] : [userId];
-        const likeIdCakeTab = user ? [...user.likeCakesId, id] : [id];
-       
+        const likeIdCakeTab = user.likeCakesId ? [...user.likeCakesId, id] : [id];
+        
         Promise.all([
             updateLikeCounterInCake(id,newLikeCount),
             addLikedCakeIdToUser(userId, likeIdCakeTab),

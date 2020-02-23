@@ -4,6 +4,7 @@ export const styles = {
             backgroundColor: '#47817Ee0',
             color: 'white',
         },
+        padding: '10px',
     },
     gridWrapper :{
         borderRadius: '20px',

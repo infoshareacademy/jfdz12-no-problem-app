@@ -68,14 +68,14 @@ class RenderCakesList extends React.Component {
         const { cooks, types, toogleView, priceRange } = this.props.state;
         const { userIdInStore, isLoadingUser }  = this.props;
         const filteredSortedCakes = this.getSorteredCakes();
-
+        
         if(isLoadingUser ){
             return <CircularProgress color="secondary" />
         }
 
-        if(priceRange[0]>priceRange[1]) {
+        if(Number(priceRange[0])>Number(priceRange[1])) {
             return <Typography variant="h6">
-                        Cena od jest wyższa od ceny do, zmień parametry aby wyświeliśc wyniki !
+                        Cena od jest wyższa od ceny do, zmień parametry aby wyświetlić wyniki !
                     </Typography>
         }
 

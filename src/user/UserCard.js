@@ -109,7 +109,7 @@ class UserCard extends React.Component{
                                 </Typography>
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} sm ={3} className={classes.gridStyle2} >
+                        <Grid item xs={12} sm ={2} className={classes.gridStyle2} >
                              <UserMenu 
                                 onHandleClick = {this.handleClick}
                                 selectedMenu = {selectedMenu}
@@ -120,7 +120,6 @@ class UserCard extends React.Component{
                             {selectedMenu.basic &&
                                 <UserAllData  
                                     user = {userInStore}
-                                    //fetchUserFromApi={this.fetchUserFromApi}
                                 />
                             }
                             {selectedMenu.like && 

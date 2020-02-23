@@ -1,16 +1,20 @@
 import React from 'react';
-import { Grid, InputLabel, TextField, withStyles,  } from '@material-ui/core';
+import { Grid, InputLabel, TextField, makeStyles } from '@material-ui/core';
 import { UserSelect } from './UserSelect';
 import { GENDERSELECT } from '../../../constans/selectConstans';
 
-const styles = {
+const useStyles = makeStyles(theme => ({
     root:{
         '& .MuiInputBase-root':{
             fontSize: '18px',
-
         },
         '& .MuiInputBase-root.Mui-disabled':{
             color: 'rgba(0, 0, 0, 0.87)',
+        },
+        '& .MuiInputBase-input' :{
+            [theme.breakpoints.down('sm')]: {
+                textAlign: 'center',
+            },
         }
     },
     textLeft: {
@@ -18,6 +22,7 @@ const styles = {
         textAlign: 'left',   
         maxWidth: '300px',
         width: '100%',
+        minWidth: '200px',
     },
     textRight:{
         padding: '17px 10px',
@@ -25,24 +30,32 @@ const styles = {
         width: '100%', 
         textAlign: 'right',
         fontSize: '16px',
+        minWidth: '200px',
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'center',
+        },
     },
     gridStyle:{
         padding: '0px 10px',
         boxSizing: 'border-box',  
+        flexWrap: 'nowrap',
+        [theme.breakpoints.down('sm')]: {
+            flexWrap: 'wrap',
+        },
     },
     gridStyleAvatar: {
         padding: '20px',
     },
-}
+}))
 
 function UserBasicData(props){
-
-    const { classes, noEdit } = props;
+    const classes = useStyles();
+    const { noEdit } = props;
     const {nick, name, surname, gender, contact } = props.user;
    
     return(
         <Grid container direction='column' className={classes.root}>
-            <Grid xs={12} item container justify="center" className={classes.gridStyle}>
+            <Grid xs={12} item container justify="center" className={classes.gridStyle} >
                 <InputLabel id="email" className={classes.textRight}> email : </InputLabel> 
                 <TextField labelid="email" name="mail" className={classes.textLeft} 
                             disabled value={contact.mail}/>    
@@ -84,4 +97,4 @@ function UserBasicData(props){
         )
 }
 
-export default withStyles(styles)(UserBasicData);
+export default UserBasicData;
