@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import { getCookById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../../api/Api2';
+import { getUserById, updateLikeCounterInCake, addLikedCakeIdToUser, addUserLikeIdToCake } from '../../../api/Api2';
 import { CircularProgress, IconButton, Tooltip } from '@material-ui/core';
 import { UserUnLikeModal } from './UserUnLikeModal';
 import { connect } from 'react-redux';
@@ -14,7 +14,7 @@ function UserUnlikeButton(props) {
     const [counter, setCounter] = useState(0);
 
     useEffect(() => {
-        getCookById(userId)
+        getUserById(userId)
             .then(user => setUser(user))
             .catch(error => console.log('error', error.toString()))
             .finally(() => setIsLoading(false));

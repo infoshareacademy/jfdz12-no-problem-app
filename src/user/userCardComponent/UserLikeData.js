@@ -26,6 +26,7 @@ function UserLikeData(props){
     const [likes, setLikes] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdate, setIsUpdate] = useState(false);
+    const { classes } = props;
 
     useEffect (() => {
         getLikesWithData(userId)
@@ -40,8 +41,6 @@ function UserLikeData(props){
     const handleOnUnLike = () =>{
         setIsUpdate(true);
     }
-
-    const { classes } = props;
 
     const likesToRender = () => {
         if(likes.length>0){
