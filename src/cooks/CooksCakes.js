@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom';
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
     root: {
       maxWidth: 345,
     },
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
       paddingTop: '56.25%', // 16:9
     },
    
-  }));
+  });
 
 export default function CooksCakes(props) {
 
@@ -27,6 +27,7 @@ return (
         <CardMedia
           className={classes.media}
           image={props.cake.imgURL}
+         
           title={props.cake.name}
                 />
         <CardContent>
